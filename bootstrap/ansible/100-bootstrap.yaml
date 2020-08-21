@@ -1,0 +1,17 @@
+---
+- name: "Configure OCP"
+  hosts: localhost
+  connection: local
+  gather_facts: false
+  vars_files:
+    - cfg/helicarrier.yml
+    - cfg/secrets_helicarrier.yml
+
+  tasks:
+    # ---- Bootsrap ArgoCD operator ----
+    - name: Applies ArgoCD Configuration to the cluster
+      command: oc apply -Rf "{{ playbook_dir }}"/../argocd/ -l config.janz.cloud/name=argocd-bootstrap
+      retries: 3
+      delay: 5
+      register: result
+      until: result.rc == 0
