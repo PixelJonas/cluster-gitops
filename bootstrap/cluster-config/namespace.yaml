@@ -1,0 +1,12 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    config.janz.cloud/managed-by: gitops
+    config.janz.cloud/scm-url: git@github.com:PixelJonas/cluster-gitops.git
+  labels:
+    config.janz.cloud/name: cluster-global
+    config.janz.cloud/component: namespaces
+  name: cluster-ops
+spec:
