@@ -4,7 +4,7 @@
     google:
       clientID: 478348800225-pipjo1969ga8rg53sf9he8mb0sjkml01.apps.googleusercontent.com
       clientSecret:
-        name: clientSecret
+        name: google-secret
       hostedDomain: redhat.com
     mappingMethod: claim
     name: RedHatSSO
