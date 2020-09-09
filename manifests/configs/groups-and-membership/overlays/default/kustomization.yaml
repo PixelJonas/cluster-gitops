@@ -20,7 +20,7 @@ patchesJson6902:
     version: v1
     kind: Group
     name: developer
-  path: developer-group-users.yaml
+  path: developers-group-users.yaml
 - target:
     group: user.openshift.io
     version: v1

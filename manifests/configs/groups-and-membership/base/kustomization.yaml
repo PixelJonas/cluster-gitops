@@ -3,4 +3,6 @@ kind: Kustomization
 resources:
 - argocdadmins-group-base.yaml
 - argocdusers-group-base.yaml
-- developer-group-base.yaml
+- developers-group-base.yaml
+- cluster-admins-group-base.yaml
+- cluster-admins-binding-base.yaml
