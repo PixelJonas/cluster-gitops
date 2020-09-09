@@ -32,8 +32,7 @@ spec:
   rbac:
     defaultPolicy: 'role:readonly'
     policy: |
-      g, admins-argocd, role:admin
-      g, admins-cluster, role:admin
+      g, argocdadmins, role:admin
     scopes: '[groups]'
   server:
     route:

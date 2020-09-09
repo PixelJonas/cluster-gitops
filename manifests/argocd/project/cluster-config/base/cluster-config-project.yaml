@@ -7,10 +7,14 @@ metadata:
   labels:
     config.janz.cloud/component: instance
     config.janz.cloud/name: argocd-bootstrap
-  name: cluster-ops
+  name: cluster-config
   namespace: argocd
 spec:
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
   destinations:
-    - namespace: cluster-ops
+  - namespace: '*'
+    server: '*'
   sourceRepos:
-    - 'git@github.com:PixelJonas/cluster-gitops.git'
+  - '*'
