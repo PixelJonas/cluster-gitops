@@ -36,6 +36,12 @@ spec:
                 kubernetes_host="https://kubernetes.default.svc:443" \
                 kubernetes_ca_cert="${default_kubernetes_certificate}"
 
+              # Activate KV store for global_secrets
+              vault_secrets_list=$(oc exec -n vault vault-server-0 -- vault secrets list)
+              if [[ $vault_secrets_list != *"global_secrets"* ]]; then
+                oc exec -n vault vault-server-0 -- vault secrets enable -path=global_secrets -version=2 kv
+              fi
+
               # Write policy for vault-secrets-operator
               cat <<EOF | oc exec -n vault vault-server-0 -i -- vault policy write vault-secrets-operator -
               path "global_secrets/data/*" {
