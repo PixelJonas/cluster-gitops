@@ -6,6 +6,7 @@ namespace: argocd
 bases:
 - ../../../manifests/argocd/apps/oauth/base
 - ../../../manifests/argocd/apps/groups-and-membership/base
+- ../../../manifests/argocd/apps/vault/base
 
 patches:
 - target:

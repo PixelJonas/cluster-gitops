@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vault-server
+  annotations:
+    argocd.argoproj.io/sync-wave: "11"
+  labels:
+    gitops.ownedBy: cluster-config
+spec:
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: MutatingWebhookConfiguration
+      jsonPointers:
+        - /webhooks/0/clientConfig/caBundle
+  destination:
+    namespace: vault
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: ''
+    repoURL: 'https://helm.releases.hashicorp.com'
+    targetRevision: 0.7.0
+    chart: vault
+    helm:
+      parameters:
+        - name: global.openshift
+          value: 'true'
+        - name: server.dev.enabled
+          value: 'true'
+  project: cluster-config
+  syncPolicy:
+    automated:
+      automated:
+        prune: false
+        selfHeal: false

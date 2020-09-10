@@ -1,0 +1,61 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+    argocd.argoproj.io/hook: post-sync
+    argocd.argoproj.io/sync-wave: "20"
+    argocd.argoproj.io/hook-delete-policy: BeforeHookCreation
+  name: vault-secrets-operator-initializer
+spec:
+  template:
+    spec:
+      containers:
+        - image: registry.redhat.io/openshift4/ose-cli:v4.4
+          # work around unwriteable HOME dir / for unprivileged pods causing OC commands to be slow in pods
+          env:
+          - name: HOME
+            value: /tmp
+          command:
+            - /bin/bash
+            - -c
+            - |
+              set x
+              # Activate Kubernetes Auth
+              vault_auth_list=$(oc exec -n vault vault-0 -- vault auth list)
+              echo "Current configured authentication methods"
+              echo "${vault_auth_list}"
+              if [[ $vault_auth_list != *"kubernetes"* ]]; then
+                oc exec -n vault vault-0 -- vault auth enable kubernetes
+              fi
+
+              # Allow ServiceAccount authentication
+              default_kubernetes_token=$(oc exec -n vault vault-0 -- cat /var/run/secrets/kubernetes.io/serviceaccount/token)
+              default_kubernetes_certificate=$(oc exec -n vault vault-0 -- cat /var/run/secrets/kubernetes.io/serviceaccount/ca.crt)
+              oc exec -n vault vault-0 -- \
+                vault write auth/kubernetes/config \
+                token_reviewer_jwt="${default_kubernetes_token}" \
+                kubernetes_host="https://kubernetes.default.svc:443" \
+                kubernetes_ca_cert="${default_kubernetes_certificate}"
+
+              # Write policy for vault-secrets-operator
+              cat <<EOF | oc exec -n vault vault-0 -i -- vault policy write vault-secrets-operator -
+              path "global_secrets/data/*" {
+                capabilities = ["read"]
+              }
+              EOF
+
+              # add vault-secrets-operator ServiceAccount and attach policy
+              oc exec -n vault vault-0 -- vault write auth/kubernetes/role/vault-secrets-operator \
+                bound_service_account_names="vault-secrets-operator" \
+                bound_service_account_namespaces="vault" \
+                policies=vault-secrets-operator \
+                ttl=24h
+
+              echo "finished initializing vault"
+          imagePullPolicy: IfNotPresent
+          name: vault-secrets-operator-initializer
+      dnsPolicy: ClusterFirst
+      restartPolicy: OnFailure
+      serviceAccount: vault-initializer
+      serviceAccountName: vault-initializer
+      terminationGracePeriodSeconds: 30

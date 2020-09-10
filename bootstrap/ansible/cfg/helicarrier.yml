@@ -1,4 +1,0 @@
----
-sysctx_instance_name: helicarrier
-sysctx_host_hostname: helicarrier.janz.lan
-sysctx_host_kubeconfig: /root/.kube/config
