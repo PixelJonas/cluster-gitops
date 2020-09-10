@@ -8,5 +8,5 @@
 
   tasks:
     - name: populate vault with global_secrets
-      command: oc exec -n vault vault-0 -- vault kv put global_secrets/{{item.name}} {{item.key}}={{item.value}}
+      command: oc exec -n vault vault-server-0 -- vault kv put global_secrets/{{item.name}} {{item.key}}={{item.value}}
       with_items: "{{ global_secrets }}"
