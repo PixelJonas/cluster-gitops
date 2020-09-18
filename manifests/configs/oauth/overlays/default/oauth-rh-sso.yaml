@@ -9,15 +9,3 @@
     mappingMethod: claim
     name: RedHatSSO
     type: Google
-- op: add
-  path: /spec/identityProviders/-
-  value:
-    github:
-      clientID: "2df4ad40a1cb85c00524"
-      clientSecret:
-        name: github-secret
-      organizations:
-        - AvengersVsVirus
-    mappingMethod: claim
-    name: GitHub
-    type: GitHub

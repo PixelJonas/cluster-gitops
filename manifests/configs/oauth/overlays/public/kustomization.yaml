@@ -13,4 +13,4 @@ patchesJson6902:
       version: v1
       kind: OAuth
       name: cluster
-    path: oauth-rh-sso.yaml
+    path: oauth-github.yaml
