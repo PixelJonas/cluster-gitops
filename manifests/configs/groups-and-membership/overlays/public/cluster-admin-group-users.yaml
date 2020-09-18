@@ -4,3 +4,9 @@
 - op: add
   path: /users/-
   value: "wschomburg"
+- op: add
+  path: /users/-
+  value: "marcusne"
+- op: add
+  path: /users/-
+  value: "marcoklaassen"
