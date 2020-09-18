@@ -4,9 +4,9 @@
   connection: local
   gather_facts: false
   vars_files:
-    - cfg/secrets_helicarrier.yml
+    - cfg/secrets_helicarrier.yaml
 
   tasks:
     - name: populate vault with global_secrets
-      command: oc exec -n vault vault-server-0 -- vault kv put global_secrets/{{item.name}} {{item.key}}={{item.value}}
+      command: oc exec -n vault vault-server-0 -- vault kv put global_secrets/{{item.name}} {{item.key}}="{{item.value}}"
       with_items: "{{ global_secrets }}"

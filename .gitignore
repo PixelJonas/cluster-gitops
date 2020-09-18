@@ -1,1 +1,1 @@
-bootstrap/ansible/cfg/secrets-*.yaml
+bootstrap/ansible/cfg/secrets*.yaml
