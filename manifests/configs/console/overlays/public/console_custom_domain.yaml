@@ -1,3 +1,7 @@
-- op: replace
-  path: /spec/route/hostname
-  value: "console.app.janz.digital"
+apiVersion: operator.openshift.io/v1
+kind: Console
+metadata:
+  name: cluster
+spec:
+  route:
+    hostname: "console.app.janz.digital"

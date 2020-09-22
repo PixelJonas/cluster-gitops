@@ -4,10 +4,5 @@ kind: Kustomization
 bases:
   - ../default
 
-patchesJson6902:
-  - target:
-      group: operator.openshift.io/v1
-      version: v1
-      kind: Console
-      name: cluster
-    path: console_custom_domain.yaml
+patchesStrategicMerge:
+  - console_custom_domain.yaml
