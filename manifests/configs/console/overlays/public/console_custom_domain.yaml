@@ -4,4 +4,4 @@ metadata:
   name: cluster
 spec:
   route:
-    hostname: "console.app.janz.digital"
+    hostname: "console.apps.ocp.janz.cloud"
