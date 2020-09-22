@@ -4,16 +4,17 @@ kind: Kustomization
 namespace: argocd
 
 bases:
-- ../../../manifests/argocd/apps/oauth/public
-- ../../../manifests/argocd/apps/groups-and-membership/public
-- ../../../manifests/argocd/apps/vault/base
-- ../../../manifests/argocd/apps/alertmanager/base
+  - ../../../manifests/argocd/apps/oauth/public
+  - ../../../manifests/argocd/apps/groups-and-membership/public
+  - ../../../manifests/argocd/apps/console/public
 
+  - ../../../manifests/argocd/apps/vault/base
+  - ../../../manifests/argocd/apps/alertmanager/base
 
 patches:
-- target:
-    group: argoproj.io
-    version: v1alpha1
-    kind: Application
-    labelSelector: gitops.ownedBy=cluster-config
-  path: patch-gitops-repo.yaml
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
+      labelSelector: gitops.ownedBy=cluster-config
+    path: patch-gitops-repo.yaml

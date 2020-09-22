@@ -1,0 +1,3 @@
+- op: replace
+  path: /spec/route/hostname
+  value: "console.app.janz.digital"
