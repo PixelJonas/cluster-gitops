@@ -21,18 +21,17 @@ spec:
     targetRevision: 0.7.0
     chart: vault
     helm:
-      parameters:
-        - name: global.openshift
-          value: "true"
-        - name: server.dev.enabled
-          value: "false"
-        - name: server.ha.enabled
-          value: "true"
-        - name: server.ha.raft.enabled
-          value: "true"
-        - name: server.dataStorage.annotations
-          value: |
-            argocd.argoproj.io/compare-options: IgnoreExtraneous
+      values: |-
+        global:
+          openshift: true
+        server:
+          ha:
+            enabled: true
+          raft:
+            enabled: true
+          dataStorage:
+            annotations:
+              argocd.argoproj.io/compare-options: IgnoreExtraneous
   project: cluster-config
   syncPolicy:
     automated:
