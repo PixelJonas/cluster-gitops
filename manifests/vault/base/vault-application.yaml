@@ -30,7 +30,7 @@ spec:
           value: "true"
         - name: server.ha.raft.enabled
           value: "true"
-        - name: annotations
+        - name: dataStorage.annotations
           value:
             argocd.argoproj.io/compare-options: IgnoreExtraneous
   project: cluster-config
