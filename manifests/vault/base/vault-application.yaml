@@ -27,9 +27,9 @@ spec:
         - name: server.dev.enabled
           value: "false"
         - name: server.ha.enabled
-          value: true
+          value: "true"
         - name: server.ha.raft.enabled
-          value: true
+          value: "true"
   project: cluster-config
   syncPolicy:
     automated:
