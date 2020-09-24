@@ -11,6 +11,7 @@ metadata:
   name: argocd-server
   namespace: argocd
 spec:
+  applicationInstanceLabelKey: argocd.argoproj.io/instance
   resourceExclusions: |
     - apiGroups:
       - tekton.dev
@@ -30,10 +31,10 @@ spec:
     route:
       enabled: true
   rbac:
-    defaultPolicy: 'role:readonly'
+    defaultPolicy: "role:readonly"
     policy: |
       g, argocdadmins, role:admin
-    scopes: '[groups]'
+    scopes: "[groups]"
   server:
     route:
       enabled: true
