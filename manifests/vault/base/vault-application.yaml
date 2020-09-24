@@ -27,8 +27,8 @@ spec:
         server:
           ha:
             enabled: true
-          raft:
-            enabled: true
+            raft:
+              enabled: true
           dataStorage:
             annotations:
               argocd.argoproj.io/compare-options: IgnoreExtraneous
