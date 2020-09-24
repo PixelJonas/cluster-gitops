@@ -12,8 +12,8 @@ spec:
         - image: registry.redhat.io/openshift4/ose-cli:v4.4
           # work around unwriteable HOME dir / for unprivileged pods causing OC commands to be slow in pods
           env:
-          - name: HOME
-            value: /tmp
+            - name: HOME
+              value: /tmp
           command:
             - /bin/bash
             - -c

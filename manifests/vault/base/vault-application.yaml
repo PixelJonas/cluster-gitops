@@ -14,18 +14,22 @@ spec:
         - /webhooks/0/clientConfig/caBundle
   destination:
     namespace: vault
-    server: 'https://kubernetes.default.svc'
+    server: "https://kubernetes.default.svc"
   source:
-    path: ''
-    repoURL: 'https://helm.releases.hashicorp.com'
+    path: ""
+    repoURL: "https://helm.releases.hashicorp.com"
     targetRevision: 0.7.0
     chart: vault
     helm:
       parameters:
         - name: global.openshift
-          value: 'true'
+          value: "true"
         - name: server.dev.enabled
-          value: 'true'
+          value: "false"
+        - name: server.ha.enabled
+          value: true
+        - name: server.ha.raft.enabled
+          value: true
   project: cluster-config
   syncPolicy:
     automated:
