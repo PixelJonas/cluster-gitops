@@ -4,3 +4,6 @@ kind: Kustomization
 
 bases:
 - ../../../manifests/argocd/project/cluster-config/base
+
+resources:
+- sealed-secrets-namespace.yaml

@@ -8,7 +8,7 @@ bases:
   - ../../../manifests/argocd/apps/groups-and-membership/public
   - ../../../manifests/argocd/apps/console/public
 
-  - ../../../manifests/argocd/apps/vault/base
+  - ../../../manifests/argocd/apps/sealed-secrets-operator/base
   - ../../../manifests/argocd/apps/alertmanager/base
 
 patches:
