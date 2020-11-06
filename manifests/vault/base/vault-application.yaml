@@ -18,20 +18,23 @@ spec:
   source:
     path: ""
     repoURL: "https://helm.releases.hashicorp.com"
-    targetRevision: 0.7.0
+    targetRevision: 0.8.0
     chart: vault
     helm:
       values: |-
         global:
           openshift: true
-        server:
-          ha:
+        injector:
+          enabled: true
+          metrics:
             enabled: true
-            raft:
-              enabled: true
+        server:
           dataStorage:
+            enabled: true
             annotations:
               argocd.argoproj.io/compare-options: IgnoreExtraneous
+        ui:
+          enabled: true
   project: cluster-config
   syncPolicy:
     automated:
