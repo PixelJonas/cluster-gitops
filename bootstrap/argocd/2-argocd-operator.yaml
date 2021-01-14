@@ -12,7 +12,7 @@ metadata:
   namespace: argocd
 spec:
   targetNamespaces:
-  - argocd
+    - argocd
 ---
 apiVersion: operators.coreos.com/v1alpha1
 kind: Subscription
@@ -30,4 +30,20 @@ spec:
   installPlanApproval: Automatic
   name: argocd-operator
   source: community-operators
-  sourceNamespace: openshift-marketplace 
+  sourceNamespace: openshift-marketplace
+---
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: argocd-cluster-admin-binding
+subjects:
+  - kind: User
+    apiGroup: rbac.authorization.k8s.io
+    name: "system:serviceaccount:argocd:argocd-application-controller"
+  - kind: User
+    apiGroup: rbac.authorization.k8s.io
+    name: "system:serviceaccount:argocd:argocd-server"
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
