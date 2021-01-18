@@ -3,10 +3,12 @@ kind: Subscription
 metadata:
   name: web-terminal
   namespace: openshift-operators
+  annotations:
+    argocd.argoproj.io/sync-wave: "21"
 spec:
   channel: alpha
   installPlanApproval: Automatic
   name: web-terminal
   source: redhat-operators
   sourceNamespace: openshift-marketplace
-  startingCSV: web-terminal.v1.0.1
+  startingCSV: web-terminal.v1.1.0
