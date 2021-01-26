@@ -9,6 +9,7 @@ bases:
   - ../../../manifests/argocd/apps/console/public
 
   - ../../../manifests/argocd/apps/sealed-secrets-operator/base
+  - ../../../manifests/argocd/apps/web-terminal-operator/base
   - ../../../manifests/argocd/apps/alertmanager/base
 
 patches:

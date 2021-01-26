@@ -1,9 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: config-authentication
+  name: web-terminal
   annotations:
-    argocd.argoproj.io/sync-wave: "11"
+    argocd.argoproj.io/sync-wave: "1"
     argocd.argoproj.io/compare-options: IgnoreExtraneous
   labels:
     gitops.ownedBy: cluster-config
@@ -13,10 +13,10 @@ spec:
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
-    path: manifests/configs/oauth/overlays/default
+    path: manifests/operator/web-terminal/overlays/default
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
-    targetRevision: master
+    targetRevision: feature/web-terminal
   syncPolicy:
     automated:
       prune: false
-      selfHeal: false
+      selfHeal: true
