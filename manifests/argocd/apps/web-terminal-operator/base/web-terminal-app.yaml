@@ -15,7 +15,7 @@ spec:
   source:
     path: manifests/operator/web-terminal/overlays/default
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
-    targetRevision: feature/web-terminal
+    targetRevision: master
   syncPolicy:
     automated:
       prune: false
