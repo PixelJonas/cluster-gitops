@@ -11,6 +11,7 @@ bases:
   - ../../../manifests/argocd/apps/sealed-secrets-operator/base
   - ../../../manifests/argocd/apps/alertmanager/base
   - ../../../manifests/argocd/apps/user-workload-monitoring/base
+  - ../../../manifests/argocd/apps/openshift-pipelines/base
 
 patches:
   - target:
