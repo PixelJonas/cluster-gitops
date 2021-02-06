@@ -16,7 +16,7 @@ spec:
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
-    path: manifests/operator/grafana/base
+    path: manifests/operator/grafana/overlays/default
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
     targetRevision: master
   syncPolicy:
