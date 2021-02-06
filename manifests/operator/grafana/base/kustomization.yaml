@@ -10,9 +10,6 @@ bases:
   - namespace.yaml
   - https://github.com/redhat-canada-gitops/catalog/grafana-operator/overlays/user-app?ref=grafana
 
-patchesStrategicMerge:
-  - patch-grafana-csv-namespaces.yaml
-
 patchesJson6902:
   - target:
       version: v1
