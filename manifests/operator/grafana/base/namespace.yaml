@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  annotations:
+    openshift.io/description: Namespace for custom Grafana instance for User Workload Monitoring
+    openshift.io/display-name: Grafana - User Workload Monitroing
+  name: user-workload-grafana

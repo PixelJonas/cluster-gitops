@@ -1,0 +1,10 @@
+---
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: grafana
+spec:
+  targetNamespaces:
+    - user-workload-grafana
+    - product-metrics-infra
+    - product-metrics-prod

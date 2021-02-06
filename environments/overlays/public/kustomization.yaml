@@ -12,6 +12,7 @@ bases:
   - ../../../manifests/argocd/apps/alertmanager/base
   - ../../../manifests/argocd/apps/user-workload-monitoring/base
   - ../../../manifests/argocd/apps/openshift-pipelines/base
+  - ../../../manifests/argocd/apps/grafana-operator/base
 
 patches:
   - target:
