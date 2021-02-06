@@ -3,30 +3,58 @@ kind: ClusterRole
 metadata:
   name: grafana-operator
 rules:
-  - apiGroups:
+  - verbs:
+      - "*"
+    apiGroups:
+      - ""
+    resources:
+      - pods
+      - services
+      - endpoints
+      - persistentvolumeclaims
+      - events
+      - configmaps
+      - secrets
+      - serviceaccounts
+  - verbs:
+      - "*"
+    apiGroups:
+      - apps
+    resources:
+      - deployments
+      - deployments/finalizers
+      - daemonsets
+      - replicasets
+      - statefulsets
+  - verbs:
+      - "*"
+    apiGroups:
+      - route.openshift.io
+    resources:
+      - routes
+      - routes/custom-host
+  - verbs:
+      - get
+      - create
+    apiGroups:
+      - monitoring.coreos.com
+    resources:
+      - servicemonitors
+  - verbs:
+      - "*"
+    apiGroups:
+      - extensions
+    resources:
+      - ingresses
+  - verbs:
+      - "*"
+    apiGroups:
       - integreatly.org
     resources:
-      - grafanadashboards
-      - grafanadashboards/status
       - grafanas
-      - grafanas/status
+      - grafanadashboards
       - grafanadatasources
+      - grafanas/finalizers
+      - grafanas/status
+      - grafanadashboards/status
       - grafanadatasources/status
-    verbs: ["get", "list", "update", "watch"]
-  - apiGroups:
-      - ""
-    resources:
-      - namespaces
-    verbs: ["get", "list", "watch"]
-  - apiGroups:
-      - "apps"
-    resources:
-      - namespaces
-      - deployments
-      - configmaps
-    verbs: ["get", "list", "watch"]
-  - apiGroups:
-      - ""
-    resources:
-      - events
-    verbs: ["create", "patch"]
