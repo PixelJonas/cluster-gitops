@@ -8,6 +8,10 @@ rules:
     resources:
       - grafanadashboards
       - grafanadashboards/status
+      - grafanas
+      - grafanas/status
+      - grafanadatasources
+      - grafanadatasources/status
     verbs: ["get", "list", "update", "watch"]
   - apiGroups:
       - ""
