@@ -6,5 +6,3 @@ metadata:
 spec:
   targetNamespaces:
     - user-workload-grafana
-    - product-metrics-infra
-    - product-metrics-prod
