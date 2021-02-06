@@ -17,6 +17,11 @@ rules:
       - ""
     resources:
       - namespaces
+    verbs: ["get", "list", "watch"]
+  - apiGroups:
+      - "apps"
+    resources:
+      - namespaces
       - deployments
       - configmaps
     verbs: ["get", "list", "watch"]
