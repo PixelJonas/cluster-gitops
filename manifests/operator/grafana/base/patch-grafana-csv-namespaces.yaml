@@ -1,0 +1,18 @@
+apiVersion: operators.coreos.com/v1alpha1
+kind: ClusterServiceVersion
+metadata:
+  name: grafana-operator.v3.8.1
+  namespace: user-workload-grafana
+spec:
+  install:
+    spec:
+      deployments:
+        - name: grafana-operator
+          spec:
+            template:
+              spec:
+                containers:
+                  env:
+                    - name: WATCH_NAMESPACE
+                      value: >-
+                        user-workload-grafana,product-metrics-prod,product-metrics-infra
