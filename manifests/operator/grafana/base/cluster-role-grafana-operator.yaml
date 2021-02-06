@@ -12,15 +12,13 @@ rules:
       - grafanas/status
       - grafanadatasources
       - grafanadatasources/status
-      - deployments
-      - deployments/status
-      - configmaps
-      - configmaps/status
     verbs: ["get", "list", "update", "watch"]
   - apiGroups:
       - ""
     resources:
       - namespaces
+      - deployments
+      - configmaps
     verbs: ["get", "list", "watch"]
   - apiGroups:
       - ""
