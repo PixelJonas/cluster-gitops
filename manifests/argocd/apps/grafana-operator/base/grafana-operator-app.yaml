@@ -5,6 +5,12 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "11"
 spec:
+  ignoreDifferences:
+    - group: integreatly.org
+      kind: GrafanaDataSource
+      name: prometheus
+      jsonPointers:
+        - /spec/datasources/0/secureJsonData/httpHeaderValue1
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
