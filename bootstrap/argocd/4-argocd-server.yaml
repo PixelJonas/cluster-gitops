@@ -36,5 +36,9 @@ spec:
       g, argocdadmins, role:admin
     scopes: "[groups]"
   server:
+    insecure: true
     route:
       enabled: true
+      tls:
+        insecureEdgeTerminationPolicy: Redirect
+        termination: edge        
