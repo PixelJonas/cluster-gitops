@@ -8,7 +8,7 @@ metadata:
   labels:
     config.janz.cloud/component: instance
     config.janz.cloud/name: argocd-bootstrap
-  name: argocd-server
+  name: argo-cluster
   namespace: argocd
 spec:
   applicationInstanceLabelKey: argocd.argoproj.io/instance
@@ -41,4 +41,4 @@ spec:
       enabled: true
       tls:
         insecureEdgeTerminationPolicy: Redirect
-        termination: edge        
+        termination: edge
