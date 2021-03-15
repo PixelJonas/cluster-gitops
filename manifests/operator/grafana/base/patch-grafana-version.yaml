@@ -1,3 +1,3 @@
 - op: replace
   path: /spec/startingCSV
-  value: grafana-operator.v3.8.1
+  value: grafana-operator.v3.9.0
