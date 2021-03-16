@@ -5,3 +5,6 @@ namespace: openshift-cnv
 
 bases:
   - https://github.com/redhat-canada-gitops/catalog/virtualization-operator/base?ref=master
+
+patchesStrategicMerge:
+  - openshift-virt-patch-version.yaml
