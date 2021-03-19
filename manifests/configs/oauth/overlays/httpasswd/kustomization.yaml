@@ -6,3 +6,4 @@ bases:
 
 resources:
   - httpasswd-secret.yaml
+  - httpasswd-provider.yaml
