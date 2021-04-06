@@ -5,9 +5,7 @@ namespace: argocd
 
 bases:
   - ../../../manifests/argocd/apps/oauth/public
-  - ../../../manifests/argocd/apps/oauth/httpasswd
   - ../../../manifests/argocd/apps/groups-and-membership/public
-  - ../../../manifests/argocd/apps/groups-and-membership/demo-admin
   - ../../../manifests/argocd/apps/console/public
 
   - ../../../manifests/argocd/apps/sealed-secrets-operator/base
