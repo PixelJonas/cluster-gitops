@@ -8,9 +8,16 @@ metadata:
   labels:
     config.janz.cloud/component: instance
     config.janz.cloud/name: argocd-bootstrap
-  name: argo-cluster
-  namespace: argocd
+  name: argocd-cluster
+  namespace: openshift-gitops
 spec:
+  server:
+    insecure: true
+    route:
+      enabled: true
+      tls:
+        insecureEdgeTerminationPolicy: Redirect
+        termination: edge
   applicationInstanceLabelKey: argocd.argoproj.io/instance
   resourceExclusions: |
     - apiGroups:
@@ -20,8 +27,7 @@ spec:
       kinds:
       - TaskRun
       - PipelineRun
-  dex:
-    openShiftOAuth: true
+  dex: {}
   grafana:
     enabled: true
     route:
@@ -35,10 +41,3 @@ spec:
     policy: |
       g, argocdadmins, role:admin
     scopes: "[groups]"
-  server:
-    insecure: true
-    route:
-      enabled: true
-      tls:
-        insecureEdgeTerminationPolicy: Redirect
-        termination: edge
