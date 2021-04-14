@@ -9,7 +9,7 @@ commonAnnotations:
 bases:
   - cluster-role-binding-grafana-operator.yaml
   - cluster-role-grafana-operator.yaml
-  - https://github.com/redhat-canada-gitops/catalog/grafana-operator/overlays/user-app?ref=grafana
+  - https://github.com/redhat-canada-gitops/catalog/grafana-operator/overlays/user-app
 
 patchesJson6902:
   - target:
