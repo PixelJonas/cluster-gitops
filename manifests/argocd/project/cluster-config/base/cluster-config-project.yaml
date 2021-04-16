@@ -8,7 +8,7 @@ metadata:
     config.janz.cloud/component: instance
     config.janz.cloud/name: argocd-bootstrap
   name: cluster-config
-  namespace: openshift-gitops
+  namespace: argocd
 spec:
   clusterResourceWhitelist:
   - group: '*'

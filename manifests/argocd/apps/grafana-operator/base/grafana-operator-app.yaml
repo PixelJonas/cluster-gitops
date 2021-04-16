@@ -12,7 +12,7 @@ spec:
       jsonPointers:
         - /spec/datasources/0/secureJsonData/httpHeaderValue1
   destination:
-    namespace: openshift-gitops
+    namespace: argocd
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
