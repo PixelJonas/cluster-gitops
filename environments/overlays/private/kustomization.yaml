@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: argocd
+
+bases:
+  - ../../../manifests/argocd/apps/oauth/private
+  - ../../../manifests/argocd/apps/groups-and-membership/private
+  - ../../../manifests/argocd/apps/console/private
+
+  - ../../../manifests/argocd/apps/sealed-secrets-operator/base
+
+patches:
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
+      labelSelector: gitops.ownedBy=cluster-config
+    path: patch-gitops-repo.yaml
