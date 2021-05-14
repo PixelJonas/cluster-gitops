@@ -7,7 +7,7 @@ bases:
   - ../../../manifests/argocd/apps/oauth/private
   - ../../../manifests/argocd/apps/groups-and-membership/private
   - ../../../manifests/argocd/apps/console/private
-  - ../../../manifests/argocd/apps/cert-manager/private
+  - ../../../manifests/argocd/apps/cert-manager/overlays/private
 
   - ../../../manifests/argocd/apps/sealed-secrets-operator/base
 
