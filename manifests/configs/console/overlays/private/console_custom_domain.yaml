@@ -4,4 +4,4 @@ metadata:
   name: cluster
 spec:
   route:
-    hostname: "console.apps.vormir.janz.digital"
+    hostname: "console.apps.atlantis.janz.digital"
