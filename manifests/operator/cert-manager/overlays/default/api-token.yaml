@@ -6,12 +6,9 @@ metadata:
   namespace: cert-manager
 spec:
   encryptedData:
-    api-token: AgCOkX/CKIrviKXKiLY7+pTvcTLdFndORiB0jUdTmTSwr/Xe3KTWgD4dzXNmzcJ+z+cp26YSqwmUFo1/ClyfAKk0J0kN3WdNidIZuXBxBE69JnslMacGSZ2/OAzXQ4rso2XSv9gCQh/fUVurffopMNYLjlqojQXvWxFQnPydN0sBSGosyOt0LErerYuFRGYxuyL16+cGFvzROIIxuusQ2+Sw4cGFfImJDJF72yqNiKGQVChZa6mygCNgvF/cBaCgwWujcgn73HGtQLUhwPEQSZVhtCDsExT2EhlRBVdDdW2bI+4DbCj09NCVO1+qmdGFmUa8yIu16KWrXoLA/EdxDLU0vI8syxNrcb8AZC1BAbDToXVqFzb8IUflNgqVGKoBDSb89lhUJOAFaKqtM+tmSVNu6mEN1hjU2XjEIHOfQyHjacuPJYD2LgJAJ04wXw9H+wyztJ3ZVi7FUgRl2IeE46/2pUBs1lRp0+Yoq9C1FX+Y1gOSaxbP8aOjjNSlIxKka/gxzYPU6iiBvSPnlwBK/xS+IUkiTTABflzdf0LxdV3qac3utoSd4FNsnHj24O68ejv/NVAFnmD64n9jq6DSaj3cY1pXwtdJjkW8DH61hBCbC0SXV0qsnUURZIAQFVV0Q9csLS6Jp4OG9I7D+wrymcyIUrWcVNLYFzMYWjd03LJ/NH8QXyPBXNrXZAECxn5M0TndYFDdSUQqV9hrF/S+8ugk1t1Th6BXJBc=
+    api-token: AgB9H+qWH7ZWBoq/7C8SPXC+zekg3YpTzu2HFxkQacBCrCKMqXbxJCMRhFxlKrR+Jx9Pxgion255b4P9D6m95CVi8Jqyyqqi/dQq7Z1w2TtcWP5l62Tvc6NsGoLIM0tfZ06vEaTZ+WodKCp38w5j+wkRzB1yUdfSemzvTx/NESiJ+4q6KBZr6R9Uq4JWUAYBX7gdVIn115vgb2yeNkeGyaHVe+FTCFg8uGkdPc4TlJedaakRwKxiBWBkX39MduKfXWhstHyJ+a7v4ogqWqygBa1EeA/jb/tATdC0zdEDqO4FG5DIvW5gIuTRY4BPETfoAjZYSA1HkDhjHGQnJbhT61ColsZUTVeY+zVAxf7slz8LKVYrz4cBSK0bHvQX+9Jf4Is9//eg6Ku+7qMOijsPZgpd43iysVmt4l28LbjYK60vJnF+8MiwDTKXSKy1YYQ8QWSUbBw0DtVJbGSgLRcg2n66NziUaFwB0qSiol/mvZjL0+Clacv7ycg9pdKd5lSW+SXGM/gDhyDAtlwHw/wDnm1FvLCSNB2lMaFEpgjmecplKdnV0sWbqKZ4LPXBF12RX+GNMrNYKNo0QDqrD1FEplOJkNLBYMfDvNolKIVoHqYymNQUpWNId6qyUoOBYTMSZE/qG7VrDVNz2L6lp5s5Zgrq3WnbbRtoTFE0aPbzEp7D5h6QFavkGiHnmt3nWDE3CwCyzD5IxUYOeeKplw6G1SE6bRs7h4tAxkr9p2F3t/xH/9wed3anagR5
   template:
     metadata:
-      annotations:
-        argocd.argoproj.io/compare-options: IgnoreExtraneous
-        argocd.argoproj.io/sync-options: Prune=false
       creationTimestamp: null
       name: cloudflare-api-token
       namespace: cert-manager
