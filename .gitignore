@@ -1,2 +1,4 @@
 bootstrap/ansible/cfg/secrets*.yaml
 sealed-secrets-keys.yaml
+/*.yaml
+/*.json

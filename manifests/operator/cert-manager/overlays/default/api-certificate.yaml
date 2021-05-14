@@ -1,0 +1,11 @@
+apiVersion: cert-manager.io/v1alpha3
+kind: Certificate
+metadata:
+  name: api-atlantis-janz-digital
+  namespace: openshift-config
+spec:
+  duration: 2160h
+  renewBefore: 360h
+  issuerRef:
+    kind: ClusterIssuer
+    name: cloudflare-issuer

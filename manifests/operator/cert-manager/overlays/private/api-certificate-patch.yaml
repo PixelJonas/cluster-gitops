@@ -1,0 +1,9 @@
+apiVersion: cert-manager.io/v1alpha3
+kind: Certificate
+metadata:
+  name: api-atlantis-janz-digital
+  namespace: openshift-config
+spec:
+  dnsNames:
+    - api.atlantis.janz.digital
+  secretName: api-atlantis-janz-digital-tls
