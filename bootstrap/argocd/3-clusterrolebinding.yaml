@@ -6,10 +6,10 @@ metadata:
 subjects:
   - kind: User
     apiGroup: rbac.authorization.k8s.io
-    name: "system:serviceaccount:openshift-gitops:argocd-cluster-argocd-application-controller"
+    name: "system:serviceaccount:openshift-gitops:openshift-gitops-applicationset-controller"
   - kind: User
     apiGroup: rbac.authorization.k8s.io
-    name: "system:serviceaccount:openshift-gitops:argocd-cluster-argocd-server"
+    name: "system:serviceaccount:openshift-gitops:openshift-gitops-argocd-server"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole

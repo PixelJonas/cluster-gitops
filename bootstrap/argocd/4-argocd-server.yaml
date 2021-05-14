@@ -2,39 +2,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: ArgoCD
 metadata:
-  annotations:
-    config.janz.cloud/managed-by: gitops
-    config.janz.cloud/scm-url: git@github.com:PixelJonas/cluster-gitops.git
-  labels:
-    config.janz.cloud/component: instance
-    config.janz.cloud/name: argocd-bootstrap
-  name: argocd-cluster
-  namespace: argocd
+  name: openshift-gitops
+  namespace: openshift-gitops
 spec:
-  applicationInstanceLabelKey: argocd.argoproj.io/instance
-  resourceExclusions: |
-    - apiGroups:
-      - tekton.dev
-      clusters:
-      - '*'
-      kinds:
-      - TaskRun
-      - PipelineRun
   dex:
     openShiftOAuth: true
-  grafana:
-    enabled: true
-    route:
-      enabled: true
-  prometheus:
-    enabled: true
-    route:
-      enabled: true
-  rbac:
-    defaultPolicy: "role:readonly"
-    policy: |
-      g, argocdadmins, role:admin
-    scopes: "[groups]"
   server:
     insecure: true
     route:
