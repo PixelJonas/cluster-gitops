@@ -6,7 +6,7 @@ metadata:
 subjects:
   - kind: User
     apiGroup: rbac.authorization.k8s.io
-    name: "system:serviceaccount:openshift-gitops:openshift-gitops-applicationset-controller"
+    name: "system:serviceaccount:openshift-gitops:openshift-gitops-argocd-application-controller"
   - kind: User
     apiGroup: rbac.authorization.k8s.io
     name: "system:serviceaccount:openshift-gitops:openshift-gitops-argocd-server"
