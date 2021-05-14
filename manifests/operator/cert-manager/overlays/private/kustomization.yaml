@@ -7,7 +7,7 @@ bases:
   - "../default"
 
 resources:
-  - api-server-patch.yaml
-  
+#  - api-server-patch.yaml
+
 patchesStrategicMerge:
   - api-certificate-patch.yaml

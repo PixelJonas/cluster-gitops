@@ -4,8 +4,8 @@ metadata:
   name: api-atlantis-janz-digital
   namespace: openshift-config
 spec:
-  duration: 2160h
-  renewBefore: 360h
+  duration: 2160h0m0s
+  renewBefore: 360h0m0s
   issuerRef:
     kind: ClusterIssuer
     name: cloudflare-issuer
