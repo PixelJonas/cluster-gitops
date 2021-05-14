@@ -8,4 +8,4 @@ resources:
 #  - api-server-patch.yaml
 
 patchesStrategicMerge:
-  - api-certificate-patch.yaml
+  - ingress-certificate-patch.yaml

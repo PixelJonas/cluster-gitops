@@ -8,3 +8,4 @@ resources:
   - api-token.yaml
   - issuer.yaml
   - api-certificate.yaml
+  - ingress-certificate.yaml
