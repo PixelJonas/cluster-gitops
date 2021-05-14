@@ -2,7 +2,7 @@ apiVersion: cert-manager.io/v1alpha3
 kind: Certificate
 metadata:
   name: wildcard-apps-atlantis-janz-digital
-  namespace: openshift-config
+  namespace: openshift-ingress
 spec:
   duration: 2160h0m0s
   renewBefore: 360h0m0s
