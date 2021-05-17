@@ -8,6 +8,7 @@ bases:
   - ../../../manifests/argocd/apps/groups-and-membership/private
   - ../../../manifests/argocd/apps/console/private
   - ../../../manifests/argocd/apps/cert-manager/overlays/private
+  - ../../../manifests/argocd/apps/ntp/overlays/default
 
   - ../../../manifests/argocd/apps/sealed-secrets-operator/base
 

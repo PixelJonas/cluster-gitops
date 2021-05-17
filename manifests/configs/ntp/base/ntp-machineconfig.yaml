@@ -1,0 +1,10 @@
+apiVersion: machineconfiguration.openshift.io/v1
+kind: MachineConfig
+metadata:
+  labels:
+    machineconfiguration.openshift.io/role: ntp-chrony-conf
+  name: 50-ntp-chrony-conf
+spec:
+  config:
+    ignition:
+      version: 3.1.0
