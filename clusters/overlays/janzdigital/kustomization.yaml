@@ -7,6 +7,7 @@ bases:
   - ../../../environments/overlays/bootstrap
 
 resources:
+  - argocd-namespace.yaml
   - cluster-config-manager.yaml
 
 patches:
