@@ -12,6 +12,8 @@ spec:
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
+    directory:
+      recurse: false
     path: manifests/configs/groups-and-membership/overlays/default
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
     targetRevision: master
