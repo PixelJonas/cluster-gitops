@@ -5,7 +5,7 @@ namespace: argocd
 
 bases:
   - ../../../manifests/argocd/apps/groups-and-membership/private
-  - ../../../manifests/argocd/apps/sealed-secrets-operator/base
+  - ../../../manifests/argocd/apps/sealed-secrets-operator/private
 
 patches:
   - target:
