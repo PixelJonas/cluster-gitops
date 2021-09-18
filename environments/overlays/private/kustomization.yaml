@@ -4,7 +4,6 @@ kind: Kustomization
 namespace: argocd
 
 bases:
-  - ../../../manifests/argocd/apps/groups-and-membership/private
   - ../../../manifests/argocd/apps/sealed-secrets-operator/private
 
 patches:
