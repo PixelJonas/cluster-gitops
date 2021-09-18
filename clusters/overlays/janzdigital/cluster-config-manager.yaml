@@ -10,12 +10,9 @@ spec:
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
-    directory:
-      recurse: false
     path: environments/overlays/private
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
     targetRevision: master
   syncPolicy:
     automated:
-      prune: false
       selfHeal: true
