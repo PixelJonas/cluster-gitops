@@ -3,3 +3,6 @@ kind: Kustomization
 
 bases:
   - ../../../manifests/argocd/project/cluster-config/base
+
+resources:
+  - argocd-server.yaml

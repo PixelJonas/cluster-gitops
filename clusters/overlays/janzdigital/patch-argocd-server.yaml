@@ -1,0 +1,14 @@
+- op: replace
+  path: /metadata/name
+  value: argocd
+
+- op: replace
+  path: /metadata/namespace
+  value: argocd
+
+- op: replace
+  path: /spec/dex/openShiftOAuth
+  value: false
+
+- op: remove
+  path: /spec/server/route

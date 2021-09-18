@@ -1,10 +1,18 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: openshift-gitops
+namespace: argocd
 
 bases:
   - ../../../environments/overlays/bootstrap
 
 resources:
   - cluster-config-manager.yaml
+
+patches:
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: ArgoCD
+      name: openshift-gitops
+    path: patch-argocd-server.yaml
