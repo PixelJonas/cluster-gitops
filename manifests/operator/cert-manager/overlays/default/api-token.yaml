@@ -3,7 +3,7 @@ kind: SealedSecret
 metadata:
   creationTimestamp: null
   name: cloudflare-api-token
-  namespace: cert-manager
+  namespace: operators
 spec:
   encryptedData:
     api-token: AgCZYM8ytwTeUk3hNnV6aIzHQvviUTw5pHlNeborUa/sc5DXU4U9vo5hYpKoXO2dljexV0m+X/5Rd7Hn4e1zUgYr1hHveuj/jtEEzVuh99D1pzYvNTU+/db9YMHQHBgquKr3BC/pJgmq9p+kOXKwvb1IMR8xqAi+hAf6fOlZEXrwm4LLK26V/9l6Wu3Z6dHxJaxrn1ma2crcuXLuejTNXEWX0yLZolX7yI8+z5LUwDXel3f8wzvQBgl56Waa1CLGSfiIJ6J7uTMnNzpryKU3tNnmJljb419we5c95ENlLwvfQichJ5MajpUn7HVxFlALY5aisCFxisJo6Bkd/MyyKm8BMhpSAa20R/CozOLSqOLTChvextPmS5YMlKoOwVV7hHXXqZkG1kP7pTwxDXAdI/gnNXM3BR54ZeTjKeBxo/XaGsH21lPuL6eoD+6wGhVnxQ/wQvWIKif5rfjsJiKORFX+VWT/sRqYcYschBzma1n1/J+aJQ1WexUugXasvMgDQsJYsxO0DDIBkZKtr7xErsAUAOFNlRpoa2NAswuL25KcaIwJpl6stgaFaw47yMCS9+sX430zztrdXiscjt8vncRoiR3/pCN9nxm6Ncs1A/dfvXX5/aKoMTbMHLIUV2wB6R1f3+wBOhHFYzLYOiUd7okDuExcngYOt+af16KdHZefCurjH6j+DII6f5ABkEb5tVSVDaHGF2KXclZ0HLSw/Z+N5JpoD1nXjGkAuTCidGJ1Xi54pVYarsGB
@@ -11,4 +11,4 @@ spec:
     metadata:
       creationTimestamp: null
       name: cloudflare-api-token
-      namespace: cert-manager
+      namespace: operators
