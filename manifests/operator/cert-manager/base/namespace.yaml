@@ -1,7 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    openshift.io/description: managing Let's encrypt certificates
-    openshift.io/display-name: Cert-Manager
-  name: cert-manager
