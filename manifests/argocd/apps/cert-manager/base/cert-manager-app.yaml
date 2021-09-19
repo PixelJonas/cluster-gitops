@@ -14,7 +14,7 @@ spec:
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
-    path: manifests/operator/cert-manager/overlays/default
+    path: manifests/operator/cert-manager/overlays/public
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
     targetRevision: master
   syncPolicy:

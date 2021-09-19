@@ -5,8 +5,8 @@ bases:
   - "../default"
 
 resources:
-#  - api-server-patch.yaml
-
-patchesStrategicMerge:
-  - api-certificate-patch.yaml
   - ingress-certificate-patch.yaml
+  - subscription.yaml
+
+patches:
+  - patch-issuer-server.yaml

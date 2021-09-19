@@ -6,3 +6,4 @@ bases:
 
 resources:
   - argocd-server.yaml
+  - namespace.yaml
