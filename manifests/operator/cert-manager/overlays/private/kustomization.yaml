@@ -1,7 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: cluster-config
+namespace: operators
 
 bases:
   - "../default"
@@ -11,3 +11,4 @@ resources:
 
 patches:
   - patch-issuer-server.yaml
+  - patch-api-token.yaml
