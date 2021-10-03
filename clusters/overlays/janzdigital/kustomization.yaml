@@ -18,3 +18,10 @@ patches:
       kind: ArgoCD
       name: openshift-gitops
     path: patch-argocd-server.yaml
+
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
+      labelSelector: gitops.ownedBy=cluster-config
+    path: patch-target-revision.yaml
