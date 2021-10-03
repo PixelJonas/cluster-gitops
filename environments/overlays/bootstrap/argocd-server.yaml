@@ -5,6 +5,7 @@ metadata:
   name: openshift-gitops
   namespace: openshift-gitops
 spec:
+  applicationInstanceLabelKey: argocd.argoproj.io/instance
   dex:
     openShiftOAuth: true
   server:
