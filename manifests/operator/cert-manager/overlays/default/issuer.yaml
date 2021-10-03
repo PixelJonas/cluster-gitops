@@ -2,7 +2,6 @@ apiVersion: cert-manager.io/v1alpha3
 kind: ClusterIssuer
 metadata:
   name: cloudflare-issuer
-  namespace: cert-manager
 spec:
   acme:
     email: "jonas@janz.digital"
