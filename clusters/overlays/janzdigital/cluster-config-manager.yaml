@@ -12,7 +12,7 @@ spec:
   source:
     path: environments/overlays/private
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
-    targetRevision: feature/private
+    targetRevision: master
   syncPolicy:
     automated:
       selfHeal: true
