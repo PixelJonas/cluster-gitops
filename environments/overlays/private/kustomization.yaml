@@ -14,3 +14,10 @@ patches:
       kind: Application
       labelSelector: gitops.ownedBy=cluster-config
     path: patch-gitops-repo.yaml
+
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
+      labelSelector: gitops.ownedBy=cluster-config
+    path: patch-target-revision.yaml

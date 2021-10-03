@@ -1,12 +1,14 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
+namespace: operators
+
 bases:
   - "../default"
 
 resources:
   - ingress-certificate-patch.yaml
-  - subscription.yaml
 
 patches:
   - patch-issuer-server.yaml
+  - patch-api-token.yaml

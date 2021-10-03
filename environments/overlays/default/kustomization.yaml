@@ -9,6 +9,9 @@ bases:
   - ../../../manifests/argocd/apps/vault/base
   - ../../../manifests/argocd/apps/alertmanager/base
 
+resources:
+  - cluster-config-namespace.yaml
+
 patches:
   - target:
       group: argoproj.io

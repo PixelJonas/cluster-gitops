@@ -4,4 +4,4 @@
 
 - op: replace
   path: /spec/destination/namespace
-  value: operators
+  value: cert-manager
