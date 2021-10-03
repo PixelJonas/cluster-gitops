@@ -6,7 +6,6 @@ bases:
 
 resources:
   - ingress-certificate-patch.yaml
-  - subscription.yaml
 
 patches:
   - patch-issuer-server.yaml
