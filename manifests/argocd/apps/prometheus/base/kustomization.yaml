@@ -4,3 +4,4 @@ kind: Kustomization
 resources:
   - prometheus-operator-app.yaml
   - prometheus-instance-app.yaml
+  - prometheus-config-app.yaml
