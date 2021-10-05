@@ -20,3 +20,10 @@ patches:
       kind: Application
       name: prometheus-instance
     path: patch-destination.yaml
+
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
+      name: prometheus-config
+    path: patch-destination.yaml
