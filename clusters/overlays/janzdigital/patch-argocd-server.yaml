@@ -12,3 +12,12 @@
 
 - op: remove
   path: /spec/server/route
+
+- op: replace
+  path: /spec/server/ingress
+  value:
+    enabled: true
+
+- op: replace
+  path: /spec/server/host
+  value: argocd.apps.atlantis.janz.digital
