@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx
+  namespace: argocd
+spec:
+  destination:
+    namespace: ingress
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    chart: ingress-nginx
+    helm:
+      values: |-
+        controller:
+          kind: DaemonSet
+          hostPort:
+            enabled: true
+            ports:
+              http: 8080
+              https: 443
+          metrics:
+            enabled: false
+          service:
+            enabled: false
+          extraArgs:
+            default-ssl-certificate: "operators/wildcard-apps-atlantis-janz-digital-tls"
+    repoURL: https://kubernetes.github.io/ingress-nginx
+    targetRevision: 4.0.5
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground

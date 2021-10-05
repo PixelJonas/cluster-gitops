@@ -6,6 +6,7 @@ namespace: argocd
 bases:
   - ../../../manifests/argocd/apps/sealed-secrets-operator/private
   - ../../../manifests/argocd/apps/cert-manager/overlays/private
+  - ../../../manifests/argocd/apps/nginx/base
 
 patches:
   - target:
