@@ -12,4 +12,4 @@ spec:
     displayName: "Janz"
   instanceSelector:
     matchLabels:
-      app: example-keycloak
+      app: keycloak
