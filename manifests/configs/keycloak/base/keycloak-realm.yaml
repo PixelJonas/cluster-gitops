@@ -6,8 +6,8 @@ metadata:
     app: keycloak
 spec:
   realm:
-    id: "basic"
-    realm: "basic"
+    id: "Janz"
+    realm: "Janz"
     enabled: True
     displayName: "Janz"
   instanceSelector:
