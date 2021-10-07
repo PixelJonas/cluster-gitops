@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "11"
 spec:
   destination:
-    namespace: keylcoak
+    namespace: keycloak
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
