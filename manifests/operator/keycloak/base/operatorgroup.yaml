@@ -1,8 +1,9 @@
-apiVersion: operators.coreos.com/v1 
-kind: OperatorGroup 
-metadata: 
-  name: operatorgroup 
-  namespace: keycloak-operator 
-spec: 
-  targetNamespaces: 
-    - keycloak-operator 
+apiVersion: operators.coreos.com/v1
+kind: OperatorGroup
+metadata:
+  name: operatorgroup
+  namespace: keycloak-operator
+spec:
+  targetNamespaces:
+    - keycloak-operator
+    - keycloak
