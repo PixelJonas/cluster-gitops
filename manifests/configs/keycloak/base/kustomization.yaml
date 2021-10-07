@@ -6,3 +6,4 @@ namespace: keycloak-operator
 resources:
   - keycloak-instance.yaml
   - keycloak-realm.yaml
+  - ingress.yaml
