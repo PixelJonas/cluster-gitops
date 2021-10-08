@@ -10,6 +10,9 @@ bases:
   - ../../../manifests/argocd/apps/keycloak/base
   - ../../../manifests/argocd/apps/nfs-provisioner/base
 
+resources:
+  - ./cluster-apps-project.yaml
+
 patches:
   - target:
       group: argoproj.io
