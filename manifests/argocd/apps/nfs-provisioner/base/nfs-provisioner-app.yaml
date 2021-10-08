@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nfs-provisioner
+  annotations:
+    argocd.argoproj.io/sync-wave: "11"
+spec:
+  project: cluster-config
+  source:
+    repoURL: "https://kubernetes-sigs.github.io/nfs-subdir-external-provisioner/"
+    chart: nfs-subdir-external-provisioner
+    targetRevision: 4.0.14
+    helm:
+      values: |-
+        nfs:
+          server: 192.168.1.220
+          path: /mnt/storage/configs
+          reclaimPolicy: Retain
+
+        storageClass:
+          defaultClass: true
+          name: nfs
+          onDelete: retain
+          pathPattern: "${.PVC.namespace}-${.PVC.name}"
+          accessModes: ReadWriteMany
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: nfs-provisioner
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

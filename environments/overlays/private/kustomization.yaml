@@ -8,6 +8,7 @@ bases:
   - ../../../manifests/argocd/apps/cert-manager/overlays/private
   - ../../../manifests/argocd/apps/nginx/base
   - ../../../manifests/argocd/apps/keycloak/base
+  - ../../../manifests/argocd/apps/nfs-provisioner/base
 
 patches:
   - target:
