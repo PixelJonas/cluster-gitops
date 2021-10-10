@@ -1,0 +1,12 @@
+
+--- 
+apiVersion: operators.coreos.com/v1alpha1 
+kind: Subscription 
+metadata: 
+  name: rook-ceph 
+  namespace: rook-ceph 
+spec: 
+  channel: beta 
+  name: rook-ceph 
+  source: operatorhubio-catalog 
+  sourceNamespace: olm
