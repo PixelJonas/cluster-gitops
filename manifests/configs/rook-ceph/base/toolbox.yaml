@@ -1,50 +1,48 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: rook-ceph-tools
-  namespace: rook-ceph
+  name: toolbox
   labels:
-    app: rook-ceph-tools
+    app: toolbox
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: rook-ceph-tools
+      app: toolbox
   template:
     metadata:
       labels:
-        app: rook-ceph-tools
+        app: toolbox
     spec:
       dnsPolicy: ClusterFirstWithHostNet
       containers:
-      - name: rook-ceph-tools
-        image: rook/ceph:v1.7.5
-        command: ["/tini"]
-        args: ["-g", "--", "/usr/local/bin/toolbox.sh"]
-        imagePullPolicy: IfNotPresent
-        env:
-          - name: ROOK_CEPH_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: rook-ceph-mon
-                key: ceph-username
-          - name: ROOK_CEPH_SECRET
-            valueFrom:
-              secretKeyRef:
-                name: rook-ceph-mon
-                key: ceph-secret
-        volumeMounts:
-          - mountPath: /etc/ceph
-            name: ceph-config
-          - name: mon-endpoint-volume
-            mountPath: /etc/rook
+        - name: toolbox
+          image: chriswayg/toolbox
+          command: ["/bin/sh"]
+          args: ["-c", "while true; do echo hello; sleep 10;done"]  
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - mountPath: /usr/src/paperless/consume
+              name: consume
+            - mountPath: /usr/src/paperless/data
+              name: data
+            - mountPath: /usr/src/paperless/export
+              name: export
+            - mountPath: /usr/src/paperless/media
+              name: media
       volumes:
-        - name: mon-endpoint-volume
-          configMap:
-            name: rook-ceph-mon-endpoints
-            items:
-            - key: data
-              path: mon-endpoints
+        - name: consume
+          persistentVolumeClaim:
+            claimName: paperless-ng-import
+        - name: data
+          persistentVolumeClaim:
+            claimName: paperless-ng-data
+        - name: export
+          persistentVolumeClaim:
+            claimName: paperless-ng-export
+        - name: media
+          persistentVolumeClaim:
+            claimName: paperless-ng-media
         - name: ceph-config
           emptyDir: {}
       tolerations:

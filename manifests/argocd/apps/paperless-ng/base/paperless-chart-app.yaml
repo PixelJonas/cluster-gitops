@@ -25,12 +25,6 @@ spec:
           PAPERLESS_CONSUMER_POLLING: 30
           PAPERLESS_OCR_DESKEW: true
           PAPERLESS_OCR_ROTATE_PAGES_THRESHOLD: 3
-          PAPERLESS_DBHOST: localhost
-          PAPERLESS_DBPORT: 5432
-          PAPERLESS_DBUSER: paperless
-          PAPERLESS_DBPASS: 9GGqeEzYAsy74m
-          PGID: 1500
-          PUID: 1500
 
         ingress:
           main:
@@ -49,37 +43,21 @@ spec:
         persistence:
           data:
             enabled: true
-            size: 1Gi
+            storageClass: rook-cephfs
+            size: 3Gi
           media:
             enabled: true
+            storageClass: rook-cephfs
             size: 10Gi
           export:
             enabled: true
             size: 1Gi
-          database:
-            enabled: true
-            mountPath: "-"
-            accessMode: "ReadWriteOnce"
-            size: 3Gi
 
         additionalContainers:
           broker:
             name: broker
             image: redis:6.0
             imagePullPolicy: IfNotPresent
-          postgresql:
-            name: postgresql
-            image: postgres:13
-            env:
-              - name: POSTGRES_DB
-                value: paperless
-              - name: POSTGRES_USER
-                value: paperless
-              - name: POSTGRES_PASSWORD
-                value: 9GGqeEzYAsy74m
-            volumeMounts:
-              - mountPath: /var/lib/posgresql/data
-                name: database
 
   project: cluster-apps
   syncPolicy:
