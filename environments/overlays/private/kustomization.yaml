@@ -9,6 +9,7 @@ bases:
   - ../../../manifests/argocd/apps/nginx/base
   - ../../../manifests/argocd/apps/keycloak/base
   - ../../../manifests/argocd/apps/nfs-provisioner/base
+  - ../../../manifests/argocd/apps/rook-ceph/base
 
 resources:
   - ./cluster-apps-project.yaml

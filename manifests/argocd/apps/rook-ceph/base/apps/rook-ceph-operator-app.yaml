@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rook-ceph-operator-app
+  annotations:
+    argocd.argoproj.io/sync-wave: "21"
+spec:
+  destination:
+    namespace: rook-ceph
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    path: manifests/operator/rook-ceph/base
+    repoURL: https://github.com/pixeljonas/cluster-gitops.git
+    targetRevision: feature/rook
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
