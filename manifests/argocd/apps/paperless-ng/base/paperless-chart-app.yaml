@@ -1,0 +1,90 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: paperless-ng
+  namespace: argocd
+spec:
+  destination:
+    namespace: paperless
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://k8s-at-home.com/charts/'
+    targetRevision: 7.0.1
+    chart: paperless
+    helm:
+      values: |-
+        env:
+          # -- Project name
+          COMPOSE_PROJECT_NAME: paperless
+          # -- Redis to use
+          PAPERLESS_REDIS: redis://localhost:6379
+          # -- OCR languages to install
+          PAPERLESS_OCR_LANGUAGE: deu
+          PAPERLESS_OCR_LANGUAGES: deu
+          PAPERLESS_TIME_ZONE: Europe/Berlin
+          PAPERLESS_CONSUMER_POLLING: 30
+          PAPERLESS_OCR_DESKEW: true
+          PAPERLESS_OCR_ROTATE_PAGES_THRESHOLD: 3
+          PAPERLESS_DBHOST: localhost
+          PAPERLESS_DBPORT: 5432
+          PAPERLESS_DBUSER: paperless
+          PAPERLESS_DBPASS: 9GGqeEzYAsy74m
+          PGID: 1500
+          PUID: 1500
+
+        ingress:
+          main:
+            enabled: true
+            ingressClassName: nginx
+            pathType: Prefix
+            hosts:
+              - host: paperless.apps.atlantis.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+            tls:
+              - hosts:
+                  - paperless.apps.atlantis.janz.digital
+
+        persistence:
+          data:
+            enabled: true
+            size: 1Gi
+          media:
+            enabled: true
+            size: 10Gi
+          export:
+            enabled: true
+            size: 1Gi
+          database:
+            enabled: true
+            mountPath: "-"
+            accessMode: "ReadWriteOnce"
+            size: 3Gi
+
+        additionalContainers:
+          broker:
+            name: broker
+            image: redis:6.0
+            imagePullPolicy: IfNotPresent
+          postgresql:
+            name: postgresql
+            image: postgres:13
+            env:
+              - name: POSTGRES_DB
+                value: paperless
+              - name: POSTGRES_USER
+                value: paperless
+              - name: POSTGRES_PASSWORD
+                value: 9GGqeEzYAsy74m
+            volumeMounts:
+              - mountPath: /var/lib/posgresql/data
+                name: database
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

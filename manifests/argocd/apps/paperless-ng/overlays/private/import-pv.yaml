@@ -1,0 +1,39 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pvc-paperless-import
+spec:
+  accessModes:
+  - ReadWriteOnce
+  capacity:
+    storage: 1Gi
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: paperless-ng-import
+    namespace: paperless
+  nfs:
+    path: /mnt/storage/documents
+    server: 192.168.1.220
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-custom
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    app.kubernetes.io/instance: paperless-ng
+    app.kubernetes.io/name: paperless
+    #argocd.argoproj.io/instance: paperless-ng
+  name: paperless-ng-import
+  namespace: paperless
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: nfs-custom
+  volumeMode: Filesystem
+  volumeName: pvc-paperless-import

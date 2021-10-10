@@ -12,7 +12,7 @@ spec:
   source:
     path: manifests/operator/rook-ceph/base
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
-    targetRevision: master
+    targetRevision: feature/rook
   syncPolicy:
     automated:
       prune: true
