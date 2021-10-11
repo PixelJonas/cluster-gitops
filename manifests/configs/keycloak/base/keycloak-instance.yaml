@@ -6,7 +6,6 @@ metadata:
    app: keycloak
 spec:
   instances: 1
-  storageClassName: rook-cephfs
   externalAccess:
     enabled: True
     host: sso.apps.atlantis.janz.digital
