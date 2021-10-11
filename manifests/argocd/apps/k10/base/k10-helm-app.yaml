@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: k10-chart
+  namespace: argocd
+spec:
+  destination:
+    namespace: kasten-io
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    chart: k10
+    helm:
+      parameters:
+      - name: global.persistence.storageClass
+        value: rook-cephfs
+    repoURL: https://charts.kasten.io/
+    targetRevision: 4.0.13
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
