@@ -20,4 +20,4 @@
 
 - op: replace
   path: /spec/server/host
-  value: argocd.apps.atlantis.janz.digital
+  value: argocd.apps.hive.janz.digital

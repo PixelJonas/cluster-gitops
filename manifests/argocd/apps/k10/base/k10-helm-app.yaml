@@ -25,7 +25,7 @@ spec:
           tls:
             enabled: true
             secretName: kasten-tls
-          host: kasten.apps.atlantis.janz.digital
+          host: kasten.apps.hive.janz.digital
           urlPath: k10
 
         injectKanisterSidecar:

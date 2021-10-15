@@ -14,7 +14,7 @@ metadata:
   namespace: keycloak-operator
 spec:
   rules:
-    - host: sso.apps.atlantis.janz.digital
+    - host: sso.apps.hive.janz.digital
       http:
         paths:
           - backend:
@@ -26,4 +26,4 @@ spec:
             pathType: ImplementationSpecific
   tls:
     - hosts:
-        - sso.apps.atlantis.janz.digital
+        - sso.apps.hive.janz.digital

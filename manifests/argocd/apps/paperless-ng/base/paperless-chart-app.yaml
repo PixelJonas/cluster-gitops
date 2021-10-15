@@ -39,13 +39,13 @@ spec:
             ingressClassName: nginx
             pathType: Prefix
             hosts:
-              - host: paperless.apps.atlantis.janz.digital
+              - host: paperless.apps.hive.janz.digital
                 paths:
                   - path: /
                     pathType: Prefix
             tls:
               - hosts:
-                  - paperless.apps.atlantis.janz.digital
+                  - paperless.apps.hive.janz.digital
 
         persistence:
           data:

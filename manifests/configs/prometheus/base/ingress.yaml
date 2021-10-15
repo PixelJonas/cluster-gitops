@@ -9,7 +9,7 @@ metadata:
   namespace: monitoring
 spec:
   rules:
-  - host: grafana.apps.atlantis.janz.digital
+  - host: grafana.apps.hive.janz.digital
     http:
       paths:
       - backend:
@@ -21,4 +21,4 @@ spec:
         pathType: ImplementationSpecific
   tls:
   - hosts:
-    - grafana.apps.atlantis.janz.digital
+    - grafana.apps.hive.janz.digital
