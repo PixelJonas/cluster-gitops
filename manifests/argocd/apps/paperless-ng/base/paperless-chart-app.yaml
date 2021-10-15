@@ -26,6 +26,13 @@ spec:
           PAPERLESS_OCR_DESKEW: true
           PAPERLESS_OCR_ROTATE_PAGES_THRESHOLD: 3
 
+        controller:
+          labels:
+            kanister.kasten.io/inject-sidecar: "true"
+
+        podLabels:
+          kanister.kasten.io/inject-sidecar: "true"
+
         ingress:
           main:
             enabled: true
