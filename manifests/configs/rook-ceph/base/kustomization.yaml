@@ -7,4 +7,3 @@ resources:
   - rook-ceph-cluster.yaml
   - rook-ceph-filesystem.yaml
   - rook-ceph-storageclass.yaml
-#  - rook-ceph-snapshotclass.yaml

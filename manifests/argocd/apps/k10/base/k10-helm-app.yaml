@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: k10-chart
+  name: k10
   namespace: argocd
 spec:
   destination:
@@ -12,10 +12,33 @@ spec:
     chart: k10
     helm:
       parameters:
-      - name: global.persistence.storageClass
-        value: rook-cephfs
+      values: |-
+        global:
+          persistence:
+            storageClass: rook-cephs
+          ingress:
+            create: true
+            urlPath: k10
+        ingress:
+          class: nginx
+          create: true
+          tls:
+            enabled: true
+            secretName: kasten-tls
+          host: kasten.apps.atlantis.janz.digital
+          urlPath: k10
+
+        injectKanisterSidecar:
+          enabled: true
+          objectSelector:
+            matchLabels:
+              kanister.kasten.io/inject-sidecar: "true"
+        auth:
+          basicAuth:
+            enabled: true
+            htpasswd: "admin:$2y$10$90kwyftHGGeNUPHiDmueqOW5/TCAWMhLjFjv9Ff111TSs.cvibk.."
     repoURL: https://charts.kasten.io/
     targetRevision: 4.0.13
   syncPolicy:
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true

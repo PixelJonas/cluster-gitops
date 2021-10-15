@@ -1,0 +1,12 @@
+apiVersion: config.kio.kasten.io/v1alpha1
+kind: Profile
+metadata:
+  name: lola-nfs
+  namespace: kasten-io
+spec:
+  locationSpec:
+    fileStore:
+      claimName: pvc-k10-export
+      path: k10/49c03ec0-44df-4fbc-87a8-3822c08aa6ff/migration
+    type: FileStore
+  type: Location
