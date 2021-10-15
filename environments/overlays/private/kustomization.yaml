@@ -11,7 +11,7 @@ bases:
   - ../../../manifests/argocd/apps/nfs-provisioner/base
   #- ../../../manifests/argocd/apps/rook-ceph/base
   #- ../../../manifests/argocd/apps/paperless-ng/overlays/private
-  #- ../../../manifests/argocd/apps/k10/base
+  - ../../../manifests/argocd/apps/k10/base
 resources:
   - ./cluster-apps-project.yaml
 

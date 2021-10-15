@@ -14,8 +14,6 @@ spec:
       parameters:
       values: |-
         global:
-          persistence:
-            storageClass: rook-cephs
           ingress:
             create: true
             urlPath: k10
