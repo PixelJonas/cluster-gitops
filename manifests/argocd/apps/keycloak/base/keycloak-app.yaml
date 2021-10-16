@@ -1,18 +1,49 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: keycloak-app
+  name: keycloak
   annotations:
     argocd.argoproj.io/sync-wave: "11"
 spec:
   destination:
-    namespace: argocd
+    namespace: keycloak
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
-    path: manifests/argocd/apps/keycloak/base/apps
-    repoURL: https://github.com/pixeljonas/cluster-gitops.git
-    targetRevision: master
+    repoURL: https://codecentric.github.io/helm-charts
+    chart: keycloak
+    targetRevision: 15.1.0
+    helm:
+      values: |-
+        postgresql:
+          global:
+            storageClass: local-path
+          primary:
+        #    annotations:
+        #      kanister.kasten.io/blueprint: postgres-bp
+            labels:
+              kanister.kasten.io/inject-sidecar: "true"
+
+        extraEnv: |
+          - name: PROXY_ADDRESS_FORWARDING
+            value: "true"
+
+        ingress:
+          enabled: true
+          ingressClassName: "nginx"
+          servicePort: http
+          annotations:
+            nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
+
+          rules:
+            - host: 'sso.apps.hive.janz.digital'
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+            - hosts:
+                - 'sso.apps.hive.janz.digital'
+              secretName: ""
   syncPolicy:
     syncOptions:
-      - CreateNamespace=true
+    - CreateNamespace=true
