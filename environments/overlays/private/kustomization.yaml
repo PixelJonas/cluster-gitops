@@ -12,6 +12,7 @@ bases:
   - ../../../manifests/argocd/apps/k10/base
   - ../../../manifests/argocd/apps/keycloak/base
   - ../../../manifests/argocd/apps/paperless-ng/overlays/private
+  - ../../../manifests/argocd/apps/mariadb-homeassistant/base
 
 resources:
   - ./cluster-apps-project.yaml
