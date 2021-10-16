@@ -11,3 +11,10 @@ spec:
           value: paperless-ng-import
         - name: persistence.consume.enabled
           value: "true"
+        - name: persistence.data.storageClass
+          value: "local-path"
+        - name: persistence.export.storageClass
+          value: "local-path"
+        - name: persistence.media.storageClass
+          value: "local-path"
+        
