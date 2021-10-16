@@ -1,0 +1,36 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: mariadb-homeassistant-chart
+  annotations:
+    argocd.argoproj.io/sync-wave: "30"
+spec:
+  destination:
+    namespace: mariadb-homeassistant
+    server: https://kubernetes.default.svc
+  project: cluster-apps
+  source:
+    chart: mariadb
+    helm:
+      values: |
+        commonLabels:
+          kanister.kasten.io/inject-sidecar: "true"
+
+        primary:
+          persistence:
+            enabled: true
+            storageClass: "local-path"
+
+          service:
+            type: NodePort
+            nodePort: "30306"
+
+        auth:
+          database: homeassistant
+          existingSecret: mariadb-homeassistant-credentials
+    repoURL: https://charts.bitnami.com/bitnami
+    targetRevision: 9.6.2
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
+    - PrunePropagationPolicy=foreground

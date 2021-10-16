@@ -6,7 +6,6 @@ metadata:
   name: demo-app
   labels:
     app: demo
-    kanister.kasten.io/inject-sidecar: "true"
 spec:
   replicas: 1
   selector:
@@ -29,12 +28,7 @@ spec:
         volumeMounts:
         - name: data
           mountPath: /data
-        - name: media
-          mountPath: /media
       volumes:
       - name: data
         persistentVolumeClaim:
-          claimName: paperless-ng-data
-      - name: media
-        persistentVolumeClaim:
-          claimName: paperless-ng-media
+          claimName: data-mariadb-homeassistant-0
