@@ -8,7 +8,7 @@ spec:
   destination:
     namespace: argocd
     server: https://kubernetes.default.svc
-  project: cluster-config
+  project: cluster-apps
   source:
     path: manifests/argocd/apps/mariadb-homeassistant/base/apps
     repoURL: https://github.com/pixeljonas/cluster-gitops.git

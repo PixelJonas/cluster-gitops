@@ -8,7 +8,7 @@ spec:
   destination:
     namespace: mariadb-homeassistant
     server: https://kubernetes.default.svc
-  project: cluster-config
+  project: cluster-apps
   source:
     path: manifests/configs/mariadb-homeassistant/base
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
