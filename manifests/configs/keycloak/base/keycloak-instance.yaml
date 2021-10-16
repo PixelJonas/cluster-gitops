@@ -4,6 +4,7 @@ metadata:
   name: keycloak
   labels:
    app: keycloak
+   kanister.kasten.io/inject-sidecar: "true"
 spec:
   instances: 1
   storageClassName: local-path
