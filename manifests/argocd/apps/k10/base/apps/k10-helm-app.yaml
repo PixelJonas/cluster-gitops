@@ -19,6 +19,10 @@ spec:
           ingress:
             create: true
             urlPath: k10
+          persistence:	
+            enabled: true	
+            storageClass: "local-path"
+
         ingress:
           class: nginx
           create: true
@@ -27,7 +31,12 @@ spec:
             secretName: kasten-tls
           host: kasten.apps.hive.janz.digital
           urlPath: k10
-
+        
+        prometheus:	
+          server:	
+            persistentVolume:	
+              enabled: true	
+              storageClass: "local-path"
         injectKanisterSidecar:
           enabled: true
           objectSelector:
