@@ -6,6 +6,7 @@ metadata:
    app: keycloak
 spec:
   instances: 1
+  storageClassName: local-path
   externalAccess:
     enabled: True
     host: sso.apps.hive.janz.digital
