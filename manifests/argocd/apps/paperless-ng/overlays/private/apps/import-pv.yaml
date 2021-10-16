@@ -2,6 +2,8 @@ apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: pvc-paperless-import
+  label:
+    kanister.kasten.io/ignore: "true"
 spec:
   accessModes:
   - ReadWriteOnce
@@ -25,7 +27,7 @@ metadata:
   labels:
     app.kubernetes.io/instance: paperless-ng
     app.kubernetes.io/name: paperless
-    #argocd.argoproj.io/instance: paperless-ng
+    kanister.kasten.io/ignore: "true"
   name: paperless-ng-import
   namespace: paperless
 spec:
