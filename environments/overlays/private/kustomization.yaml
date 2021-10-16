@@ -8,9 +8,10 @@ bases:
   - ../../../manifests/argocd/apps/cert-manager/overlays/private
   - ../../../manifests/argocd/apps/nginx/base
   - ../../../manifests/argocd/apps/nfs-provisioner/base
-  - ../../../manifests/argocd/apps/paperless-ng/overlays/private
   - ../../../manifests/argocd/apps/localpath-provisioner
   - ../../../manifests/argocd/apps/k10/base
+  - ../../../manifests/argocd/apps/keycloak/base
+  - ../../../manifests/argocd/apps/paperless-ng/overlays/private
 
 resources:
   - ./cluster-apps-project.yaml
