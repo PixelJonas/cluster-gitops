@@ -4,5 +4,8 @@ kind: Kustomization
 bases:
   - "../../../base/apps"
 
+resources:
+  - "import-pv.yaml"
+
 patchesStrategicMerge:
   - "paperless-app-patch.yaml"
