@@ -16,17 +16,6 @@ spec:
     chart: ingress-nginx
     helm:
       values: |-
-        controller:
-          kind: DaemonSet
-          hostPort:
-            enabled: true
-            ports:
-              http: 8080
-              https: 443
-          metrics:
-            enabled: false
-          service:
-            enabled: false
           extraArgs:
             default-ssl-certificate: "operators/wildcard-apps-hive-janz-digital-tls"
     repoURL: https://kubernetes.github.io/ingress-nginx
