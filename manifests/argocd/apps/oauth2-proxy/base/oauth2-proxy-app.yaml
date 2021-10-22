@@ -1,0 +1,52 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: oauth2-proxy
+  namespace: argocd
+spec:
+  destination:
+    namespace: oauth2-proxy
+    server: https://kubernetes.default.svc
+  project: cluster-apps
+  source:
+    chart: oauth2-proxy
+    helm:
+      values: |-
+        authenticatedEmailsFile:
+          enabled: true
+          restricted_access: |-
+            jonas@janz.digital
+
+        config:
+          configFile: |-
+            email_domains = [ "gmail.com" ]
+        
+        extraArgs:
+          scope: "openid email profile"
+          provider: oidc
+          client-id: oauth2-proxy
+          client-secret: 5ee803c1-16b2-49c7-9b15-aa8e755b4b0f
+          oidc-issuer-url: https://sso.janz.digital/auth/realms/janz
+          upstream: static://200
+          cookie-domain: .janz.digital
+          whitelist-domain: .janz.digital
+
+        ingress:
+          enabled: true
+          path: /
+          hosts: 
+           - auth.apps.hive.janz.digital
+           - auth.janz.digital
+          tls:
+            - secretName: oauth2-proxy-tls
+              hosts:
+                - auth.apps.hive.janz.digital
+                - auth.janz.digital
+
+          ingressClassName: nginx
+          
+    repoURL: https://k8s-at-home.com/charts/
+    targetRevision: 5.0.7
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true

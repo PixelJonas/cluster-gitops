@@ -36,6 +36,11 @@ spec:
             nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
 
           rules:
+            - host: 'sso.janz.digital'
+              paths:
+                - path: /
+                  pathType: Prefix
+            
             - host: 'sso.apps.hive.janz.digital'
               paths:
                 - path: /
@@ -43,7 +48,9 @@ spec:
           tls:
             - hosts:
                 - 'sso.apps.hive.janz.digital'
+                - 'sso.janz.digital'
               secretName: ""
+
   syncPolicy:
     syncOptions:
     - CreateNamespace=true

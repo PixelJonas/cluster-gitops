@@ -11,6 +11,7 @@ bases:
   - ../../../manifests/argocd/apps/localpath-provisioner
   - ../../../manifests/argocd/apps/k10/base
   - ../../../manifests/argocd/apps/keycloak/base
+  - ../../../manifests/argocd/apps/oauth2-proxy/base
   - ../../../manifests/argocd/apps/paperless-ng/overlays/private
   - ../../../manifests/argocd/apps/mariadb-homeassistant/base
 
