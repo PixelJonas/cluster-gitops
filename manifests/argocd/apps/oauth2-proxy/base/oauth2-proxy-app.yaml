@@ -16,6 +16,7 @@ spec:
           enabled: true
           restricted_access: |-
             jonas@janz.digital
+            anonymous@janz.digital
 
         config:
           configFile: |-
@@ -30,6 +31,10 @@ spec:
           upstream: static://200
           cookie-domain: .janz.digital
           whitelist-domain: .janz.digital
+          reverse-proxy: true
+          set-xauthrequest: true
+          pass-user-headers: true
+          pass-authorization-header: true
 
         ingress:
           enabled: true

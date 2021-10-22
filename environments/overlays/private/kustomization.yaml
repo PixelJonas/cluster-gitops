@@ -14,6 +14,7 @@ bases:
   - ../../../manifests/argocd/apps/oauth2-proxy/base
   - ../../../manifests/argocd/apps/paperless-ng/overlays/private
   - ../../../manifests/argocd/apps/mariadb-homeassistant/base
+  - ../../../manifests/argocd/apps/filebrowser/base
 
 resources:
   - ./cluster-apps-project.yaml

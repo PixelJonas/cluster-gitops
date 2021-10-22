@@ -1,0 +1,76 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "30"
+    argocd.argoproj.io/compare-options: IgnoreExtraneous
+    argocd.argoproj.io/sync-options: Prune=false
+  name: filebrowser
+  namespace: argocd
+spec:
+  destination:
+    namespace: filebrowser
+    server: https://kubernetes.default.svc
+  project: cluster-apps
+  source:
+    helm:
+      values: |2-
+
+        ingress:
+          main:
+            annotations:
+              nginx.ingress.kubernetes.io/auth-response-headers: X-Auth-Request-Preferred-Username,X-Auth-Request-User,X-Auth-Request-Email
+              nginx.ingress.kubernetes.io/auth-signin: https://auth.janz.digital/oauth2/start?rd=https://$best_http_host$request_uri
+              nginx.ingress.kubernetes.io/auth-url: https://auth.janz.digital/oauth2/auth
+              nginx.ingress.kubernetes.io/configuration-snippet: |
+                auth_request_set $name_upstream_1 $upstream_cookie_name_1;
+                auth_request_set $user   $upstream_http_x_auth_request_email;
+                auth_request_set $email  $upstream_http_x_auth_request_email;
+                proxy_set_header X-Forwarded-User  $user;
+                proxy_set_header X-Forwarded-Email $email;
+            enabled: true
+            ingressClassName: nginx
+            pathType: Prefix
+            hosts:
+              - host: share.apps.hive.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+              - host: share.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+            tls:
+              - hosts:
+                  - share.apps.hive.janz.digital
+                  - share.janz.digital
+
+        config: |
+          {
+            "port": 80,
+            "baseURL": "",
+            "address": "",
+            "log": "stdout",
+            "database": "/config/database.db",
+            "root": "/srv/data"
+          }
+
+        persistence:
+          config:
+            enabled: true
+            mountpath: /config
+            accessMode: ReadWriteOnce
+            storageClass: local-path
+            size: 5Gi
+          data:
+            enabled: true
+            mountPath: /srv
+            accessMode: ReadWriteOnce
+            storageClass: nfs
+            size: 5Gi
+    path: charts/incubator/filebrowser
+    repoURL: https://github.com/PixelJonas/charts-1.git
+    targetRevision: filebrowser-1.0.0
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
