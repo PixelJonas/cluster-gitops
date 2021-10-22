@@ -1,34 +1,23 @@
-
----
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
   name: demo-app
   labels:
     app: demo
 spec:
-  replicas: 1
-  selector:
-    matchLabels:
-      app: demo
-  template:
-    metadata:
-      labels:
-        app: demo
-    spec:
-      containers:
-      - name: demo-container
-        image: alpine:3.7
-        resources:
-            requests:
-              memory: 256Mi
-              cpu: 100m
-        command: ["tail"]
-        args: ["-f", "/dev/null"]
-        volumeMounts:
-        - name: data
-          mountPath: /data
-      volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: data-mariadb-homeassistant-0
+  containers:
+  - name: demo-container
+    image: alpine:3.7
+    resources:
+        requests:
+          memory: 256Mi
+          cpu: 100m
+    command: ["tail"]
+    args: ["-f", "/dev/null"]
+    volumeMounts:
+    - name: data
+      mountPath: /data
+  volumes:
+  - name: data
+    persistentVolumeClaim:
+      claimName: data-mariadb-homeassistant-chart-0
