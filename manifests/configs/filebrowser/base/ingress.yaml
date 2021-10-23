@@ -18,13 +18,6 @@ spec:
                 name: filebrowser
                 port:
                   number: 80
-            path: /api/login
-            pathType: Prefix
-          - backend:
-              service:
-                name: filebrowser
-                port:
-                  number: 80
             path: /api/public
             pathType: Prefix
           - backend:
