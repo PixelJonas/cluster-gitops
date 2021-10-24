@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "30"
 spec:
   destination:
-    namespace: argocd
+    namespace: vaultwarden
     server: https://kubernetes.default.svc
   project: cluster-apps
   source:
