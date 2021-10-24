@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: vaultwarden-internet
   namespace: vaultwarden
+  annotations:
+    argocd.argoproj.io/sync-wave: "39"
 spec:
   ingressClassName: nginx
   rules:
