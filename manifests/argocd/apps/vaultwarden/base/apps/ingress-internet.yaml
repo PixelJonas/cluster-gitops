@@ -1,0 +1,34 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: vaultwarden-internet
+  namespace: vaultwarden
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: vault.janz.digital
+    http:
+      paths:
+        - path: /
+          backend:
+            service:
+              name: vaultwarden
+              port:
+                number: 80
+          pathType: Prefix
+        - path: /notifications/hub/negotiate
+          backend:
+            service:
+              name: vaultwarden
+              port:
+                number: 80
+          pathType: Prefix
+        - path: /notifications/hub
+          backend:
+            service:
+              name: vaultwarden
+              port:
+                number: 3012
+          pathType: Prefix
+
+
