@@ -2,6 +2,8 @@ kind: Policy
 apiVersion: config.kio.kasten.io/v1alpha1
 metadata:
   name: generic-backup
+  annotations:
+    argocd.argoproj.io/sync-wave: "60"
 spec:
   frequency: "@daily"
   retention:

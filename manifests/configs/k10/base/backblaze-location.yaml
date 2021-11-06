@@ -3,6 +3,8 @@ kind: Profile
 metadata:
   name: backblaze
   namespace: kasten-io
+  annotations:
+    argocd.argoproj.io/sync-wave: "50"
 spec:
   locationSpec:
     credential:

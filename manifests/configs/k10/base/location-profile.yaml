@@ -3,6 +3,8 @@ kind: Profile
 metadata:
   name: lola-nfs
   namespace: kasten-io
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
 spec:
   locationSpec:
     fileStore:

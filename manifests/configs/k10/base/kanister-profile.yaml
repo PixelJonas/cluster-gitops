@@ -1,8 +1,10 @@
  apiVersion: config.kio.kasten.io/v1alpha1
  kind: Profile
  metadata:
-   name: kanister-profile
-   namespace: kasten-io
+  name: kanister-profile
+  namespace: kasten-io
+  annotations:
+    argocd.argoproj.io/sync-wave: "20"
  spec:
   locationSpec:
     credential:
