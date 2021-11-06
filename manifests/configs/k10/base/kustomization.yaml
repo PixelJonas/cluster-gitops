@@ -5,5 +5,8 @@ resources:
   - nfs-export-pvc.yaml
   - nfs-custom.yaml
   - location-profile.yaml
+  - sealed-backblaze.yaml
+  - backblaze-location.yaml
   - kanister-profile.yaml
+  - policy.yaml
   - https://raw.githubusercontent.com/kanisterio/kanister/0.68.0/examples/stable/postgresql/blueprint-v2/postgres-blueprint.yaml

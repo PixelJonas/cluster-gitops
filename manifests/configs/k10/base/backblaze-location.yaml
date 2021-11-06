@@ -1,0 +1,23 @@
+apiVersion: config.kio.kasten.io/v1alpha1
+kind: Profile
+metadata:
+  name: backblaze
+  namespace: kasten-io
+spec:
+  locationSpec:
+    credential:
+      secret:
+        apiVersion: v1
+        kind: secret
+        name: backblaze-credentials
+        namespace: kasten-io
+      secretType: AwsAccessKey
+    objectStore:
+      endpoint: s3.us-west-002.backblazeb2.com
+      name: jjanz-kasten
+      objectStoreType: S3
+      path: k10/3fed078e-d7fc-498b-b2b6-9d47d7373747/migration
+      pathType: Directory
+      region: us-west-002
+    type: ObjectStore
+  type: Location
