@@ -53,6 +53,7 @@ spec:
             name: broker
             image: redis:6.0
             imagePullPolicy: IfNotPresent
+  project: cluster-apps
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
