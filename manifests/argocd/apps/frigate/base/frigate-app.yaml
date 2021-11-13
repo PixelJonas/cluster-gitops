@@ -43,16 +43,13 @@ spec:
             enabled: true
             storageClass: local-path
             size: 3Gi
+            accessMode: ReadWriteOnce
           media:
             enabled: true
             storageClass: nfs
             size: 10Gi
+            accessMode: ReadWriteOnce
 
-        additionalContainers:
-          broker:
-            name: broker
-            image: redis:6.0
-            imagePullPolicy: IfNotPresent
   project: cluster-apps
   syncPolicy:
     syncOptions:
