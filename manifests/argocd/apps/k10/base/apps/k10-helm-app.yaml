@@ -22,7 +22,18 @@ spec:
           persistence:	
             enabled: true	
             storageClass: "local-path"
-
+        
+        grafana:
+          enabled: false
+        
+        prometheus:
+          server:
+            enabled: false
+            persistentVolume:
+              enabled: false
+            networkPolicy:
+              enabled: false
+  
         ingress:
           class: nginx
           create: true
