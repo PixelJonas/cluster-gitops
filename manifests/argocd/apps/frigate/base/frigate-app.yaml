@@ -1,0 +1,61 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: frigate
+  annotations:
+    argocd.argoproj.io/sync-wave: "11"
+spec:
+  destination:
+    namespace: frigate
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://k8s-at-home.com/charts/'
+    targetRevision: 8.1.0
+    chart: frigate
+    helm:
+      values: |-
+        env:
+          TZ: Europe/Berlin
+
+        controller:
+          labels:
+            kanister.kasten.io/inject-sidecar: "true"
+
+        podLabels:
+          kanister.kasten.io/inject-sidecar: "true"
+
+        ingress:
+          main:
+            enabled: true
+            ingressClassName: nginx
+            pathType: Prefix
+            hosts:
+              - host: frigate.apps.hive.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+            tls:
+              - hosts:
+                  - frigate.apps.hive.janz.digital
+
+        persistence:
+          data:
+            enabled: true
+            storageClass: local-path
+            size: 3Gi
+          media:
+            enabled: true
+            storageClass: nfs
+            size: 10Gi
+
+        additionalContainers:
+          broker:
+            name: broker
+            image: redis:6.0
+            imagePullPolicy: IfNotPresent
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
