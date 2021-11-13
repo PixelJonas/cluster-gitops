@@ -47,7 +47,7 @@ spec:
             enabled: true
             htpasswd: "admin:$2y$10$90kwyftHGGeNUPHiDmueqOW5/TCAWMhLjFjv9Ff111TSs.cvibk.."
     repoURL: https://charts.kasten.io/
-    targetRevision: 4.0.13
+    targetRevision: 4.5.2
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
