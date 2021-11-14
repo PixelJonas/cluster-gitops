@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: frigate
   annotations:
-    argocd.argoproj.io/sync-wave: "11"
+    argocd.argoproj.io/sync-wave: "30"
 spec:
   destination:
     namespace: frigate

@@ -69,7 +69,7 @@ spec:
             accessMode: ReadWriteOnce
             storageClass: nfs
             size: 5Gi
-    path: charts/incubator/filebrowser
+    path: charts/stable/filebrowser
     repoURL: https://github.com/PixelJonas/charts-1.git
     targetRevision: filebrowser-1.0.0
   syncPolicy:
