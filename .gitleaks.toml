@@ -1,0 +1,3 @@
+[allowlist]
+  description = "don't alert on SealedSecrets"
+  files = ['''sealed-.+\.yaml''']
