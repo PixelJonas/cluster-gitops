@@ -32,5 +32,12 @@ spec:
               port:
                 number: 3012
           pathType: Prefix
+        - path: /admin
+          backend:
+            service:
+              name: foo
+              port:
+                number: 80
+          pathType: Prefix
 
 
