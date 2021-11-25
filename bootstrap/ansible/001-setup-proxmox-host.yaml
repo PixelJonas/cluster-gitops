@@ -1,0 +1,49 @@
+---
+- hosts: proxmox_nodes
+  vars_files:
+    - 'vars/vault.yaml'
+  roles:
+    - name: ironicbadger.ansible_role_proxmox_nag_removal
+      become: true
+    - name: grog.package
+      become: true
+  tasks:
+    - name: create ansible_main_group
+      group:
+        name: '{{ ansible_main_group_name }}'
+        state: present
+        gid: '{{ ansible_main_group_gid }}'
+    - name: create ansible_main_group default user
+      user:
+        name: '{{ ansible_main_group_name }}'
+        uid: '{{ ansible_main_group_gid }}'
+        state: present
+        create_home: false
+        shell: /sbin/nologin
+
+    - name: create ansible_main_user
+      user:
+        name: '{{ ansible_main_user_name }}'
+        state: present
+        create_home: true
+        append: true
+        groups: '{{ ansible_main_group_name }}'
+
+    - name: execute security role
+      include_role:
+        name: geerlingguy.security
+
+    - name: import keys from github
+      authorized_key:
+        user: '{{ ansible_main_user_name }}'
+        state: present
+        key: https://github.com/{{ github_username }}.keys
+
+- hosts: lab
+  vars_files:
+    - 'vars/vault.yaml'
+  roles:
+    - name: ironicbadger.ansible_role_snapraid
+      become: true
+    - name: pixeljonas-lab
+      become: true

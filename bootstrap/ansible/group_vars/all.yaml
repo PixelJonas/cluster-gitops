@@ -1,0 +1,43 @@
+security_ssh_port: 22
+
+security_ssh_password_authentication: 'no'
+security_ssh_permit_root_login: 'no'
+security_ssh_usedns: 'no'
+security_ssh_permit_empty_password: 'no'
+security_ssh_challenge_response_auth: 'no'
+security_ssh_gss_api_authentication: 'no'
+security_ssh_x11_forwarding: 'no'
+
+security_sudoers_passwordless: ['jonas']
+security_autoupdate_enabled: true
+security_fail2ban_enabled: true
+
+ansible_main_group_name: media
+ansible_main_group_gid: 1500
+
+ansible_main_user_name: jonas
+github_username: pixeljonas
+
+package_list:
+  - name: sudo
+  - name: git
+  - name: zsh
+
+## snapraid
+snapraid_config_excludes:
+  - '*.unrecoverable'
+  - '/tmp/'
+  - '/lost+found/'
+  - 'downloads/'
+  - 'appdata/'
+  - '*.!sync'
+  - '.AppleDouble'
+  - '._AppleDouble'
+  - '.DS_Store'
+  - '._.DS_Store'
+  - '.Thumbs.db'
+  - '.fseventsd'
+  - '.Spotlight-V100'
+  - '.TemporaryItems'
+  - '.Trashes'
+  - '.AppleDB'

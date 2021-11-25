@@ -2,3 +2,5 @@ bootstrap/ansible/cfg/secrets*.yaml
 sealed-secrets-keys.yaml
 /*.yaml
 /*.json
+/bootstrap/ansible/inventories/.proxmox.yaml
+/bootstrap/ansible/inventories/hosts.yaml
