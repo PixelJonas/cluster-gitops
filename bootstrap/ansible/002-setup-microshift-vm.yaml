@@ -1,0 +1,40 @@
+- hosts: microshift
+  vars_files:
+    - 'vars/vault.yaml'
+  roles:
+    - name: grog.package
+      become: true
+    - name: pixeljonas-base
+      become: true
+  tasks:
+    - name: ensure hostname is set correctly
+      ignore_errors: yes
+      hostname:
+        name: '{{ hostname_microshift }}'
+
+    - name: Create temporary build directory
+      tempfile:
+        state: directory
+        suffix: microshift
+      register: tmp_microshift_dir
+
+    - name: download microshift installer
+      get_url:
+        url: https://raw.githubusercontent.com/redhat-et/microshift/main/install.sh
+        dest: '{{ tmp_microshift_dir.path }}/install.sh'
+        mode: '0770'
+      changed_when: false
+
+    - name: run microshift installer
+      become: true
+      command: bash '{{ tmp_microshift_dir.path }}/install.sh'
+
+    - name: allow 6443 and 443 traffic to the node
+      become: true
+      firewalld:
+        port: '{{ item }}'
+        permanent: yes
+        state: enabled
+      with_items:
+        - '6443/tcp'
+        - '443/tcp'
