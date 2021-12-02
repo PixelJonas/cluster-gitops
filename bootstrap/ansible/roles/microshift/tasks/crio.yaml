@@ -1,0 +1,42 @@
+---
+- name: download CRI-O repos
+  include_tasks: crio-repo.yaml
+  with_items:
+    - url: https://src.fedoraproject.org/rpms/fedora-repos/raw/rawhide/f/fedora-modular.repo
+      name: fedora-modular.repo
+    - url: https://src.fedoraproject.org/rpms/fedora-repos/raw/rawhide/f/fedora-updates-modular.repo 
+      name: fedora-updates-modular.repo
+
+- name: flush handlers
+  meta: flush_handlers
+
+- name: activate CRI-O
+  shell: |                           
+    rpm-ostree ex module enable cri-o:1.21
+
+- name: install CRI-O
+  ignore_errors: yes
+  shell: |                           
+    rpm-ostree install --idempotent \
+        cri-o \
+        cri-tools \
+        selinux-policy-devel
+  register: rpm_install
+
+- name: check if cri-o tools are installed
+  notify: reboot
+  assert:
+    that: "true"
+    quiet: true
+  changed_when: true
+  when: rpm_install.rc>0
+
+- name: flush handlers
+  meta: flush_handlers
+
+- name: activate CRI-O systemd service
+  systemd:
+    state: started
+    enabled: yes
+    daemon_reload: true
+    name: crio 

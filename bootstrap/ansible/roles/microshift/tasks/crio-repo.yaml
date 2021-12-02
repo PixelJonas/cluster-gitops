@@ -1,0 +1,13 @@
+---
+- name: check if file already exists
+  stat: 
+    path: "/etc/yum.repos.d/{{ item.name }}"
+  register: crio_repo
+
+- name: download file
+  notify:
+    - reboot
+  get_url:
+    url: "{{ item.url }}"
+    dest: "/etc/yum.repos.d/{{ item.name }}"
+  when: crio_repo.stat.exists

@@ -1,0 +1,25 @@
+---
+- name: download and install CRI-O
+  include_tasks: crio.yaml
+
+- name: configure selinux policies
+  include_tasks: selinux.yaml
+
+- name: configure firewalld
+  include_tasks: firewalld.yaml
+
+- name: adjust kernel-args for cgroups
+  shell: |
+    rpm-ostree kargs --append-if-missing=systemd.unified_cgroup_hierarchy=0
+
+- name: download microshift systemd service
+  get_url:
+    url: https://raw.githubusercontent.com/redhat-et/microshift/main/packaging/systemd/microshift-containerized.service
+    dest: /etc/systemd/system/microshift.service
+
+- name: activate and start microshift
+  systemd:
+    unit: microshift
+    enabled: true
+    daemon_reload: true
+    state: started
