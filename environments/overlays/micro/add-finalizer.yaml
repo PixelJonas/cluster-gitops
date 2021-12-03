@@ -1,0 +1,4 @@
+- op: add
+  path: /metadata/finalizers
+  value: 
+    - resources-finalizer.argocd.argoproj.io
