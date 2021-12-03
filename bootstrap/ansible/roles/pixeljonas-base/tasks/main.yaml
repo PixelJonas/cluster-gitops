@@ -3,6 +3,7 @@
     name: '{{ ansible_main_group_name }}'
     state: present
     gid: '{{ ansible_main_group_gid }}'
+    
 - name: create ansible_main_group default user
   user:
     name: '{{ ansible_main_group_name }}'

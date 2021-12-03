@@ -59,7 +59,11 @@ spec:
     route.openshift.io/Route:
       ignoreDifferences: |
         jsonPointers:
-        - /status/ingress
+        - /webhooks/ingress
+    admissionregistration.k8s.io/MutatingWebhookConfiguration:
+      ignoreDifferences: |
+        jsonPointers:
+        - /webhooks/0/clientConfig/caBundle     
     integreatly.org/GrafanaDataSource:
       ignoreDifferences: |
         jsonPointers:
