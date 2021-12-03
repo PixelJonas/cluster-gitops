@@ -1,0 +1,15 @@
+- op: add
+  path: /spec/source/helm/parameters
+  value: []
+
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    name: "global.ingress.create"
+    value: "false"
+
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    name: "ingress.create"
+    value: "false"

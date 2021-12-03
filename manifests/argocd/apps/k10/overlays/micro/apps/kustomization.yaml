@@ -10,3 +10,9 @@ patches:
       version: v1alpha1
       kind: Application
     path: patch-namespace.yaml
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
+      name: k10
+    path: patch-chart.yaml

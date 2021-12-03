@@ -13,7 +13,6 @@ spec:
   source:
     chart: k10
     helm:
-      parameters:
       values: |-
         global:
           ingress:
@@ -22,18 +21,17 @@ spec:
           persistence:	
             enabled: true	
             storageClass: "local-path"
-        
+
         grafana:
           enabled: false
-        
-        prometheus:
+
+        prometheus:	
           server:
             enabled: false
-            persistentVolume:
-              enabled: false
-            networkPolicy:
-              enabled: false
-  
+            persistentVolume:	
+              enabled: false	
+              storageClass: "local-path"
+
         ingress:
           class: nginx
           create: true
@@ -42,12 +40,14 @@ spec:
             secretName: kasten-tls
           host: kasten.apps.hive.janz.digital
           urlPath: k10
-        
+
         prometheus:	
-          server:	
+          server:
+            enabled: false
             persistentVolume:	
-              enabled: true	
+              enabled: false	
               storageClass: "local-path"
+
         injectKanisterSidecar:
           enabled: true
           objectSelector:
@@ -57,6 +57,7 @@ spec:
           basicAuth:
             enabled: true
             htpasswd: "admin:$2y$10$90kwyftHGGeNUPHiDmueqOW5/TCAWMhLjFjv9Ff111TSs.cvibk.."
+
     repoURL: https://charts.kasten.io/
     targetRevision: 4.5.4
   syncPolicy:
