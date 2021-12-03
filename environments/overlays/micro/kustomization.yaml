@@ -3,7 +3,8 @@ kind: Kustomization
 
 namespace: argocd-operator-system
 
-#bases:
+bases:
+  - ../../../manifests/argocd/apps/k10/overlays/micro
 
 resources:
   - ./cluster-apps-project.yaml
@@ -20,12 +21,17 @@ patches:
       group: argoproj.io
       version: v1alpha1
       kind: Application
+    path: patch-namespace.yaml
+
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
       labelSelector: gitops.ownedBy=cluster-config
     path: patch-target-revision.yaml
-  
+
   - target:
       group: argoproj.io
       version: v1alpha1
       kind: Application
     path: add-finalizer.yaml
-

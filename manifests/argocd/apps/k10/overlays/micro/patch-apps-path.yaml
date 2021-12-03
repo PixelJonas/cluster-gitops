@@ -1,0 +1,7 @@
+- op: replace
+  path: /spec/source/path
+  value: manifests/argocd/apps/k10/overlays/micro/apps
+
+- op: replace
+  path: /spec/destination/namespace
+  value: argocd-operator-system

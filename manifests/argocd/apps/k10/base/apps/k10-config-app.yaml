@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "21"
 spec:
   destination:
-    namespace: argocd
+    namespace: kasten-io
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
