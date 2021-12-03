@@ -11,6 +11,12 @@
 - op: add
   path: /spec/source/helm/parameters/-
   value:
+    name: "global.persistence.storageClass"
+    value: "kubevirt-hostpath-provisioner"
+
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
     name: "ingress.create"
     value: "false"
 

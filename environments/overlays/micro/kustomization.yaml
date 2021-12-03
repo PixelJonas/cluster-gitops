@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: argocd-operator-system
 
 bases:
-  - ../../../manifests/argocd/apps/localpath-provisioner
+#  - ../../../manifests/argocd/apps/localpath-provisioner
   - ../../../manifests/argocd/apps/k10/overlays/micro
 
 resources:
