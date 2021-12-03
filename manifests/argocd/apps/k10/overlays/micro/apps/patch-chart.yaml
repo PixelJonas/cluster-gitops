@@ -13,3 +13,15 @@
   value:
     name: "ingress.create"
     value: "false"
+
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    name: "global.route.enabled"
+    value: "true"
+
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    name: "global.route.path"
+    value: "k10"
