@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: localpath-provisioner-app
   annotations:
-    argocd.argoproj.io/sync-wave: "11"
+    argocd.argoproj.io/sync-wave: "05"
 spec:
   destination:
     namespace: local-path-storage
