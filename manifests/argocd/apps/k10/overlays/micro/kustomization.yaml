@@ -12,3 +12,10 @@ patches:
       version: v1alpha1
       kind: Application
     path: patch-apps-path.yaml
+
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
+      name: k10-app
+    path: patch-namespace.yaml
