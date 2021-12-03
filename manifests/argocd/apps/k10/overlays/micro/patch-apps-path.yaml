@@ -3,5 +3,5 @@
   value: manifests/argocd/apps/k10/overlays/micro/apps
 
 - op: replace
-  path: /spec/destination/namespace
+  path: /metadata/namespace
   value: argocd-operator-system
