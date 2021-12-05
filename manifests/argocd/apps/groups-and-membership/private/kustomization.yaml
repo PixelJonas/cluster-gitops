@@ -4,18 +4,18 @@ kind: Kustomization
 namespace: argocd
 
 bases:
-  - ../base
+- ../base
 
 patches:
-  - target:
-      group: argoproj.io
-      version: v1alpha1
-      kind: Application
-      name: config-groups-and-membership
-    path: patch-groups-and-membership-app.yaml
-# - target:
-#     group: argoproj.io
-#     version: v1alpha1
-#     kind: Application
-#     name: config-groups-and-membership
-#   path: patch-destination.yaml
+- target:
+    group: argoproj.io
+    version: v1alpha1
+    kind: Application
+    name: config-groups-and-membership
+  path: patch-groups-and-membership-app.yaml
+- target:
+    group: argoproj.io
+    version: v1alpha1
+    kind: Application
+    name: config-groups-and-membership
+  path: patch-destination.yaml

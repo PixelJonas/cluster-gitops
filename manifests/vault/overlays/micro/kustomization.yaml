@@ -11,8 +11,8 @@ patches:
       kind: Application
     path: patch-vault-app.yaml
 
-  - target:
-      group: rbac.authorization.k8s.io
-      version: v1
-      kind: RoleBinding
-    path: patch-rolebdining.yaml
+  # - target:
+  #     group: rbac.authorization.k8s.io
+  #     version: v1
+  #     kind: RoleBinding
+  #   path: patch-rolebdining.yaml
