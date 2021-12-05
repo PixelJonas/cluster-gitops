@@ -4,7 +4,3 @@ kind: Kustomization
 resources:
   - vault-application.yaml
   - vault-secrets-operator.yaml
-  - vault-initializer-job.yaml
-  - vault-initializer-role.yaml
-  - vault-initializer-rolebinding.yaml
-  - vault-initializer-serviceaccount.yaml
