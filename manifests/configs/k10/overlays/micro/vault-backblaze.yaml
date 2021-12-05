@@ -1,0 +1,8 @@
+apiVersion: ricoberger.de/v1alpha1
+kind: VaultSecret
+metadata:
+  name: backblaze-credentials
+  namespace: kasten-io
+spec:
+  path: global_secrets/k10/backblaze
+  type: Opaque

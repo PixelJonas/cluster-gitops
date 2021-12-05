@@ -9,7 +9,7 @@ bases:
   - ../../../manifests/argocd/apps/nginx/base
   - ../../../manifests/argocd/apps/nfs-provisioner/base
   - ../../../manifests/argocd/apps/localpath-provisioner
-  - ../../../manifests/argocd/apps/k10/base
+  - ../../../manifests/argocd/apps/k10/overlays/private
   - ../../../manifests/argocd/apps/keycloak/base
   - ../../../manifests/argocd/apps/oauth2-proxy/base
   - ../../../manifests/argocd/apps/paperless-ng/overlays/private
@@ -35,10 +35,9 @@ patches:
       kind: Application
       labelSelector: gitops.ownedBy=cluster-config
     path: patch-target-revision.yaml
-  
+
   - target:
       group: argoproj.io
       version: v1alpha1
       kind: Application
     path: add-finalizer.yaml
-
