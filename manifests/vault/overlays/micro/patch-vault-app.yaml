@@ -1,3 +1,9 @@
 - op: replace
   path: /metadata/namespace
   value: argocd-operator-system
+
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    name: "server.dataStorage.storageClass"
+    value: "kubevirt-hostpath-provisioner"
