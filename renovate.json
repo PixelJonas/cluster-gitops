@@ -3,6 +3,6 @@
     "config:base"
   ],
   "argocd":{
-    "fileMatch": ["manifests/argocd/apps.+\\.yaml$"]
+    "fileMatch": ["manifests/.+\\.yaml$"]
   }
 }
