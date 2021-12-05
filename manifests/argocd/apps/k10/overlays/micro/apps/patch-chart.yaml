@@ -31,3 +31,27 @@
   value:
     name: "global.route.path"
     value: "k10"
+
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    name: "route.enabled"
+    value: "true"
+
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    name: "route.path"
+    value: "k10"
+
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    name: "route.host"
+    value: "kasten.apps.micro.janz.digital"
+
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    name: "route.tls.enabled"
+    value: "true"
