@@ -27,7 +27,7 @@ spec:
         injector:
           enabled: true
           metrics:
-            enabled: true
+            enabled: false
         server:
           dataStorage:
             enabled: true
@@ -37,6 +37,8 @@ spec:
           enabled: true
   project: cluster-config
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       automated:
         prune: false

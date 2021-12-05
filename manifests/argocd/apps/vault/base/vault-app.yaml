@@ -16,6 +16,8 @@ spec:
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
     targetRevision: master
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       prune: false
       selfHeal: false
