@@ -16,7 +16,7 @@ spec:
     namespace: paperless
   nfs:
     path: /mnt/storage/documents
-    server: 192.168.1.122
+    server: 192.168.1.112
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nfs-custom
   volumeMode: Filesystem

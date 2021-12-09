@@ -4,7 +4,7 @@ metadata:
   name: nfs-server
 subsets:
   - addresses:
-      - ip: 192.168.1.122
+      - ip: 192.168.1.112
     ports:
       - port: 111
         name: tcp-portmapper
