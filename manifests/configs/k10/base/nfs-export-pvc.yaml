@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "10"
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   capacity:
     storage: 20Gi
   claimRef:
@@ -16,7 +16,7 @@ spec:
     namespace: kasten-io
   nfs:
     path: /mnt/storage/backups/kasten
-    server: 192.168.1.220
+    server: nfs.janz.lan
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nfs-custom
   volumeMode: Filesystem
@@ -29,7 +29,7 @@ metadata:
   namespace: kasten-io
 spec:
   accessModes:
-  - ReadWriteOnce
+    - ReadWriteOnce
   resources:
     requests:
       storage: 20Gi
