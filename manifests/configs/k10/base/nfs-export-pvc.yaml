@@ -16,7 +16,7 @@ spec:
     namespace: kasten-io
   nfs:
     path: /mnt/storage/backups/kasten
-    server: 192.168.1.220
+    server: 192.168.1.122
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nfs-custom
   volumeMode: Filesystem

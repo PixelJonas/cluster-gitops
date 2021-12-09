@@ -1,7 +1,7 @@
 ---
 - name: ensure hostname is set correctly
   hostname:
-    name: '{{ hostname_lab }}'
+    name: "{{ hostname_proxmox }}"
 
 - name: disks
   include: disks.yaml

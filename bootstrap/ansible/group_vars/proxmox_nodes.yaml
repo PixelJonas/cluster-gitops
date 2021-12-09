@@ -10,10 +10,19 @@ package_list:
   - name: lm-sensors
   - name: mergerfs
   - name: nfs-kernel-server
+  - name: nfs-common
   - name: python3
   - name: python-setuptools
   - name: screen
+  - name: sudo
   - name: smartmontools
   - name: tree
   - name: zfsutils-linux
   - name: snapraid
+
+nfs_exports:
+  - "/mnt/storage 192.168.1.0/255.255.255.0(rw,sync,no_subtree_check,fsid=0,no_root_squash)"
+# samba_users:
+#   - name: jonas
+#   - name: andrew
+#   - name: printer

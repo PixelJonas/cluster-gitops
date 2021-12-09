@@ -1,7 +1,8 @@
 proxmox_main_storage_path: /mnt/storage
+hostname_proxmox: pve
 
 extra_mountpoints:
-  - { path: '{{ proxmox_main_storage_path }}' }
+  - { path: "{{ proxmox_main_storage_path }}" }
 
 # ironicbadger.snapraid
 snapraid_bin_path: /usr/bin/snapraid
@@ -10,10 +11,10 @@ snapraid_runner: false
 
 fstab_mergerfs:
   - {
-      source: '/mnt/disk*',
-      mountpoint: '/mnt/storage',
+      source: "/mnt/disk*",
+      mountpoint: "/mnt/storage",
       fs: fuse.mergerfs,
-      opts: 'allow_other,use_ino,cache.files=partial,dropcacheonclose=true,category.create=mfs,minfreespace=200G,fsname=mergerfs',
+      opts: "allow_other,use_ino,cache.files=partial,dropcacheonclose=true,category.create=mfs,minfreespace=200G,fsname=mergerfs",
     }
 
 snapraid_data_disks:
