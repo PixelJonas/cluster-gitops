@@ -7,6 +7,10 @@ subsets:
       - ip: 192.168.1.220
     ports:
       - port: 111
+        name: tcp-portmapper
       - port: 2049
+        name: tcp-nfs
       - port: 1110
+        name: tcp-cluster-status
       - port: 4045
+        name: tcp-nfs-lock
