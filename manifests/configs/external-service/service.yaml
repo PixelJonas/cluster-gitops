@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: nfs-server
+spec:
+  ports:
+    - protocol: TCP
+      port: 111
+      targetPort: 111
+    - protocol: UDP
+      port: 111
+      targetPort: 111
+    - protocol: TCP
+      port: 2049
+      targetPort: 2049
+    - protocol: UDP
+      port: 2049
+      targetPort: 2049
+    - protocol: TCP
+      port: 1110
+      targetPort: 1110
+    - protocol: UDP
+      port: 1110
+      targetPort: 1110
+    - protocol: TCP
+      port: 4045
+      targetPort: 4045
+    - protocol: UDP
+      port: 4045
+      targetPort: 4045
