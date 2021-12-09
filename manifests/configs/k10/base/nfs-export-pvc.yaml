@@ -16,7 +16,7 @@ spec:
     namespace: kasten-io
   nfs:
     path: /mnt/storage/backups/kasten
-    server: nfs.janz.lan
+    server: nfs-server.nfs.svc.cluster.local
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nfs-custom
   volumeMode: Filesystem

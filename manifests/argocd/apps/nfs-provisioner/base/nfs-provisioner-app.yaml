@@ -13,7 +13,7 @@ spec:
     helm:
       values: |-
         nfs:
-          server: nfs.janz.lan
+          server: nfs-server.nfs.svc.cluster.local
           path: /mnt/storage/configs
           reclaimPolicy: Retain
 

@@ -4,6 +4,7 @@ kind: Kustomization
 namespace: argocd
 
 bases:
+  - ../../../manifests/argocd/apps/nfs-service/base
   - ../../../manifests/argocd/apps/sealed-secrets-operator/private
   - ../../../manifests/argocd/apps/cert-manager/overlays/private
   - ../../../manifests/argocd/apps/nginx/base
@@ -17,7 +18,6 @@ bases:
   - ../../../manifests/argocd/apps/filebrowser/base
   - ../../../manifests/argocd/apps/vaultwarden/base
   - ../../../manifests/argocd/apps/frigate/base
-  - ../../../manifests/configs/external-service
 
 resources:
   - ./cluster-apps-project.yaml
