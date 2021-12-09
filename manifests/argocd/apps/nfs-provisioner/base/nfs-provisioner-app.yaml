@@ -13,7 +13,7 @@ spec:
     helm:
       values: |-
         nfs:
-          server: nfs-server.nfs.svc.cluster.local
+          server: 192.168.1.220
           path: /mnt/storage/configs
           reclaimPolicy: Retain
 
