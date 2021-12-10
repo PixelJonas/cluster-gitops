@@ -8,19 +8,25 @@
 - name: flush handlers
   meta: flush_handlers
 
-- name: install microshift
+- name: check for installed microshift
   ignore_errors: yes
   shell: |
-    rpm-ostree install --idempotent \
-        microshift
+    rpm-ostree status | grep microshift
   register: rpm_install
 
-- name: check if microshift is installed
+- name: reboot if microshift is not installed
   notify: reboot
   assert:
     that: "true"
     quiet: true
   changed_when: true
+  when: rpm_install.rc>0
+
+- name: install microshift
+  ignore_errors: yes
+  shell: |
+    rpm-ostree install --idempotent \
+        microshift
   when: rpm_install.rc>0
 
 - name: flush handlers

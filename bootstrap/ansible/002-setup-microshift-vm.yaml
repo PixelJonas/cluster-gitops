@@ -1,4 +1,4 @@
-- hosts: microshift
+- hosts: microshift-master-01
   become: true
   vars_files:
     - 'vars/vault.yaml'
