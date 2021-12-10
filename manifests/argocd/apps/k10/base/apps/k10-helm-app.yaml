@@ -60,6 +60,15 @@ spec:
 
     repoURL: https://charts.kasten.io/
     targetRevision: 4.5.5
+  ignoreDifferences:
+    - group: admissionregistration.k8s.io
+      kind: MutatingWebhookConfiguration
+      jsonPointers:
+        - /webhooks/0/clientConfig/caBundle
+    - kind: Secret
+      jsonPointers:
+        - /data/tls.crt
+        - /data/tls.key
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
