@@ -11,4 +11,13 @@ resources:
   - api-token.yaml
 
 patches:
-  - "patch-issuer-server.yaml"
+  - target:
+      group: cert-manager.io
+      version: v1
+      kind: ClusterIssuer
+      name: cloudflare-issuer
+    path: patch-issuer-server.yaml
+  # - target:
+  #     group: cert-manager.io
+  #     version: v1
+  #   path: patch-api-version.yaml
