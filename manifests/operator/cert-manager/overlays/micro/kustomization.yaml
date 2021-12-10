@@ -10,7 +10,7 @@ resources:
 patches:
   - target:
       group: cert-manager.io
-      version: v1alpha3
+      version: v1
       kind: ClusterIssuer
       name: cloudflare-issuer
     path: patch-issuer-server.yaml
