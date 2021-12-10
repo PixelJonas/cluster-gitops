@@ -11,4 +11,4 @@ resources:
   - api-token.yaml
 
 patches:
-  - patch-issuer-server.yaml
+  - "patch-issuer-server.yaml"
