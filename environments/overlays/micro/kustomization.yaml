@@ -6,6 +6,7 @@ namespace: argocd-operator-system
 bases:
   - ../../../manifests/argocd/apps/vault/overlays/micro
   - ../../../manifests/argocd/apps/k10/overlays/micro
+  - ../../../manifests/argocd/apps/cert-manager/overlays/micro
 
 resources:
   - ./cluster-apps-project.yaml
