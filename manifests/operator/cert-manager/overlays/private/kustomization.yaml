@@ -8,7 +8,7 @@ bases:
 
 resources:
   - ingress-certificate-patch.yaml
+  - api-token.yaml
 
 patches:
   - patch-issuer-server.yaml
-  - patch-api-token.yaml
