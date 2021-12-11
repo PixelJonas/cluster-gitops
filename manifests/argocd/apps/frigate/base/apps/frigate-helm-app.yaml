@@ -39,6 +39,9 @@ spec:
                     roles:
                       - detect
                       - rtmp
+              detect:
+                width: 640
+                height: 360
               zones:
                 door:
                   coordinates: 481,42,596,48,565,267,469,228
