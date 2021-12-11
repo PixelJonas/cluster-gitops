@@ -6,54 +6,13 @@ metadata:
     argocd.argoproj.io/sync-wave: "30"
 spec:
   destination:
-    namespace: frigate
-    server: 'https://kubernetes.default.svc'
-  source:
-    repoURL: 'https://k8s-at-home.com/charts/'
-    targetRevision: 6.2.0
-    chart: frigate
-    helm:
-      values: |-
-        env:
-          TZ: Europe/Berlin
-
-        controller:
-          labels:
-            kanister.kasten.io/inject-sidecar: "true"
-
-        podLabels:
-          kanister.kasten.io/inject-sidecar: "true"
-
-        ingress:
-          main:
-            enabled: true
-            ingressClassName: nginx
-            pathType: Prefix
-            hosts:
-              - host: frigate.apps.hive.janz.digital
-                paths:
-                  - path: /
-                    pathType: Prefix
-            tls:
-              - hosts:
-                  - frigate.apps.hive.janz.digital
-
-        persistence:
-          data:
-            enabled: true
-            storageClass: local-path
-            size: 3Gi
-            accessMode: ReadWriteOnce
-          media:
-            enabled: true
-            storageClass: nfs
-            size: 10Gi
-            accessMode: ReadWriteOnce
-
+    namespace: argocd
+    server: https://kubernetes.default.svc
   project: cluster-apps
+  source:
+    path: manifests/argocd/apps/frigate/base/apps
+    repoURL: https://github.com/pixeljonas/cluster-gitops.git
+    targetRevision: master
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
-    automated:
-      prune: true
-      selfHeal: true

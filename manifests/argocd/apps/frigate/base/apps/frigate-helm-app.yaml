@@ -1,0 +1,106 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: frigate
+  annotations:
+    argocd.argoproj.io/sync-wave: "39"
+spec:
+  destination:
+    namespace: frigate
+    server: 'https://kubernetes.default.svc'
+  source:
+    repoURL: 'https://k8s-at-home.com/charts/'
+    targetRevision: 6.2.0
+    chart: frigate
+    helm:
+      values: |-
+        env:
+          TZ: Europe/Berlin
+
+        controller:
+          labels:
+            kanister.kasten.io/inject-sidecar: "true"
+
+        podLabels:
+          kanister.kasten.io/inject-sidecar: "true"
+        
+        config:
+          database:
+            path: /data/frigate.db
+          mqtt:
+            host: 192.168.1.113
+            user: frigate
+            tls_insecure: true
+          
+          cameras:
+            bedroom:
+              ffmpeg:
+                - path: rtsp://admin:{FRIGATE_BEDROOM_PASSWORD}@{FRIGATE_BEDROOM_IP}:544//h264Preview_01_sub
+                  roles:
+                    - detect
+                    - rtmp
+              zones:
+                door:
+                  coordinates: 481,42,596,48,565,267,469,228
+                  objects:
+                    - person
+        env:
+          FRIGATE_RTSP_PASSWORD:
+            valueFrom:
+              secretKeyRef:
+                name: frigate-secrets
+                key: rtsp_password
+          FRIGATE_BEDROOM_PASSWORD:
+            valueFrom:
+              secretKeyRef:
+                name: frigate-secrets
+                key: bedroom_password
+          FRIGATE_BEDROOM_IP:
+            valueFrom:
+              secretKeyRef:
+                name: frigate-secrets
+                key: bedroom_ip
+          FRIGATE_MQTT_HOST:
+            valueFrom:
+              secretKeyRef:
+                name: frigate-secrets
+                key: mqtt_password
+          FRIGATE_MQTT_PASSWORD:
+            valueFrom:
+              secretKeyRef:
+                name: frigate-secrets
+                key: mqtt_host
+
+        ingress:
+          main:
+            enabled: true
+            ingressClassName: nginx
+            pathType: Prefix
+            hosts:
+              - host: frigate.apps.hive.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+            tls:
+              - hosts:
+                  - frigate.apps.hive.janz.digital
+
+        persistence:
+          data:
+            enabled: true
+            storageClass: local-path
+            size: 3Gi
+            accessMode: ReadWriteOnce
+          media:
+            enabled: true
+            storageClass: nfs
+            size: 10Gi
+            accessMode: ReadWriteOnce
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
