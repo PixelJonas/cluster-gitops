@@ -24,7 +24,7 @@ spec:
         podLabels:
           kanister.kasten.io/inject-sidecar: "true"
 
-        config:
+        config: |
           database:
             path: /data/frigate.db
           mqtt:
