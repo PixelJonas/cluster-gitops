@@ -42,8 +42,6 @@ spec:
               zones:
                 door:
                   coordinates: 481,42,596,48,565,267,469,228
-                  objects:
-                    - person
         env:
           - name: FRIGATE_RTSP_PASSWORD
             valueFrom:
