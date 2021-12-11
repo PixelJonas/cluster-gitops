@@ -34,10 +34,11 @@ spec:
           cameras:
             bedroom:
               ffmpeg:
-                - path: rtsp://admin:{FRIGATE_BEDROOM_PASSWORD}@{FRIGATE_BEDROOM_IP}:544//h264Preview_01_sub
-                  roles:
-                    - detect
-                    - rtmp
+                inputs:
+                  - path: rtsp://admin:{FRIGATE_BEDROOM_PASSWORD}@{FRIGATE_BEDROOM_IP}:544//h264Preview_01_sub
+                    roles:
+                      - detect
+                      - rtmp
               zones:
                 door:
                   coordinates: 481,42,596,48,565,267,469,228
