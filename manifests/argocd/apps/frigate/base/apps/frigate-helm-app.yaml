@@ -33,6 +33,7 @@ spec:
             host: 192.168.1.113
             client_id: frigate
             user: frigate
+            password: "{FRIGATE_MQTT_PASSWORD}"
           database:
             path: /data/frigate.db
 
