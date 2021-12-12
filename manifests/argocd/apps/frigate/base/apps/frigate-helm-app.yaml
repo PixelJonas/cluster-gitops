@@ -25,15 +25,21 @@ spec:
           kanister.kasten.io/inject-sidecar: "true"
 
         config: |
-          database:
-            path: /data/frigate.db
+          detectors:
+            cpu1:
+              type: cpu
+              num_threads: 3
           mqtt:
             host: 192.168.1.113
+            client_id: frigate
             user: frigate
+          database:
+            path: /data/frigate.db
 
           cameras:
             bedroom:
-              height: 320
+              fps: 4
+              height: 360
               width: 640
               ffmpeg:
                 inputs:
@@ -60,11 +66,6 @@ spec:
               secretKeyRef:
                 name: frigate-secrets
                 key: bedroom_ip
-          - name: FRIGATE_MQTT_HOST
-            valueFrom:
-              secretKeyRef:
-                name: frigate-secrets
-                key: mqtt_password
           - name: FRIGATE_MQTT_PASSWORD
             valueFrom:
               secretKeyRef:
