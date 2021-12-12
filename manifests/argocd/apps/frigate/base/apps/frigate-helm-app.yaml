@@ -70,7 +70,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: frigate-secrets
-                key: mqtt_host
+                key: mqtt_password
 
         ingress:
           main:
