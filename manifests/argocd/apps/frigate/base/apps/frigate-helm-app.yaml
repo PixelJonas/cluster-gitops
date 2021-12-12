@@ -39,11 +39,17 @@ spec:
           database:
             path: /data/frigate.db
 
+          detect:
+            fps: 4
+            height: 360
+            width: 640
+
+          snapshots:
+            enabled: true
+            bounding_box: true
+
           cameras:
             bedroom:
-              fps: 4
-              height: 360
-              width: 640
               ffmpeg:
                 inputs:
                   - path: rtsp://admin:{FRIGATE_BEDROOM_PASSWORD}@{FRIGATE_BEDROOM_IP}:5555555555555555555555555555555555555555555555555555555554//h264Preview_01_sub
