@@ -15,7 +15,7 @@ spec:
     helm:
       values: |-
         image:
-          tag: blakeblackshear/frigate:0.9.4-amd64
+          tag: 0.9.4-amd64
         env:
           TZ: Europe/Berlin
 
