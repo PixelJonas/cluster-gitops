@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://codecentric.github.io/helm-charts
     chart: keycloak
-    targetRevision: 16.0.4
+    targetRevision: 16.0.5
     helm:
       values: |-
         postgresql:
