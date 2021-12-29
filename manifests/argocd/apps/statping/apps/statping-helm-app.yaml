@@ -1,0 +1,78 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: statping
+  annotations:
+    argocd.argoproj.io/sync-wave: "39"
+spec:
+  destination:
+    namespace: statping
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://k8s-at-home.com/charts/"
+    targetRevision: 5.3.1
+    chart: statping
+    helm:
+      values: |-
+        env:
+          TZ: Europe/Berlin
+          NAME: JanzPing
+          Description: Statping Instance to monitor internal services
+          VIRTUAL_HOST: "statping.apps.hive.janz.digital"
+          ADMIN_USER: jonas
+
+        controller:
+          labels:
+            kanister.kasten.io/inject-sidecar: "true"
+
+        podLabels:
+          kanister.kasten.io/inject-sidecar: "true"
+
+        env:
+          - name: ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: statping-secrets
+                key: admin_password
+          - name: ADMIN_EMAIL
+            valueFrom:
+              secretKeyRef:
+                name: statping-secrets
+                key: admin_email
+          - name: DB_PASS
+            valueFrom:
+              secretKeyRef:
+                name: statping-postgresql-secret
+                key: postgresql-password
+
+        ingress:
+          main:
+            enabled: true
+            ingressClassName: nginx
+            pathType: Prefix
+            hosts:
+              - host: statping.apps.hive.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+            tls:
+              - hosts:
+                  - statping.apps.hive.janz.digital
+
+        persistence:
+          data:
+            enabled: true
+            storageClass: local-path
+            size: 3Gi
+            accessMode: ReadWriteOnce
+
+        postgresql:
+          existingSecret: statping-postgresql-secret
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

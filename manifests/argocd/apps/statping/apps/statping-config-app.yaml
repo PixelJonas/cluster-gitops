@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: statping-config
+  namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "31"
+spec:
+  destination:
+    namespace: statping
+    server: https://kubernetes.default.svc
+  project: cluster-apps
+  source:
+    path: manifests/configs/statping/base
+    repoURL: https://github.com/pixeljonas/cluster-gitops.git
+    targetRevision: master
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=foreground
