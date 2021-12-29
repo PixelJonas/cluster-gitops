@@ -24,6 +24,8 @@ spec:
         env:
           - name: TZ
             value: Europe/Berlin
+          - name: UPTIME_KUMA_PORT
+            value: "3001"
 
         ingress:
           main:
