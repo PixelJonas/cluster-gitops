@@ -16,7 +16,7 @@ bases:
   - ../../../manifests/argocd/apps/mariadb-homeassistant/base
   - ../../../manifests/argocd/apps/filebrowser/base
   - ../../../manifests/argocd/apps/vaultwarden/base
-  - ../../../manifests/argocd/apps/statping
+  - ../../../manifests/argocd/apps/statping/base
 
 resources:
   - ./cluster-apps-project.yaml
