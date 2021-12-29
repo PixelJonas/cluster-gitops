@@ -33,13 +33,13 @@ spec:
             ingressClassName: nginx
             pathType: Prefix
             hosts:
-              - host: status.apps.hive.janz.digital
+              - host: status.janz.digital
                 paths:
                   - path: /
                     pathType: Prefix
             tls:
               - hosts:
-                  - status.apps.hive.janz.digital
+                  - status.janz.digital
 
         persistence:
           data:
