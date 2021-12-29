@@ -30,3 +30,14 @@
     user: '{{ ansible_main_user_name }}'
     state: present
     key: https://github.com/{{ github_username }}.keys
+
+- name: create samba users
+  user:
+    name: "{{ item.name }}"
+    password: "{{ item.password | password_hash('sha512', vault_password_salt)  }}"
+    state: present
+    append: true
+    groups:
+      - '{{ ansible_main_group_name }}'
+  with_items:
+    - "{{ samba_users }}"

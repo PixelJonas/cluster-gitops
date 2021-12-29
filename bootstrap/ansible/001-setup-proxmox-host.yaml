@@ -11,6 +11,8 @@
       become: true
     - name: pixeljonas-base
       become: true
+    - name: bertvv.samba
+      become: true
 
 - hosts: main-prox
   vars_files:
