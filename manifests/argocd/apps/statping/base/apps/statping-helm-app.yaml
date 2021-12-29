@@ -14,13 +14,6 @@ spec:
     chart: statping
     helm:
       values: |-
-        env:
-          TZ: Europe/Berlin
-          NAME: JanzPing
-          Description: Statping Instance to monitor internal services
-          VIRTUAL_HOST: "statping.apps.hive.janz.digital"
-          ADMIN_USER: jonas
-
         controller:
           labels:
             kanister.kasten.io/inject-sidecar: "true"
@@ -29,6 +22,26 @@ spec:
           kanister.kasten.io/inject-sidecar: "true"
 
         env:
+          - name: TZ
+            value: Europe/Berlin
+          - name: NAME
+            value: JanzPing
+          - name: Description
+            value: Statping Instance to monitor internal services
+          - name: VIRTUAL_HOST
+            value: "statping.apps.hive.janz.digital"
+          - name: ADMIN_USER
+            value: jonas
+          - name: DB_CONN
+            value: postgres
+          - name: DB_DATABASE
+            value: statping
+          - name: DB_HOST
+            value: statping-postgresql
+          - name: DB_USER
+            value: statping
+          - name: USE_CDN
+            value: true
           - name: ADMIN_PASSWORD
             valueFrom:
               secretKeyRef:
@@ -68,6 +81,13 @@ spec:
 
         postgresql:
           existingSecret: statping-postgresql-secret
+          postgresqlUsername: statping
+          postgresqlDatabase: statping
+          persistence:
+            enabled: true
+            storageClass: local-path
+            size: 25GB
+            accessMode: ReadWriteOnce
 
   project: cluster-apps
   syncPolicy:
