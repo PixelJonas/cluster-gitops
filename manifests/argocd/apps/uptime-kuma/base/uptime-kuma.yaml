@@ -1,0 +1,55 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: uptime-kuma
+  annotations:
+    argocd.argoproj.io/sync-wave: "39"
+spec:
+  destination:
+    namespace: uptime-kuma
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://k8s-at-home.com/charts/"
+    targetRevision: 1.0.1
+    chart: uptime-kuma
+    helm:
+      values: |-
+        controller:
+          labels:
+            kanister.kasten.io/inject-sidecar: "true"
+
+        podLabels:
+          kanister.kasten.io/inject-sidecar: "true"
+
+        env:
+          - name: TZ
+            value: Europe/Berlin
+
+        ingress:
+          main:
+            enabled: true
+            ingressClassName: nginx
+            pathType: Prefix
+            hosts:
+              - host: status.apps.hive.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+            tls:
+              - hosts:
+                  - status.apps.hive.janz.digital
+
+        persistence:
+          data:
+            enabled: true
+            storageClass: local-path
+            size: 3Gi
+            accessMode: ReadWriteOnce
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

@@ -16,6 +16,7 @@ bases:
   - ../../../manifests/argocd/apps/mariadb-homeassistant/base
   - ../../../manifests/argocd/apps/filebrowser/base
   - ../../../manifests/argocd/apps/vaultwarden/base
+  - ../../../manifests/argocd/apps/uptime-kuma/base
 
 resources:
   - ./cluster-apps-project.yaml
