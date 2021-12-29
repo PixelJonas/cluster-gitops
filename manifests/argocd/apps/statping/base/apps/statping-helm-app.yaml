@@ -86,7 +86,7 @@ spec:
           persistence:
             enabled: true
             storageClass: local-path
-            size: 25GB
+            size: 25Gi
             accessMode: ReadWriteOnce
 
   project: cluster-apps
