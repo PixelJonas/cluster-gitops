@@ -1,5 +1,5 @@
 
-package_list:
+package_list_group:
   - name: sudo
   - name: git
   - name: zsh
