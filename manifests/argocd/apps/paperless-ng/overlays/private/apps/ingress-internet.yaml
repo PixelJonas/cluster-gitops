@@ -6,6 +6,7 @@ metadata:
   annotations:
     nginx.ingress.kubernetes.io/auth-signin: https://auth.janz.digital/oauth2/start?rd=https://$best_http_host$request_uri
     nginx.ingress.kubernetes.io/auth-url: https://auth.janz.digital/oauth2/auth
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m
 spec:
   ingressClassName: nginx
   rules:
