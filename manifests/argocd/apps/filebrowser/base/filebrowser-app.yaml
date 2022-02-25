@@ -4,6 +4,8 @@ metadata:
   name: filebrowser-app
   annotations:
     argocd.argoproj.io/sync-wave: "11"
+  labels:
+    gitops.type: app-of-apps
 spec:
   destination:
     namespace: argocd

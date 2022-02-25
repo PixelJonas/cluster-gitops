@@ -4,6 +4,8 @@ metadata:
   name: k10-app
   annotations:
     argocd.argoproj.io/sync-wave: "19"
+  labels:
+    gitops.type: app-of-apps
 spec:
   destination:
     namespace: argocd
