@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/compare-options: IgnoreExtraneous
     argocd.argoproj.io/sync-options: Prune=false
   name: filebrowser
-  namespace: argocd
+  namespace: argocd-operator-system
 spec:
   destination:
     namespace: filebrowser
