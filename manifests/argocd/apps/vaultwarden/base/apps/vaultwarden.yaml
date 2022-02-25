@@ -4,6 +4,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "32"
   name: vaultwarden
+  namespace: argocd-operator-system
 spec:
   destination:
     namespace: vaultwarden
