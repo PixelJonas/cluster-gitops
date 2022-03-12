@@ -6,63 +6,63 @@ spec:
   destination:
     namespace: resilio-sync
     server: "https://kubernetes.default.svc"
+  project: cluster-apps
   source:
     repoURL: "https://k8s-at-home.com/charts/"
     targetRevision: 5.2.0
     chart: resilio-sync
-  project: cluster-apps
-  helm:
-    values: |-
+    helm:
+      values: |-
 
-      env:
-        TZ: Europe/Berlin
-        PUID: "1500"
-        PGID: "1500"
-      controller:
-        labels:
-          kanister.kasten.io/inject-sidecar: "true"
+        env:
+          TZ: Europe/Berlin
+          PUID: "1500"
+          PGID: "1500"
+        controller:
+          labels:
+            kanister.kasten.io/inject-sidecar: "true"
 
-      podLabels:
-        kanister.kasten.io/inject-sidecar: "true" 
-        
-      ingress:
-        main:
-          annotations:
-            nginx.ingress.kubernetes.io/proxy-body-size: 50m
-          enabled: true
-          ingressClassName: nginx
-          pathType: Prefix
-          hosts:
-            - host: snyc.apps.hive.janz.digital
-              paths:
-                - path: /
-                  pathType: Prefix
-            - host: snyc.janz.digital
-              paths:
-                - path: /
-                  pathType: Prefix
-          tls:
-            - hosts:
-                - sync.apps.hive.janz.digital             
-                - sync.janz.digital
+        podLabels:
+          kanister.kasten.io/inject-sidecar: "true" 
+          
+        ingress:
+          main:
+            annotations:
+              nginx.ingress.kubernetes.io/proxy-body-size: 50m
+            enabled: true
+            ingressClassName: nginx
+            pathType: Prefix
+            hosts:
+              - host: snyc.apps.hive.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+              - host: snyc.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+            tls:
+              - hosts:
+                  - sync.apps.hive.janz.digital             
+                  - sync.janz.digital
 
-      persistence:
-        config:
-          enabled: true
-          storageClass: local-path
-          size: 5Gi
-        media:
-          enabled: true
-          storageClass: nfs
-          size: 10Gi
-        downloads:
-          enabled: true
-          storageClass: nfs
-          size: 10Gi         
-        sync:
-          enabled: true
-          storageClass: nfs
-          size: 10Gi         
+        persistence:
+          config:
+            enabled: true
+            storageClass: local-path
+            size: 5Gi
+          media:
+            enabled: true
+            storageClass: nfs
+            size: 10Gi
+          downloads:
+            enabled: true
+            storageClass: nfs
+            size: 10Gi         
+          sync:
+            enabled: true
+            storageClass: nfs
+            size: 10Gi         
   syncPolicy:
     automated:
       prune: true
