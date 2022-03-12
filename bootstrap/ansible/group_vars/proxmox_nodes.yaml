@@ -54,3 +54,12 @@ samba_shares:
     create_mode: 0664
     owner: andrew
     write_list: "andrew"
+
+  - name: jonas
+    comment: "Share for jonas"
+    path: "{{ proxmox_main_storage_path }}/jonas"
+    read_only: false
+    guest_ok: false
+    create_mode: 0664
+    owner: jonas
+    write_list: "jonas"

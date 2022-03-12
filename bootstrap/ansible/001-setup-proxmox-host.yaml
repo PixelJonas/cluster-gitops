@@ -20,6 +20,8 @@
   roles:
     - name: pixeljonas-proxmox
       become: true
+    - name: ironicbadger.ansible_role_snapraid
+      become: true
 
 - hosts: lab
   vars_files:

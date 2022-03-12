@@ -22,8 +22,28 @@ extra_mountpoints:
 
 # ironicbadger.snapraid
 snapraid_bin_path: /usr/bin/snapraid
+snapraid_install: true
+snapraid_runner: true
+snapraid_runner_healthcheck_io_uuid: "{{ vault_runner_healthcheck_io }}"
 
-snapraid_runner: false
+## snapraid
+snapraid_config_excludes:
+  - "*.unrecoverable"
+  - "/tmp/"
+  - "/lost+found/"
+  - "downloads/"
+  - "appdata/"
+  - "*.!sync"
+  - ".AppleDouble"
+  - "._AppleDouble"
+  - ".DS_Store"
+  - "._.DS_Store"
+  - ".Thumbs.db"
+  - ".fseventsd"
+  - ".Spotlight-V100"
+  - ".TemporaryItems"
+  - ".Trashes"
+  - ".AppleDB"
 
 fstab_mergerfs:
   - {
@@ -55,11 +75,18 @@ snapraid_data_disks:
       opts: defaults,
       content: true,
     }
-snapraid_parity_disks: []
-#   - {
-#       path: /mnt/parity1,
-#       diskbyid: /dev/disk/by-id/scsi-35000c500853d147f-part1,
-#       fs: xfs,
-#       opts: defaults,
-#       content: false,
-#     }
+  - {
+      path: /mnt/disk4,
+      diskbyid: /dev/disk/by-id/ata-WDC_WD140EDFZ-11A0VA0_9MGN4JBU-part1,
+      fs: ext4,
+      opts: defaults,
+      content: true,
+    }
+snapraid_parity_disks:
+  - {
+      path: /mnt/parity1,
+      diskbyid: /dev/disk/by-id/ata-WDC_WD140EDFZ-11A0VA0_9LG1ZK2A-part1,
+      fs: ext4,
+      opts: defaults,
+      content: true,
+    }
