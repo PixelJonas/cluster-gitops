@@ -17,6 +17,7 @@ bases:
   - ../../../manifests/argocd/apps/filebrowser/base
   - ../../../manifests/argocd/apps/vaultwarden/base
   - ../../../manifests/argocd/apps/uptime-kuma/base
+  - ../../../manifests/argocd/apps/resilio-sync/base
 
 resources:
   - ./cluster-apps-project.yaml
