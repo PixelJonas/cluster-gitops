@@ -14,8 +14,8 @@ spec:
     chart: frigate
     helm:
       values: |-
-        image:
-          tag: 0.9.4-amd64
+
+
         env:
           TZ: Europe/Berlin
 
@@ -26,11 +26,15 @@ spec:
         podLabels:
           kanister.kasten.io/inject-sidecar: "true"
 
+        securityContext:
+          privileged: true
+
         config: |
           detectors:
-            cpu1:
-              type: cpu
-              num_threads: 3
+            coral_pci1:
+              type: edgetpu
+              device: pci
+
           mqtt:
             host: 192.168.1.113
             client_id: frigate
@@ -106,6 +110,11 @@ spec:
             storageClass: nfs
             size: 10Gi
             accessMode: ReadWriteOnce
+          coralpci:
+            enabled: true
+            type: hostPath
+            hostPath: /dev/apex_0
+
 
   project: cluster-apps
   syncPolicy:
