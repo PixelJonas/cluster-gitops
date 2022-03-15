@@ -3,5 +3,3 @@ kind: Console
 metadata:
   name: cluster
 spec:
-  route:
-    hostname: "console.apps.ocp.janz.cloud"

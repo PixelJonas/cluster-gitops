@@ -6,7 +6,7 @@ namespace: openshift-gitops
 bases:
   - ../../../manifests/argocd/apps/oauth/public
   - ../../../manifests/argocd/apps/groups-and-membership/public
-  - ../../../manifests/argocd/apps/console/public
+  - ../../../manifests/argocd/apps/console/base
 
   - ../../../manifests/argocd/apps/sealed-secrets-operator/base
 

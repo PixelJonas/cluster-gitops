@@ -1,7 +1,0 @@
-apiVersion: operator.openshift.io/v1
-kind: Console
-metadata:
-  name: cluster
-spec:
-  route:
-    hostname: "console.apps.hive.janz.digital"
