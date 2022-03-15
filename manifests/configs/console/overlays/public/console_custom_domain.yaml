@@ -1,5 +1,10 @@
-apiVersion: operator.openshift.io/v1
-kind: Console
+apiVersion: config.openshift.io/v1
+kind: Ingress
 metadata:
   name: cluster
 spec:
+  componentRoutes:
+    - hostname: console.apps.ocp4.janz.cloud
+      name: console
+      namespace: openshift-console
+  domain: apps.ocp4.janz.cloud
