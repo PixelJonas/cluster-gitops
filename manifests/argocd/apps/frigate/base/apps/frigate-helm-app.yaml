@@ -14,7 +14,8 @@ spec:
     chart: frigate
     helm:
       values: |-
-
+        image:
+          tag: 0.9.4-amd64
 
         env:
           TZ: Europe/Berlin
