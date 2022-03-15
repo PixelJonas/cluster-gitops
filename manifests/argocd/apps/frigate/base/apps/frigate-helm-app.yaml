@@ -57,7 +57,7 @@ spec:
             bedroom:
               ffmpeg:
                 inputs:
-                  - path: rtsp://admin:{FRIGATE_BEDROOM_PASSWORD}@{FRIGATE_BEDROOM_IP}:5555555555555555555555555555555555555555555555555555555554//h264Preview_01_sub
+                  - path: rtsp://admin:{FRIGATE_BEDROOM_PASSWORD}@{FRIGATE_BEDROOM_IP}:544//h264Preview_01_sub
                     roles:
                       - detect
                       - rtmp
