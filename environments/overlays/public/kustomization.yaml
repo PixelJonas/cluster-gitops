@@ -9,8 +9,6 @@ bases:
   - ../../../manifests/argocd/apps/console/public
 
   - ../../../manifests/argocd/apps/sealed-secrets-operator/base
-  - ../../../manifests/argocd/apps/alertmanager/base
-  - ../../../manifests/argocd/apps/openshift-pipelines/base
 
 patches:
   - target:
