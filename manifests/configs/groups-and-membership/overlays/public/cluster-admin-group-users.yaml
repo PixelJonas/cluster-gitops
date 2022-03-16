@@ -16,3 +16,6 @@
 - op: add
   path: /users/-
   value: "rschramo@redhat.com"
+- op: add
+  path: /users/-
+  value: "ruizhang@redhat.com"
