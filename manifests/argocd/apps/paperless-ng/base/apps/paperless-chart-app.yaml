@@ -6,15 +6,15 @@ metadata:
 spec:
   destination:
     namespace: paperless
-    server: 'https://kubernetes.default.svc'
+    server: "https://kubernetes.default.svc"
   source:
-    repoURL: 'https://k8s-at-home.com/charts/'
+    repoURL: "https://k8s-at-home.com/charts/"
     targetRevision: 8.5.0
     chart: paperless
     helm:
       values: |-
 
-      
+
         secret:
           docker-entrypoint.sh: |-
             #!/bin/bash
@@ -158,21 +158,18 @@ spec:
             DOCUMENT_THUMBNAIL_URL=${6}
             DOCUMENT_CORRESPONDENT=${7}
             DOCUMENT_TAGS=${8}
+            DOCUMENT_FILE="$(basename ${DOCUMENT_SOURCE_PATH})"
+            DOCUMENT_ARCHIVE_PATH=/usr/src/paperless/media/documents/archive/${DOCUMENT_FILE}
 
             echo "
             A document with an id of ${DOCUMENT_ID} was just consumed.  I know the
-            following additional information about it:
-            * Generated File Name: ${DOCUMENT_FILE_NAME}
             * Source Path: ${DOCUMENT_SOURCE_PATH}
-            * Thumbnail Path: ${DOCUMENT_THUMBNAIL_PATH}
-            * Download URL: ${DOCUMENT_DOWNLOAD_URL}
-            * Thumbnail URL: ${DOCUMENT_THUMBNAIL_URL}
-            * Correspondent: ${DOCUMENT_CORRESPONDENT}
-            * Tags: ${DOCUMENT_TAGS}
-            It was consumed with the passphrase ${PASSPHRASE}
-            " | tee --append /usr/src/paperless/scripts/post-consumption-example.log
+            * File Name: ${DOCUMENT_FILE}
+            * Archive Path: ${DOCUMENT_ARCHIVE_PATH}
+            "
 
             IN="$DOCUMENT_SOURCE_PATH"
+            OUT="${DOCUMENT_ARCHIVE_PATH}"
             PAGES=$(pdfinfo $IN | grep ^Pages: | tr -dc '0-9')
             echo "Starting to remove blank pages from $IN"
             non_blank() {
@@ -189,8 +186,7 @@ spec:
             }
 
             set +x
-            pdftk $IN cat $(non_blank) output $IN.tmp
-            mv $IN.tmp $IN
+            pdftk $IN cat $(non_blank) output $OUT
             rm out.tmp
             echo "finishing removing blank pages from $IN"
 
@@ -299,7 +295,6 @@ spec:
                   - "-c"
                   - echo "Healthy" > /usr/src/paperless/consume/foo && cat /usr/src/paperless/consume/foo && rm /usr/src/paperless/consume/foo
               timeoutSeconds: 1
-
 
   project: cluster-apps
   syncPolicy:
