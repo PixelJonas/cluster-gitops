@@ -9,7 +9,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: "https://k8s-at-home.com/charts/"
-    targetRevision: 8.5.0
+    targetRevision: 8.6.0
     chart: paperless
     helm:
       values: |-
