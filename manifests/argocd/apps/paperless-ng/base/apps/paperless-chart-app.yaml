@@ -162,7 +162,7 @@ spec:
             DOCUMENT_ARCHIVE_PATH=/usr/src/paperless/media/documents/archive/${DOCUMENT_FILE}
 
             echo "
-            A document with an id of ${DOCUMENT_ID} was just consumed.  I know the
+            A document with an id of ${DOCUMENT_ID} was just consumed.
             * Source Path: ${DOCUMENT_SOURCE_PATH}
             * File Name: ${DOCUMENT_FILE}
             * Archive Path: ${DOCUMENT_ARCHIVE_PATH}
@@ -188,7 +188,7 @@ spec:
             set +x
             pdftk $IN cat $(non_blank) output $OUT
             rm out.tmp
-            echo "finishing removing blank pages from $IN"
+            echo "finishing removing blank pages from $IN saved file to $OUT"
 
         env:
           # -- Project name
