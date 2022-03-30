@@ -13,6 +13,187 @@ spec:
     chart: paperless
     helm:
       values: |-
+
+      
+        secret:
+          docker-entrypoint.sh: |-
+            #!/bin/bash
+            set -e
+
+            # Source: https://github.com/sameersbn/docker-gitlab/
+            map_uidgid() {
+              USERMAP_ORIG_UID=$(id -u paperless)
+              USERMAP_ORIG_GID=$(id -g paperless)
+              USERMAP_NEW_UID=${USERMAP_UID:-$USERMAP_ORIG_UID}
+              USERMAP_NEW_GID=${USERMAP_GID:-${USERMAP_ORIG_GID:-$USERMAP_NEW_UID}}
+              if [[ ${USERMAP_NEW_UID} != "${USERMAP_ORIG_UID}" || ${USERMAP_NEW_GID} != "${USERMAP_ORIG_GID}" ]]; then
+                echo "Mapping UID and GID for paperless:paperless to $USERMAP_NEW_UID:$USERMAP_NEW_GID"
+                usermod -o -u "${USERMAP_NEW_UID}" paperless
+                groupmod -o -g "${USERMAP_NEW_GID}" paperless
+              fi
+            }
+
+            initialize() {
+              map_uidgid
+
+              for dir in export data data/index media media/documents media/documents/originals media/documents/thumbnails; do
+                if [[ ! -d "../$dir" ]]; then
+                  echo "Creating directory ../$dir"
+                  mkdir ../$dir
+                fi
+              done
+
+              echo "Creating directory /tmp/paperless"
+              mkdir -p /tmp/paperless
+
+              set +e
+              echo "Adjusting permissions of paperless files. This may take a while."
+              chown -R paperless:paperless /tmp/paperless
+              find .. -not \( -user paperless -and -group paperless \) -exec chown paperless:paperless {} +
+              set -e
+
+              gosu paperless /sbin/docker-prepare.sh
+            }
+
+            install_languages() {
+              echo "Installing languages..."
+
+              local langs="$1"
+              read -ra langs <<<"$langs"
+
+              # Check that it is not empty
+              if [ ${#langs[@]} -eq 0 ]; then
+                return
+              fi
+              apt-get update
+
+              for lang in "${langs[@]}"; do
+                pkg="tesseract-ocr-$lang"
+                # English is installed by default
+                #if [[ "$lang" ==  "eng" ]]; then
+                #    continue
+                #fi
+
+                if dpkg -s "$pkg" &>/dev/null; then
+                  echo "Package $pkg already installed!"
+                  continue
+                fi
+
+                if ! apt-cache show "$pkg" &>/dev/null; then
+                  echo "Package $pkg not found! :("
+                  continue
+                fi
+
+                echo "Installing package $pkg..."
+                if ! apt-get -y install "$pkg" &>/dev/null; then
+                  echo "Could not install $pkg"
+                  exit 1
+                fi
+              done
+            }
+
+            install_packages() {
+              echo "Installing packages..."
+
+              local packages="$1"
+              read -ra packages <<<"$packages"
+
+              # Check that it is not empty
+              if [ ${#packages[@]} -eq 0 ]; then
+                return
+              fi
+              apt-get update
+
+              for package in "${packages[@]}"; do
+                pkg="$package"
+
+                if dpkg -s "$pkg" &>/dev/null; then
+                  echo "Package $pkg already installed!"
+                  continue
+                fi
+
+                if ! apt-cache show "$pkg" &>/dev/null; then
+                  echo "Package $pkg not found! :("
+                  continue
+                fi
+
+                echo "Installing package $pkg..."
+                if ! apt-get -y install "$pkg" &>/dev/null; then
+                  echo "Could not install $pkg"
+                  exit 1
+                fi
+              done
+            }
+
+            echo "Paperless-ngx docker container starting..."
+
+            # Install additional languages if specified
+            if [[ -n "$PAPERLESS_OCR_LANGUAGES" ]]; then
+              install_languages "$PAPERLESS_OCR_LANGUAGES"
+            fi
+
+            # Install additional packages if specified
+            if [[ -n "$PAPERLESS_CUSTOM_PACKAGES" ]]; then
+              install_packages "$PAPERLESS_CUSTOM_PACKAGES"
+            fi
+
+            initialize
+
+            if [[ "$1" != "/"* ]]; then
+              echo Executing management command "$@"
+              exec gosu paperless python3 manage.py "$@"
+            else
+              echo Executing "$@"
+              exec "$@"
+            fi
+
+          pdf_rm_blank.sh: |-
+            #!/usr/bin/env bash
+
+            DOCUMENT_ID=${1}
+            DOCUMENT_FILE_NAME=${2}
+            DOCUMENT_SOURCE_PATH=${3}
+            DOCUMENT_THUMBNAIL_PATH=${4}
+            DOCUMENT_DOWNLOAD_URL=${5}
+            DOCUMENT_THUMBNAIL_URL=${6}
+            DOCUMENT_CORRESPONDENT=${7}
+            DOCUMENT_TAGS=${8}
+
+            echo "
+            A document with an id of ${DOCUMENT_ID} was just consumed.  I know the
+            following additional information about it:
+            * Generated File Name: ${DOCUMENT_FILE_NAME}
+            * Source Path: ${DOCUMENT_SOURCE_PATH}
+            * Thumbnail Path: ${DOCUMENT_THUMBNAIL_PATH}
+            * Download URL: ${DOCUMENT_DOWNLOAD_URL}
+            * Thumbnail URL: ${DOCUMENT_THUMBNAIL_URL}
+            * Correspondent: ${DOCUMENT_CORRESPONDENT}
+            * Tags: ${DOCUMENT_TAGS}
+            It was consumed with the passphrase ${PASSPHRASE}
+            " | tee --append /usr/src/paperless/scripts/post-consumption-example.log
+
+            IN="$DOCUMENT_SOURCE_PATH"
+            PAGES=$(pdfinfo $IN | grep ^Pages: | tr -dc '0-9')
+            echo "Starting to remove blank pages from $IN"
+            non_blank() {
+                for i in $(seq 1 $PAGES)
+                do
+                    if [ $(convert -density 25 "$IN[$((i-1))]" -define histogram:unique-colors=true -format %c histogram:info:- | wc -l) -gt 15 ]
+                    then
+                        echo $i
+                        #echo $i 1>&2
+                    fi
+                    echo -n . 1>&2
+                done | tee out.tmp
+                echo 1>&2
+            }
+
+            set +x
+            pdftk $IN cat $(non_blank) output $IN.tmp
+            mv $IN.tmp $IN
+            rm out.tmp
+            echo "finishing removing blank pages from $IN"
+
         env:
           # -- Project name
           COMPOSE_PROJECT_NAME: paperless
@@ -21,12 +202,20 @@ spec:
           # -- OCR languages to install
           PAPERLESS_OCR_LANGUAGE: deu
           PAPERLESS_OCR_LANGUAGES: deu
+          PAPERLESS_CUSTOM_PACKAGES: "pdftk poppler-utils"
           PAPERLESS_TIME_ZONE: Europe/Berlin
           PAPERLESS_CONSUMER_POLLING: 30
           PAPERLESS_OCR_DESKEW: true
           PAPERLESS_OCR_ROTATE_PAGES_THRESHOLD: 3
+          PAPERLESS_TIKA_ENABLED: 1
+          PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://localhost:3000
+          PAPERLESS_TIKA_ENDPOINT: http://localhost:9998
+          PAPERLESS_POST_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/pdf_rm_blank.sh
           USERMAP_UID: 1500
           USERMAP_GID: 1500
+
+        command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
+        args: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
         controller:
           labels:
@@ -63,12 +252,54 @@ spec:
           export:
             enabled: true
             size: 1Gi
+          custom-scripts:
+            name: paperless-ng
+            enabled: true
+            type: secret
+            defaultMode: 0777
+            mountPath: /usr/src/paperless/custom-scripts
 
         additionalContainers:
           broker:
             name: broker
             image: redis:6.0
             imagePullPolicy: IfNotPresent
+          tika:
+            name: tika
+            image: docker.io/apache/tika:2.3.0
+            imagePullPolicy: IfNotPresent
+          gotenberg:
+            name: gotenberg
+            image: docker.io/gotenberg/gotenberg:7
+            env:
+              - name: CHROMIUM_DISABLE_ROUTES
+                value: "1"
+
+        probes:
+          startup:
+            custom: true
+            enabled: true
+            spec:
+              failureThreshold: 30
+              initialDelaySeconds: 20
+              periodSeconds: 5
+              tcpSocket:
+                port: 8000
+              timeoutSeconds: 1
+          liveness:
+            custom: true
+            enabled: true
+            spec:
+              failureThreshold: 30
+              initialDelaySeconds: 0
+              periodSeconds: 5
+              exec:
+                command:
+                  - /bin/bash
+                  - "-c"
+                  - echo "Healthy" > /usr/src/paperless/consume/foo && cat /usr/src/paperless/consume/foo && rm /usr/src/paperless/consume/foo
+              timeoutSeconds: 1
+
 
   project: cluster-apps
   syncPolicy:
