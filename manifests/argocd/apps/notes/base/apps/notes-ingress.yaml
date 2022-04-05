@@ -17,6 +17,16 @@ spec:
                   number: 80
             path: /
             pathType: Prefix
+    - host: notes.janz.digital
+      http:
+        paths:
+          - backend:
+              service:
+                name: notes-nginx
+                port:
+                  number: 80
+            path: /
+            pathType: Prefix
   tls:
     - hosts:
         - notes.apps.hive.janz.digital
