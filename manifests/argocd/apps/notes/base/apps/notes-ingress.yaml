@@ -14,7 +14,7 @@ spec:
               service:
                 name: notes-nginx
                 port:
-                  number: 8000
+                  number: 80
             path: /
             pathType: Prefix
   tls:
