@@ -19,7 +19,7 @@ spec:
 
         ingress:
           enabled: true
-          host: notes.apps.hive.janz.digital
+          hostname: notes.apps.hive.janz.digital
           extraTls:
             - hosts:
                 - notes.apps.hive.janz.digital
