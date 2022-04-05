@@ -14,6 +14,16 @@ spec:
     helm:
       values: |-
         staticSitePVC: notes-import
+        service:
+          type: ClusterIp
+
+        ingress:
+          enabled: true
+          host: notes.apps.hive.janz.digital
+          extraTls:
+            - hosts:
+                - notes.apps.hive.janz.digital
+
   project: cluster-apps
   syncPolicy:
     syncOptions:
