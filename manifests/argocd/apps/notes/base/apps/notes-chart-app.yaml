@@ -17,13 +17,6 @@ spec:
         service:
           type: ClusterIP
 
-        ingress:
-          enabled: true
-          hostname: notes.apps.hive.janz.digital
-          extraTls:
-            - hosts:
-                - notes.apps.hive.janz.digital
-
   project: cluster-apps
   syncPolicy:
     syncOptions:

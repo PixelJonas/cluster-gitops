@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: notes
+  namespace: notes
+  annotations:
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: notes.apps.hive.janz.digital
+      http:
+        paths:
+          - backend:
+              service:
+                name: notes-nginx
+                port:
+                  number: 8000
+            path: /
+            pathType: Prefix
+  tls:
+    - hosts:
+        - notes.apps.hive.janz.digital
