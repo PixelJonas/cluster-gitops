@@ -13,7 +13,7 @@ spec:
     apiVersion: v1
     kind: PersistentVolumeClaim
     name: notes-import
-    namespace: paperless
+    namespace: notes
   nfs:
     path: /mnt/storage/jonas/logseq
     server: 192.168.1.112
