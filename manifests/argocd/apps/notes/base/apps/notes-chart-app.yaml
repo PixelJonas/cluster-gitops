@@ -15,7 +15,7 @@ spec:
       values: |-
         staticSitePVC: notes-import
         service:
-          type: ClusterIp
+          type: ClusterIP
 
         ingress:
           enabled: true
