@@ -38,4 +38,4 @@ spec:
       storage: 1Gi
   storageClassName: nfs-custom
   volumeMode: Filesystem
-  volumeName: notes-import
+  volumeName: notes-import-pv
