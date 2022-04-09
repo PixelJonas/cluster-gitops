@@ -66,7 +66,32 @@ spec:
             enabled: true
             storageClass: nfs
             accessMode: ReadWriteOnce
-            size: 10Gi         
+            size: 10Gi        
+
+        probes:
+          startup:
+            custom: true
+            enabled: true
+            spec:
+              failureThreshold: 30
+              initialDelaySeconds: 20
+              periodSeconds: 5
+              tcpSocket:
+                port: 8000
+              timeoutSeconds: 1
+          liveness:
+            custom: true
+            enabled: true
+            spec:
+              failureThreshold: 30
+              initialDelaySeconds: 0
+              periodSeconds: 5
+              exec:
+                command:
+                  - /bin/bash
+                  - "-c"
+                  - echo "Healthy" > /sync/foo && cat /sync/foo && rm /sync/foo
+              timeoutSeconds: 1 
   syncPolicy:
     automated:
       prune: true
