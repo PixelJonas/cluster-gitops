@@ -2,6 +2,8 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: resilio-sync
+  annotations:
+    argocd.argoproj.io/sync-wave: "21"
 spec:
   destination:
     namespace: resilio-sync
