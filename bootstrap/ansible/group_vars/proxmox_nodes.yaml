@@ -23,7 +23,8 @@ package_list:
   - name: podman
 
 nfs_exports:
-  - "/mnt/storage 192.168.1.0/255.255.255.0(rw,sync,no_subtree_check,fsid=0,no_root_squash)"
+  - "/srv/nfs4     192.168.1.0/255.255.255.0(rw,sync,no_subtree_check,crossmnt,no_root_squash,fsid=0)"
+  - "/mnt/storage  192.168.1.0/255.255.255.0(rw,sync,no_subtree_check,fsid=0,no_root_squash)"
 
 samba_users:
   - name: jonas

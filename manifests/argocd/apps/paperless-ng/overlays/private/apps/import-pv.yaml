@@ -15,7 +15,7 @@ spec:
     name: paperless-ng-import
     namespace: paperless
   nfs:
-    path: /mnt/storage/documents
+    path: /documents
     server: 192.168.1.112
   mountOptions:
     - nfsvers=4.2
