@@ -28,7 +28,7 @@ spec:
             command:
               - /bin/bash
               - "-c"
-              - echo "Healthy" > /app/foo && cat /app/fooo && rm /app/foo
+              - echo "Healthy" > /app/foo && cat /app/foo && rm /app/foo
           timeoutSeconds: 1
   project: cluster-apps
   syncPolicy:
