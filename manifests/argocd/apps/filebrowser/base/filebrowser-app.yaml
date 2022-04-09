@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: filebrowser-app
   annotations:
-    argocd.argoproj.io/sync-wave: "11"
+    argocd.argoproj.io/sync-wave: "21"
   labels:
     gitops.type: app-of-apps
 spec:
