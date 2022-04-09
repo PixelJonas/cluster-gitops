@@ -15,7 +15,7 @@ spec:
     name: notes-import
     namespace: notes
   nfs:
-    path: /mnt/storage/jonas/logseq
+    path: /srv/nfs4/jonas/logseq
     server: 192.168.1.112
   mountOptions:
     - nfsvers=4.2
