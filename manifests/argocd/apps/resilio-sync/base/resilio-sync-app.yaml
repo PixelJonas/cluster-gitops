@@ -68,22 +68,7 @@ spec:
             enabled: true
             storageClass: nfs
             accessMode: ReadWriteOnce
-            size: 10Gi        
-
-        probes:
-          liveness:
-            custom: true
-            enabled: true
-            spec:
-              failureThreshold: 30
-              initialDelaySeconds: 0
-              periodSeconds: 5
-              exec:
-                command:
-                  - /bin/bash
-                  - "-c"
-                  - echo "Healthy" > /sync/foo && cat /sync/foo && rm /sync/foo
-              timeoutSeconds: 1 
+            size: 10Gi
   syncPolicy:
     automated:
       prune: true

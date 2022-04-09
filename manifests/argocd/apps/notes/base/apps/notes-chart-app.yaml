@@ -17,19 +17,6 @@ spec:
         service:
           type: ClusterIP
 
-        livenessProbe:
-          enabled: false
-
-        customLivenessProbe:
-          failureThreshold: 30
-          initialDelaySeconds: 0
-          periodSeconds: 5
-          exec:
-            command:
-              - /bin/bash
-              - "-c"
-              - echo "Healthy" > /app/foo && cat /app/foo && rm /app/foo
-          timeoutSeconds: 1
   project: cluster-apps
   syncPolicy:
     syncOptions:
