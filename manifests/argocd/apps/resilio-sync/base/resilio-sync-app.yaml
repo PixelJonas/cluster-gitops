@@ -69,16 +69,6 @@ spec:
             size: 10Gi        
 
         probes:
-          startup:
-            custom: true
-            enabled: true
-            spec:
-              failureThreshold: 30
-              initialDelaySeconds: 20
-              periodSeconds: 5
-              tcpSocket:
-                port: 8000
-              timeoutSeconds: 1
           liveness:
             custom: true
             enabled: true
