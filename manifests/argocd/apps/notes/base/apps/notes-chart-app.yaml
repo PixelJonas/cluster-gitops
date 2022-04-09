@@ -17,6 +17,9 @@ spec:
         service:
           type: ClusterIP
 
+        livenessProbe:
+          enabled: false
+
         customLivenessProbe:
           failureThreshold: 30
           initialDelaySeconds: 0
