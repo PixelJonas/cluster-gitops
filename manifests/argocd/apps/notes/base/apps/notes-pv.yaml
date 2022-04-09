@@ -17,6 +17,8 @@ spec:
   nfs:
     path: /mnt/storage/jonas/logseq
     server: 192.168.1.112
+  mountOptions:
+    - nfsvers=4.2
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nfs-custom
   volumeMode: Filesystem
