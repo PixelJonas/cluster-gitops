@@ -282,19 +282,6 @@ spec:
               tcpSocket:
                 port: 8000
               timeoutSeconds: 1
-          liveness:
-            custom: true
-            enabled: true
-            spec:
-              failureThreshold: 30
-              initialDelaySeconds: 0
-              periodSeconds: 5
-              exec:
-                command:
-                  - /bin/bash
-                  - "-c"
-                  - echo "Healthy" > /usr/src/paperless/consume/foo && cat /usr/src/paperless/consume/foo && rm /usr/src/paperless/consume/foo
-              timeoutSeconds: 1
 
   project: cluster-apps
   syncPolicy:
