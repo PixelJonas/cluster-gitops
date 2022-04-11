@@ -11,8 +11,8 @@ spec:
   project: cluster-config
   source:
     repoURL: https://codecentric.github.io/helm-charts
-    chart: keycloak
-    targetRevision: 16.1.0
+    chart: keycloakx
+    targetRevision: 1.1.1
     helm:
       values: |-
         postgresql:
