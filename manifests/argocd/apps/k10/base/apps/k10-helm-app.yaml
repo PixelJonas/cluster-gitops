@@ -58,7 +58,7 @@ spec:
             htpasswd: "admin:$2y$10$90kwyftHGGeNUPHiDmueqOW5/TCAWMhLjFjv9Ff111TSs.cvibk.."
 
     repoURL: https://charts.kasten.io/
-    targetRevision: 4.5.12
+    targetRevision: 4.5.13
   ignoreDifferences:
     - group: admissionregistration.k8s.io
       kind: MutatingWebhookConfiguration
