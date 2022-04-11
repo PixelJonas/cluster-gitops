@@ -1,4 +1,3 @@
-
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
@@ -6,3 +5,4 @@ resources:
   - keycloak-chart.yaml
   - postgresql-chart.yaml
   - sealed-postgresql-credentials.yaml
+  - sealed-keycloak-credentials.yaml
