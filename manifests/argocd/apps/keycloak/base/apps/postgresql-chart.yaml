@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak-db
+  annotations:
+    argocd.argoproj.io/sync-wave: "12"
+spec:
+  destination:
+    namespace: keycloak
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: postgresql
+    targetRevision: 1.1.1
+    helm:
+      values: |-
+        global:
+          storageClass: local-path
+          postgresql:
+            auth:
+              username: keycloak
+              existingSecret: postgresql-credentials
+              database: keycloak
+        primary:
+          annotations: 
+            kanister.kasten.io/blueprint: postgres-bp
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true

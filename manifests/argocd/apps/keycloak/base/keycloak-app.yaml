@@ -1,80 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: keycloak
+  name: keycloak-app
   annotations:
     argocd.argoproj.io/sync-wave: "12"
+  labels:
+    gitops.type: app-of-apps
 spec:
   destination:
-    namespace: keycloak
+    namespace: argocd
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
-    repoURL: https://codecentric.github.io/helm-charts
-    chart: keycloakx
-    targetRevision: 1.1.1
-    helm:
-      values: |-
-        command:
-          - "/opt/keycloak/bin/kc.sh"
-          - "--verbose"
-          - "start"
-          - "--auto-build"
-          - "--http-enabled=true"
-          - "--proxy=edge"
-          - "--http-port=8080"
-          - "--hostname-strict=false"
-          - "--hostname-strict-https=false"
-          - "--spi-events-listener-jboss-logging-success-level=info"
-          - "--spi-events-listener-jboss-logging-error-level=warn"
-
-        extraEnv: |
-          - name: KEYCLOAK_ADMIN
-            valueFrom:
-              secretKeyRef:
-                name: {{ include "keycloak.fullname" . }}-admin-creds
-                key: user
-          - name: KEYCLOAK_ADMIN_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: {{ include "keycloak.fullname" . }}-admin-creds
-                key: password
-          - name: JAVA_OPTS_APPEND
-            value: >-
-              -XX:+UseContainerSupport
-              -XX:MaxRAMPercentage=50.0
-              -Djava.awt.headless=true
-              -Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless  
-               
-        secrets:
-          admin-creds:
-            stringData:
-              user: admin
-              password: secret
-
-        ingress:
-          enabled: true
-          ingressClassName: "nginx"
-          servicePort: http
-          annotations:
-            nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
-
-          rules:
-            - host: 'sso.janz.digital'
-              paths:
-                - path: /
-                  pathType: Prefix
-            
-            - host: 'sso.apps.hive.janz.digital'
-              paths:
-                - path: /
-                  pathType: Prefix
-          tls:
-            - hosts:
-                - 'sso.apps.hive.janz.digital'
-                - 'sso.janz.digital'
-              secretName: ""
-
+    path: manifests/argocd/apps/keycloak/base/apps
+    repoURL: https://github.com/pixeljonas/cluster-gitops.git
+    targetRevision: master
   syncPolicy:
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true

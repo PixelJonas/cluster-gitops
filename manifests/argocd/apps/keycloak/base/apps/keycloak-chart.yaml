@@ -1,0 +1,90 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+  annotations:
+    argocd.argoproj.io/sync-wave: '12'
+spec:
+  destination:
+    namespace: keycloak
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: https://codecentric.github.io/helm-charts
+    chart: keycloakx
+    targetRevision: 1.1.1
+    helm:
+      values: |-
+        command:
+          - "/opt/keycloak/bin/kc.sh"
+          - "--verbose"
+          - "start"
+          - "--auto-build"
+          - "--http-enabled=true"
+          - "--proxy=edge"
+          - "--http-port=8080"
+          - "--hostname-strict=false"
+          - "--hostname-strict-https=false"
+          - "--spi-events-listener-jboss-logging-success-level=info"
+          - "--spi-events-listener-jboss-logging-error-level=warn"
+
+        extraEnv: |
+          - name: KEYCLOAK_ADMIN
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-credentials
+                key: user
+          - name: KEYCLOAK_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-credentials
+                key: password
+          - name: KC_DB_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgresql-credentials
+                key: password
+          - name: JAVA_OPTS_APPEND
+            value: >-
+              -XX:+UseContainerSupport
+              -XX:MaxRAMPercentage=50.0
+              -Djava.awt.headless=true
+              -Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless
+
+        dbchecker:
+          enabled: true
+        
+        database:
+          vendor: postgres
+          hostname: keycloak-db-postgresql
+          port: 5432
+          username: keycloak
+          database: keycloak
+          password
+
+        ingress:
+          enabled: true
+          ingressClassName: "nginx"
+          servicePort: http
+          annotations:
+            nginx.ingress.kubernetes.io/proxy-buffer-size: 128k
+
+          rules:
+            - host: 'sso.janz.digital'
+              paths:
+                - path: /
+                  pathType: Prefix
+            
+            - host: 'sso.apps.hive.janz.digital'
+              paths:
+                - path: /
+                  pathType: Prefix
+          tls:
+            - hosts:
+                - 'sso.apps.hive.janz.digital'
+                - 'sso.janz.digital'
+              secretName: ""
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
