@@ -8,4 +8,4 @@ resources:
   - backblaze-location.yaml
   - kanister-profile.yaml
   - policy.yaml
-  - https://raw.githubusercontent.com/kanisterio/kanister/0.68.0/examples/stable/postgresql/blueprint-v2/postgres-blueprint.yaml
+  - https://raw.githubusercontent.com/kanisterio/kanister/0.76.0/examples/postgresql/blueprint-v2/postgres-blueprint.yaml
