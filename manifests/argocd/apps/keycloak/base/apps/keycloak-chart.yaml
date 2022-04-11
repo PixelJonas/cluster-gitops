@@ -60,7 +60,6 @@ spec:
           port: 5432
           username: keycloak
           database: keycloak
-          password
 
         ingress:
           enabled: true
