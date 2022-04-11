@@ -17,32 +17,40 @@ spec:
       values: |-
         command:
           - "/opt/keycloak/bin/kc.sh"
+          - "--verbose"
           - "start"
           - "--auto-build"
           - "--http-enabled=true"
+          - "--proxy=edge"
           - "--http-port=8080"
           - "--hostname-strict=false"
-          - "--hostname-strict-https=false":
-
-        postgresql:
-          global:
-            storageClass: local-path
-          primary:
-        #    annotations:
-        #      kanister.kasten.io/blueprint: postgres-bp
-            labels:
-              kanister.kasten.io/inject-sidecar: "true"
+          - "--hostname-strict-https=false"
+          - "--spi-events-listener-jboss-logging-success-level=info"
+          - "--spi-events-listener-jboss-logging-error-level=warn"
 
         extraEnv: |
-          - name: PROXY_ADDRESS_FORWARDING
-            value: "true"
           - name: KEYCLOAK_ADMIN
-            value: admin
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "keycloak.fullname" . }}-admin-creds
+                key: user
           - name: KEYCLOAK_ADMIN_PASSWORD
-            value: admin
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "keycloak.fullname" . }}-admin-creds
+                key: password
           - name: JAVA_OPTS_APPEND
             value: >-
-              -Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless          
+              -XX:+UseContainerSupport
+              -XX:MaxRAMPercentage=50.0
+              -Djava.awt.headless=true
+              -Djgroups.dns.query={{ include "keycloak.fullname" . }}-headless  
+               
+        secrets:
+          admin-creds:
+            stringData:
+              user: admin
+              password: secret
 
         ingress:
           enabled: true
