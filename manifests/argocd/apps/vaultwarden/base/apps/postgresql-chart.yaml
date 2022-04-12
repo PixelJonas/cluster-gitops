@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vaultwarden-db
+  annotations:
+    argocd.argoproj.io/sync-wave: "17"
+spec:
+  destination:
+    namespace: vaultwarden
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: postgresql
+    targetRevision: 11.1.19
+    helm:
+      values: |-
+        global:
+          storageClass: local-path
+          postgresql:
+            auth:
+              username: vaultwarden
+              existingSecret: vaultwarden-db-postgresql
+              database: vaultwarden
+        primary:
+          annotations: 
+            kanister.kasten.io/blueprint: postgres-bp
+          labels:
+            kanister.kasten.io/inject-sidecar: "true"
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true

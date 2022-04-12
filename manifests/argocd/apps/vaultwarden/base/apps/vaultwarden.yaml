@@ -16,6 +16,17 @@ spec:
     helm:
       values: |-
 
+        env:
+          - name: TZ
+            value: Europe/Berlin
+          - name: DATABASE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: vaultwarden-db-postgresql
+                key: password
+          - name: DATABASE_URL
+            value: "postgresql://vaultwarden:$DATABASE_PASSWORD@vaultwarden-db-postgresql:5432/vaultwarden"
+
         controller:
           labels:
             kanister.kasten.io/inject-sidecar: "true"
