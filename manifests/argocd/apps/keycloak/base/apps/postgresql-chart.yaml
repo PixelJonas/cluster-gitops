@@ -25,6 +25,9 @@ spec:
         primary:
           annotations: 
             kanister.kasten.io/blueprint: postgres-bp
+          labels:
+            kanister.kasten.io/inject-sidecar: "true"
+
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
