@@ -54,16 +54,8 @@ spec:
             storageClass: local-path
             accessMode: ReadWriteOnce
             size: 5Gi
-          media:
-            enabled: true
-            storageClass: nfs
-            accessMode: ReadWriteOnce
-            size: 10Gi
-          downloads:
-            enabled: true
-            storageClass: nfs
-            accessMode: ReadWriteOnce
-            size: 10Gi         
+            labels:
+              kanister.kasten.io/ignore: "true"
           sync:
             enabled: true
             storageClass: nfs
