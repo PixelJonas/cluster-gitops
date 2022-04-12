@@ -56,6 +56,18 @@ spec:
             size: 5Gi
             labels:
               kanister.kasten.io/ignore: "true"
+          media:
+            enabled: true
+            storageClass: nfs
+            accessMode: ReadWriteOnce
+            size: 10Gi
+            labels:
+              kanister.kasten.io/ignore: "true"
+          downloads:
+            enabled: true
+            storageClass: nfs
+            accessMode: ReadWriteOnce
+            size: 10Gi  
           sync:
             enabled: true
             storageClass: nfs
