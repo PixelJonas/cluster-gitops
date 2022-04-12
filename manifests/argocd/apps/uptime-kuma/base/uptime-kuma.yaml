@@ -14,12 +14,6 @@ spec:
     chart: uptime-kuma
     helm:
       values: |-
-        controller:
-          labels:
-            kanister.kasten.io/inject-sidecar: "false"
-
-        podLabels:
-          kanister.kasten.io/inject-sidecar: "false"
 
         env:
           - name: TZ
