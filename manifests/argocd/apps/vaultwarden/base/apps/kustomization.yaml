@@ -4,5 +4,6 @@ kind: Kustomization
 resources:
   - "vaultwarden.yaml"
   - "ingress-internet.yaml"
-  - postgresql-chart.yaml
-  - sealed-postgresql-credentials.yaml
+  - "postgresql-chart.yaml"
+  - "sealed-postgresql-credentials.yaml"
+  - "sealed-vaultwarden-credentials.yaml"

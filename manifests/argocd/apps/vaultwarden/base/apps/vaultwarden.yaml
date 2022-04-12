@@ -19,14 +19,18 @@ spec:
         env:
           - name: TZ
             value: Europe/Berlin
-          - name: DATABASE_PASSWORD
+
+          - name: DATABASE_URL
             valueFrom:
               secretKeyRef:
-                name: vaultwarden-db-postgresql
-                key: password
-          - name: DATABASE_URL
-            value: "postgresql://vaultwarden:$DATABASE_PASSWORD@vaultwarden-db-postgresql:5432/vaultwarden"
-
+                name: vaultwarden-credentials
+                key: db-url
+          - name: ADMIN_TOKEN
+             valueFrom:
+              secretKeyRef:
+                name: vaultwarden-credentials
+                key: admin-password
+         
         controller:
           labels:
             kanister.kasten.io/inject-sidecar: "true"
