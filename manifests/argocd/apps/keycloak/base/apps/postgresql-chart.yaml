@@ -20,7 +20,7 @@ spec:
           postgresql:
             auth:
               username: keycloak
-              existingSecret: postgresql-credentials
+              existingSecret: keycloak-db-postgresql
               database: keycloak
         primary:
           annotations: 
