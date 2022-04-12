@@ -19,14 +19,13 @@ spec:
         env:
           - name: TZ
             value: Europe/Berlin
-
           - name: DATABASE_URL
             valueFrom:
               secretKeyRef:
                 name: vaultwarden-credentials
                 key: db-url
           - name: ADMIN_TOKEN
-             valueFrom:
+            valueFrom:
               secretKeyRef:
                 name: vaultwarden-credentials
                 key: admin-password
