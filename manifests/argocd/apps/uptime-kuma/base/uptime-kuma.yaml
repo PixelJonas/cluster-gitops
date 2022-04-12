@@ -16,10 +16,10 @@ spec:
       values: |-
         controller:
           labels:
-            kanister.kasten.io/inject-sidecar: "true"
+            kanister.kasten.io/inject-sidecar: "false"
 
         podLabels:
-          kanister.kasten.io/inject-sidecar: "true"
+          kanister.kasten.io/inject-sidecar: "false"
 
         env:
           - name: TZ
