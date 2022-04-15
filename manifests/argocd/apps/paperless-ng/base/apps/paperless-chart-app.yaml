@@ -175,7 +175,7 @@ spec:
             non_blank() {
                 for i in $(seq 1 $PAGES)
                 do
-                    if [ $(convert -density 25 "$IN[$((i-1))]" -define histogram:unique-colors=true -format %c histogram:info:- | wc -l) -gt 15 ]
+                    if [ $(convert -density 25 "$IN[$((i-1))]" -define histogram:unique-colors=true -format %c histogram:info:- | wc -l) -gt 25 ]
                     then
                         echo $i
                         #echo $i 1>&2
