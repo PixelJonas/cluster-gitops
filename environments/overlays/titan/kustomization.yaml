@@ -6,7 +6,7 @@ namespace: argocd-operator-system
 bases:
   - ../../../manifests/argocd/apps/sealed-secrets-operator/private
   - ../../../manifests/argocd/apps/cert-manager/overlays/titan
-  - ../../../manifests/argocd/apps/nginx/titan
+  - ../../../manifests/argocd/apps/nginx/overlays/titan
 
 resources:
   - ./cluster-apps-project.yaml
