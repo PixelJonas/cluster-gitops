@@ -7,6 +7,9 @@ subjects:
   - kind: User
     apiGroup: rbac.authorization.k8s.io
     name: "system:serviceaccount:argocd-operator-system:argocd-argocd-application-controller"
+  - kind: User
+    apiGroup: rbac.authorization.k8s.io
+    name: "system:serviceaccount:argocd-operator-system:argocd-argocd-server"
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
