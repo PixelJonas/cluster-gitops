@@ -15,5 +15,7 @@ spec:
             - key: node-role.kubernetes.io/master
               operator: Exists
               effect: NoSchedule
+          nodeSelector:
+            node-role.kubernetes.io/master: ""
           extraArgs:
             default-ssl-certificate: "cert-manager/wildcard-apps-titan-janz-digital-tls"
