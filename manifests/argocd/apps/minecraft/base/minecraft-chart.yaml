@@ -1,0 +1,51 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: minecraft-valhelsia
+  namespace: argocd-operator-system
+spec:
+  destination:
+    namespace: minecraft-valhelsia
+    server: https://kubernetes.default.svc
+  project: cluster-apps
+  source:
+    chart: minecraft
+    repoURL: https://itzg.github.io/minecraft-server-charts/
+    targetRevision: 3.8.4
+    helm:
+      values: |-
+        minecraftServer:
+          eula: true
+          version: 1.8.1
+          type: "CURSEFORGE"
+          motd: "Avengers Minecraft Valhelsia"
+          cfServerMod: "https://media.forgecdn.net/files/3723/369/Valhelsia+Enhanced+Vanilla-1.1.2-SERVER.zip"
+          difficulty: "normal"
+          whitelist: "VoxelJonas, Kounex"
+          ops: "VoxelJonas"
+          viewDistance: 16
+          worldSaveName: "valhesia_enhanced_vanilla_01"
+          removeOldMods: true
+          onlineMode: true
+          memory: "8096M"
+          overrideServerProperties: true
+          serviceType: NodePort
+          nodePort: 30100
+          maxTickTime: -1
+
+
+        resources:
+          requests:
+            memory: "8086Mi"
+
+
+        persistence:
+          storageClass: "local-path"
+          dataDir:
+            enabled: true
+
+        extraEnv:
+          ENABLE_AUTOPAUSE: "true"
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
