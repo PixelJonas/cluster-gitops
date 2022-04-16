@@ -20,7 +20,7 @@ spec:
           - name: default
             protocol: layer2
             addresses:
-            - 192.168.1.73-192.168.1.75
+            - 192.168.1.74-192.168.1.75
 
   syncPolicy:
     syncOptions:
