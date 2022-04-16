@@ -1,11 +1,11 @@
-apiVersion: cert-manager.io/v1alpha3
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
-  name: wildcard-apps-hive-janz-digital
+  name: wildcard-apps-titan-janz-digital
 spec:
   dnsNames:
-    - "*.apps.hive.janz.digital"
-  secretName: wildcard-apps-hive-janz-digital-tls
+    - "*.apps.titan.janz.digital"
+  secretName: wildcard-apps-titan-janz-digital-tls
   issuerRef:
     name: cloudflare-issuer
     kind: ClusterIssuer
