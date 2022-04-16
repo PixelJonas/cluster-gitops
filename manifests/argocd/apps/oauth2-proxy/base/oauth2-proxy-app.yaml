@@ -3,6 +3,8 @@ kind: Application
 metadata:
   name: oauth2-proxy
   namespace: argocd
+  annotations:
+    argocd.argoproj.io/sync-wave: "35"
 spec:
   destination:
     namespace: oauth2-proxy
