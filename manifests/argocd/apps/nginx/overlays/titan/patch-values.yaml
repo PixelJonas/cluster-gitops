@@ -9,4 +9,4 @@ spec:
       values: |-
         controller:
           extraArgs:
-            default-ssl-certificate: "operators/wildcard-apps-titan-janz-digital-tls"
+            default-ssl-certificate: "cert-manager/wildcard-apps-titan-janz-digital-tls"
