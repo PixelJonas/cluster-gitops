@@ -12,16 +12,6 @@ spec:
     repoURL: "https://charts.rook.io/release"
     targetRevision: v1.9.0
     chart: rook-ceph-cluster
-    helm:
-      values: |-
-
-        cephClusterSpec:
-          placement:
-            all:
-              tolerations:
-                - key: node-role.kubernetes.io/master
-                  operator: Exists
-                  effect: "NoSchedule"
 
   project: cluster-apps
   syncPolicy:
