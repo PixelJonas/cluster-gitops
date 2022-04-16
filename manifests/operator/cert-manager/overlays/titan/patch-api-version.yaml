@@ -1,0 +1,3 @@
+- op: replace
+  path: /apiVersion
+  value: "v1/alpha3"
