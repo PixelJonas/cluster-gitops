@@ -5,6 +5,7 @@ namespace: argocd-operator-system
 
 bases:
   - ../../../manifests/argocd/apps/sealed-secrets-operator/private
+  - ../../../manifests/argocd/apps/metallb/base
   - ../../../manifests/argocd/apps/cert-manager/overlays/titan
   - ../../../manifests/argocd/apps/nginx/overlays/titan
 

@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: metallb
+  annotations:
+    argocd.argoproj.io/sync-wave: '12'
+spec:
+  destination:
+    namespace: metallb-system
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: https://metallb.github.io/metallb
+    chart: metallb/metallb
+    targetRevision: 0.12.1
+    helm:
+      values: |-
+        configInline:
+          address-pools:
+          - name: default
+            protocol: layer2
+            addresses:
+            - 192.168.1.73
+            - 192.168.1.74
+            - 192.168.1.75
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
