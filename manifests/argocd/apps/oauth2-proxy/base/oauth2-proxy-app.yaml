@@ -15,10 +15,6 @@ spec:
     helm:
       values: |-
 
-        config:
-          configFile: |-
-            email_domains = [ "gmail.com" ]
-
         extraArgs: 
           - "--scope=openid email profile"
           - "--provider=oidc"
@@ -37,9 +33,7 @@ spec:
         configuration:
           clientID: oauth2-proxy
           clientSecret: 5ee803c1-16b2-49c7-9b15-aa8e755b4b0f
-          authenticatedEmailsFile:
-            enabled: true
-            content: |-
+          content: |-
               email_domains = [ "gmail.com" ]
           
         ingress:
