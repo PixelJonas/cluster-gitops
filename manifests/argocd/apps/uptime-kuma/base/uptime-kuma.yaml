@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: uptime-kuma
   annotations:
-    argocd.argoproj.io/sync-wave: "39"
+    argocd.argoproj.io/sync-wave: "101"
 spec:
   destination:
     namespace: uptime-kuma
@@ -27,13 +27,13 @@ spec:
             ingressClassName: nginx
             pathType: Prefix
             hosts:
-              - host: status.apps.hive.janz.digital
+              - host: status.apps.titan.janz.digital
                 paths:
                   - path: /
                     pathType: Prefix
             tls:
               - hosts:
-                  - status.apps.hive.janz.digital
+                  - status.apps.titan.janz.digital
           external:
             enabled: true
             ingressClassName: nginx
