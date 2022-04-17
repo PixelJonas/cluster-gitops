@@ -45,12 +45,12 @@ spec:
           path: /
           hosts: 
            - auth.janz.digital
-           - paperless.apps.titan.janz.digital
+           - auth.apps.titan.janz.digital
           tls:
             - secretName: oauth2-proxy-tls
               hosts:
                 - auth.janz.digital
-                - paperless.apps.titan.janz.digital
+                - auth.apps.titan.janz.digital
 
     repoURL: https://oauth2-proxy.github.io/manifests
     targetRevision: 6.2.0
