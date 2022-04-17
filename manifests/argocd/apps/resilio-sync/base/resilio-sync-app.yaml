@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: resilio-sync
   annotations:
-    argocd.argoproj.io/sync-wave: "21"
+    argocd.argoproj.io/sync-wave: "101"
 spec:
   destination:
     namespace: resilio-sync
@@ -20,6 +20,7 @@ spec:
           TZ: Europe/Berlin
           PUID: "1500"
           PGID: "1500"
+
         controller:
           labels:
             kanister.kasten.io/inject-sidecar: "true"

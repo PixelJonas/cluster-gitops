@@ -10,6 +10,7 @@ bases:
   - ../../../manifests/argocd/apps/nfs-provisioner/base
   - ../../../manifests/argocd/apps/oauth2-proxy/base
   - ../../../manifests/argocd/apps/notes/base
+  - ../../../manifests/argocd/apps/resilio-sync/base
 
   - ../../../manifests/argocd/apps/sealed-secrets-operator/private
 
