@@ -17,4 +17,8 @@ spec:
           value: "ceph-filesystem"
         - name: persistence.media.storageClass
           value: "ceph-filesystem"
+        - name: ingress.main.hosts[0].host
+          value: paperless.apps.titan.janz.digital
+        - name: ingress.main.tls[0].hosts[0]
+          value: paperless.apps.titan.janz.digital
         
