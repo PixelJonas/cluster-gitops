@@ -23,7 +23,7 @@ spec:
         config:
           configFile: |-
             email_domains = [ "gmail.com" ]
-        
+
         extraArgs:
           scope: "openid email profile"
           provider: oidc
@@ -44,14 +44,15 @@ spec:
           path: /
           hosts: 
            - auth.janz.digital
+           - paperless.apps.titan.janz.digital
           tls:
             - secretName: oauth2-proxy-tls
               hosts:
                 - auth.janz.digital
+                - paperless.apps.titan.janz.digital
 
-         
     repoURL: https://oauth2-proxy.github.io/manifests
     targetRevision: 6.2.0
   syncPolicy:
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
