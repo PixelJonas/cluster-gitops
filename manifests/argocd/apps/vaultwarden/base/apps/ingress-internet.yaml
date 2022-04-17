@@ -4,7 +4,7 @@ metadata:
   name: vaultwarden-internet
   namespace: vaultwarden
   annotations:
-    argocd.argoproj.io/sync-wave: "39"
+    argocd.argoproj.io/sync-wave: "111"
 spec:
   ingressClassName: nginx
   rules:
