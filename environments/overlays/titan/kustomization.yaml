@@ -4,16 +4,19 @@ kind: Kustomization
 namespace: argocd-operator-system
 
 bases:
-  - ../../../manifests/argocd/apps/sealed-secrets-operator/private
+  - ../../../manifests/argocd/apps/homeassistant-db/base
   - ../../../manifests/argocd/apps/metallb/base
-  - ../../../manifests/argocd/apps/cert-manager/overlays/titan
   - ../../../manifests/argocd/apps/rook/base
+  - ../../../manifests/argocd/apps/oauth2-proxy/base
+
+  - ../../../manifests/argocd/apps/sealed-secrets-operator/private
+
+  - ../../../manifests/argocd/apps/cert-manager/overlays/titan
   - ../../../manifests/argocd/apps/nginx/overlays/titan
   - ../../../manifests/argocd/apps/k10/overlays/titan
   - ../../../manifests/argocd/apps/keycloak/overlays/titan
-  - ../../../manifests/argocd/apps/oauth2-proxy/base
   - ../../../manifests/argocd/apps/vaultwarden/overlays/titan
-  - ../../../manifests/argocd/apps/homeassistant-db/base
+  - ../../../manifests/argocd/apps/paperless-ng/overlays/titan
 
 resources:
   - ./cluster-apps-project.yaml

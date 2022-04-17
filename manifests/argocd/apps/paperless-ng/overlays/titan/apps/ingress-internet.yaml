@@ -1,0 +1,26 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: paperless-ng-internet
+
+  namespace: paperless
+  annotations:
+    nginx.ingress.kubernetes.io/auth-signin: https://auth.janz.digital/oauth2/start?rd=https://$best_http_host$request_uri
+    nginx.ingress.kubernetes.io/auth-url: https://auth.janz.digital/oauth2/auth
+    nginx.ingress.kubernetes.io/proxy-body-size: 50m
+    argocd.argoproj.io/sync-wave: "111"
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: paperless.janz.digital
+    http:
+      paths:
+      - backend:
+          service:
+            name: paperless-ng
+            port:
+              number: 8000
+        path: /
+        pathType: Prefix
+
+
