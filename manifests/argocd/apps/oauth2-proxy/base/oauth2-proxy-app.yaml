@@ -39,6 +39,7 @@ spec:
           pass-authorization-header: true
 
         ingress:
+          className: nginx
           enabled: true
           path: /
           hosts: 
@@ -48,8 +49,7 @@ spec:
               hosts:
                 - auth.janz.digital
 
-          ingressClassName: nginx
-          
+         
     repoURL: https://oauth2-proxy.github.io/manifests
     targetRevision: 6.2.0
   syncPolicy:
