@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: keycloak-app
   annotations:
-    argocd.argoproj.io/sync-wave: "12"
+    argocd.argoproj.io/sync-wave: "41"
   labels:
     gitops.type: app-of-apps
 spec:

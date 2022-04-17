@@ -10,6 +10,7 @@ bases:
   - ../../../manifests/argocd/apps/rook/base
   - ../../../manifests/argocd/apps/nginx/overlays/titan
   - ../../../manifests/argocd/apps/k10/overlays/titan
+  - ../../../manifests/argocd/apps/keycloak/overlays/titan
 
 resources:
   - ./cluster-apps-project.yaml
