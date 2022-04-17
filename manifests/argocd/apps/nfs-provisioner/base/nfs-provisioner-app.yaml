@@ -17,7 +17,7 @@ spec:
           path: /configs
           reclaimPolicy: Retain
           mountOptions: 
-            - "nfsvers=4.2"
+            - "nfsvers=4"
 
         storageClass:
           defaultClass: false
