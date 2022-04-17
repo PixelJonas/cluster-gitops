@@ -9,6 +9,7 @@ bases:
   - ../../../manifests/argocd/apps/cert-manager/overlays/titan
   - ../../../manifests/argocd/apps/rook/base
   - ../../../manifests/argocd/apps/nginx/overlays/titan
+  - ../../../manifests/argocd/apps/k10/overlays/titan
 
 resources:
   - ./cluster-apps-project.yaml
