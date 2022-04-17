@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: mariadb-homeassistant-config
   annotations:
-    argocd.argoproj.io/sync-wave: "31"
+    argocd.argoproj.io/sync-wave: "101"
 spec:
   destination:
     namespace: mariadb-homeassistant

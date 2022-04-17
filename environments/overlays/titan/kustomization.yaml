@@ -12,6 +12,7 @@ bases:
   - ../../../manifests/argocd/apps/k10/overlays/titan
   - ../../../manifests/argocd/apps/keycloak/overlays/titan
   - ../../../manifests/argocd/apps/oauth2-proxy/base
+  - ../../../manifests/argocd/apps/mariadb-homeassistant/base
 
 resources:
   - ./cluster-apps-project.yaml
