@@ -32,7 +32,6 @@ spec:
           oidc-issuer-url: https://sso.janz.digital/auth/realms/janz
           upstream: static://200
           cookie-domain: 
-          cookie-name: _oauth2_proxy
           whitelist-domain: .janz.digital
           reverse-proxy: true
           set-xauthrequest: true
