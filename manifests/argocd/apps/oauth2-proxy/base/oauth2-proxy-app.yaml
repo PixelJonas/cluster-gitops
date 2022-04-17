@@ -31,7 +31,8 @@ spec:
           client-secret: 5ee803c1-16b2-49c7-9b15-aa8e755b4b0f
           oidc-issuer-url: https://sso.janz.digital/auth/realms/janz
           upstream: static://200
-          cookie-domain: .janz.digital
+          cookie-domain: 
+          cookie-name: _oauth2_proxy
           whitelist-domain: .janz.digital
           reverse-proxy: true
           set-xauthrequest: true
