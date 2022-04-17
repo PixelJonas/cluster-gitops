@@ -11,6 +11,7 @@ bases:
   - ../../../manifests/argocd/apps/nginx/overlays/titan
   - ../../../manifests/argocd/apps/k10/overlays/titan
   - ../../../manifests/argocd/apps/keycloak/overlays/titan
+  - ../../../manifests/argocd/apps/oauth2-proxy/base
 
 resources:
   - ./cluster-apps-project.yaml

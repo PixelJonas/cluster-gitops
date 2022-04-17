@@ -42,12 +42,10 @@ spec:
           enabled: true
           path: /
           hosts: 
-           - auth.apps.hive.janz.digital
            - auth.janz.digital
           tls:
             - secretName: oauth2-proxy-tls
               hosts:
-                - auth.apps.hive.janz.digital
                 - auth.janz.digital
 
           ingressClassName: nginx
