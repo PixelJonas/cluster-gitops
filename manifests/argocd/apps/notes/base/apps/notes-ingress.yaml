@@ -4,10 +4,11 @@ metadata:
   name: notes
   namespace: notes
   annotations:
+    argocd.argoproj.io/sync-wave: "111"
 spec:
   ingressClassName: nginx
   rules:
-    - host: notes.apps.hive.janz.digital
+    - host: notes.apps.titan.janz.digital
       http:
         paths:
           - backend:
@@ -29,4 +30,4 @@ spec:
             pathType: Prefix
   tls:
     - hosts:
-        - notes.apps.hive.janz.digital
+        - notes.apps.titan.janz.digital
