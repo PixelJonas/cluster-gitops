@@ -35,7 +35,7 @@ spec:
             ingressClassName: nginx
             pathType: Prefix
             hosts:
-              - host: snyc.apps.hive.janz.digital
+              - host: snyc.apps.titan.janz.digital
                 paths:
                   - path: /
                     pathType: Prefix
@@ -45,13 +45,13 @@ spec:
                     pathType: Prefix
             tls:
               - hosts:
-                  - sync.apps.hive.janz.digital             
+                  - sync.apps.titan.janz.digital             
                   - sync.janz.digital
 
         persistence:
           config:
             enabled: true
-            storageClass: local-path
+            storageClass: ceph-filesystem
             accessMode: ReadWriteOnce
             size: 5Gi
             labels:

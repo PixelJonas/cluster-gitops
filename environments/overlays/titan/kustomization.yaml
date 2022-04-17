@@ -7,6 +7,7 @@ bases:
   - ../../../manifests/argocd/apps/homeassistant-db/base
   - ../../../manifests/argocd/apps/metallb/base
   - ../../../manifests/argocd/apps/rook/base
+  - ../../../manifests/argocd/apps/nfs-provisioner/base
   - ../../../manifests/argocd/apps/oauth2-proxy/base
   - ../../../manifests/argocd/apps/notes/base
 

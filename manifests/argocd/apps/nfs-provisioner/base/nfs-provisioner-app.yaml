@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: nfs-provisioner
   annotations:
-    argocd.argoproj.io/sync-wave: "11"
+    argocd.argoproj.io/sync-wave: "30"
 spec:
   project: cluster-config
   source:
@@ -12,6 +12,7 @@ spec:
     targetRevision: 4.0.16
     helm:
       values: |-
+
         nfs:
           server: 192.168.1.112
           path: /configs
