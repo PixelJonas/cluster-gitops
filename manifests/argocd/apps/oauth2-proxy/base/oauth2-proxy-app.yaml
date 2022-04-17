@@ -48,16 +48,8 @@ spec:
           hostname: auth.apps.titan.janz.digital
           path: /
           extraHosts: 
-            - host: auth.janz.digital
-              http:
-                paths:
-                  - backend:
-                      service:
-                        name: oauth2-proxy
-                        port:
-                          number: 80
-                    path: /
-                    pathType: ImplementationSpecific
+            - name: auth.janz.digital
+              path: /
 
           extraTls:
             - secretName: oauth2-proxy-tls
