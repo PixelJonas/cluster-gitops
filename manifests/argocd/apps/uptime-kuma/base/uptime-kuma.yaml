@@ -50,7 +50,7 @@ spec:
         persistence:
           data:
             enabled: true
-            storageClass: local-path
+            storageClass: ceph-filesystem
             size: 3Gi
             accessMode: ReadWriteOnce
 
