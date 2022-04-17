@@ -3,7 +3,7 @@ kind: Application
 metadata:
   name: k10-config-app
   annotations:
-    argocd.argoproj.io/sync-wave: "15"
+    argocd.argoproj.io/sync-wave: "33"
 spec:
   destination:
     namespace: kasten-io
