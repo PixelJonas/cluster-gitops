@@ -4,13 +4,13 @@ kind: Kustomization
 namespace: argocd-operator-system
 
 bases:
-  - ../../../manifests/argocd/apps/homeassistant-db/base
+  #- ../../../manifests/argocd/apps/homeassistant-db/base
   - ../../../manifests/argocd/apps/metallb/base
   - ../../../manifests/argocd/apps/rook/base
   - ../../../manifests/argocd/apps/nfs-provisioner/base
-  - ../../../manifests/argocd/apps/oauth2-proxy/base
+  #- ../../../manifests/argocd/apps/oauth2-proxy/base
   - ../../../manifests/argocd/apps/notes/base
-  - ../../../manifests/argocd/apps/resilio-sync/base
+  #- ../../../manifests/argocd/apps/resilio-sync/base
   - ../../../manifests/argocd/apps/uptime-kuma/base
 
   - ../../../manifests/argocd/apps/sealed-secrets-operator/private
@@ -18,9 +18,9 @@ bases:
   - ../../../manifests/argocd/apps/cert-manager/overlays/titan
   - ../../../manifests/argocd/apps/nginx/overlays/titan
   - ../../../manifests/argocd/apps/k10/overlays/titan
-  - ../../../manifests/argocd/apps/keycloak/overlays/titan
-  - ../../../manifests/argocd/apps/vaultwarden/overlays/titan
-  - ../../../manifests/argocd/apps/paperless-ng/overlays/titan
+  #- ../../../manifests/argocd/apps/keycloak/overlays/titan
+  #- ../../../manifests/argocd/apps/vaultwarden/overlays/titan
+  #- ../../../manifests/argocd/apps/paperless-ng/overlays/titan
 
 resources:
   - ./cluster-apps-project.yaml
