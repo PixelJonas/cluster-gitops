@@ -5,6 +5,12 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "31"
 spec:
+  ignoreDifferences:
+    - group: ceph.rook.io
+      kind: CephCluster
+      name: rook-ceph
+      jsonPointers:
+        - /spec/monitoring/createPrometheusRules
   destination:
     namespace: rook-ceph
     server: "https://kubernetes.default.svc"
