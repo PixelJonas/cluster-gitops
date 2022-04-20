@@ -8,9 +8,9 @@ metadata:
 spec:
   destination:
     namespace: vaultwarden
-    server: 'https://kubernetes.default.svc'
+    server: "https://kubernetes.default.svc"
   source:
-    repoURL: 'https://k8s-at-home.com/charts/'
+    repoURL: "https://k8s-at-home.com/charts/"
     targetRevision: 4.1.0
     chart: vaultwarden
     helm:
@@ -39,6 +39,8 @@ spec:
 
         ingress:
           main:
+            annotations:
+              nginx.ingress.kubernetes.io/proxy-body-size: 500m
             enabled: true
             ingressClassName: nginx
             pathType: Prefix
