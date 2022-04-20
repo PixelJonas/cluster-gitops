@@ -5,6 +5,7 @@ metadata:
   namespace: vaultwarden
   annotations:
     argocd.argoproj.io/sync-wave: "111"
+    nginx.ingress.kubernetes.io/proxy-body-size: 500m
 spec:
   ingressClassName: nginx
   rules:
