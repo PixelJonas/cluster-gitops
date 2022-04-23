@@ -25,10 +25,31 @@ spec:
         cephClusterSpec:
           dashboard:
             enabled: true
-        resources:
-          requests:
-            cpu: "100m"
-            memory: "512Mi"
+          mgr:
+            limits:
+              cpu: "1"
+              memory: "1024Mi"
+            requests:
+              cpu: "250m"
+              memory: "1024Mi"
+          mon:
+            limits:
+              cpu: "1"
+              memory: "1024Mi"
+            requests:
+              cpu: "250m"
+              memory: "1024Mi"
+          osd:
+            limits:
+              cpu: "1"
+              memory: "2048Mi"
+            requests:
+              cpu: "250m"
+              memory: "1024Mi"
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "512Mi"
   project: cluster-apps
   syncPolicy:
     syncOptions:
