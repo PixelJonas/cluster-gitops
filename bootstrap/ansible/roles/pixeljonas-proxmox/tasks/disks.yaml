@@ -18,8 +18,7 @@
     src: "{{ item.diskbyid }}"
     fstype: "{{ item.fs }}"
     opts: "{{ item.opts }}"
-    # change to 'mounted' to auto mount
-    state: present
+    state: mounted
   with_items:
     - "{{ snapraid_parity_disks }}"
     - "{{ snapraid_data_disks }}"
@@ -33,7 +32,6 @@
     src: "{{ item.source }}"
     opts: "{{ item.opts }}"
     fstype: "{{ item.fs }}"
-    # change to 'mounted' to auto mount
-    state: present
+    state: mounted
   with_items:
     - "{{ fstab_mergerfs }}"

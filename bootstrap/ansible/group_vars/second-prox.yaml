@@ -1,0 +1,15 @@
+proxmox_main_storage_path: /mnt/storage
+hostname_proxmox: vormir
+
+security_sudoers_passwordless: ["jonas"]
+
+
+extra_mountpoints:
+  - { path: "{{ proxmox_main_storage_path }}" }
+  - {
+      path: /mnt/data,
+      diskbyid: /dev/disk/by-id/ata-CT1000MX500SSD1_2208E60E12A0-part1,
+      fs: ext4,
+      opts: defaults,
+      content: true,
+    }

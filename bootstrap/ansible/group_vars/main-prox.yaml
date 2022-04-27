@@ -20,6 +20,49 @@ extra_mountpoints:
       content: true,
     }
 
+nfs_exports:
+  - "/srv/nfs4     192.168.1.0/255.255.255.0(rw,sync,no_subtree_check,crossmnt,no_root_squash,fsid=0)"
+
+samba_shares:
+  - name: documents
+    comment: "Import folder for scanned documents"
+    path: "{{ proxmox_main_storage_path }}/documents"
+    read_only: false
+    guest_ok: false
+    create_mode: 0664
+    group: media
+    owner: printer
+    write_list: "@media"
+
+  - name: andrew
+    comment: "Share for Andrew"
+    path: "{{ proxmox_main_storage_path }}/andrew"
+    read_only: false
+    guest_ok: false
+    create_mode: 0664
+    owner: andrew
+    write_list: "andrew"
+
+  - name: jonas
+    comment: "Share for jonas"
+    path: "{{ proxmox_main_storage_path }}/jonas"
+    read_only: false
+    guest_ok: false
+    create_mode: 0664
+    owner: jonas
+    write_list: "jonas"
+
+samba_users:
+  - name: jonas
+    group: media
+    password: "{{ vault_samba_jonas_password }}"
+  - name: andrew
+    group: media
+    password: "{{ vault_samba_andrew_password }}"
+  - name: printer
+    group: media
+    password: "{{ vault_samba_printer_password }}"
+
 # ironicbadger.snapraid
 snapraid_bin_path: /usr/bin/snapraid
 snapraid_install: true

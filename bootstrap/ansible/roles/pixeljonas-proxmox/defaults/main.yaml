@@ -1,1 +1,5 @@
 hostname_proxmox: pve
+
+snapraid_parity_disks: []
+snapraid_data_disks: []
+fstab_mergerfs: []
