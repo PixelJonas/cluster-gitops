@@ -2,7 +2,6 @@ apiVersion: apps/v1
 kind: DaemonSet
 metadata:
   name: ovirt-guest-agent
-  namespace: openshift-ovirt-infra
 spec:
   selector:
     matchLabels:
