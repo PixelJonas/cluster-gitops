@@ -12,7 +12,7 @@ bases:
   - ../../../manifests/argocd/apps/notes/base
   - ../../../manifests/argocd/apps/resilio-sync/base
   - ../../../manifests/argocd/apps/uptime-kuma/base
-
+  - ../../../manifests/argocd/apps/qemu-guest-agent/base
   - ../../../manifests/argocd/apps/sealed-secrets-operator/private
 
   - ../../../manifests/argocd/apps/cert-manager/overlays/titan
