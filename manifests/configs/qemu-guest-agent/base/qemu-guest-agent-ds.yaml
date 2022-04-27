@@ -52,4 +52,3 @@ spec:
         - key: node.kubernetes.io/memory-pressure
           operator: Exists
           effect: NoSchedule
-          apiVersion: apps/v1
