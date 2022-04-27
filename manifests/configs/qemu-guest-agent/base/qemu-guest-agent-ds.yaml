@@ -18,8 +18,8 @@ spec:
             type: ''
       containers:
         - name: ovirt-guest-agent
-          #image: docker.io/eleh/qemu-guest-agent
-          image: registry.access.redhat.com/rhev4/ovirt-guest-agent
+          image: docker.io/eleh/qemu-guest-agent
+          #image: registry.access.redhat.com/rhev4/ovirt-guest-agent
           resources: {}
           volumeMounts:
             - name: virtio-ports
