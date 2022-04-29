@@ -10,7 +10,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: "https://charts.rook.io/release"
-    targetRevision: v1.9.1
+    targetRevision: v1.9.2
     chart: rook-ceph
   project: cluster-apps
   syncPolicy:
