@@ -8,7 +8,7 @@ metadata:
     gitops.type: app-of-apps
 spec:
   destination:
-    namespace: argocd
+    namespace: argocd-operator-system
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
