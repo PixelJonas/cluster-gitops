@@ -8,13 +8,13 @@ bases:
   - ../../../manifests/argocd/apps/metallb/base
   - ../../../manifests/argocd/apps/rook/base
   - ../../../manifests/argocd/apps/nfs-provisioner/base
-  - ../../../manifests/argocd/apps/oauth2-proxy/base
   - ../../../manifests/argocd/apps/notes/base
   - ../../../manifests/argocd/apps/resilio-sync/base
   - ../../../manifests/argocd/apps/uptime-kuma/base
   - ../../../manifests/argocd/apps/qemu-guest-agent/base
   - ../../../manifests/argocd/apps/sealed-secrets-operator/private
 
+  - ../../../manifests/argocd/apps/oauth2-proxy/overlays/titan
   - ../../../manifests/argocd/apps/cert-manager/overlays/titan
   - ../../../manifests/argocd/apps/nginx/overlays/titan
   - ../../../manifests/argocd/apps/k10/overlays/titan
