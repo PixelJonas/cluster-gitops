@@ -1,0 +1,13 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: oauth2-proxy
+  namespace: argocd
+spec:
+  source:
+    helm:
+      parameters:
+        - name: redis.auth.existingSecret
+          value: "redis-credentials"
+        - name: redis.auth.existingSecretPasswordKey
+          value: "redis-password"

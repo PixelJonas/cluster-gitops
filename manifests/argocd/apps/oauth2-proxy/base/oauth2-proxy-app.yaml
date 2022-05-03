@@ -1,58 +1,20 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: oauth2-proxy
-  namespace: argocd
+  name: oauth2-proxy-app
   annotations:
     argocd.argoproj.io/sync-wave: "61"
+  labels:
+    gitops.type: app-of-apps
 spec:
   destination:
-    namespace: oauth2-proxy
+    namespace: argocd
     server: https://kubernetes.default.svc
-  project: cluster-apps
+  project: cluster-config
   source:
-    chart: oauth2-proxy
-    helm:
-      values: |-
-
-        extraArgs: 
-          - "--scope=openid email profile"
-          - "--provider=oidc"
-          - "--client-id=oauth2-proxy"
-          - "--client-secret=5ee803c1-16b2-49c7-9b15-aa8e755b4b0f"
-          - "--oidc-issuer-url=https://sso.janz.digital/auth/realms/janz"
-          - "--upstream=static://200"
-          - "--cookie-domain=.janz.digital"
-          - "--whitelist-domain=.janz.digital"
-          - "--reverse-proxy=true"
-          - "--set-xauthrequest=true"
-          - "--pass-user-headers=true"
-          - "--pass-authorization-header=true"
-
-
-        configuration:
-          clientID: oauth2-proxy
-          clientSecret: 5ee803c1-16b2-49c7-9b15-aa8e755b4b0f
-          content: |-
-              email_domains = [ "gmail.com" ]
-          
-        ingress:
-          ingressClassName: nginx
-          enabled: true
-          hostname: auth.apps.titan.janz.digital
-          path: /
-          extraHosts: 
-            - name: auth.janz.digital
-              path: /
-
-          extraTls:
-            - secretName: oauth2-proxy-tls
-              hosts:
-                - auth.janz.digital
-                - auth.apps.titan.janz.digital
-
-    repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 2.0.20
+    path: manifests/argocd/apps/oauth2-proxy/base/apps
+    repoURL: https://github.com/pixeljonas/cluster-gitops.git
+    targetRevision: master
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
