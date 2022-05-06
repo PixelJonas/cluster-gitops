@@ -62,10 +62,9 @@ spec:
               smtp {
                 host = "smtp.strato.de"
                 port = 465
-                user = ${SHARRY_SMTP_USERNAME}
-                password = ${SHARRY_SMTP_PASSWORD}
+                user = "${SHARRY_SMTP_USERNAME}"
+                password = "${SHARRY_SMTP_PASSWORD}"
                 ssl-type = "ssl"
-
               }
             }
             webapp {
@@ -75,9 +74,9 @@ spec:
             }
             backend {
               jdbc {
-                url = jdbc:postgresql://sharry-db-postgresql:5432/sharry
-                user = sharry
-                password = ${POSTGRESQL_PASSWORD}
+                url = "jdbc:postgresql://sharry-db-postgresql:5432/sharry"
+                user = "sharry"
+                password = "${POSTGRESQL_PASSWORD}"
               }
               signup {
                 mode = "invite"
