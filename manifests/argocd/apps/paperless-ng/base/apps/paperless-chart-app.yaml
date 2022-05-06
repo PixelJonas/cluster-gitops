@@ -209,7 +209,7 @@ spec:
           PAPERLESS_TIKA_ENABLED: 1
           PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://localhost:3000
           PAPERLESS_TIKA_ENDPOINT: http://localhost:9998
-          PAPERLESS_POST_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/pdf_rm_blank.sh
+          PAPERLESS_PRE_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/pdf_rm_blank.sh
           USERMAP_UID: 1500
           USERMAP_GID: 1500
 
