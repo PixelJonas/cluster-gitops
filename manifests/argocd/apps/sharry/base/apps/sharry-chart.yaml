@@ -118,7 +118,7 @@ spec:
         ingress:
           main:
             annotations:
-              nginx.ingress.kubernetes.io/proxy-body-size: 500m
+              nginx.ingress.kubernetes.io/proxy-body-size: 1500m
             enabled: true
             ingressClassName: nginx
             pathType: Prefix
