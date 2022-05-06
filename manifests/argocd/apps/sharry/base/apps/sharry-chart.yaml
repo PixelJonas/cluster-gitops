@@ -75,7 +75,7 @@ spec:
             backend {
               jdbc {
                 url = "jdbc:postgresql://sharry-db-postgresql:5432/sharry"
-                user = "sharry"
+                user = "postgres"
                 password = "${POSTGRESQL_PASSWORD}"
               }
               signup {
