@@ -16,6 +16,9 @@ spec:
     helm:
       values: |-
 
+        image:
+          tag: v0.2.0
+
         env:
           - name: TZ
             value: Europe/Berlin
