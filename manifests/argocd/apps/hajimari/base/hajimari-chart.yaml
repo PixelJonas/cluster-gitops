@@ -1,0 +1,65 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+  name: hajimari
+  namespace: argocd-operator-system
+spec:
+  destination:
+    namespace: hajimari
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://hajimari.io"
+    targetRevision: 1.2.0
+    chart: hajimari
+    helm:
+      values: |-
+
+        env:
+          - name: TZ
+            value: Europe/Berlin
+
+        title: "Janz"
+         
+        controller:
+          labels:
+            kanister.kasten.io/inject-sidecar: "true"
+
+        podLabels:
+          kanister.kasten.io/inject-sidecar: "true"
+
+        ingress:
+          main:
+            annotations:
+              nginx.ingress.kubernetes.io/auth-signin: https://auth.janz.digital/oauth2/start?rd=https://$best_http_host$request_uri
+              nginx.ingress.kubernetes.io/auth-url: https://auth.janz.digital/oauth2/auth
+            enabled: true
+            ingressClassName: nginx
+            pathType: Prefix
+            hosts:
+              - host: start.apps.titan.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+              - host: start.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+            tls:
+              - hosts:
+                  - start.apps.titan.janz.digital
+                  - start.janz.digital
+        persistence:
+          data:
+            enabled: true
+            storageClass: ceph-filesystem
+            size: 3Gi
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
