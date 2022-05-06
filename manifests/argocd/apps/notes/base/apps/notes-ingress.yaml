@@ -5,10 +5,6 @@ metadata:
   namespace: notes
   annotations:
     argocd.argoproj.io/sync-wave: "111"
-    hajimari.io/enable: "true"
-    hajimari.io/appName: "Notes"
-    hajimari.io/group: "Productivity"
-    hajimari.io/icon: "notebook-heart"
 spec:
   ingressClassName: nginx
   rules:
