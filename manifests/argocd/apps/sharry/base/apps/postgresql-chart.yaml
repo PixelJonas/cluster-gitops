@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: sharry-db
+  namespace: argocd-operator-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "101"
+spec:
+  destination:
+    namespace: sharry
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: postgresql
+    targetRevision: 11.1.28
+    helm:
+      values: |-
+        global:
+          storageClass: ceph-block
+          postgresql:
+            auth:
+              username: sharry
+              existingSecret: sharry-db-postgresql
+              database: sharry
+        primary:
+          annotations: 
+            kanister.kasten.io/blueprint: postgres-bp
+          labels:
+            kanister.kasten.io/inject-sidecar: "true"
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

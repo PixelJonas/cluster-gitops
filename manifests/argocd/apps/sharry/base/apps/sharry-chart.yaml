@@ -1,0 +1,146 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+  name: sharry
+  namespace: argocd-operator-system
+spec:
+  destination:
+    namespace: sharry
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://k8s-at-home.com/charts/"
+    targetRevision: 5.3.1
+    chart: sharry
+    helm:
+      values: |-
+
+        env:
+          - name: TZ
+            value: Europe/Berlin
+          - name: POSTGRESQL_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sharry-db-postgresql
+                key: password
+          - name: SHARRY_OAUTH_CLIENT_SECRET
+            valueFrom:
+              secretKeyRef:
+                name: sharry-credentials
+                key: client-secret
+          - name: SHARRY_ADMIN_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sharry-credentials
+                key: admin-password
+          - name: SHARRY_INVITE_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sharry-credentials
+                key: invite-password
+          - name: SHARRY_SMTP_USERNAME
+            valueFrom:
+              secretKeyRef:
+                name: sharry-credentials
+                key: smtp-username
+          - name: SHARRY_SMTP_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: sharry-credentials
+                key: smtp-password
+
+        config: |
+          sharry.restserver {
+            base-url = "https://share.janz.digital"
+            bind {
+              address = "0.0.0.0"
+              port = {{ .Values.service.main.ports.http.port }}
+            }
+            mail {
+              enabled = true
+              smtp {
+                host = "smtp.strato.de"
+                port = 465
+                user = ${SHARRY_SMTP_USERNAME}
+                password = ${SHARRY_SMTP_PASSWORD}
+                ssl-type = "ssl"
+
+              }
+            }
+            webapp {
+              app-name = "Janz Share"
+              default-language = "de"
+              initial-theme = "dark"
+            }
+            backend {
+              jdbc {
+                url = jdbc:postgresql://sharry-db-postgresql:5432/sharry
+                user = sharry
+                password = ${POSTGRESQL_PASSWORD}
+              }
+              signup {
+                mode = "invite"
+                invite-password = "${SHARRY_INVITE_PASSWORD}"
+                invite-time = "7 days"
+              }
+              auth {
+                oauth = [
+                  {
+                    enabled = true
+                    id = "janz"
+                    name = "Janz SSO"
+                    icon = "fab fa-key"
+                    authorize-url = "https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/auth"
+                    token-url = "https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/token"
+                    user-url = "https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/userinfo"
+                    user-id-key = "preferred_username"
+                    client-id = "sharry"
+                    client-secret = "${SHARRY_OAUTH_CLIENT_SECRET}"
+                  }
+                ]
+                fixed {
+                  enabled = true
+                  user = "admin"
+                  password = "${SHARRY_ADMIN_PASSWORD}"
+                  order = 10
+                }
+              }
+            }
+          }
+         
+        controller:
+          labels:
+            kanister.kasten.io/inject-sidecar: "true"
+
+        podLabels:
+          kanister.kasten.io/inject-sidecar: "true"
+
+        ingress:
+          main:
+            annotations:
+              nginx.ingress.kubernetes.io/proxy-body-size: 500m
+            enabled: true
+            ingressClassName: nginx
+            pathType: Prefix
+            hosts:
+              - host: sharry.apps.titan.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+              - host: share.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+            tls:
+              - hosts:
+                  - sharry.apps.titan.janz.digital
+                  - share.janz.digital
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
