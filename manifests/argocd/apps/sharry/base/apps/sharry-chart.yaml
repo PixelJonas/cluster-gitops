@@ -23,7 +23,7 @@ spec:
             valueFrom:
               secretKeyRef:
                 name: sharry-db-postgresql
-                key: password
+                key: postgres-password
           - name: SHARRY_OAUTH_CLIENT_SECRET
             valueFrom:
               secretKeyRef:
