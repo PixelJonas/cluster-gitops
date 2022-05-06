@@ -54,6 +54,7 @@ spec:
           data:
             enabled: true
             storageClass: ceph-filesystem
+            accessMode: ReadWriteOnce
             size: 3Gi
 
   project: cluster-apps
