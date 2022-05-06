@@ -62,8 +62,8 @@ spec:
               smtp {
                 host = "smtp.strato.de"
                 port = 465
-                user = "${SHARRY_SMTP_USERNAME}"
-                password = "${SHARRY_SMTP_PASSWORD}"
+                user = ${SHARRY_SMTP_USERNAME}
+                password = ${SHARRY_SMTP_PASSWORD}
                 ssl-type = "ssl"
               }
             }
@@ -76,11 +76,11 @@ spec:
               jdbc {
                 url = "jdbc:postgresql://sharry-db-postgresql:5432/sharry"
                 user = "postgres"
-                password = "${POSTGRESQL_PASSWORD}"
+                password = ${POSTGRESQL_PASSWORD}
               }
               signup {
                 mode = "invite"
-                invite-password = "${SHARRY_INVITE_PASSWORD}"
+                invite-password = ${SHARRY_INVITE_PASSWORD}
                 invite-time = "7 days"
               }
               auth {
@@ -95,13 +95,13 @@ spec:
                     user-url = "https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/userinfo"
                     user-id-key = "preferred_username"
                     client-id = "sharry"
-                    client-secret = "${SHARRY_OAUTH_CLIENT_SECRET}"
+                    client-secret = ${SHARRY_OAUTH_CLIENT_SECRET}
                   }
                 ]
                 fixed {
                   enabled = true
                   user = "admin"
-                  password = "${SHARRY_ADMIN_PASSWORD}"
+                  password = ${SHARRY_ADMIN_PASSWORD}
                   order = 10
                 }
               }
