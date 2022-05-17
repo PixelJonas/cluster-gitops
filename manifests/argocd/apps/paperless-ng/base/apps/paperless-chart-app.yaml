@@ -155,10 +155,7 @@ spec:
             DOCUMENT_FILE_NAME=${1}
 
             echo "
-            A document with an id of ${DOCUMENT_ID} was just consumed.
-            * Source Path: ${DOCUMENT_SOURCE_PATH}
-            * File Name: ${DOCUMENT_FILE}
-            * Archive Path: ${DOCUMENT_ARCHIVE_PATH}
+            Document ${DOCUMENT_ID} was just consumed.
             "
 
             IN="$DOCUMENT_FILE_NAME"
@@ -182,7 +179,7 @@ spec:
             pdftk $IN cat $(non_blank) output $OUT
             rm out.tmp
             mv $OUT $IN
-            echo "finishing removing blank pages from $IN saved file to $OUT"
+            echo "finishing removing blank pages from $IN"
 
         env:
           # -- Project name
