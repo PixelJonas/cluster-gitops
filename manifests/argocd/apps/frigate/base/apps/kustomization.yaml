@@ -3,4 +3,4 @@ kind: Kustomization
 
 resources:
   - frigate-helm-app.yaml
-  - frigate-config-app.yaml
+  - sealed-frigate-secrets.yaml

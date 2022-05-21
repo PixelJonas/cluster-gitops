@@ -1,7 +1,0 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: paperless-app
-spec:
-  source:
-    path: manifests/argocd/apps/paperless-ng/overlays/private/apps

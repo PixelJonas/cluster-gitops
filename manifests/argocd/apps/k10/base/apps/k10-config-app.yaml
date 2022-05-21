@@ -10,7 +10,7 @@ spec:
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
-    path: manifests/configs/k10/base
+    path: manifests/argocd/apps/k10/base/apps/config
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
     targetRevision: master
   syncPolicy:

@@ -1,6 +1,0 @@
-- op: replace
-  path: /spec/source/path
-  value: manifests/vault/overlays/micro
-- op: replace
-  path: /spec/destination/namespace
-  value: argocd-operator-system

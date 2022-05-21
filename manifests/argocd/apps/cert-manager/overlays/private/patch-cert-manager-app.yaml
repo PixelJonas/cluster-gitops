@@ -1,7 +1,0 @@
-- op: replace
-  path: /spec/source/path
-  value: manifests/operator/cert-manager/overlays/private
-
-- op: replace
-  path: /spec/destination/namespace
-  value: cert-manager

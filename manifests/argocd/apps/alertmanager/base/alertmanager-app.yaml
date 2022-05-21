@@ -12,7 +12,7 @@ spec:
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
-    path: manifests/configs/alertmanager/overlays/default
+    path: manifests/argocd/apps/alertmanager/overlays/default
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
     targetRevision: master
   syncPolicy:

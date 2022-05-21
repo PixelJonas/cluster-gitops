@@ -10,7 +10,7 @@ spec:
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
-    path: manifests/configs/qemu-guest-agent/base
+    path: manifests/argocd/apps/qemu-guest-agent/base/apps
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
     targetRevision: master
   syncPolicy:

@@ -1,6 +1,6 @@
 - op: replace
   path: /spec/source/path
-  value: manifests/operator/cert-manager/overlays/titan
+  value: manifests/argocd/apps/cert-manager/overlays/titan/apps
 
 - op: replace
   path: /spec/destination/namespace
