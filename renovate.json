@@ -4,5 +4,12 @@
   ],
   "argocd":{
     "fileMatch": ["manifests/.+\\.yaml$"]
-  }
+  },
+  "matchUpdateTypes": [
+    "minor",
+    "patch",
+    "pin",
+    "digest"
+  ],
+  "automerge": true
 }
