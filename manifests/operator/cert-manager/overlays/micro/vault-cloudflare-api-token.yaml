@@ -1,8 +1,0 @@
-apiVersion: ricoberger.de/v1alpha1
-kind: VaultSecret
-metadata:
-  name: cloudflare-api-token
-  namespace: cert-manager
-spec:
-  path: global_secrets/cert-manager/cloudflare
-  type: Opaque

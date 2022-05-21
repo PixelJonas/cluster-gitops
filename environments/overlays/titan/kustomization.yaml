@@ -14,8 +14,8 @@ bases:
   - ../../../manifests/argocd/apps/qemu-guest-agent/base
   - ../../../manifests/argocd/apps/sharry/base
   - ../../../manifests/argocd/apps/heimdall/base
-  - ../../../manifests/argocd/apps/sealed-secrets-operator/private
 
+  - ../../../manifests/argocd/apps/sealed-secrets-operator/overlays/titan
   - ../../../manifests/argocd/apps/oauth2-proxy/overlays/titan
   - ../../../manifests/argocd/apps/cert-manager/overlays/titan
   - ../../../manifests/argocd/apps/nginx/overlays/titan

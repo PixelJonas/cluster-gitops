@@ -4,7 +4,7 @@ kind: Kustomization
 namespace: argocd
 
 bases:
-- ../base
+- ../../base
 
 patches:
 - target:

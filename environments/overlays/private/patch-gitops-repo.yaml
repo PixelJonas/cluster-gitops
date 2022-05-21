@@ -1,3 +1,0 @@
-- op: replace
-  path: /spec/source/repoURL
-  value: https://github.com/pixeljonas/cluster-gitops.git
