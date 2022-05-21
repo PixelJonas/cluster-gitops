@@ -27,6 +27,11 @@ spec:
                   operator: In
                   values:
                     - "true"
+            - matchExpressions:
+                - key: app.kubernetes.io/name
+                  operator: In
+                  values:
+                    - resilio-sync                    
         profile:
           name: backblaze
           namespace: kasten-io
