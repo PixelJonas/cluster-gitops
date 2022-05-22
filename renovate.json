@@ -2,14 +2,20 @@
   "extends": [
     "config:base"
   ],
-  "argocd":{
-    "fileMatch": ["manifests/.+\\.yaml$"]
+  "argocd": {
+    "fileMatch": [
+      "manifests/.+\\.yaml$"
+    ]
   },
-  "matchUpdateTypes": [
-    "minor",
-    "patch",
-    "pin",
-    "digest"
-  ],
-  "automerge": true
+  "packageRules": [
+    {
+      "matchUpdateTypes": [
+        "minor",
+        "patch",
+        "pin",
+        "digest"
+      ],
+      "automerge": true
+    }
+  ]
 }
