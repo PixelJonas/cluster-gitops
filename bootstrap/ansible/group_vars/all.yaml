@@ -26,3 +26,5 @@ snapraid_config_excludes:
   - ".TemporaryItems"
   - ".Trashes"
   - ".AppleDB"
+  - "/backups/kasten/"
+  - "/config/resilio-sync-resilio-sync-sync/"
