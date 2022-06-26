@@ -207,7 +207,8 @@ spec:
           PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: "HTTP_X_Auth_Request_Preferred_Username"
           USERMAP_UID: 1500
           USERMAP_GID: 1500
-
+          PORT: 8000
+          
         command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
         args: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
