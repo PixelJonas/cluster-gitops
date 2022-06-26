@@ -15,7 +15,9 @@ spec:
     chart: paperless
     helm:
       values: |-
-
+        image:
+          repository: docker.io/ealen/echo-server
+          tag: "0.5.2"
 
         secret:
           docker-entrypoint.sh: |-
