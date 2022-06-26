@@ -60,5 +60,5 @@ data:
     no-autoupdate: true
     ingress:
       - hostname: paperless.janz.digital
-        service: hello-world
+        service: "https://paperless.apps.titan.janz.digital"
       - service: http_status:404
