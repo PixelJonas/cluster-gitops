@@ -1,0 +1,34 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: paperless-ng
+  namespace: argocd-operator-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+spec:
+  destination:
+    namespace: paperless
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://github.com/cloudflare/argo-tunnel-examples.git"
+    targetRevision: master
+    helm:
+      values: |-
+
+
+        cloudflare:
+          account: "jonas@janz.digital"
+          tunnelName: "paperless"
+          tunnelId: "4b7879c0-0e75-4af5-a9c9-111e710fe5b5"
+          secret: "cloudflared-credentials"
+          ingress:
+            - hostname: paperless.janz.digital
+              service: paperless-ng
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
