@@ -15,9 +15,6 @@ spec:
     chart: paperless
     helm:
       values: |-
-        image:
-          repository: docker.io/ealen/echo-server
-          tag: "0.5.2"
 
         secret:
           docker-entrypoint.sh: |-
@@ -204,11 +201,10 @@ spec:
           PAPERLESS_TIKA_ENDPOINT: http://localhost:9998
           PAPERLESS_PRE_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/pdf_rm_blank.sh
           PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
-          PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: "HTTP_X_Auth_Request_Preferred_Username"
+          PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: "HTTP_X_AUTH_REQUEST_PREFERRED_USERNAME"
           USERMAP_UID: 1500
           USERMAP_GID: 1500
-          PORT: 8000
-          
+
         command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
         args: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
@@ -269,6 +265,12 @@ spec:
             env:
               - name: CHROMIUM_DISABLE_ROUTES
                 value: "1"
+          echo:
+            name: echo
+            image: docker.io/ealen/echo-server:latest
+            env:
+              - name: PORT
+                value: 8001
 
         probes:
           startup:
