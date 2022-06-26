@@ -11,6 +11,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: "https://github.com/cloudflare/argo-tunnel-examples.git"
+    path: helm/cloudflare-tunnel
     targetRevision: master
     helm:
       values: |-
