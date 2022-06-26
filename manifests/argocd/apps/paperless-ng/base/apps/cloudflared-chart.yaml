@@ -16,6 +16,9 @@ spec:
     helm:
       values: |-
 
+        image:
+          repository: docker.io/cloudflare/cloudflared
+          tag: "2022.6.3"
 
         cloudflare:
           account: "jonas@janz.digital"
