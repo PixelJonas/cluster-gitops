@@ -186,9 +186,9 @@ spec:
           COMPOSE_PROJECT_NAME: paperless
           # -- Redis to use
           PAPERLESS_REDIS: redis://localhost:6379
-          PAPERLESS_CSRF_TRUSTED_ORIGINS: "https://paperless.apps.titan.janz.digital, https://paperless.janz.digital"
-          PAPERLESS_ALLOWED_HOSTS: "https://paperless.apps.titan.janz.digital, https://paperless.janz.digital"
-          PAPERLESS_CORS_ALLOWED_HOSTS: "https://paperless.apps.titan.janz.digital, https://paperless.janz.digital"
+          PAPERLESS_CSRF_TRUSTED_ORIGINS: "https://paperless.apps.titan.janz.digital,https://paperless.janz.digital"
+          PAPERLESS_ALLOWED_HOSTS: "https://paperless.apps.titan.janz.digital,https://paperless.janz.digital"
+          PAPERLESS_CORS_ALLOWED_HOSTS: "https://paperless.apps.titan.janz.digital,https://paperless.janz.digital"
           
           # -- OCR languages to install
           PAPERLESS_OCR_LANGUAGE: deu
