@@ -60,5 +60,5 @@ data:
     no-autoupdate: true
     ingress:
       - hostname: paperless.janz.digital
-        service: hello_world
+        service: http://paperless-ng:8000
       - service: http_status:404
