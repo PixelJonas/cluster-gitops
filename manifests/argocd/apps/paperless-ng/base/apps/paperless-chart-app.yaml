@@ -270,7 +270,7 @@ spec:
             image: docker.io/ealen/echo-server:latest
             env:
               - name: PORT
-                value: 8001
+                value: "8001"
 
         probes:
           startup:
