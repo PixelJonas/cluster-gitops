@@ -4,4 +4,4 @@ kind: Kustomization
 resources:
   - paperless-chart-app.yaml
   - sealed-cloudflare-credentials.yaml
-  - cloudflared-chart.yaml
+  - cloudflared.yaml
