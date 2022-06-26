@@ -202,7 +202,7 @@ spec:
           PAPERLESS_TIKA_ENDPOINT: http://localhost:9998
           PAPERLESS_PRE_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/pdf_rm_blank.sh
           PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
-          PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: "X-Auth-Request-Preferred-Username"
+          PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: "HTTP_X_Auth_Request_Preferred_Username"
           USERMAP_UID: 1500
           USERMAP_GID: 1500
 
