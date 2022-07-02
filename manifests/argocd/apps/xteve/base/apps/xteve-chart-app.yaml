@@ -45,7 +45,7 @@ spec:
         persistence:
           config:
             enabled: true
-            storageClass: rook-cephfs
+            storageClass: ceph-filesystem
             size: 3Gi
 
   project: cluster-apps
