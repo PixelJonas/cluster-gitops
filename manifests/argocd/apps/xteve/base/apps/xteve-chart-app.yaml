@@ -1,0 +1,57 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: xteve-ng
+  namespace: argocd-operator-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+spec:
+  destination:
+    namespace: xteve
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: "https://k8s-at-home.com/charts/"
+    targetRevision: 8.3.2
+    chart: xteve
+    helm:
+      values: |-
+
+        env:
+          TZ: Europe/Berlin
+
+        controller:
+          labels:
+            kanister.kasten.io/inject-sidecar: "true"
+
+        podLabels:
+          kanister.kasten.io/inject-sidecar: "true"
+
+        ingress:
+          main:
+            annotations:
+              nginx.ingress.kubernetes.io/proxy-body-size: 50m
+            enabled: true
+            ingressClassName: nginx
+            pathType: Prefix
+            hosts:
+              - host: xteve.apps.titan.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+            tls:
+              - hosts:
+                  - xteve.apps.titan.janz.digital
+
+        persistence:
+          config:
+            enabled: true
+            storageClass: rook-cephfs
+            size: 3Gi
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

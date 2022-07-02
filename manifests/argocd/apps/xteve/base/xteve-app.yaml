@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: xteve-app
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+spec:
+  destination:
+    namespace: argocd-operator-system
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    path: manifests/argocd/apps/xteve/base/apps
+    repoURL: https://github.com/pixeljonas/cluster-gitops.git
+    targetRevision: master
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

@@ -15,6 +15,7 @@ bases:
   - ../../../manifests/argocd/apps/sharry/base
   - ../../../manifests/argocd/apps/heimdall/base
   - ../../../manifests/argocd/apps/node-red/base
+  - ../../../manifests/argocd/apps/xteve/base
 
   - ../../../manifests/argocd/apps/sealed-secrets-operator/overlays/titan
   - ../../../manifests/argocd/apps/oauth2-proxy/overlays/titan
