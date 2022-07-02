@@ -11,7 +11,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: "https://charts.bitnami.com/bitnami"
-    targetRevision: 12.0.6
+    targetRevision: 13.0.0
     chart: nginx
     helm:
       values: |-
