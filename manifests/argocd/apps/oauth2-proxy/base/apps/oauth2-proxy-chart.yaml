@@ -52,7 +52,7 @@ spec:
                 - auth.apps.titan.janz.digital
 
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 2.1.9
+    targetRevision: 2.1.10
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
