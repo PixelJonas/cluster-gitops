@@ -44,9 +44,6 @@ spec:
         service:
           main:
             type: NodePort
-            ports:
-              htsp:
-                enabled: true
 
         persistence:
           config:
