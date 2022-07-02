@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - xteve-chart-app.yaml
+  - sealed-xteve-config.yaml

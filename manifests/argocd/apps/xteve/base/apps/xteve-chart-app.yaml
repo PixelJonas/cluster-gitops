@@ -47,6 +47,12 @@ spec:
             enabled: true
             storageClass: ceph-filesystem
             size: 3Gi
+          playlist:
+            name: xteve-config
+            enabled: true
+            type: secret
+            defaultMode: 0777
+            mountPath: /custom/xteve/
 
   project: cluster-apps
   syncPolicy:
