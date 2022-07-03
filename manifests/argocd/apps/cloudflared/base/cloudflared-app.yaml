@@ -6,7 +6,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "101"
 spec:
   destination:
-    namespace: argocd-operator-system
+    namespace: cloudflared
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
