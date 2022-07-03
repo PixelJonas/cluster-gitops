@@ -265,12 +265,6 @@ spec:
             env:
               - name: CHROMIUM_DISABLE_ROUTES
                 value: "1"
-          echo:
-            name: echo
-            image: docker.io/ealen/echo-server:latest
-            env:
-              - name: PORT
-                value: "8001"
 
         probes:
           startup:

@@ -3,7 +3,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: cloudflared
-  namespace: paperless
+  namespace: cloudflared
 spec:
   replicas: 1
   revisionHistoryLimit: 3
@@ -42,24 +42,8 @@ spec:
           secret:
             secretName: cloudflared-credentials
         - name: config
-          configMap:
-            name: cloudflared
+          secret:
+            secretName: cloudflared
             items:
               - key: config.yaml
                 path: config.yaml
----
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: cloudflared
-  namespace: paperless
-data:
-  config.yaml: |
-    tunnel: paperless
-    credentials-file: /etc/cloudflared/creds/credentials.json
-    metrics: 0.0.0.0:2000
-    no-autoupdate: true
-    ingress:
-      - hostname: paperless.janz.digital
-        service: "https://paperless.apps.titan.janz.digital"
-      - service: http_status:404
