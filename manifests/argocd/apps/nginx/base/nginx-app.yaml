@@ -17,6 +17,8 @@ spec:
     helm:
       values: |-
         controller:
+          service:
+            externalTrafficPolicy: Local
           extraArgs:
             default-ssl-certificate: "operators/wildcard-apps-hive-janz-digital-tls"
     repoURL: https://kubernetes.github.io/ingress-nginx
