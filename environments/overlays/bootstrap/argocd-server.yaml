@@ -60,10 +60,14 @@ spec:
       ignoreDifferences: |
         jsonPointers:
         - /webhooks/ingress
+    CustomResourceDefinition:
+      ignoreDifferences: |
+        jsonPointers:
+        - /spec/conversion/webhook/clientConfig/caBundle
     admissionregistration.k8s.io/MutatingWebhookConfiguration:
       ignoreDifferences: |
         jsonPointers:
-        - /webhooks/0/clientConfig/caBundle     
+        - /webhooks/0/clientConfig/caBundle
     integreatly.org/GrafanaDataSource:
       ignoreDifferences: |
         jsonPointers:
