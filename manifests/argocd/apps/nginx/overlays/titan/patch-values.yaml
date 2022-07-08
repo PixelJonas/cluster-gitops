@@ -8,5 +8,7 @@ spec:
     helm:
       values: |-
         controller:
+          service:
+            externalTrafficPolicy: Local        
           extraArgs:
             default-ssl-certificate: "cert-manager/wildcard-apps-titan-janz-digital-tls"
