@@ -10,5 +10,11 @@ spec:
         controller:
           kind: DaemonSet
           hostNetwork: true
+          nodeSelector:
+            - "node-role.kubernetes.io/master"
+          tolerations:
+            - key: "node-role.kubernetes.io/master"
+              operator: "Exists"
+              effect: "NoSchedule"
           extraArgs:
             default-ssl-certificate: "cert-manager/wildcard-apps-titan-janz-digital-tls"
