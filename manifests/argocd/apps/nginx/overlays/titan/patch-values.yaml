@@ -8,7 +8,7 @@ spec:
     helm:
       values: |-
         controller:
-          kind: daemonset
+          kind: DaemonSet
           hostNetwork: true
           extraArgs:
             default-ssl-certificate: "cert-manager/wildcard-apps-titan-janz-digital-tls"
