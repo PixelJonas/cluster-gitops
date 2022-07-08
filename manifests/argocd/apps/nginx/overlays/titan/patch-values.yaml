@@ -8,6 +8,7 @@ spec:
     helm:
       values: |-
         controller:
+          hostNetwork: true
           service:
             externalTrafficPolicy: Local        
           extraArgs:
