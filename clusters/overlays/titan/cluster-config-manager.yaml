@@ -2,8 +2,6 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cluster-config-manager
-  labels:
-    gitops.ownedBy: cluster-config
 spec:
   destination:
     namespace: argocd

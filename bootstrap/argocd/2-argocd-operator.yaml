@@ -14,3 +14,5 @@ spec:
     env:
       - name: DISABLE_DEX
         value: "false"
+      - name: "ARGOCD_CLUSTER_CONFIG_NAMESPACES"
+        value: "openshift-gitops"
