@@ -23,6 +23,9 @@ spec:
         podLabels:
           kanister.kasten.io/inject-sidecar: "true"
 
+        env:
+          TZ: Europe/Berlin
+          
         ingress:
           main:
             annotations:
