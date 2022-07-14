@@ -26,6 +26,14 @@ spec:
             enabled: true
             ingressClassName: nginx
             pathType: Prefix
+            annotations:
+              nginx.ingress.kubernetes.io/configuration-snippet: |
+                proxy_set_header Accept-Encoding "";
+                sub_filter
+                '</head>'
+                '<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/uptime-kuma/nord.css">
+                </head>';
+                sub_filter_once on;
             hosts:
               - host: status.apps.titan.janz.digital
                 paths:
@@ -34,26 +42,6 @@ spec:
             tls:
               - hosts:
                   - status.apps.titan.janz.digital
-          external:
-            enabled: true
-            ingressClassName: nginx
-            pathType: Prefix
-            annotations:
-              nginx.ingress.kubernetes.io/configuration-snippet: |
-                proxy_set_header Accept-Encoding "";
-                sub_filter
-                '</head>'
-                '<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/uptime-kuma/nord.css">
-                </head>';
-                sub_filter_once on;  
-            hosts:
-              - host: status.janz.digital
-                paths:
-                  - path: /
-                    pathType: Prefix
-            tls:
-              - hosts:
-                  - status.janz.digital
 
         persistence:
           data:
