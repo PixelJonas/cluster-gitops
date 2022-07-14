@@ -44,18 +44,14 @@ spec:
                 </head>';
                 sub_filter_once on;  
             hosts:
-              - host: snyc.apps.titan.janz.digital
+              - host: sync.apps.titan.janz.digital
                 paths:
                   - path: /
                     pathType: Prefix
-              - host: snyc.janz.digital
-                paths:
-                  - path: /
-                    pathType: Prefix
+
             tls:
               - hosts:
                   - sync.apps.titan.janz.digital             
-                  - sync.janz.digital
 
         persistence:
           config:
