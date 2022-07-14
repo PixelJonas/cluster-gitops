@@ -6,6 +6,7 @@ bases:
 
 resources:
   - "import-pv.yaml"
+  - "ingress-internet.yaml"
 
 patchesStrategicMerge:
   - "paperless-app-patch.yaml"
