@@ -41,6 +41,14 @@ spec:
           main:
             annotations:
               nginx.ingress.kubernetes.io/proxy-body-size: 500m
+              nginx.ingress.kubernetes.io/configuration-snippet: |
+                proxy_set_header Accept-Encoding "";
+                nginx_header_content_security_policy: "default-src 'self'; style-src 'self' 'unsafe-inline' theme-park.dev;"
+                sub_filter
+                '</head>'
+                '<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/bitwarden/nord.css">
+                </head>';
+                sub_filter_once on;  
             enabled: true
             ingressClassName: nginx
             pathType: Prefix
