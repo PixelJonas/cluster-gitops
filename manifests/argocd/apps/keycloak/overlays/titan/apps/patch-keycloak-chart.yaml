@@ -5,7 +5,7 @@
 - op: add
   path: /spec/source/helm/parameters/-
   value:
-    name: "ingress.rules[1].host"
+    name: "ingress.rules[0].host"
     value: "sso.apps.titan.janz.digital"
 
 - op: add
