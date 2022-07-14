@@ -41,14 +41,10 @@ spec:
           enabled: true
           hostname: auth.apps.titan.janz.digital
           path: /
-          extraHosts: 
-            - name: auth.janz.digital
-              path: /
 
           extraTls:
             - secretName: oauth2-proxy-tls
               hosts:
-                - auth.janz.digital
                 - auth.apps.titan.janz.digital
 
     repoURL: https://charts.bitnami.com/bitnami

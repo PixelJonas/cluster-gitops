@@ -127,14 +127,10 @@ spec:
                 paths:
                   - path: /
                     pathType: Prefix
-              - host: share.janz.digital
-                paths:
-                  - path: /
-                    pathType: Prefix
+
             tls:
               - hosts:
                   - sharry.apps.titan.janz.digital
-                  - share.janz.digital
 
   project: cluster-apps
   syncPolicy:

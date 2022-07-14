@@ -41,14 +41,10 @@ spec:
                 paths:
                   - path: /
                     pathType: Prefix
-              - host: start.janz.digital
-                paths:
-                  - path: /
-                    pathType: Prefix
+
             tls:
               - hosts:
                   - start.apps.titan.janz.digital
-                  - start.janz.digital
 
         persistence:
           config:
