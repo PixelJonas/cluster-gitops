@@ -65,13 +65,13 @@ spec:
             enabled: true
             storageClass: ceph-filesystem
             accessMode: ReadWriteOnce
-            size: 5GB
-            
+            size: 5Gi
+
           data:
             enabled: true
             storageClass: ceph-filesystem
             accessMode: ReadWriteOnce
-            size: 5GB
+            size: 5Gi
 
   project: cluster-apps
   syncPolicy:
