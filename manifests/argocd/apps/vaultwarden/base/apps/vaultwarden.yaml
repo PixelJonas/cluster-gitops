@@ -63,11 +63,13 @@ spec:
         persistence:
           config:
             enabled: true
-            storageClass: local-path
+            storageClass: ceph-filesystem
+            accessMode: ReadWriteOnce
           data:
             enabled: true
-            storageClass: local-path
-            
+            storageClass: ceph-filesystem
+            accessMode: ReadWriteOnce
+
   project: cluster-apps
   syncPolicy:
     syncOptions:
