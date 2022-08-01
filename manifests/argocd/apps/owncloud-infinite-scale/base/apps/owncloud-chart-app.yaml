@@ -1,0 +1,49 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: owncloud
+  namespace: argocd-operator-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+spec:
+  destination:
+    namespace: owncloud
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: 'https://github.com/owncloud/ocis-charts.git'
+    path: charts/ocis
+    targetRevision: master
+    helm:
+      values: |-
+
+        externalDomain: cloud.apps.titan.janz.digital
+        autoscaling:
+          enabled: false
+        
+        extraLabels:
+          kanister.kasten.io/inject-sidecar: "true"
+
+        features:
+          emailNotifications: true
+          demoUsers: true
+
+        ingress:
+          enabled: true
+          ingressClassName: nginx
+          annotations:
+            nginx.ingress.kubernetes.io/proxy-body-size: 50m
+          tls:
+            - hosts:
+              - cloud.apps.titan.janz.digital
+              secretName: ocis-tls-certificate
+        
+        logging:
+          level: debug
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

@@ -1,0 +1,14 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: sealed-machine-auth-api-key
+  namespace: owncloud
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  encryptedData:
+    machine-auth-api-key: AgDTSfunYNFKCCp8PR1DG+lpjZjEEkmPYoozZLlLtjygHFEMR58qpbBlRKVZtK1KVR1sH9+mwIs95qAFQwYYVZloPE0nDSB4j0A35dXvR1wD6MOoDzv3+V4FcXqfp/CF5FJENg5MJsPRc5yaiSUEfqgJOW+X2dCcMfxfYz5POoaTZ6hhQugpDsC0bSFfymuFOYyrZLqktkj5/5DtXZ2K669oXYD5JSP1eFsXCnNVPqsjiVRcLTZcTBg72vLxSuPdT6jBfrLuc4G4CcOf/AYlvLCzFpVhFdjpB3qY/f/r2LgMIrtrAynzPbQdqS1UW8FoUIbewWTj35TZivZUXv+soq5OmlcXBZThKEVvAAjzWkt+wMKFB4RfitkyrWnSDoPYavRZVXnYByJcumgfTfEkbza3aplj/27CiCgwrn+Z1PgqVzrwe+uU9rieeUR2IRdwEg9XvbOCoIphkM5K178SS/YI17HE32TbCmxOWWmB49kjYNd3Fl05Piw7TaPQjzzAjxGeOW52CuGJLTOcCGmH7NSNqf+SZhb7Tg5uZZ+PNlnCFBobLMyGHiuwSb/8+dXpI2m8vgzbb9nd84xWmkh17gB0BDNWpcJjx6ut3MHDlSjfvF6LDUa0Q7QPuPVGMwIbaQP+AeFqhZ3Qjl36jlQ1mZzm84x1LmSD10lPnu4JYSmvsrTYD/zOJJZeVa1XZUJfxXptj5zkG9zsWf4+xCowwJgFFG4Yp8n58ge8S2kt6xxkbi0pEotnyBc503zYFxdUvn3znyg=
+  template:
+    metadata:
+      name: machine-auth-api-key
+      namespace: owncloud

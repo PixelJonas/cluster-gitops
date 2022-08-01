@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: owncloud-app
+  annotations:
+    argocd.argoproj.io/sync-wave: "101"
+  labels:
+    gitops.type: app-of-apps
+spec:
+  destination:
+    namespace: argocd
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    path: manifests/argocd/apps/owncloud-infinite-scale/base/apps
+    repoURL: https://github.com/pixeljonas/cluster-gitops.git
+    targetRevision: master
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
