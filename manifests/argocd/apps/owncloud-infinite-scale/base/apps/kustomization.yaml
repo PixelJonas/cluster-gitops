@@ -14,3 +14,4 @@ resources:
   - sealed-ldap-cert.yaml
   - sealed-ldap-bind-secrets.yaml
   - sealed-jwt-secret.yaml
+  - sealed-machine-auth-api-key.yaml
