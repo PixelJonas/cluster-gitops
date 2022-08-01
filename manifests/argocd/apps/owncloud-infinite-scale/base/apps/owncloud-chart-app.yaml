@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: "https://github.com/owncloud/ocis-charts.git"
     path: charts/ocis
-    targetRevision: master
+    targetRevision: external-user-management
     helm:
       values: |-
 
@@ -25,7 +25,11 @@ spec:
 
         features:
           emailNotifications: true
-          demoUsers: true
+          demoUsers: false
+          externalUserManagement:
+            enabled: true
+            oidc:
+              issuerURI: https://sso.janz.digital/auth/realms/janz
 
         ingress:
           enabled: true
