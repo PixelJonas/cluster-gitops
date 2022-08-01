@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   - owncloud-chart-app.yaml
-  - sealed-smtp-settings.yaml
+  - sealed-notifications-smtp-secret.yaml
   - sealed-idp-secrets.yaml
   - sealed-thumbnails-transfer-secret.yaml
   - sealed-admin-user.yaml
