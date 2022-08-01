@@ -60,8 +60,6 @@ spec:
               install_packages "$PAPERLESS_CUSTOM_PACKAGES"
             fi
 
-            initialize
-
             exec "/sbin/docker-entrypoint.sh /usr/local/bin/paperless_cmd.sh"
 
           pdf_rm_blank.sh: |-
