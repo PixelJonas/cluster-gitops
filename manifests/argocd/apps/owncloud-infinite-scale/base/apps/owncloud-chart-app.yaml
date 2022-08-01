@@ -40,6 +40,23 @@ spec:
         logging:
           level: debug
 
+        # References to secrets.
+        # The secrets need to be manually created.
+        # See https://github.com/owncloud/ocis-charts/blob/master/charts/ocis/README.md#secrets for how to generate them.
+        secretRefs:
+          adminUserSecretRef: "sealed-admin-user"
+          idpSecretRef: "sealed-idp-secrets"
+          jwtSecretRef: "sealed-jwt-secret"
+          ldapCaRef: "sealed-ldap-ca"
+          ldapCertRef: "sealed-ldap-cert"
+          ldapSecretRef: "sealed-ldap-bind-secrets"
+          machineAuthApiKeySecretRef: "sealed-machine-auth-api-key"
+          notificationsSmtpSecretRef: "sealed-notifications-smtp-secret"
+          storageSystemJwtSecretRef: "sealed-storage-system-jwt-secret"
+          storageSystemSecretRef: "sealed-storage-system"
+          thumbnailsSecretRef: "sealed-thumbnails-transfer-secret"
+          transferSecretSecretRef: "sealed-transfer-secret"          
+
   project: cluster-apps
   syncPolicy:
     syncOptions:
