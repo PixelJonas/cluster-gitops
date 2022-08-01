@@ -10,7 +10,7 @@ spec:
     namespace: owncloud
     server: "https://kubernetes.default.svc"
   source:
-    repoURL: 'https://github.com/owncloud/ocis-charts.git'
+    repoURL: "https://github.com/owncloud/ocis-charts.git"
     path: charts/ocis
     targetRevision: master
     helm:
@@ -19,7 +19,7 @@ spec:
         externalDomain: cloud.apps.titan.janz.digital
         autoscaling:
           enabled: false
-        
+
         extraLabels:
           kanister.kasten.io/inject-sidecar: "true"
 
@@ -36,7 +36,11 @@ spec:
             - hosts:
               - cloud.apps.titan.janz.digital
               secretName: ocis-tls-certificate
-        
+
+        insecure:
+          oidcIdpInsecure: true
+          ocisHttpApiInsecure: fals
+
         logging:
           level: debug
 
@@ -55,7 +59,7 @@ spec:
           storageSystemJwtSecretRef: "sealed-storage-system-jwt-secret"
           storageSystemSecretRef: "sealed-storage-system"
           thumbnailsSecretRef: "sealed-thumbnails-transfer-secret"
-          transferSecretSecretRef: "sealed-transfer-secret"          
+          transferSecretSecretRef: "sealed-transfer-secret"
 
   project: cluster-apps
   syncPolicy:
