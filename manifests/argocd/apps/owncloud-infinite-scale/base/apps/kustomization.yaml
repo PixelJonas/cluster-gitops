@@ -13,3 +13,4 @@ resources:
   - sealed-ldap-ca.yaml
   - sealed-ldap-cert.yaml
   - sealed-ldap-bind-secrets.yaml
+  - sealed-jwt-secret.yaml
