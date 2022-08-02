@@ -13,7 +13,7 @@ spec:
   source:
     chart: node-red
     repoURL: https://k8s-at-home.com/charts/
-    targetRevision: 10.3.0
+    targetRevision: 10.3.2
     helm:
       values: |-
         controller:
