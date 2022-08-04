@@ -30,7 +30,7 @@ spec:
           username: homeassistant
           existingSecret: mariadb-homeassistant-credentials
     repoURL: https://charts.bitnami.com/bitnami
-    targetRevision: 11.1.3
+    targetRevision: 11.1.4
   syncPolicy:
     syncOptions:
     - CreateNamespace=true
