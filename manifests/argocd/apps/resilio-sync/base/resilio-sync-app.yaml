@@ -11,7 +11,7 @@ spec:
   project: cluster-apps
   source:
     repoURL: "https://k8s-at-home.com/charts/"
-    targetRevision: 5.4.0
+    targetRevision: 5.4.2
     chart: resilio-sync
     helm:
       values: |-
