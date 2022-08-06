@@ -7,6 +7,7 @@ bases:
   - ../../../manifests/argocd/apps/homeassistant-db/base
   - ../../../manifests/argocd/apps/rook/base
   - ../../../manifests/argocd/apps/nfs-provisioner/base
+  - ../../../manifests/argocd/apps/kube-prometheus/base
   - ../../../manifests/argocd/apps/notes/base
   - ../../../manifests/argocd/apps/resilio-sync/base
   - ../../../manifests/argocd/apps/uptime-kuma/base

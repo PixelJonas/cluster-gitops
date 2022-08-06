@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kube-prometheus-stack
+  namespace: argocd-operator-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "31"
+spec:
+  destination:
+    namespace: monitoring
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: 'https://prometheus-community.github.io/helm-charts'
+    targetRevision: 39.4.1
+    helm:
+      skipCrds: true
+    chart: kube-prometheus-stack
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
