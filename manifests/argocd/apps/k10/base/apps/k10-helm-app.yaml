@@ -19,7 +19,6 @@ spec:
             urlPath: k10
           persistence:	
             enabled: true	
-            storageClass: "local-path"
 
         grafana:
           enabled: false
@@ -29,7 +28,6 @@ spec:
             enabled: false
             persistentVolume:	
               enabled: false	
-              storageClass: "local-path"
 
         ingress:
           class: nginx
@@ -37,7 +35,7 @@ spec:
           tls:
             enabled: true
             secretName: kasten-tls
-          host: kasten.apps.hive.janz.digital
+          host: kasten.apps.titan.janz.digital
           urlPath: k10
 
         prometheus:	
@@ -45,7 +43,6 @@ spec:
             enabled: false
             persistentVolume:	
               enabled: false	
-              storageClass: "local-path"
 
         injectKanisterSidecar:
           enabled: true

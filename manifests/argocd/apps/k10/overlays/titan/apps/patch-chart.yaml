@@ -5,11 +5,5 @@
 - op: add
   path: /spec/source/helm/parameters/-
   value:
-    name: "global.persistence.storageClass"
-    value: "ceph-filesystem"
-
-- op: add
-  path: /spec/source/helm/parameters/-
-  value:
     name: "ingress.host"
     value: "kasten.apps.titan.janz.digital"
