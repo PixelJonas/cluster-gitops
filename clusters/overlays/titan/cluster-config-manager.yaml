@@ -11,6 +11,3 @@ spec:
     path: environments/overlays/titan
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
     targetRevision: master
-  syncPolicy:
-    automated:
-      selfHeal: true
