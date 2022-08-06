@@ -24,6 +24,10 @@ spec:
         toolbox:
           enabled: true
 
+        monitoring:
+          enabled: true
+          createPrometheusRules: true
+
         cephClusterSpec:
           dashboard:
             enabled: true
