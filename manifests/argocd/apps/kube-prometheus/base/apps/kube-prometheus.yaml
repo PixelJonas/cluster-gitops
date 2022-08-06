@@ -17,6 +17,8 @@ spec:
       skipCrds: true
     chart: kube-prometheus-stack
   syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
     automated:
       prune: true
       selfHeal: true
