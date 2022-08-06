@@ -1,0 +1,21 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: rook-app
+  annotations:
+    argocd.argoproj.io/sync-wave: "31"
+spec:
+  destination:
+    namespace: argocd-operator-system
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    path: manifests/argocd/apps/rook/base/apps
+    repoURL: https://github.com/pixeljonas/cluster-gitops.git
+    targetRevision: master
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
