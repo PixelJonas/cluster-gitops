@@ -9,6 +9,8 @@ spec:
       values: |-
         controller:
           kind: DaemonSet
+          service:
+            enabled: false
           hostNetwork: true
           nodeSelector:
             node-role.kubernetes.io/master: ""
