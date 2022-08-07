@@ -28,7 +28,7 @@ spec:
           service:
             selector:
               k8s-app: kube-scheduler
-        
+
         altermanager:
           alertmanagerSpec:
             secrets:
@@ -70,7 +70,7 @@ spec:
 
             auth:
               disable_login_form: false
-              oauth_auto_login: true
+              oauth_auto_login: false
 
             "auth.generic_oauth":
               enabled: true
