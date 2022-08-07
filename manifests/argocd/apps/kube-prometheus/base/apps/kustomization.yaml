@@ -4,3 +4,5 @@ kind: Kustomization
 resources:
   - kube-prometheus-crds.yaml
   - kube-prometheus.yaml
+  - grafana-ingress.yaml
+  - prometheus-ingress.yaml
