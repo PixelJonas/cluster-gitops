@@ -42,7 +42,7 @@ spec:
               api_url: $__file{/etc/secrets/keycloak-conf/api_url}
           
           extraSecretMounts:
-            - name: keycloak_conf_mount
+            - name: keycloak-conf-mount
               secretName: keycloak-conf
               defaultMode: 0440
               mountPath: /etc/secrets/keycloak-conf
