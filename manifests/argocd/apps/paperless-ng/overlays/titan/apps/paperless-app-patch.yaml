@@ -12,11 +12,11 @@ spec:
         - name: persistence.consume.enabled
           value: "true"
         - name: persistence.data.storageClass
-          value: "ceph-filesystem"
+          value: "openebs-jiva-csi-default"
         - name: persistence.export.storageClass
-          value: "ceph-filesystem"
+          value: "openebs-jiva-csi-default"
         - name: persistence.media.storageClass
-          value: "ceph-filesystem"
+          value: "openebs-jiva-csi-default"
         - name: ingress.main.hosts[0].host
           value: paperless.apps.titan.janz.digital
         - name: ingress.main.tls[0].hosts[0]

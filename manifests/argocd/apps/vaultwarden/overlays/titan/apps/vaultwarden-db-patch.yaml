@@ -11,4 +11,4 @@ spec:
     helm:
       parameters:
         - name: "global.storageClass"
-          value: "ceph-block"
+          value: "openebs-jiva-csi-default"

@@ -46,7 +46,7 @@ spec:
         persistence:
           data:
             enabled: true
-            storageClass: ceph-filesystem
+            storageClass: openebs-jiva-csi-default
             size: 3Gi
             accessMode: ReadWriteOnce
 

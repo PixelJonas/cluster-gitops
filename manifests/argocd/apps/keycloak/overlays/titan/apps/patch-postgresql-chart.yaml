@@ -6,4 +6,4 @@
   path: /spec/source/helm/parameters/-
   value:
     name: "global.storageClass"
-    value: "ceph-block"
+    value: "openebs-jiva-csi-default"

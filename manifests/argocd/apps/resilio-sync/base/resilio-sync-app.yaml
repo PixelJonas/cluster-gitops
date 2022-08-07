@@ -56,7 +56,7 @@ spec:
         persistence:
           config:
             enabled: true
-            storageClass: ceph-filesystem
+            storageClass: openebs-jiva-csi-default
             accessMode: ReadWriteOnce
             size: 5Gi
             labels:

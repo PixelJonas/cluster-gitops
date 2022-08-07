@@ -17,7 +17,7 @@ spec:
     helm:
       values: |-
         global:
-          storageClass: ceph-block
+          storageClass: openebs-jiva-csi-default
           postgresql:
             auth:
               username: sharry

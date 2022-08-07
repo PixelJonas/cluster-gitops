@@ -148,11 +148,11 @@ spec:
         persistence:
           data:
             enabled: true
-            storageClass: rook-cephfs
+            storageClass: openebs-jiva-csi-default
             size: 3Gi
           media:
             enabled: true
-            storageClass: rook-cephfs
+            storageClass: openebs-jiva-csi-default
             size: 10Gi
           export:
             enabled: true

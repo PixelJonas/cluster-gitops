@@ -51,7 +51,7 @@ spec:
         persistence:
           config:
             enabled: true
-            storageClass: ceph-filesystem
+            storageClass: openebs-jiva-csi-default
             size: 3Gi
           playlist:
             name: xteve-config

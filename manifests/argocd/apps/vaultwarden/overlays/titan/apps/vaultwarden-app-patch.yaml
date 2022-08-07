@@ -12,5 +12,5 @@ spec:
         - name: ingress.main.tls[0].hosts[0]
           value: vaultwarden.apps.titan.janz.digital
         - name: persistence.config.storageClass
-          value: "ceph-filesystem"
+          value: "openebs-jiva-csi-default"
         

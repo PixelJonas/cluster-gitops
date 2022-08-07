@@ -1,12 +1,6 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
-  annotations:
-    config.janz.cloud/managed-by: gitops
-    config.janz.cloud/scm-url: git@github.com:PixelJonas/cluster-gitops.git
-  labels:
-    config.janz.cloud/component: instance
-    config.janz.cloud/name: argocd-bootstrap
   name: cluster-config
   namespace: openshift-gitops
 spec:
