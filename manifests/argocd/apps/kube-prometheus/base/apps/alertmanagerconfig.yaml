@@ -4,8 +4,6 @@ metadata:
   name: janz-config
   namespace: monitoring
 spec:
-  global:
-    slack_api_url_file: "/etc/alertmanager/secrets/slack-config/slack_api_url"
   route:
     groupBy: ["job"]
     groupWait: 30s
@@ -17,4 +15,5 @@ spec:
       slack_configs:
         - channel: "homecluster"
           send_resolved: "true"
+          api_url_file: "/etc/alertmanager/secrets/slack-config/slack_api_url"
           text: "\nsummary: {{ .CommonAnnotations.summary }}\ndescription: {{ .CommonAnnotations.description }}"
