@@ -26,15 +26,17 @@ spec:
           service:
             selector:
               k8s-app: kube-scheduler
-        
-        storageSpec:
-         volumeClaimTemplate:
-           spec:
-             storageClassName: openebs-jiva-csi-default
-             accessModes: ["ReadWriteOnce"]
-             resources:
-               requests:
-                 storage: 50Gi
+
+        prometheus:              
+          prometheusSpec:
+            storageSpec:
+            volumeClaimTemplate:
+              spec:
+                storageClassName: openebs-jiva-csi-default
+                accessModes: ["ReadWriteOnce"]
+                resources:
+                  requests:
+                    storage: 50Gi
 
         grafana:
           persistence:
