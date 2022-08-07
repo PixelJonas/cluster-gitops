@@ -14,7 +14,7 @@ spec:
     - name: "slack"
       slackConfigs:
         - channel: "homecluster"
-          send_resolved: "true"
+          sendResolved: "true"
           apiURL:
             key: slack_api_url
             name: slack-config
