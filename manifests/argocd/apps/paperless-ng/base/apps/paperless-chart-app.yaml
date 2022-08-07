@@ -122,6 +122,10 @@ spec:
         command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
         args: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
+        podSecurityContext:
+          runAsUser: 0
+          runAsGroup: 0
+
         controller:
           labels:
             kanister.kasten.io/inject-sidecar: "true"
