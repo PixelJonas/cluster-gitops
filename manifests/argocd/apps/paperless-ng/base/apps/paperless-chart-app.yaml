@@ -116,8 +116,6 @@ spec:
           PAPERLESS_PRE_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/pdf_rm_blank.sh
           PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
           PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: "HTTP_X_AUTH_REQUEST_PREFERRED_USERNAME"
-          USERMAP_UID: 1500
-          USERMAP_GID: 1500
 
         command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
         args: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
