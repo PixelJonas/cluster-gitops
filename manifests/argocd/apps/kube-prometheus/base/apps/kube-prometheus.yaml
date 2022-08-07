@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
-    repoURL: 'https://prometheus-community.github.io/helm-charts'
+    repoURL: "https://prometheus-community.github.io/helm-charts"
     targetRevision: 39.4.1
     helm:
       skipCrds: true
@@ -36,17 +36,17 @@ spec:
             name = Oauth
             tls_skip_verify_insecure = false
             allow_sign_up = false
-            client_id = $__file{/etc/secrets/keycloak_conf/client_id}
-            client_secret = $__file{/etc/secrets/keycloak_conf/client_secret}
-            auth_url = $__file{/etc/secrets/keycloak_conf/auth_url}
-            token_url = $__file{/etc/secrets/keycloak_conf/token_url}
-            api_url = $__file{/etc/secrets/keycloak_conf/api_url}
+            client_id = $__file{/etc/secrets/keycloak-conf/client_id}
+            client_secret = $__file{/etc/secrets/keycloak-conf/client_secret}
+            auth_url = $__file{/etc/secrets/keycloak-conf/auth_url}
+            token_url = $__file{/etc/secrets/keycloak-conf/token_url}
+            api_url = $__file{/etc/secrets/keycloak-conf/api_url}
           
           extraSecretMounts:
             - name: keycloak_conf_mount
-              secretName: keycloak_conf
+              secretName: keycloak-conf
               defaultMode: 0440
-              mountPath: /etc/secrets/keycloak_conf
+              mountPath: /etc/secrets/keycloak-conf
               readOnly: true
 
     chart: kube-prometheus-stack
