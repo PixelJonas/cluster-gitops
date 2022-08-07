@@ -28,6 +28,11 @@ spec:
               k8s-app: kube-scheduler
 
         grafana:
+          persistence:
+            enabled: true
+            type: pvc
+            size: 10Gi
+            storageClassName: openebs-jiva-csi-default
           grafana.ini:
             server:
               root_url: https://grafana.apps.titan.janz.digital/
