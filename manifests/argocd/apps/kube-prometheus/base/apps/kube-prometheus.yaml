@@ -33,6 +33,8 @@ spec:
           prometheusSpec:
             storageSpec:
               volumeClaimTemplate:
+                metadata:
+                  name: prometheus-db
                 spec:
                   storageClassName: openebs-jiva-csi-default
                   accessModes: ["ReadWriteOnce"]
