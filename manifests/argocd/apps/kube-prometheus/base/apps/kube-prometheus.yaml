@@ -30,13 +30,13 @@ spec:
         prometheus:              
           prometheusSpec:
             storageSpec:
-            volumeClaimTemplate:
-              spec:
-                storageClassName: openebs-jiva-csi-default
-                accessModes: ["ReadWriteOnce"]
-                resources:
-                  requests:
-                    storage: 50Gi
+              volumeClaimTemplate:
+                spec:
+                  storageClassName: openebs-jiva-csi-default
+                  accessModes: ["ReadWriteOnce"]
+                  resources:
+                    requests:
+                      storage: 50Gi
 
         grafana:
           persistence:
