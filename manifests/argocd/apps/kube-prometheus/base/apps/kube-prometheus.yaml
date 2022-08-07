@@ -17,7 +17,7 @@ spec:
       skipCrds: true
       values: |
 
-        nameOverride: monitoring
+        fullnameOverride: monitoring
 
         kubeControllerManager:
           service:
