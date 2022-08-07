@@ -15,6 +15,18 @@ spec:
     targetRevision: 39.4.1
     helm:
       skipCrds: true
+      values: |
+
+        kubeControllerManager:
+          service:
+            selector:
+              k8s-app: kube-controller-manager
+
+        kubeScheduler:
+          service:
+            selector:
+              k8s-app: kube-scheduler
+
     chart: kube-prometheus-stack
   syncPolicy:
     syncOptions:
