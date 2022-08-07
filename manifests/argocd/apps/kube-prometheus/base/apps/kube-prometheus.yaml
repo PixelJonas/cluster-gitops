@@ -29,18 +29,17 @@ spec:
 
         grafana:
           grafana.ini:
-            auth:
-              generic_oauth:
-                enabled: true
-                scopes: openid email profile
-                name: Oauth
-                tls_skip_verify_insecure: false
-                allow_sign_up: false
-                client_id: $__file{/etc/secrets/keycloak-conf/client_id}
-                client_secret: $__file{/etc/secrets/keycloak-conf/client_secret}
-                auth_url: $__file{/etc/secrets/keycloak-conf/auth_url}
-                token_url: $__file{/etc/secrets/keycloak-conf/token_url}
-                api_url: $__file{/etc/secrets/keycloak-conf/api_url}
+            "auth.generic_oauth":
+              enabled: true
+              scopes: openid email profile
+              name: Oauth
+              tls_skip_verify_insecure: false
+              allow_sign_up: false
+              client_id: $__file{/etc/secrets/keycloak-conf/client_id}
+              client_secret: $__file{/etc/secrets/keycloak-conf/client_secret}
+              auth_url: $__file{/etc/secrets/keycloak-conf/auth_url}
+              token_url: $__file{/etc/secrets/keycloak-conf/token_url}
+              api_url: $__file{/etc/secrets/keycloak-conf/api_url}
           
           extraSecretMounts:
             - name: keycloak_conf_mount
