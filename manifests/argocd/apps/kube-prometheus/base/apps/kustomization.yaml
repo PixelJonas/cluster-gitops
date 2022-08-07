@@ -7,3 +7,5 @@ resources:
   - grafana-ingress.yaml
   - prometheus-ingress.yaml
   - sealed-keycloak-conf.yaml
+  - sealed-slack-config.yaml
+  - alertmanagerconfig.yaml

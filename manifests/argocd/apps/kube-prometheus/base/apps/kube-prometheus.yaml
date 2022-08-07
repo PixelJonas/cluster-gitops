@@ -28,7 +28,23 @@ spec:
           service:
             selector:
               k8s-app: kube-scheduler
-
+        
+        altermanager:
+          alertmanagerSpec:
+            secrets:
+              - slack-config
+            alertmanagerConfiguration:
+              name: janz-config
+            storage:
+              volumeClaimTemplate:
+                metadata:
+                  name: alert-db
+                spec:
+                  storageClassName: openebs-jiva-csi-default
+                  accessModes: ["ReadWriteOnce"]
+                  resources:
+                    requests:
+                      storage: 5Gi
         prometheus:              
           prometheusSpec:
             storageSpec:
