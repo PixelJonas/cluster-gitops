@@ -29,6 +29,7 @@ spec:
 
         grafana:
           grafana.ini:
+            root_url: https://grafana.apps.titan.janz.digital/
             "auth.generic_oauth":
               enabled: true
               scopes: openid email profile
