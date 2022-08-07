@@ -53,7 +53,7 @@ spec:
               root_url: https://grafana.apps.titan.janz.digital/
 
             auth:
-              disable_login_form: true
+              disable_login_form: false
               oauth_auto_login: true
 
             "auth.generic_oauth":
