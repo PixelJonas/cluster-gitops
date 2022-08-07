@@ -12,7 +12,6 @@ bases:
   - ../../../manifests/argocd/apps/uptime-kuma/base
   - ../../../manifests/argocd/apps/qemu-guest-agent/base
   - ../../../manifests/argocd/apps/sharry/base
-  - ../../../manifests/argocd/apps/heimdall/base
   - ../../../manifests/argocd/apps/node-red/base
   - ../../../manifests/argocd/apps/xteve/base
   - ../../../manifests/argocd/apps/cloudflared/base
