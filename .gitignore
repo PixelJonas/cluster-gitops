@@ -11,3 +11,5 @@ config.yaml
 /bootstrap/ansible/inventories/.proxmox.yaml
 /bootstrap/ansible/inventories/hosts.yaml
 /tmp
+/bootstrap/talos/*.yaml
+/bootstrap/talos/talosconfig
