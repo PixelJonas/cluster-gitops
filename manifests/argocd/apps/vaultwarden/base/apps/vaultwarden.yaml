@@ -65,7 +65,7 @@ spec:
             enabled: true
             storageClass: openebs-jiva-csi-default
             accessMode: ReadWriteOnce
-            size: 5Gi
+            size: 1Gi
 
           data:
             enabled: true
