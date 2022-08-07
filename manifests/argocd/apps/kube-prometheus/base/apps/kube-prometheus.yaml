@@ -27,6 +27,28 @@ spec:
             selector:
               k8s-app: kube-scheduler
 
+        grafana:
+          grafana.ini: |
+            ######## KEYCLOAK ############
+            [auth.generic_oauth]
+            enabled = true
+            scopes = openid email profile
+            name = Oauth
+            tls_skip_verify_insecure = false
+            allow_sign_up = false
+            client_id = $__file{/etc/secrets/keycloak_conf/client_id}
+            client_secret = $__file{/etc/secrets/keycloak_conf/client_secret}
+            auth_url = $__file{/etc/secrets/keycloak_conf/auth_url}
+            token_url = $__file{/etc/secrets/keycloak_conf/token_url}
+            api_url = $__file{/etc/secrets/keycloak_conf/api_url}
+          
+          extraSecretMounts:
+            - name: keycloak_conf_mount
+              secretName: keycloak_conf
+              defaultMode: 0440
+              mountPath: /etc/secrets/keycloak_conf
+              readOnly: true
+
     chart: kube-prometheus-stack
   syncPolicy:
     syncOptions:

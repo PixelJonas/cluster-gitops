@@ -6,3 +6,4 @@ resources:
   - kube-prometheus.yaml
   - grafana-ingress.yaml
   - prometheus-ingress.yaml
+  - sealed-keycloak-conf.yaml
