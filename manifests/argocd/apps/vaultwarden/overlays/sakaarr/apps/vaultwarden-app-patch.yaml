@@ -11,4 +11,6 @@ spec:
 
         - name: persistence.config.storageClass
           value: "odf-lvm-vg1"
-        
+
+        - name: persistence.data.storageClass
+          value: "odf-lvm-vg1"
