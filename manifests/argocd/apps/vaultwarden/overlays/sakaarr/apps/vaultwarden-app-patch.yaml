@@ -1,0 +1,15 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vaultwarden
+  namespace: argocd-operator-system
+spec:
+  source:
+    helm:
+      parameters:
+        - name: ingress.main.enabled
+          value: "false"
+
+        - name: persistence.config.storageClass
+          value: "odf-lvm-vg1"
+        

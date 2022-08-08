@@ -1,0 +1,11 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vaultwarden-db
+  namespace: argocd-operator-system
+spec:
+  source:
+    helm:
+      parameters:
+        - name: "global.storageClass"
+          value: "odf-lvm-vg1"

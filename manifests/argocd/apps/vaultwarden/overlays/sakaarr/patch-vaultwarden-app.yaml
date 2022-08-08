@@ -1,0 +1,8 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: vaultwarden-app
+  namespace: argocd-operator-system
+spec:
+  source:
+    path: manifests/argocd/apps/vaultwarden/overlays/sakaarr/apps
