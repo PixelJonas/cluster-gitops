@@ -1,0 +1,22 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: paperless-ng
+spec:
+  source:
+    helm:
+      parameters:
+        - name: persistence.consume.existingClaim
+          value: paperless-ng-import
+        - name: persistence.consume.enabled
+          value: "true"
+        - name: persistence.data.storageClass
+          value: "odf-lvm-vg1"
+        - name: persistence.export.storageClass
+          value: "odf-lvm-vg1"
+        - name: persistence.media.storageClass
+          value: "odf-lvm-vg1"
+        - name: ingress.main.hosts[0].host
+          value: paperless.apps.sakaarr.janz.digital
+        - name: ingress.main.tls[0].hosts[0]
+          value: paperless.apps.sakaarr.janz.digital

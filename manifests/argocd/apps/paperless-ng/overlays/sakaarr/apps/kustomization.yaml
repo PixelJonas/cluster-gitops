@@ -1,0 +1,22 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - "../../../base/apps"
+
+resources:
+  - "import-pv.yaml"
+
+patches:
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
+      name: paperless-ng
+    path: paperless-app-patch.yaml
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
+      name: paperless-ng
+    path: paperless-app-namespace-patch.yaml
