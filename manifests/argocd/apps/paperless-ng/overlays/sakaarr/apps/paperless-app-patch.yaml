@@ -16,9 +16,5 @@ spec:
           value: "odf-lvm-vg1"
         - name: persistence.media.storageClass
           value: "odf-lvm-vg1"
-        - name: ingress.main.ingressClassName
-          value: openshift-default
-        - name: ingress.main.hosts[0].host
-          value: paperless.apps.sakaarr.janz.digital
-        - name: ingress.main.tls[0].hosts[0]
-          value: paperless.apps.sakaarr.janz.digital
+        - name: ingress.main.enabled
+          value: false
