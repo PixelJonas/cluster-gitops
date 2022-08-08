@@ -4,6 +4,9 @@ kind: Kustomization
 bases:
   - "../../../base/apps"
 
+resources:
+  - route.yaml
+
 patches:
   - target:
       group: argoproj.io
