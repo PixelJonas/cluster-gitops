@@ -17,4 +17,4 @@ spec:
         - name: persistence.media.storageClass
           value: "odf-lvm-vg1"
         - name: ingress.main.enabled
-          value: false
+          value: "false"
