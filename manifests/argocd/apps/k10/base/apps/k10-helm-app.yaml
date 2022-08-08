@@ -57,6 +57,9 @@ spec:
     repoURL: https://charts.kasten.io/
     targetRevision: 5.0.4
   ignoreDifferences:
+    - kind: SecurityContextConstraints
+      jsonPointers:
+        - /volumes
     - group: admissionregistration.k8s.io
       kind: MutatingWebhookConfiguration
       jsonPointers:
