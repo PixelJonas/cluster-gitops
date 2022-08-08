@@ -1,4 +1,3 @@
-
 apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
@@ -10,4 +9,4 @@ spec:
     name: cloudflare-issuer
     kind: ClusterIssuer
   dnsNames:
-  - api.sakaarr.janz.digital
+    - api.sakaarr.janz.digital

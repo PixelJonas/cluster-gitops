@@ -1,4 +1,4 @@
-apiVersion: certmanager.k8s.io/v1alpha1
+apiVersion: cert-manager.io/v1
 kind: Certificate
 metadata:
   name: openshift-wildcard
@@ -8,6 +8,6 @@ spec:
   issuerRef:
     name: cloudflare-issuer
     kind: ClusterIssuer
-  commonName: '*.apps.sakaarr.janz.digital'
+  commonName: "*.apps.sakaarr.janz.digital"
   dnsNames:
-  - '*.apps.sakaarr.janz.digital'
+    - "*.apps.sakaarr.janz.digital"

@@ -4,5 +4,5 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 namespace: openshift-config
 
 resources:
-- openshift-api-certificate.yaml
-- https://raw.githubusercontent.com/gnunn-gitops/cluster-config/main/clusters/local.home/apps/cluster-certs/overlays/openshift-api-cert/patch-cluster-api-cert-job.yaml
+  - openshift-api-certificate.yaml
+  - https://raw.githubusercontent.com/gnunn-gitops/cluster-config/main/clusters/local.home/apps/cluster-certs/overlays/openshift-api-cert/patch-cluster-api-cert-job.yaml
