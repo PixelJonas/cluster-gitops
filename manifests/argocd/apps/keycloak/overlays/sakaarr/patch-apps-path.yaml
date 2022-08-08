@@ -1,3 +1,3 @@
 - op: replace
   path: /spec/source/path
-  value: manifests/argocd/apps/keycloak/overlays/sakarr/apps
+  value: manifests/argocd/apps/keycloak/overlays/sakaarr/apps
