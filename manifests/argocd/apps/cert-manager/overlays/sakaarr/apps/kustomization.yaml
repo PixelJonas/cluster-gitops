@@ -1,0 +1,19 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+namespace: cert-manager
+
+bases:
+  - "../../../base/apps"
+
+resources:
+  - ingress-certificate-patch.yaml
+  - api-token.yaml
+
+patches:
+  - target:
+      group: cert-manager.io
+      version: v1
+      kind: ClusterIssuer
+      name: cloudflare-issuer
+    path: patch-issuer-server.yaml
