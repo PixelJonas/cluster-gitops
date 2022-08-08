@@ -19,7 +19,7 @@ spec:
         - name: ingress.main.enabled
           value: "false"
         - name: env.PAPERLESS_URL
-          value: "paperless.janz.digital"
+          value: "https://paperless.janz.digital"
         - name: env.PAPERLESS_ALLOWED_HOSTS
           value: "paperless.apps.sakaarr.janz.digital,paperless.janz.digital,localhost"
         - name: env.PAPERLESS_CORS_ALLOWED_HOSTS
