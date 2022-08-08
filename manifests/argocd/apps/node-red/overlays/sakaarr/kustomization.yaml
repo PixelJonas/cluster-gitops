@@ -30,3 +30,13 @@ patches:
         value:
           name: persistence.data.storageClass
           value: "odf-lvm-vg1"
+
+      - op: "add"
+        path: "/spec/source/helm/parameters/-"
+        value:
+          name: dnsConfig
+          value:
+            nameservers:
+              - 192.168.1.207
+            searches:
+              - janz.lan
