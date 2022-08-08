@@ -8,6 +8,7 @@ bases:
   - ../../../manifests/argocd/apps/cloudflared/base
 
   - ../../../manifests/argocd/apps/cert-manager/overlays/sakaarr
+  - ../../../manifests/argocd/apps/k10/overlays/sakaarr
 
   - ../../../manifests/argocd/apps/sealed-secrets-operator/overlays/titan
 
