@@ -6,9 +6,10 @@ namespace: openshift-gitops
 bases:
   - ../../../manifests/argocd/apps/nfs-provisioner/base
   - ../../../manifests/argocd/apps/cloudflared/base
-  
+
+  - ../../../manifests/argocd/apps/cert-manager/overlays/sakaarr
+
   - ../../../manifests/argocd/apps/sealed-secrets-operator/overlays/titan
-  - ../../../manifests/argocd/apps/cert-manager/overlays/titan
 
 resources:
   - ./cluster-apps-project.yaml
