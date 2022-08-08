@@ -62,13 +62,6 @@
     name: "grafana.prometheusPrefixURL"
     value: "/k10/prometheus/"
 
-
-- op: add
-  path: /spec/source/helm/parameters/-
-  value:
-    name: "auth.tokenAuth.enabled"
-    value: "true"
-
 - op: add
   path: /spec/source/helm/parameters/-
   value:
