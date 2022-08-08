@@ -42,7 +42,7 @@
   path: /spec/source/helm/parameters/-
   value:
     name: "route.tls.insecureEdgeTerminationPolicy"
-    value: "redirect"
+    value: "Redirect"
 
 - op: add
   path: /spec/source/helm/parameters/-
