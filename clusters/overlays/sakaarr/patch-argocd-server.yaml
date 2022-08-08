@@ -1,0 +1,8 @@
+- op: replace
+  path: /spec/dex/openShiftOAuth
+  value: true
+
+- op: add
+  path: /spec/notifications
+  value:
+    enabled: true
