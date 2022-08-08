@@ -3,11 +3,7 @@ kind: SealedSecret
 metadata:
   creationTimestamp: null
   name: cloudflare-api-token
+  namespace: openshift-operators
 spec:
   encryptedData:
     api-token: AgBmceSxYDg+ffWpRocgtFNsTa9WHUtgVq9BwfbGQR3SbNGI5Nv21MazDp2Ldc8L0cw+lb48V3/xKe1bmskMCoTiXe8vIIEMW7YOuRaKuNBq+BJinVC48oJUnaihKOcHbIFQTlhQPgeyS8JK8lhmUNH4hodI8+inAbSmyMTBe1CcW5s157+4pZ1Adpbmcx7twwwP5JbUkhVZTLkpPSe7MLD0X5l9BS50/d9qBthdQv5igh6+uyWE4VMj+eFC1oX2quxtAVoYZkrqfdUg1P0I18m6E73sLU/RQ74qKJ4P9wuaE0OAjO1LnugETth+xpN6H+ig459pv7aYGZ96BRjd1/H0zvasU8oxdeHMaWiIvpSi/JaaDtZUMUXEW2rrkB05VAdMroEL5i342BCD3LXOpznvXRZXwGq56A2GfInYVfl50b3TLnGoDJlrCMZusWSZxuXl5mfmxuBOrCza5b+Dl41MV5yxO2yIZzPUbLPbTjh8Zhrbm+kMEOVL8KQsZqedpibNbEVQXfhLC8P2W+U4Win0PYPdw5Fu4ahRYN/OlDicVBSlT5QszoCDERPMtrz3hn0KnRf3rg+OJOqWIsojT7OzFZP6C3jZE85vdc4AYK40COmf5XgPHOz0ohHyBeHmdx+SUVqS6sJyrDxMraCm+oJU4Dh35L1FAIGZNAE+NOMDTr7eHaf0nRlRggFBf5TAQYnFsmtfc9DUsb7Hsd3oSUhUzBtjL2HUKNy/fSaSeORFsE+UWm1Q+r+c
-  template:
-    metadata:
-      creationTimestamp: null
-      name: cloudflare-api-token
-      namespace: cert-manager
