@@ -1,8 +1,4 @@
 - op: replace
-  path: /metadata/name
-  value: cert-manager-config
-
-- op: replace
   path: /spec/source/path
   value: manifests/argocd/apps/cert-manager/overlays/sakaarr/apps
 

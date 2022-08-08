@@ -6,10 +6,10 @@ namespace: openshift-gitops
 bases:
   - ../../../manifests/argocd/apps/nfs-provisioner/base
   - ../../../manifests/argocd/apps/cloudflared/base
-  
+
   - ../../../manifests/argocd/apps/sealed-secrets-operator/overlays/titan
   - ../../../manifests/argocd/apps/cert-manager/overlays/titan
-  
+
 resources:
   - ./cluster-apps-project.yaml
 
@@ -18,22 +18,29 @@ patches:
       group: argoproj.io
       version: v1alpha1
       kind: Application
-      labelSelector: gitops.ownedBy=cluster-config
     path: patch-gitops-repo.yaml
 
   - target:
       group: argoproj.io
       version: v1alpha1
       kind: Application
-      labelSelector: gitops.ownedBy=cluster-config
     path: patch-target-revision.yaml
 
   - target:
       group: argoproj.io
       version: v1alpha1
       kind: Application
-      labelSelector: gitops.type=app-of-apps
     path: patch-destination.yaml
+
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
+      name: cert-manager
+    patch: |-
+      - op: replace
+        path: /metadata/name
+        value: cert-manager-config
 
   - target:
       group: argoproj.io
