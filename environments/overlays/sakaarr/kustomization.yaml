@@ -6,7 +6,8 @@ namespace: openshift-gitops
 bases:
   - ../../../manifests/argocd/apps/nfs-provisioner/base
   - ../../../manifests/argocd/apps/cloudflared/base
-
+  - ../../../manifests/argocd/apps/qemu-guest-agent/base
+  
   - ../../../manifests/argocd/apps/sealed-secrets-operator/overlays/titan
 
 resources:
