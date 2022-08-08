@@ -1,0 +1,8 @@
+kind: Kustomization
+apiVersion: kustomize.config.k8s.io/v1beta1
+
+namespace: openshift-ingress
+
+resources:
+- openshift-wildcard-certificate.yaml
+- https://raw.githubusercontent.com/gnunn-gitops/cluster-config/main/clusters/local.home/apps/cluster-certs/overlays/openshift-wildcard-cert/patch-cluster-wildcard-cert-job.yaml
