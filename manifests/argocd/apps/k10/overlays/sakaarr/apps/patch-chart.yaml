@@ -56,6 +56,12 @@
     name: "prometheus.server.prefixURL"
     value: "/k10/prometheus/"
 
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    name: "grafana.prometheusPrefixURL"
+    value: "/k10/prometheus/"
+
 
 - op: add
   path: /spec/source/helm/parameters/-
