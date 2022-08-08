@@ -6,6 +6,7 @@ namespace: openshift-gitops
 bases:
   - ../../../manifests/argocd/apps/nfs-provisioner/base
   - ../../../manifests/argocd/apps/cloudflared/base
+  - ../../../manifests/argocd/apps/homeassistant-db/base
 
   - ../../../manifests/argocd/apps/cert-manager/overlays/sakaarr
   - ../../../manifests/argocd/apps/k10/overlays/sakaarr
