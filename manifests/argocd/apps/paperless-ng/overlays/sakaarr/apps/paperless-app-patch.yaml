@@ -22,3 +22,5 @@ spec:
           value: "paperless.apps.sakaarr.janz.digital,paperless.janz.digital,localhost"
         - name: env.PAPERLESS_CORS_ALLOWED_HOSTS
           value: "https://paperless.apps.sakaarr.janz.digital,https://paperless.janz.digital"
+        - name: env.PAPERLESS_CSRF_TRUSTED_ORIGINS
+          value: "https://paperless.apps.sakaarr.janz.digital,https://paperless.janz.digital"
