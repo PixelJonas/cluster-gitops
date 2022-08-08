@@ -24,3 +24,5 @@ spec:
           value: "https://paperless.apps.sakaarr.janz.digital,https://paperless.janz.digital"
         - name: env.PAPERLESS_CSRF_TRUSTED_ORIGINS
           value: "https://paperless.apps.sakaarr.janz.digital,https://paperless.janz.digital"
+        - name: env.PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME
+          value: "Cf-Access-Authenticated-User-Email"
