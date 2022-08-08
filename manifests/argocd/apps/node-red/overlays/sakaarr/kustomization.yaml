@@ -18,13 +18,13 @@ patches:
       - op: "add"
         path: "/spec/source/helm/parameters"
         value: []
-      
+
       - op: "add"
         path: "/spec/source/helm/parameters/-"
         value:
           name: ingress.main.enabled
-          value: false
-      
+          value: "false"
+
       - op: "add"
         path: "/spec/source/helm/parameters/-"
         value:
