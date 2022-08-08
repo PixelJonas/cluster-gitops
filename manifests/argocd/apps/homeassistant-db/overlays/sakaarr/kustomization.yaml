@@ -15,5 +15,5 @@ patches:
       group: argoproj.io
       version: v1alpha1
       kind: Application
-      name: k10-app
+      name: homeassistant-db-app
     path: patch-namespace.yaml
