@@ -4,6 +4,22 @@ kind: Kustomization
 bases:
   - "../../../base/apps"
 
-patchesStrategicMerge:
-  - "vaultwarden-app-patch.yaml"
-  - "vaultwarden-db-patch.yaml"
+patches:
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
+      name: vaultwarden
+    path: vaultwarden-app-patch.yaml
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
+      name: vaultwarden-db
+    path: vaultwarden-db-patch.yaml
+
+  - target:
+      group: argoproj.io
+      version: v1alpha1
+      kind: Application
+    path: argocd-app-namespace.yaml
