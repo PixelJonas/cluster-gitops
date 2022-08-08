@@ -1,0 +1,15 @@
+- op: add
+  path: /spec/source/helm/parameters
+  value: []
+
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    name: "ingress.rules[0].host"
+    value: "sso.apps.sakarr.janz.digital"
+
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    name: "ingress.tls[0].hosts[0]"
+    value: "sso.apps.sakarr.janz.digital"

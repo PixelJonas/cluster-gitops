@@ -12,6 +12,7 @@ bases:
   - ../../../manifests/argocd/apps/k10/overlays/sakaarr
   - ../../../manifests/argocd/apps/paperless-ng/overlays/sakaarr
   - ../../../manifests/argocd/apps/vaultwarden/overlays/sakaarr
+  - ../../../manifests/argocd/apps/keycloak/overlays/sakaarr
 
   - ../../../manifests/argocd/apps/sealed-secrets-operator/overlays/titan
 

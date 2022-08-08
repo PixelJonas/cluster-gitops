@@ -1,0 +1,9 @@
+- op: add
+  path: /spec/source/helm/parameters
+  value: []
+
+- op: add
+  path: /spec/source/helm/parameters/-
+  value:
+    name: "global.storageClass"
+    value: "odf-lvm-vg1"
