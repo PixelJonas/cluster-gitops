@@ -1,5 +1,5 @@
 - op: replace
-  path: /spec/dex/openShiftOAuth
+  path: /spec/sso/dex/openShiftOAuth
   value: true
 
 - op: add

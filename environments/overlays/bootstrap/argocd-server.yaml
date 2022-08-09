@@ -6,8 +6,9 @@ metadata:
   namespace: openshift-gitops
 spec:
   applicationInstanceLabelKey: argocd.argoproj.io/instance
-  dex:
-    openShiftOAuth: true
+  sso:
+    dex:
+      openShiftOAuth: true
   server:
     insecure: true
     route:
@@ -115,6 +116,12 @@ spec:
         hs.message = "Waiting for Job to complete."
         return hs
   resourceExclusions: |
+    - apiGroups:
+        - '*'
+      clusters:
+        - '*'
+      kinds:
+        - SecurityContextConstraints
     - apiGroups:
       - tekton.dev
       clusters:
