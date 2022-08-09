@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: mariadb-homeassistant
+  name: cluster-monitoring-app
   annotations:
     argocd.argoproj.io/sync-wave: "101"
   labels:
     gitops.type: app-of-apps
 spec:
   destination:
-    namespace: argocd
+    namespace: openshift-monitoring
     server: https://kubernetes.default.svc
-  project: cluster-apps
+  project: cluster-config
   source:
-    path: manifests/argocd/apps/mariadb-homeassistant/base/apps
+    path: manifests/argocd/apps/cluster-monitoring/base/apps
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
     targetRevision: master
   syncPolicy:
