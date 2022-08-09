@@ -7,7 +7,7 @@ bases:
   - ../../../manifests/argocd/apps/nfs-provisioner/base
   - ../../../manifests/argocd/apps/cloudflared/base
   - ../../../manifests/argocd/apps/openshift-certs/base
-  - ../../../manifests/argocd/apps/cluster-monitoring
+  - ../../../manifests/argocd/apps/cluster-monitoring/base
 
   - ../../../manifests/argocd/apps/cert-manager/overlays/sakaarr
   - ../../../manifests/argocd/apps/homeassistant-db/overlays/sakaarr
