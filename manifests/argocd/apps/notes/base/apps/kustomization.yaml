@@ -3,5 +3,4 @@ kind: Kustomization
 
 resources:
   - notes-chart-app.yaml
-  - notes-ingress.yaml
   - notes-pv.yaml
