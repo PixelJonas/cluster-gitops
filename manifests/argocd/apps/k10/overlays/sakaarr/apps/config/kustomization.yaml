@@ -7,3 +7,4 @@ bases:
 resources:
   - sealed-backblaze.yaml
   - servicemonitor.yaml
+  - networkpolicy.yaml
