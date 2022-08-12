@@ -4,10 +4,13 @@ metadata:
   name: allow-userworkload-monitoring
   namespace: kasten-io
 spec:
+  podSelector: {}
   ingress:
     - from:
-        - namespaceSelector:
+        - podSelector: {}
+          namespaceSelector:
             matchLabels:
               name: openshift-user-workload-monitoring
+        - podSelector: {}
   policyTypes:
     - Ingress
