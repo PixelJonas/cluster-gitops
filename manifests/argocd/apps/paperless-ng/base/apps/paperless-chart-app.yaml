@@ -73,7 +73,7 @@ spec:
 
             IN="$DOCUMENT_FILE_NAME"
             OUT="${DOCUMENT_FILE_NAME}_tmp"
-            PAGES=$(pdfinfo $IN | grep ^Pages: | tr -dc '0-9')
+            PAGES=$(pdfinfo "$IN" | grep ^Pages: | tr -dc '0-9')
             echo "Starting to remove blank pages from $IN"
             non_blank() {
                 for i in $(seq 1 $PAGES)
@@ -89,9 +89,9 @@ spec:
             }
 
             set +x
-            pdftk $IN cat $(non_blank) output $OUT
+            pdftk "$IN" cat $(non_blank) output "$OUT"
             rm out.tmp
-            mv $OUT $IN
+            mv "$OUT" "$IN"
             echo "finishing removing blank pages from $IN"
 
         env:
