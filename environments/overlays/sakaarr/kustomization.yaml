@@ -5,6 +5,7 @@ namespace: openshift-gitops
 
 bases:
   - ../../../manifests/argocd/apps/nfs-provisioner/base
+  - ../../../manifests/argocd/apps/nfs-provisioner/overlays/backups
   - ../../../manifests/argocd/apps/cloudflared/base
   - ../../../manifests/argocd/apps/openshift-certs/base
   - ../../../manifests/argocd/apps/cluster-monitoring/base
