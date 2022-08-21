@@ -12,6 +12,9 @@ patches:
       name: nfs-provisioner
     patch: |-
 
+      - op: add
+        path: /spec/source/helm/parameters
+        value: []
 
       - op: add
         path: /spec/source/helm/parameters/-
