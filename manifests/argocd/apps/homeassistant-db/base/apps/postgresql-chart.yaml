@@ -48,6 +48,9 @@ spec:
                 - /bin/bash
                 - -c
                 - |-
+                  printf "\e[1;32m%-6s\e[m\n" "Starting PMB Loop-Script ..."
+                  printf "\e[1;32m%-6s\e[m\n" "Waiting 2minutes for everything to be up and running ..."
+                  sleep 2m
                   printf "\e[1;32m%-6s\e[m\n" "Entering while loop ..."
                   BACKUP_SUCCESS=1
                   while [ $BACKUP_SUCCESS -eq 1 ]; do
