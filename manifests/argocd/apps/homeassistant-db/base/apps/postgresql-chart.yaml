@@ -34,11 +34,10 @@ spec:
             kanister.kasten.io/blueprint: postgres-bp
           labels:
             kanister.kasten.io/inject-sidecar: "true"
-          primary:
-            extraVolumes:
-              - name: backup
-                persistentVolumeClaim:
-                  claimName: pvc-homeassistant-db-backup
+          extraVolumes:
+            - name: backup
+              persistentVolumeClaim:
+                claimName: pvc-homeassistant-db-backup
           sidecars:
             - name: pmb-backup-cron
               image: ghcr.io/bjw-s/pmb:rolling
