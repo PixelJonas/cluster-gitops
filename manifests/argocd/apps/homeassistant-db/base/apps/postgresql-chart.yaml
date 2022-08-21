@@ -16,6 +16,8 @@ spec:
     targetRevision: 11.7.5
     helm:
       values: |-
+
+
         global:
           storageClass: openebs-jiva-csi-default
           postgresql:
@@ -32,6 +34,49 @@ spec:
             kanister.kasten.io/blueprint: postgres-bp
           labels:
             kanister.kasten.io/inject-sidecar: "true"
+          primary:
+            extraVolumes:
+              - name: backup
+                persistentVolumeClaim:
+                  claimName: pvc-homeassistant-db-backup
+          sidecars:
+            - name: pmb-backup-cron
+              image: ghcr.io/bjw-s/pmb:rolling
+              imagePullPolicy: Always
+              command:
+                - /bin/bash
+                - -c
+                - |-
+                  printf "\e[1;32m%-6s\e[m\n" "Entering while loop ..."
+                  BACKUP_SUCCESS=1
+                  while [ $BACKUP_SUCCESS -eq 1 ]; do
+                    printf "\e[1;32m%-6s\e[m\n" "Starting backup at $(date) ..."
+                    /entrypoint.sh
+                    printf "\e[1;32m%-6s\e[m\n" "finished backup with $? ..."
+                    BACKUP_EXIT=$?
+                    if [ $BACKUP_EXIT -ne 0 ]; then
+                      printf "\e[1;32m%-6s\e[m\n" "failed backup exiting ..."
+                      BACKUP_SUCCESS=0
+                    else
+                      printf "\e[1;32m%-6s\e[m\n" "backup was successfull waiting 24h for next backup ..."
+                      sleep 24h
+                    fi
+                  done
+              
+              env:
+                - name: KOPIA_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: kopia
+                      key: kopia_password
+                - name: PMB__DEBUG
+                  value: true
+              volumeMounts:
+                - name: data
+                  mountPath: /data/src
+                - name: backup
+                  mountPath: /data/dest
+
 
   syncPolicy:
     syncOptions:

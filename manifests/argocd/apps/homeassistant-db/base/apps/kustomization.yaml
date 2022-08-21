@@ -4,3 +4,5 @@ kind: Kustomization
 resources:
   - postgresql-chart.yaml
   - sealed-homeassistant-db-postgresql.yaml
+  - homeassistant-db-backup-pvc.yaml
+  - sealed-kopia-config.yaml
