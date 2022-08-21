@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: kyverno
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+spec:
+  destination:
+    namespace: kyverno
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: https://kyverno.github.io/kyverno/
+    chart: kyverno
+    targetRevision: 2.5.2
+    helm:
+      values: |-
+
+        installCRDs: false
+
+        extraArgs:
+          - --autogenInternals=false
+          - --clientRateLimitQPS=30
+          - --clientRateLimitBurst=60    
+
+        serviceMonitor:
+          enabled: true
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
