@@ -70,13 +70,12 @@ spec:
                       name: kopia
                       key: kopia_password
                 - name: PMB__DEBUG
-                  value: true
+                  value: "true"
               volumeMounts:
                 - name: data
                   mountPath: /data/src
                 - name: backup
                   mountPath: /data/dest
-
 
   syncPolicy:
     syncOptions:
