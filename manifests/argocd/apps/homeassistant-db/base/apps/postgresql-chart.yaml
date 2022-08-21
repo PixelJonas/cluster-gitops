@@ -42,6 +42,8 @@ spec:
             - name: pmb-backup-cron
               image: ghcr.io/bjw-s/pmb:rolling
               imagePullPolicy: Always
+              securityContext:
+                privileged: true
               command:
                 - /bin/bash
                 - -c
@@ -51,8 +53,8 @@ spec:
                   while [ $BACKUP_SUCCESS -eq 1 ]; do
                     printf "\e[1;32m%-6s\e[m\n" "Starting backup at $(date) ..."
                     /entrypoint.sh
-                    printf "\e[1;32m%-6s\e[m\n" "finished backup with $? ..."
                     BACKUP_EXIT=$?
+                    printf "\e[1;32m%-6s\e[m\n" "finished backup with $BACKUP_EXIT ..."
                     if [ $BACKUP_EXIT -ne 0 ]; then
                       printf "\e[1;32m%-6s\e[m\n" "failed backup exiting ..."
                       BACKUP_SUCCESS=0
