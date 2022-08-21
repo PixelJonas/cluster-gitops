@@ -42,6 +42,7 @@ spec:
             - name: pmb-backup-cron
               image: ghcr.io/bjw-s/pmb:rolling
               imagePullPolicy: Always
+              automountServiceAccountToken: false
               securityContext:
                 privileged: true
               command:
