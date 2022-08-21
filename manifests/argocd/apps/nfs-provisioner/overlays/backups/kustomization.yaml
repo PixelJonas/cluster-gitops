@@ -12,6 +12,15 @@ patches:
       name: nfs-provisioner
     patch: |-
 
+
+      - op: add
+        path: /metadata/name
+        value: nfs-backup-provisioner
+
+      - op: add
+        path: /spec/destination/namespace
+        value: nfs-backup-provisioner
+
       - op: add
         path: /spec/source/helm/parameters
         value: []
