@@ -17,7 +17,6 @@ spec:
     helm:
       values: |-
 
-
         global:
           storageClass: openebs-jiva-csi-default
           postgresql:
@@ -84,6 +83,13 @@ spec:
           #       - name: backup
           #         mountPath: /data/dest
 
+  ignoreDifferences:
+    - group: "apps"
+      kind: "StatefulSet"
+      jsonPointers:
+      - /spec/replicas
+      
   syncPolicy:
     syncOptions:
+      - RespectIgnoreDifferences=true
       - CreateNamespace=true
