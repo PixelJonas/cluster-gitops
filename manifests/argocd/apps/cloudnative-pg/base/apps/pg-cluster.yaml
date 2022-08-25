@@ -1,0 +1,19 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: postgres
+  namespace: cloudnative-pg
+  annotations:
+    argocd.argoproj.io/sync-wave: "50"  
+spec:
+  instances: 3
+  primaryUpdateStrategy: unsupervised
+  storage:
+    size: 40Gi
+    storageClass: odf-lvm-vg1
+  superuserSecret:
+    name: postgres-superuser
+  monitoring:
+    enablePodMonitor: true
+  backup:
+    retentionPolicy: 30d

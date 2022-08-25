@@ -10,6 +10,7 @@ bases:
   - ../../../manifests/argocd/apps/openshift-certs/base
   - ../../../manifests/argocd/apps/cluster-monitoring/base
   - ../../../manifests/argocd/apps/kyverno/base
+  - ../../../manifests/argocd/apps/cloudnative-pg/base
 
   - ../../../manifests/argocd/apps/cert-manager/overlays/sakaarr
   - ../../../manifests/argocd/apps/homeassistant-db/overlays/sakaarr
