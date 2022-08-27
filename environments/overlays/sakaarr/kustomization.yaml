@@ -10,7 +10,7 @@ bases:
   - ../../../manifests/argocd/apps/openshift-certs/base
   - ../../../manifests/argocd/apps/cluster-monitoring/base
   - ../../../manifests/argocd/apps/kyverno/base
-  - ../../../manifests/argocd/apps/cloudnative-pg/base
+#  - ../../../manifests/argocd/apps/cloudnative-pg/base
   - ../../../manifests/argocd/apps/machineconfig/base
 
   - ../../../manifests/argocd/apps/cert-manager/overlays/sakaarr
@@ -20,7 +20,7 @@ bases:
   - ../../../manifests/argocd/apps/vaultwarden/overlays/sakaarr
   - ../../../manifests/argocd/apps/keycloak/overlays/sakaarr
   - ../../../manifests/argocd/apps/node-red/overlays/sakaarr
-  - ../../../manifests/argocd/apps/notes/overlays/sakaarr
+  #- ../../../manifests/argocd/apps/notes/overlays/sakaarr
 
   - ../../../manifests/argocd/apps/sealed-secrets-operator/overlays/titan
 
