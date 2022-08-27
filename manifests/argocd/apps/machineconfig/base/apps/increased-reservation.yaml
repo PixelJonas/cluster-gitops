@@ -3,6 +3,9 @@ kind: KubeletConfig
 metadata:
   name: increased-reservation
 spec:
+  machineConfigPoolSelector:
+    matchLabels:
+      increased-memory: enabled
   kubeletConfig:
     systemReserved:
       memory: 2Gi
