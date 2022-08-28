@@ -49,7 +49,7 @@ spec:
               when:
                 - input: "$(tt.params.postgres-controller)"
                   operator: notin
-                  values: [ "" ]
+                  values: ["", "/"]
               taskRef:
                 kind: ClusterTask
                 name: backup-bitnami-postgresql
@@ -60,7 +60,7 @@ spec:
               params:
                 - name: CONTROLLER_NAME
                   value: $(params.postgres-controller)
-          finally:        
+          finally:
             - name: sync-kopia-repo
               taskRef:
                 kind: ClusterTask
