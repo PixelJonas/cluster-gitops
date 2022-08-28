@@ -16,7 +16,7 @@ spec:
     helm:
       values: |-
         global:
-          storageClass: local-path
+          storageClass: odf-lvm-vg1
           postgresql:
             auth:
               username: papperless
