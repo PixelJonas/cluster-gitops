@@ -17,8 +17,11 @@ metadata:
       An optional label of "snapshot.pmb/ignoreAffinity" may be set on the PVC
       if the pod is guaranteed to not run during the time of this jobs execution
 
-      An optional label of "snapshot.pmb/postgres-controller" may be set to a controller
-      running a postgresql database which be part of the backup. example "snapshot.pmb/postgres-controller=sts/myapp-postgresql"
+      An optional label of "snapshot.pmb/postgres-controller-name" and "snapshot.pmb/postgres-controller-type"  may be set to a controller
+      running a postgresql database which be part of the backup. 
+      example:
+          "snapshot.pmb/postgres-controller-name=myapp-postgresql"
+          "snapshot.pmb/postgres-controller-type=sts"
 spec:
   generateExistingOnPolicyUpdate: true
   mutateExistingOnPolicyUpdate: true
@@ -82,9 +85,12 @@ spec:
         - name: namespace
           variable:
             jmesPath: "request.object.metadata.namespace"
-        - name: postgresController
+        - name: postgresControllerName
           variable:
-            jmesPath: 'request.object.metadata.labels."snapshot.pmb/postgres-controller"'
+            jmesPath: 'request.object.metadata.labels."snapshot.pmb/postgres-controller-name"'
+        - name: postgresControllerType
+          variable:
+            jmesPath: 'request.object.metadata.labels."snapshot.pmb/postgres-controller-type"'
         - name: nodeAffinity
           variable:
             value:
@@ -143,7 +149,7 @@ spec:
                           - |-
                             printf "\e[1;32m%-6s\e[m\n" "Pinging pmb-tekton to run backup"
                             curl -X POST \
-                              -d '{"namespace": "{{ namespace }}", "destination-pvc": "{{ claimName }}-backup", "source-pvc": "{{ claimName }}", "postgres-controller": "{{ postgresController }}" ,"kopia_password": "$KOPIA_PASSWORD"}' http://el-pmb-listener.pmb-backup.svc.cluster.local:8080
+                              -d '{"namespace": "{{ namespace }}", "destination-pvc": "{{ claimName }}-backup", "source-pvc": "{{ claimName }}", "postgres-controller": "{{ postgresControllerType }}/{{ postgresControllerName }}" ,"kopia_password": "$KOPIA_PASSWORD"}' http://el-pmb-listener.pmb-backup.svc.cluster.local:8080
                     affinity:
                       podAffinity:
                         requiredDuringSchedulingIgnoredDuringExecution:
