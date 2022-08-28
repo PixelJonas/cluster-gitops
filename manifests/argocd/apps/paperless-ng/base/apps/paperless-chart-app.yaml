@@ -10,9 +10,9 @@ spec:
     namespace: paperless
     server: "https://kubernetes.default.svc"
   source:
+    chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
     targetRevision: 0.1.1
-    chart: paperless
     helm:
       values: |-
 
@@ -122,6 +122,13 @@ spec:
           PAPERLESS_PRE_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/pdf_rm_blank.sh
           PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
           PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: "HTTP_X_AUTH_REQUEST_PREFERRED_USERNAME"
+          PAPERLESS_DBHOST: ""
+          PAPERLESS_DBPORT: ""
+          PAPERLESS_DBPASS:
+            valueFrom:
+              secretKeyRef:
+                name: keycloak-db-postgresql
+                key: password
         
         
         command: ["/bin/bash"] # "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
