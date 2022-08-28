@@ -145,7 +145,7 @@ spec:
                                 key: kopia_password
                                 name: kopia
                           - name: NAMESPACE
-                            value: { { namespace } }
+                            value: "{{ namespace }}"
                           - name: DESTINATION_PVC
                             value:
                         command:
