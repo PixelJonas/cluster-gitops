@@ -1,0 +1,27 @@
+apiVersion: tekton.dev/v1beta1
+kind: ClusterTask
+metadata:
+  name: pmb-kopia-backup
+spec:
+  params:
+    - name: KOPIA_PASSWORD
+      type: string
+      description: name of the secret with key "kopia_password" containing the kopia repo password (default kopia)
+      default: kopia
+  workspaces:
+    - name: source-dir
+    - name: destination-dir
+  steps:
+    - name: kopia-backup
+      image: ghcr.io/bjw-s/pmb:rolling
+      env:
+        - name: KOPIA_PASSWORD
+          value: $(params.KOPIA_PASSWORD)
+        - name: PMB__SRC_DIR
+          value: $(workspaces.source-dir.path)
+        - name: PMB__DEST_DIR
+          value: $(workspaces.destination-dir.path)
+        - name: PMB__FSFREEZE
+          value: "false"
+        - name: PMB__DEBUG
+          value: "true"

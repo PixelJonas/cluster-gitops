@@ -1,0 +1,22 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: EventListener
+metadata:
+  name: pmb-listener
+  namespace: pmb-backup
+spec:
+  serviceAccountName: pipeline
+  triggers:
+    - name: backup
+      bindings:
+        - name: namespace
+          value: $(body.namespace)
+        - name: kopia_password
+          value: $(body.kopia_password)
+        - name: destination-pvc
+          value: $(body.destination-pvc)
+        - name: source-pvc
+          value: $(body.source-pvc)
+        - name: postgres-controller
+          value: $(body.postgres-controller)
+      template:
+        ref: pmb-backup-template

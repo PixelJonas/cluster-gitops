@@ -1,0 +1,75 @@
+apiVersion: triggers.tekton.dev/v1beta1
+kind: TriggerTemplate
+metadata:
+  name: pmb-backup-template
+  namespace: pmb-backup
+spec:
+  params:
+    - name: namespace
+    - name: kopia_password
+    - name: destination-pvc
+      description: Name of the PVC to be used for kopia
+    - name: source-pvc
+      description: Name of a PVC where the files for backup are
+    - name: postgres-controller
+      default: ""
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1beta1
+      kind: PipelineRun
+      metadata:
+        generateName: pmb-backup-
+        namespace: $(tt.params.namespace)
+        annotations:
+          pipeline.openshift.io/started-by: external
+      spec:
+        params:
+          - name: KOPIA_PASSWORD
+            value: $(tt.params.kopia_password)
+          - name: postgres-controller
+            value: $(tt.params.postgres-controller)
+        workspaces:
+          - name: destination
+            persistentVolumeClaim:
+              claimName: $(tt.params.destination-pvc)
+          - name: source-dir
+            persistentVolumeClaim:
+              claimName: $(tt.params.source-pvc)
+        pipelineSpec:
+          params:
+            - name: KOPIA_PASSWORD
+              type: string
+            - name: postgres-controller
+              type: string
+              default: ""
+          workspaces:
+            - name: source-dir
+            - name: destination
+          tasks:
+            - name: backup-database
+              when:
+                - input: "$(tt.params.postgres-controller)"
+                  operator: notin
+                  values: [ "" ]
+              taskRef:
+                kind: ClusterTask
+                name: backup-bitnami-postgresql
+              workspaces:
+                - name: source-dir
+                  workspace: source-dir
+                  subPath: postgres-backup
+              params:
+                - name: CONTROLLER_NAME
+                  value: $(params.postgres-controller)
+          finally:        
+            - name: sync-kopia-repo
+              taskRef:
+                kind: ClusterTask
+                name: pmb-kopia-backup
+              params:
+                - name: KOPIA_PASSWORD
+                  value: $(params.KOPIA_PASSWORD)
+              workspaces:
+                - name: source-dir
+                  workspace: source-dir
+                - name: destination-dir
+                  workspace: destination

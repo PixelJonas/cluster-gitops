@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1beta1
+kind: ClusterTask
+metadata:
+  name: backup-bitnami-postgresql
+spec:
+  params:
+    - name: CONTROLLER_NAME
+      type: string
+  workspaces:
+    - name: source-dir
+  steps:
+    - name: pg-dump-via-kubectl
+      image: quay.io/openshift/origin-cli:4.10
+      command: ["/bin/bash", "-c"]
+      args:
+        - |-
+          set -e
+          
+          echo -----------------------------------
+          echo "Backing up $(params.CONTROLLER_NAME) database"
+          kubectl exec $(params.CONTROLLER_NAME) --container postgresql -- /bin/bash -c 'PGPASSWORD=$POSTGRES_PASSWORD pg_dump -U $POSTGRES_USER' > $(workspaces.source-dir.path)/backup.sql
+          echo -----------------------------------
+    - name: show-backup
+      image: registry.redhat.io/ubi7/ubi-minimal
+      command: ["/bin/bash", "-c"]
+      args:
+        - |-
+          ls -alh $(workspaces.source-dir.path)/backup.sql
