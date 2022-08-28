@@ -65,6 +65,9 @@ spec:
             accessMode: ReadWriteOnce
             mountPath: /data
             size: 3Gi
+            labels:
+              "snapshot.pmb/enabled": "true"
+
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
