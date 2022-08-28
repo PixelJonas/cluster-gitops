@@ -12,10 +12,17 @@ spec:
   project: cluster-apps
   source:
     chart: node-red
-    repoURL: https://k8s-at-home.com/charts/
+    repoURL: https://bjw-s.github.io/helm-charts
     targetRevision: 10.3.2
     helm:
       values: |-
+
+        image:
+          repository: nodered/node-red
+          tag: 2.2.2
+          pullPolicy: IfNotePresent
+
+
         controller:
           labels:
             kanister.kasten.io/inject-sidecar: "true"
@@ -25,6 +32,15 @@ spec:
 
         env:
           TZ: Europe/Berlin
+          NODE_RED_ENABLE_PROJECTS: "false"
+          NODE_RED_ENABLE_SAFE_MODE: "false"
+          FLOWS: "flows.json"
+
+        service:
+          main:
+            ports:
+              http:
+                port: 1880
           
         ingress:
           main:
@@ -47,6 +63,7 @@ spec:
             enabled: true
             storageClass: openebs-jiva-csi-default
             accessMode: ReadWriteOnce
+            mountPath: /data
             size: 3Gi
   syncPolicy:
     syncOptions:
