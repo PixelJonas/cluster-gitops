@@ -183,7 +183,7 @@ spec:
             size: 10Gi
             labels:
               "snapshot.pmb/enabled": "true"
-              "snapshot.pmb/postgres-controller": "paperless-db-postgresql"
+              "snapshot.pmb/postgres-controller": "sts/paperless-db-postgresql"
           export:
             enabled: true       
             mountPath: /usr/src/paperless/export
