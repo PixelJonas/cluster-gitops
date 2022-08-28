@@ -10,15 +10,21 @@ spec:
     namespace: vaultwarden
     server: "https://kubernetes.default.svc"
   source:
-    repoURL: "https://k8s-at-home.com/charts/"
-    targetRevision: 5.3.2
-    chart: vaultwarden
+    chart: app-template
+    repoURL: https://bjw-s.github.io/helm-charts
+    targetRevision: 0.1.1
     helm:
       values: |-
+
+        image:
+          repository: vaultwarden/server
+          tag: 1.25.2
+          pullPolicy: IfNotPresent
 
         env:
           - name: TZ
             value: Europe/Berlin
+          - DATA_FOLDER: "config"            
           - name: DATABASE_URL
             valueFrom:
               secretKeyRef:
@@ -37,6 +43,15 @@ spec:
         podLabels:
           kanister.kasten.io/inject-sidecar: "true"
 
+        service:
+          main:
+            ports:
+              http:
+                port: 80
+              websocket:
+                enabled: true
+                port: 3012
+                
         ingress:
           main:
             annotations:

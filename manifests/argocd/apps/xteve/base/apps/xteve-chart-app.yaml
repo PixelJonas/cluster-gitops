@@ -10,11 +10,16 @@ spec:
     namespace: xteve
     server: "https://kubernetes.default.svc"
   source:
-    repoURL: "https://k8s-at-home.com/charts/"
-    targetRevision: 8.4.2
-    chart: xteve
+    chart: app-template
+    repoURL: https://bjw-s.github.io/helm-charts
+    targetRevision: 0.1.1
     helm:
       values: |-
+
+        image:
+          repository: ghcr.io/k8s-at-home/xteve
+          tag: v2.2.0.200
+          pullPolicy: IfNotPresent
 
         env:
           TZ: Europe/Berlin
@@ -26,6 +31,12 @@ spec:
         podLabels:
           kanister.kasten.io/inject-sidecar: "true"
 
+        service:
+          main:
+            ports:
+              http:
+                port: 34400
+                
         ingress:
           main:
             annotations:

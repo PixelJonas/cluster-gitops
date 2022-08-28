@@ -9,17 +9,28 @@ spec:
     namespace: uptime-kuma
     server: "https://kubernetes.default.svc"
   source:
-    repoURL: "https://k8s-at-home.com/charts/"
-    targetRevision: 1.4.2
-    chart: uptime-kuma
+    chart: app-template
+    repoURL: https://bjw-s.github.io/helm-charts
+    targetRevision: 0.1.1
     helm:
       values: |-
 
+        image:
+          repository: louislam/uptime-kuma
+          tag: 1.17.1
+          pullPolicy: IfNotPresent
+
+
         env:
-          - name: TZ
-            value: Europe/Berlin
-          - name: UPTIME_KUMA_PORT
-            value: "3001"
+          TZ: Europe/Berlin
+          UPTIME_KUMA_PORT: "3001"
+          UPTIME_KUMA_DISABLE_FRAME_SAMEORIGIN: "0"
+
+        service:
+          main:
+            ports:
+              http:
+                port: 3001
 
         ingress:
           main:
@@ -48,6 +59,7 @@ spec:
             enabled: true
             storageClass: openebs-jiva-csi-default
             size: 3Gi
+            mountPath: /app/data
             accessMode: ReadWriteOnce
 
   project: cluster-apps

@@ -10,11 +10,17 @@ spec:
     namespace: sharry
     server: "https://kubernetes.default.svc"
   source:
-    repoURL: "https://k8s-at-home.com/charts/"
-    targetRevision: 5.4.2
-    chart: sharry
+    chart: app-template
+    repoURL: https://bjw-s.github.io/helm-charts
+    targetRevision: 0.1.1
     helm:
       values: |-
+
+
+        image:
+          repository: eikek0/sharry
+          tag: v1.11.0
+          pullPolicy: IfNotPresent
 
         env:
           - name: TZ
@@ -107,7 +113,10 @@ spec:
               }
             }
           }
-         
+
+        args:
+        - "/opt/sharry.conf"    
+
         controller:
           labels:
             kanister.kasten.io/inject-sidecar: "true"
@@ -115,22 +124,11 @@ spec:
         podLabels:
           kanister.kasten.io/inject-sidecar: "true"
 
-        ingress:
+        service:
           main:
-            annotations:
-              nginx.ingress.kubernetes.io/proxy-body-size: 1500m
-            enabled: true
-            ingressClassName: nginx
-            pathType: Prefix
-            hosts:
-              - host: sharry.apps.titan.janz.digital
-                paths:
-                  - path: /
-                    pathType: Prefix
-
-            tls:
-              - hosts:
-                  - sharry.apps.titan.janz.digital
+            ports:
+              http:
+                port: 9090
 
   project: cluster-apps
   syncPolicy:
