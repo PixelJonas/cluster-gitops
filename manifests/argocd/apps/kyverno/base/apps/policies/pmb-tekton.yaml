@@ -149,7 +149,7 @@ spec:
                           - |-
                             printf "\e[1;32m%-6s\e[m\n" "Pinging pmb-tekton to run backup"
                             curl -X POST \
-                              -d '{"namespace": "{{ namespace }}", "destination-pvc": "{{ claimName }}-backup", "source-pvc": "{{ claimName }}", "postgres-controller": "{{ (request.object.metadata.labels."postgres-controller" || '') }}" ,"kopia_password": "$KOPIA_PASSWORD"}' http://el-pmb-listener.pmb-backup.svc.cluster.local:8080
+                              -d '{"namespace": "{{ namespace }}", "destination-pvc": "{{ claimName }}-backup", "source-pvc": "{{ claimName }}", "postgres-controller": "{{ ( postgres-controller || '') }}" ,"kopia_password": "$KOPIA_PASSWORD"}' http://el-pmb-listener.pmb-backup.svc.cluster.local:8080
                     affinity:
                       podAffinity:
                         requiredDuringSchedulingIgnoredDuringExecution:
