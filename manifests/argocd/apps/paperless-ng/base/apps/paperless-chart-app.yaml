@@ -124,6 +124,7 @@ spec:
           PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: "HTTP_X_AUTH_REQUEST_PREFERRED_USERNAME"
           PAPERLESS_DBHOST: "paperless-db-postgresql"
           PAPERLESS_DBPORT: "5432"
+          PAPERLESS_DBUSER: "papperless"
           PAPERLESS_DBPASS:
             valueFrom:
               secretKeyRef:
@@ -131,8 +132,8 @@ spec:
                 key: password
         
         
-        command: ["/bin/bash"] # "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
-        args: ["-c", "while true ;do sleep 50; done"] # ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
+        command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
+        args: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
         podSecurityContext:
           runAsUser: 0
