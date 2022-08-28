@@ -50,18 +50,17 @@ spec:
       generate:
         apiVersion: v1
         kind: PersistentVolumeClaim
-        metadata:
-          labels:
-          name: "{{ appName }}-{{ claimName }}-backup"
-          namespace: "{{ namespace }}"
-        spec:
-          accessModes:
-            - ReadWriteOnce
-          resources:
-            requests:
-              storage: "{{ size }}"
-          storageClassName: pmb-backup
-          volumeMode: Filesystem
+        name: "{{ appName }}-{{ claimName }}-backup"
+        namespace: "{{ namespace }}"
+        data:
+          spec:
+            accessModes:
+              - ReadWriteOnce
+            resources:
+              requests:
+                storage: "{{ size }}"
+            storageClassName: pmb-backup
+            volumeMode: Filesystem
     - name: create-pmb-cronjob
       match:
         any:
