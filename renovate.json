@@ -19,7 +19,8 @@
       ],
       "matchStrings": [
         "repository: (?<depName>.*?)\n *tag: '(?<currentValue>.*)'\n",
-        "repository: (?<depName>.*?)\n *pullPolicy: .*\n *tag: '(?<currentValue>.*)'\n"
+        "repository: (?<depName>.*?)\n *pullPolicy: .*\n *tag: '(?<currentValue>.*)'\n",
+        "dockerRepo=(?<depName>.*?)\n *tag: '(?<currentValue>.*)'\n"
       ],
       "datasourceTemplate": "docker"
     }
