@@ -20,7 +20,7 @@ spec:
         image:
           repository: nodered/node-red
           tag: 2.2.2
-          pullPolicy: IfNotePresent
+          pullPolicy: IfNotPresent
 
 
         controller:
