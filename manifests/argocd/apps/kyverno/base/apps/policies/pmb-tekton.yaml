@@ -82,7 +82,7 @@ spec:
         - name: namespace
           variable:
             jmesPath: "request.object.metadata.namespace"
-        - name: postgres-controller
+        - name: postgresController
           variable:
             jmesPath: 'request.object.metadata.labels."snapshot.pmb/postgres-controller"'
         - name: nodeAffinity
@@ -149,7 +149,7 @@ spec:
                           - |-
                             printf "\e[1;32m%-6s\e[m\n" "Pinging pmb-tekton to run backup"
                             curl -X POST \
-                              -d '{"namespace": "{{ namespace }}", "destination-pvc": "{{ claimName }}-backup", "source-pvc": "{{ claimName }}", "postgres-controller": "{{ ( postgres-controller || '') }}" ,"kopia_password": "$KOPIA_PASSWORD"}' http://el-pmb-listener.pmb-backup.svc.cluster.local:8080
+                              -d '{"namespace": "{{ namespace }}", "destination-pvc": "{{ claimName }}-backup", "source-pvc": "{{ claimName }}", "postgres-controller": "{{ postgresController }}" ,"kopia_password": "$KOPIA_PASSWORD"}' http://el-pmb-listener.pmb-backup.svc.cluster.local:8080
                     affinity:
                       podAffinity:
                         requiredDuringSchedulingIgnoredDuringExecution:
