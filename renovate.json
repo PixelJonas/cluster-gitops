@@ -18,9 +18,9 @@
         "manifests/.+\\.ya?ml$"
       ],
       "matchStrings": [
-        "repository: (?<depName>.*?)\n *tag: '(?<currentValue>.*)'\n",
-        "repository: (?<depName>.*?)\n *pullPolicy: .*\n *tag: '(?<currentValue>.*)'\n",
-        "containerRepo=(?<depName>.*?)\n *tag: '(?<currentValue>.*)'\n"
+        " *repository: '?\"?(?<depName>.*?)'?\"?\n *tag: *'?\"?(?<currentValue>.*)'?\"?\n",
+        " *repository: '?\"?(?<depName>.*?)'?\"?\n *pullPolicy:.*\n *tag: *'?\"?(?<currentValue>.*)'?\"?\n",
+        " *containerRepo='?\"?(?<depName>.*?)'?\"?\n *tag: '?\"?(?<currentValue>.*)'?\"?\n"
       ],
       "datasourceTemplate": "docker"
     }
