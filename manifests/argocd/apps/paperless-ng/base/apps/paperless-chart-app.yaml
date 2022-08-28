@@ -124,7 +124,7 @@ spec:
           PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: "HTTP_X_AUTH_REQUEST_PREFERRED_USERNAME"
           PAPERLESS_DBHOST: "paperless-db-postgresql"
           PAPERLESS_DBPORT: "5432"
-          PAPERLESS_DBUSER: "papperless"
+          PAPERLESS_DBUSER: "paperless"
           PAPERLESS_DBPASS:
             valueFrom:
               secretKeyRef:

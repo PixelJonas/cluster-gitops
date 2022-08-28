@@ -19,7 +19,7 @@ spec:
           storageClass: odf-lvm-vg1
           postgresql:
             auth:
-              username: papperless
+              username: paperless
               existingSecret: paperless-db-postgresql
               database: paperless
         primary:
