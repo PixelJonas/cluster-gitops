@@ -3,3 +3,5 @@ kind: Kustomization
 
 resources:
   - paperless-chart-app.yaml
+  - sealed-postgresql-credentials.yaml
+  - postgresql-chart.yaml

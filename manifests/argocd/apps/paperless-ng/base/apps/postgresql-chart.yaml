@@ -1,0 +1,33 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: paperless-db
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+spec:
+  destination:
+    namespace: paperless
+    server: https://kubernetes.default.svc
+  project: cluster-apps
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: postgresql
+    targetRevision: 11.8.1
+    helm:
+      values: |-
+        global:
+          storageClass: local-path
+          postgresql:
+            auth:
+              username: papperless
+              existingSecret: paperless-db-postgresql
+              database: paperless
+        primary:
+          annotations: 
+            kanister.kasten.io/blueprint: postgres-bp
+          labels:
+            kanister.kasten.io/inject-sidecar: "true"
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true

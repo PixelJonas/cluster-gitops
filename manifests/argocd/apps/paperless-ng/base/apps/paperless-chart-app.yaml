@@ -10,11 +10,17 @@ spec:
     namespace: paperless
     server: "https://kubernetes.default.svc"
   source:
-    repoURL: "https://k8s-at-home.com/charts/"
-    targetRevision: 9.1.3
+    repoURL: https://bjw-s.github.io/helm-charts
+    targetRevision: 0.1.1
     chart: paperless
     helm:
       values: |-
+
+        image:
+          repository: ghcr.io/paperless-ngx/paperless-ngx
+          tag: 1.8.0
+          pullPolicy: IfNotPresent
+
 
         secret:
           docker-entrypoint.sh: |-
@@ -131,6 +137,12 @@ spec:
         podLabels:
           kanister.kasten.io/inject-sidecar: "true"
 
+        service:
+          main:
+            ports:
+              http:
+                port: 8000
+
         ingress:
           main:
             annotations:
@@ -150,15 +162,25 @@ spec:
         persistence:
           data:
             enabled: true
+            mountPath: /usr/src/paperless/data
+            accessMode: ReadWriteOnce
             storageClass: openebs-jiva-csi-default
             size: 3Gi
           media:
             enabled: true
+            mountPath: /usr/src/paperless/media
+            accessMode: ReadWriteOnce            
             storageClass: openebs-jiva-csi-default
             size: 10Gi
           export:
-            enabled: true
+            enabled: true       
+            mountPath: /usr/src/paperless/export
+            accessMode: ReadWriteOnce
             size: 1Gi
+          consume:
+            enabled: false
+            mountPath: /usr/src/paperless/consume
+            accessMode: ReadWriteOnce       
           custom-scripts:
             name: paperless-ng
             enabled: true
