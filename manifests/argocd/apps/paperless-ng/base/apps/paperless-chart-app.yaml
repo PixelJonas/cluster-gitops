@@ -132,8 +132,8 @@ spec:
                 key: password
         
         
-        command: ["/bin/bash"] # "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
-        args: ["-c", "while true ;do sleep 50; done"] # ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
+        command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
+        args: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
         podSecurityContext:
           runAsUser: 0
