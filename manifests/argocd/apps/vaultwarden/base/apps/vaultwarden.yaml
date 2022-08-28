@@ -22,15 +22,14 @@ spec:
           pullPolicy: IfNotPresent
 
         env:
-          - name: TZ
-            value: Europe/Berlin
-          - DATA_FOLDER: "config"            
-          - name: DATABASE_URL
+          TZ: Europe/Berlin
+          DATA_FOLDER: "config"            
+          DATABASE_URL:
             valueFrom:
               secretKeyRef:
                 name: vaultwarden-credentials
                 key: db-url
-          - name: ADMIN_TOKEN
+          ADMIN_TOKEN:
             valueFrom:
               secretKeyRef:
                 name: vaultwarden-credentials
@@ -51,7 +50,7 @@ spec:
               websocket:
                 enabled: true
                 port: 3012
-                
+
         ingress:
           main:
             annotations:
