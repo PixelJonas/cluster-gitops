@@ -86,9 +86,11 @@ spec:
           variable:
             jmesPath: "request.object.metadata.namespace"
         - name: postgresControllerName
+          default: ""
           variable:
             jmesPath: 'request.object.metadata.labels."snapshot.pmb/postgres-controller-name"'
         - name: postgresControllerType
+          default: ""
           variable:
             jmesPath: 'request.object.metadata.labels."snapshot.pmb/postgres-controller-type"'
         - name: nodeAffinity
