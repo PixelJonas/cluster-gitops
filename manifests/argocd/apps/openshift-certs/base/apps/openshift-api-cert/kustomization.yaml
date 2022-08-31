@@ -5,7 +5,7 @@ namespace: openshift-config
 
 resources:
   - openshift-api-certificate.yaml
-  - https://raw.githubusercontent.com/gnunn-gitops/cluster-config/main/clusters/local.home/apps/cluster-certs/overlays/openshift-api-cert/patch-cluster-api-cert-job.yaml
+  - https://raw.githubusercontent.com/gnunn-gitops/cluster-config/main/components/apps/certificates/base/patch-cluster-api-cert-job.yaml
 
 patches:
   - target:
