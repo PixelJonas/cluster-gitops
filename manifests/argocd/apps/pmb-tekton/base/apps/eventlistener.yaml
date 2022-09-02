@@ -16,6 +16,8 @@ spec:
           value: $(body.destination-pvc)
         - name: source-pvc
           value: $(body.source-pvc)
+        - name: temp-pvc
+          value: $(body.temp-pvc)
         - name: postgres-controller
           value: $(body.postgres-controller)
       template:

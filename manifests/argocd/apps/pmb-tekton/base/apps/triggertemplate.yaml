@@ -11,6 +11,8 @@ spec:
       description: Name of the PVC to be used for kopia
     - name: source-pvc
       description: Name of a PVC where the files for backup are
+    - name: temp-pvc
+      description: Name of a PVC where the files for backup are
     - name: postgres-controller
       default: ""
   resourcetemplates:
@@ -34,6 +36,9 @@ spec:
           - name: source-dir
             persistentVolumeClaim:
               claimName: $(tt.params.source-pvc)
+          - name: temp-dir
+            persistentVolumeClaim:
+            claimName: $(tt.params.temp-pvc)           
         pipelineSpec:
           params:
             - name: KOPIA_PASSWORD
@@ -57,6 +62,8 @@ spec:
                 - name: source-dir
                   workspace: source-dir
                   subPath: postgres-backup
+                - name: temp-dir
+                  workspace: temp-dir
               params:
                 - name: CONTROLLER_NAME
                   value: $(params.postgres-controller)
