@@ -38,7 +38,7 @@ spec:
               claimName: $(tt.params.source-pvc)
           - name: temp-dir
             persistentVolumeClaim:
-              claimName: $(tt.params.temp-pvc)           
+              claimName: $(tt.params.temp-pvc)
         pipelineSpec:
           params:
             - name: KOPIA_PASSWORD
@@ -49,6 +49,7 @@ spec:
           workspaces:
             - name: source-dir
             - name: destination
+            - name: temp-dir
           tasks:
             - name: backup-database
               when:
