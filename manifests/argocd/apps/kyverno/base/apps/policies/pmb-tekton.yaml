@@ -92,7 +92,7 @@ spec:
       generate:
         apiVersion: v1
         kind: PersistentVolumeClaim
-        name: "{{ appName }}-backup"
+        name: "{{ appName }}-temp"
         namespace: "{{ namespace }}"
         data:
           spec:
@@ -190,7 +190,7 @@ spec:
                           - |-
                             printf "\e[1;32m%-6s\e[m\n" "Pinging pmb-tekton to run backup"
                             curl -X POST \
-                              -d '{"namespace": "{{ namespace }}", "destination-pvc": "{{ claimName }}-backup", "source-pvc": "{{ claimName }}", "temp-pvc": "{{ postgresControllerName }}", "postgres-controller": "{{ postgresControllerType }}/{{ postgresControllerName }}" ,"kopia_password": "$KOPIA_PASSWORD"}' http://el-pmb-listener.pmb-backup.svc.cluster.local:8080
+                              -d '{"namespace": "{{ namespace }}", "destination-pvc": "{{ claimName }}-backup", "source-pvc": "{{ claimName }}", "temp-pvc": "{{ postgresControllerName }}-temp", "postgres-controller": "{{ postgresControllerType }}/{{ postgresControllerName }}" ,"kopia_password": "$KOPIA_PASSWORD"}' http://el-pmb-listener.pmb-backup.svc.cluster.local:8080
                     affinity:
                       podAffinity:
                         requiredDuringSchedulingIgnoredDuringExecution:
