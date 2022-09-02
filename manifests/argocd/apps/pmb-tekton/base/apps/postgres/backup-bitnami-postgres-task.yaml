@@ -19,11 +19,11 @@ spec:
           
           echo -----------------------------------
           echo "Backing up $(params.CONTROLLER_NAME) database"
-          kubectl exec $(params.CONTROLLER_NAME) --container postgresql -- /bin/bash -c 'PGPASSWORD=$POSTGRES_POSTGRES_PASSWORD pg_dump -U postgres -d $POSTGRES_DB' > $(workspaces.temp-dir.path)/backup.sql
+            kubectl exec $(params.CONTROLLER_NAME) --container postgresql -- /bin/bash -c 'PGPASSWORD=$POSTGRES_POSTGRES_PASSWORD pg_dump -U postgres -d $POSTGRES_DB' > $(workspaces.temp-dir.path)/backup.sql
           echo -----------------------------------
     - name: show-backup
       image: registry.redhat.io/ubi7/ubi-minimal
       command: ["/bin/bash", "-c"]
       args:
         - |-
-          ls -alh $(workspaces.source-dir.path)/backup.sql
+          ls -alh $(workspaces.temp-dir.path)/backup.sql
