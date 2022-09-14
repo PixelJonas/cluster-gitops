@@ -12,7 +12,7 @@ spec:
   project: cluster-config
   source:
     repoURL: "https://prometheus-community.github.io/helm-charts"
-    targetRevision: 39.12.1
+    targetRevision: 39.13.3
     helm:
       skipCrds: true
       values: |
