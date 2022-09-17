@@ -23,7 +23,7 @@ spec:
           snapshot.pmb/postgres-controller-type: "sts"
 
         global:
-          storageClass: openebs-jiva-csi-default
+          storageClass: odf-lvm-vg1
           postgresql:
             auth:
               username: immich
