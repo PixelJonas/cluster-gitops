@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: immich
+  namespace: argocd-operator-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+spec:
+  destination:
+    namespace: immich
+    server: "https://kubernetes.default.svc"
+  source:
+    path: charts/apps/immich
+    repoURL: 'https://github.com/PixelJonas/immich-charts.git'
+    targetRevision: feature/immich-chart
+    helm:
+      values: |-
+
+        redis:
+          enabled: true
+        
+        persistence:
+          config:
+            enabled: true
+            storageClass: openebs-jiva-csi-default
+            accessMode: ReadWriteOnce
+            labels:
+              "snapshot.pmb/enabled": "true"
+              "snapshot.pmb/postgres-controller-name": "immich-db-postgresql"
+              "snapshot.pmb/postgres-controller-type": "sts"
+            size: 5Gi
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
