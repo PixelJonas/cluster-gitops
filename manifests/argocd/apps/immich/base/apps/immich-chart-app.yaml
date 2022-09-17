@@ -11,14 +11,30 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     path: charts/apps/immich
-    repoURL: 'https://github.com/PixelJonas/immich-charts.git'
+    repoURL: "https://github.com/PixelJonas/immich-charts.git"
     targetRevision: feature/immich-chart
     helm:
       values: |-
 
         redis:
           enabled: true
-        
+
+        postgresql:
+          enabled: false
+
+        common_env:
+          DB_HOSTNAME: "immich-db-postgresql"
+          DB_PASSWORD:
+            valueFrom:
+              secretKeyRef:
+                name: immich-postgresql
+                key: password          
+          JWT_SECRET:
+            valueFrom:
+              secretKeyRef:
+                name: immich-secret
+                key: jwt_secret
+
         persistence:
           config:
             enabled: true

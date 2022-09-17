@@ -1,0 +1,17 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: immich-route
+  namespace: immich
+spec:
+  host: immich.apps.sakaarr.janz.digital
+  to:
+    kind: Service
+    name: immich-proxy
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
