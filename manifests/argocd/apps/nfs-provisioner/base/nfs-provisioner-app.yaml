@@ -19,6 +19,7 @@ spec:
           reclaimPolicy: Retain
           mountOptions: 
             - "nfsvers=4"
+            - "noac"
 
         storageClass:
           defaultClass: false
