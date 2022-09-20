@@ -46,6 +46,33 @@ spec:
               "snapshot.pmb/postgres-controller-type": "sts"
             size: 5Gi
 
+        server:
+          image:
+            repository: altran1502/immich-server
+            tag: v1.29.4_44-dev
+
+        microservice:
+          image:
+            repository: altran1502/immich-server
+            tag: v1.29.4_44-dev
+
+        machine_learning:
+          image:
+            repository: altran1502/immich-machine-learning
+            tag: v1.29.4_44-dev
+          
+        web:
+          image:
+            repository: altran1502/immich-web
+            tag: v1.29.4_44-dev
+          
+        proxy:
+          image:
+            repository: altran1502/immich-proxy
+            tag: v1.29.4_44-dev
+        
+        
+
   project: cluster-apps
   syncPolicy:
     syncOptions:
