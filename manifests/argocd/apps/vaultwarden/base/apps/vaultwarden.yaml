@@ -41,6 +41,7 @@ spec:
 
         podLabels:
           kanister.kasten.io/inject-sidecar: "true"
+          k10.kasten.io/forcegenericbackup: "true"
 
         service:
           main:
