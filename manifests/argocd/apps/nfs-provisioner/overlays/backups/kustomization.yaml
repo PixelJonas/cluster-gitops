@@ -29,7 +29,7 @@ patches:
         path: /spec/source/helm/parameters/-
         value:
           name: "nfs.path"
-          value: "/pmb"
+          value: "/pmb-backup"
 
       - op: add
         path: /spec/source/helm/parameters/-
