@@ -21,6 +21,7 @@ spec:
           snapshot.pmb/enabled: "true"
           snapshot.pmb/postgres-controller-name: "immich-postgresql"
           snapshot.pmb/postgres-controller-type: "sts"
+          k10.kasten.io/forcegenericbackup: "true"
 
         global:
           storageClass: odf-lvm-vg1
@@ -34,6 +35,7 @@ spec:
             kanister.kasten.io/blueprint: postgres-bp
           labels:
             kanister.kasten.io/inject-sidecar: "true"
+            k10.kasten.io/forcegenericbackup: "true"
 
   ignoreDifferences:
     - group: "apps"

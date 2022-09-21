@@ -21,6 +21,7 @@ spec:
           snapshot.pmb/enabled: "true"
           snapshot.pmb/postgres-controller-name: "homeassistant-db-postgresql"
           snapshot.pmb/postgres-controller-type: "sts"
+          k10.kasten.io/forcegenericbackup: "true"
 
         global:
           storageClass: openebs-jiva-csi-default

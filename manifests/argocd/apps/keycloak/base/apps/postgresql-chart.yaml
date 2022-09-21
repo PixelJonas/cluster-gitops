@@ -27,6 +27,7 @@ spec:
             kanister.kasten.io/blueprint: postgres-bp
           labels:
             kanister.kasten.io/inject-sidecar: "true"
+            k10.kasten.io/forcegenericbackup: "true"
 
   syncPolicy:
     syncOptions:
