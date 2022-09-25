@@ -63,7 +63,7 @@ spec:
           main:
             annotations:
               nginx.ingress.kubernetes.io/proxy-body-size: 50m
-            enabled: true
+            enabled: false
             ingressClassName: nginx
             pathType: Prefix
             annotations:
@@ -87,12 +87,13 @@ spec:
         persistence:
           config:
             enabled: true
-            storageClass: openebs-jiva-csi-default
+            storageClass: odf-lvm-vg1
             accessMode: ReadWriteOnce
             mountPath: /config
             size: 5Gi
             labels:
               kanister.kasten.io/ignore: "true"
+              snapshot.pmb/enabled: "true"
           media:
             enabled: true
             storageClass: nfs
@@ -113,6 +114,8 @@ spec:
             accessMode: ReadWriteOnce
             mountPath: /sync
             size: 10Gi
+            labels:
+              snapshot.pmb/enabled: "true"
   syncPolicy:
     automated:
       prune: true

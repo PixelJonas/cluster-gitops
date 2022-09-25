@@ -1,0 +1,17 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: resilio-route
+  namespace: resilio-sync
+spec:
+  host: sync.apps.sakaarr.janz.digital
+  to:
+    kind: Service
+    name: resilio-sync
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
