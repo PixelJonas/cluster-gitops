@@ -3,4 +3,3 @@ kind: Kustomization
 
 resources:
   - resilio-sync-app.yaml
-  - route.yaml
