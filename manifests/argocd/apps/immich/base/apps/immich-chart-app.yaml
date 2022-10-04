@@ -12,7 +12,7 @@ spec:
   source:
     path: charts/apps/immich
     repoURL: "https://github.com/PixelJonas/immich-charts.git"
-    targetRevision: feature/immich-chart
+    targetRevision: main
     helm:
       values: |-
 
@@ -70,8 +70,6 @@ spec:
           image:
             repository: docker.io/altran1502/immich-proxy
             tag: v1.30.0_46-dev
-        
-        
 
   project: cluster-apps
   syncPolicy:
