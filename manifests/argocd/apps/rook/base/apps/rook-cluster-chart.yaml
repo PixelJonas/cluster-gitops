@@ -16,7 +16,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: "https://charts.rook.io/release"
-    targetRevision: v1.10.2
+    targetRevision: v1.10.3
     chart: rook-ceph-cluster
     helm:
       values: |-
