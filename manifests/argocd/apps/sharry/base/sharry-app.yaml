@@ -4,8 +4,6 @@ metadata:
   name: sharry-app
   annotations:
     argocd.argoproj.io/sync-wave: "101"
-  labels:
-    gitops.type: app-of-apps
 spec:
   destination:
     namespace: argocd
