@@ -23,6 +23,7 @@ bases:
   - ../../../manifests/argocd/apps/vaultwarden/overlays/sakaarr
   - ../../../manifests/argocd/apps/keycloak/overlays/sakaarr
   - ../../../manifests/argocd/apps/node-red/overlays/sakaarr
+  - ../../../manifests/argocd/apps/sharry/overlays/sakaarr
   #- ../../../manifests/argocd/apps/notes/overlays/sakaarr
 
   - ../../../manifests/argocd/apps/sealed-secrets-operator/overlays/titan
