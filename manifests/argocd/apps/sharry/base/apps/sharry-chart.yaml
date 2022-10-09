@@ -56,6 +56,14 @@ spec:
                 name: sharry-credentials
                 key: smtp-password
 
+        dnsConfig:
+          nameservers:
+            - 192.168.1.207
+          searches:
+            - janz.lan
+          
+        dnsPolicy: None
+
         configmap: 
           config:
             enabled: true
