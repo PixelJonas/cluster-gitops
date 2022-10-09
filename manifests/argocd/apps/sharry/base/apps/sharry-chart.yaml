@@ -56,6 +56,11 @@ spec:
                 name: sharry-credentials
                 key: smtp-password
 
+        dnsConfig:
+          options:
+            - name: ndots
+              value: "1"
+
         configmap: 
           config:
             enabled: true
