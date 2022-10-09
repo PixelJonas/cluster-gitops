@@ -56,66 +56,77 @@ spec:
                 name: sharry-credentials
                 key: smtp-password
 
-        config: |
-          sharry.restserver {
-            base-url = "https://share.janz.digital"
-            bind {
-              address = "0.0.0.0"
-              port = {{ .Values.service.main.ports.http.port }}
-            }
-            mail {
-              enabled = true
-              smtp {
-                host = "smtp.strato.de"
-                port = 465
-                user = ${SHARRY_SMTP_USERNAME}
-                password = ${SHARRY_SMTP_PASSWORD}
-                ssl-type = "ssl"
-              }
-            }
-            webapp {
-              app-name = "Janz Share"
-              default-language = "de"
-              initial-theme = "dark"
-            }
-            backend {
-              jdbc {
-                url = "jdbc:postgresql://sharry-db-postgresql:5432/sharry"
-                user = "postgres"
-                password = ${POSTGRESQL_PASSWORD}
-              }
-              signup {
-                mode = "invite"
-                invite-password = ${SHARRY_INVITE_PASSWORD}
-                invite-time = "7 days"
-              }
-              auth {
-                oauth = [
-                  {
-                    enabled = true
-                    id = "janz"
-                    name = "Janz SSO"
-                    icon = "fab fa-key"
-                    authorize-url = "https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/auth"
-                    token-url = "https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/token"
-                    user-url = "https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/userinfo"
-                    user-id-key = "preferred_username"
-                    client-id = "sharry"
-                    client-secret = ${SHARRY_OAUTH_CLIENT_SECRET}
+        configmap: 
+          config:
+            enabled: true
+            data: 
+              sharry.conf: |
+                sharry.restserver {
+                  base-url = "https://share.janz.digital"
+                  bind {
+                    address = "0.0.0.0"
+                    port = {{ .Values.service.main.ports.http.port }}
                   }
-                ]
-                fixed {
-                  enabled = true
-                  user = "admin"
-                  password = ${SHARRY_ADMIN_PASSWORD}
-                  order = 10
+                  mail {
+                    enabled = true
+                    smtp {
+                      host = "smtp.strato.de"
+                      port = 465
+                      user = ${SHARRY_SMTP_USERNAME}
+                      password = ${SHARRY_SMTP_PASSWORD}
+                      ssl-type = "ssl"
+                    }
+                  }
+                  webapp {
+                    app-name = "Janz Share"
+                    default-language = "de"
+                    initial-theme = "dark"
+                  }
+                  backend {
+                    jdbc {
+                      url = "jdbc:postgresql://sharry-db-postgresql:5432/sharry"
+                      user = "postgres"
+                      password = ${POSTGRESQL_PASSWORD}
+                    }
+                    signup {
+                      mode = "invite"
+                      invite-password = ${SHARRY_INVITE_PASSWORD}
+                      invite-time = "7 days"
+                    }
+                    auth {
+                      oauth = [
+                        {
+                          enabled = true
+                          id = "janz"
+                          name = "Janz SSO"
+                          icon = "fab fa-key"
+                          authorize-url = "https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/auth"
+                          token-url = "https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/token"
+                          user-url = "https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/userinfo"
+                          user-id-key = "preferred_username"
+                          client-id = "sharry"
+                          client-secret = ${SHARRY_OAUTH_CLIENT_SECRET}
+                        }
+                      ]
+                      fixed {
+                        enabled = true
+                        user = "admin"
+                        password = ${SHARRY_ADMIN_PASSWORD}
+                        order = 10
+                      }
+                    }
+                  }
                 }
-              }
-            }
-          }
 
         args:
-        - "/opt/sharry.conf"    
+        - "/opt/config/sharry.conf"
+
+        persistence:
+          config:
+            name: sharry-config
+            enabled: true
+            type: configMap
+            mountPath: /opt/config
 
         controller:
           labels:
