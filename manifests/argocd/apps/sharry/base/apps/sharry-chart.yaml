@@ -67,6 +67,10 @@ spec:
                     address = "0.0.0.0"
                     port = {{ .Values.service.main.ports.http.port }}
                   }
+                  logging {
+                    format: "Fancy"
+                    minimum-level = "Debug"
+                  }
                   mail {
                     enabled = true
                     smtp {
