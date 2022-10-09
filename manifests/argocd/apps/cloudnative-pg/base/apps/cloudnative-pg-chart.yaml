@@ -11,7 +11,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: "https://cloudnative-pg.io/charts/"
-    targetRevision: 0.15.0
+    targetRevision: 0.15.1
     chart: cloudnative-pg
   project: cluster-config
   syncPolicy:
