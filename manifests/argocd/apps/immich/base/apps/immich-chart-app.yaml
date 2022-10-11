@@ -49,27 +49,27 @@ spec:
         server:
           image:
             repository: docker.io/altran1502/immich-server
-            tag: v1.30.0_46-dev
+            tag: v1.31.1_49-dev
 
         microservice:
           image:
             repository: docker.io/altran1502/immich-server
-            tag: v1.30.0_46-dev
+            tag: v1.31.1_49-dev
 
         machine_learning:
           image:
             repository: docker.io/altran1502/immich-machine-learning
-            tag: v1.30.0_46-dev
+            tag: v1.31.1_49-dev
           
         web:
           image:
             repository: docker.io/altran1502/immich-web
-            tag: v1.30.0_46-dev
+            tag: v1.31.1_49-dev
           
         proxy:
           image:
             repository: docker.io/altran1502/immich-proxy
-            tag: v1.30.0_46-dev
+            tag: v1.31.1_49-dev
 
   project: cluster-apps
   syncPolicy:
