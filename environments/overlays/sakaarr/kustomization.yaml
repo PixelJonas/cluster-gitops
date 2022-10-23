@@ -18,7 +18,6 @@ bases:
 
   - ../../../manifests/argocd/apps/cert-manager/overlays/sakaarr
   - ../../../manifests/argocd/apps/homeassistant-db/overlays/sakaarr
-  - ../../../manifests/argocd/apps/k10/overlays/sakaarr
   - ../../../manifests/argocd/apps/paperless-ng/overlays/sakaarr
   - ../../../manifests/argocd/apps/vaultwarden/overlays/sakaarr
   - ../../../manifests/argocd/apps/keycloak/overlays/sakaarr
