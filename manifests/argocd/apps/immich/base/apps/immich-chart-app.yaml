@@ -16,6 +16,11 @@ spec:
     helm:
       values: |-
 
+        dnsConfig:
+          options:
+            - name: ndots
+              value: "1"
+
         redis:
           enabled: true
 
@@ -49,7 +54,7 @@ spec:
         server:
           image:
             repository: docker.io/altran1502/immich-server
-            tag: v1.32.0_50-dev
+            tag: v1.32.1_51-dev
 
         microservice:
           image:
