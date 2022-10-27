@@ -3,7 +3,7 @@ kind: Kustomization
 
 resources:
   # renovate: registryUrl=https://kyverno.github.io/kyverno/ chart=kyverno
-  - github.com/kyverno/kyverno//config/crds?ref=kyverno-chart-v2.5.2
+  - github.com/kyverno/kyverno//config/crds?ref=kyverno-chart-2.6.1
   - kyverno-chart.yaml
   - clusterrolebinding.yaml
   - policies
