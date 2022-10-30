@@ -60,11 +60,12 @@ spec:
               params:
                 - name: CONTROLLER_NAME
                   value: $(params.postgres_controller)
-          finally:
             - name: sync-kopia-repo
               taskRef:
                 kind: ClusterTask
                 name: pmb-kopia-backup
+              runAfter:
+                - backup-database
               params:
                 - name: KOPIA_PASSWORD
                   value: $(params.KOPIA_PASSWORD)
