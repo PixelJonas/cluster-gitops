@@ -1,0 +1,59 @@
+apiVersion: tekton.dev/v1beta1
+kind: ClusterTask
+metadata:
+  name: pmb-kopia-sync-b2
+spec:
+  params:
+    - name: KOPIA_PASSWORD
+      type: string
+      description: name of the secret with key "kopia_password" containing the kopia repo password (default kopia)
+      default: kopia
+    - name: B2_BUCKET
+      type: string
+      description: Bucket ID where this repository should be synced to
+    - name: B2_KEY_ID
+      type: string
+      description: Key ID to authenticate against B2 API
+    - name: B2_KEY
+      type: string
+      description: Auth Key to authenticate against B2 API
+  workspaces:
+    - name: kopia-repo-dir
+  steps:
+    - name: kopia-backup
+      image: ghcr.io/onedr0p/kopia:0.12.1
+      env:
+        - name: KOPIA_PASSWORD
+          value: $(params.KOPIA_PASSWORD)
+        - name: B2_BUCKET
+          value: $(params.B2_BUCKET)
+        - name: B2_KEY_ID
+          value: $(params.B2_KEY_ID)
+        - name: B2_KEY
+          value: $(params.B2_KEY)
+        - name: KOPIA_CACHE_DIRECTORY
+          value: $(workspaces.kopia-repo-dir.path)/cache
+        - name: KOPIA_LOG_DIR
+          value: $(workspaces.kopia-repo-dir.path)/logs
+        - name: KOPIA_DIR
+          value: $(workspaces.kopia-repo-dir.path)
+      command: ["/bin/bash", "-c"]
+      args:
+        - |-
+          echo "[01/07] Create repo ..."              && [[ ! -f "${KOPIA_DIR}"/repo/kopia.repository.f ]] && kopia repository create filesystem --path="${KOPIA_DIR}"/repo
+          echo "-------------------------------------"
+          echo "[02/07] Connect to repo ..."          && kopia repo connect filesystem --path="${KOPIA_DIR}"/repo --override-hostname=cluster --override-username=root
+          echo "-------------------------------------"
+          echo "[03/07] Set policies ..."             && kopia policy set "${KOPIA_DIR}"/repo --compression=zstd --keep-latest 14 --keep-hourly 0 --keep-daily 7 --keep-weekly 2 --keep-monthly 0 --keep-annual 0
+          echo "-------------------------------------"
+          echo "[04/07] List snapshots ..."           && kopia snap list "${KOPIA_DIR}"
+          echo "-------------------------------------"
+          echo "[04/07] Sync to B2 ..."               && kopia repository sync-to b2 --bucket=${B2_BUCKET} --key-id=${B2_KEY_ID} --key=${B2_KEY}
+          echo "-------------------------------------"
+          echo "[05/07] Show stats ..."               && kopia content stats
+          echo "-------------------------------------"
+          echo "[06/07] Show maintenance info ..."    && kopia maintenance info
+          echo "-------------------------------------"
+          echo "[07/07] Disconnect from repo ..."     && kopia repo disconnect
+          echo "-------------------------------------"
+          echo "FINISHED"

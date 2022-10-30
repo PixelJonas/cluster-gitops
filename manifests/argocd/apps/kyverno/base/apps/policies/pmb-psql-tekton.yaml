@@ -22,6 +22,9 @@ metadata:
           "snapshot.pmb/postgres-controller-name=myapp-postgresql"
           "snapshot.pmb/postgres-controller-type=sts"
 
+      There should also be a secret called kopia in the namespace this CronJob is executed. It needs to contain the following keys:
+        - kopia_password
+
 spec:
   generateExistingOnPolicyUpdate: true
   mutateExistingOnPolicyUpdate: true
@@ -182,4 +185,4 @@ spec:
                           - |-
                             printf "\e[1;32m%-6s\e[m\n" "Pinging pmb-tekton to run backup"
                             curl -X POST \
-                              -d "{\"namespace\": \"{{ namespace }}\", \"kopia_repo_pvc\": \"{{ claimName }}-psql-backup\", \"source_pvc\": \"{{ claimName }}-psql-tmp\", \"postgres_controller\": \"{{ postgresControllerType }}/{{ postgresControllerName }}\" ,\"kopia_password\": \"$KOPIA_PASSWORD\"}" http://el-pmb-postgres-listener.pmb-backup.svc.cluster.local:8080
+                              -d "{\"namespace\": \"{{ namespace }}\", \"kopia_repo_pvc\": \"{{ claimName }}-psql-backup\", \"source_pvc\": \"{{ claimName }}-psql-tmp\", \"postgres_controller\": \"{{ postgresControllerType }}/{{ postgresControllerName }}\" ,\"kopia_password\": \"$KOPIA_PASSWORD\"}" http://el-pmb-kopia-sync-listener.pmb-backup.svc.cluster.local:8080

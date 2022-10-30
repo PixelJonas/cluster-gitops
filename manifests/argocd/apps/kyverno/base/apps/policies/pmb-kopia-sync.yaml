@@ -2,72 +2,28 @@
 apiVersion: kyverno.io/v1
 kind: ClusterPolicy
 metadata:
-  name: pmb-backup-cronjob-controller
+  name: pmb-kopia-sync-controller
   annotations:
-    policies.kyverno.io/title: PMB Tekton CronJob controller
+    policies.kyverno.io/title: PMB Kopia Sync to B2 controller
     policies.kyverno.io/subject: PersistentVolumeClaim
     policies.kyverno.io/description: |
-      This policy creates a PMB snapshot CronJob for labeled PersistentVolumeClaims
+      This policy creates a PMB Sync to B2 CronJob for labeled PersistentVolumeClaims
 
       The following labels on PVCs with their respective labels are required for this to run:
         - snapshot.pmb/enabled
+        - snapshot.pmb/bucket
         - app.kubernetes.io/name
         - app.kubernetes.io/instance
 
       There should also be a secret called kopia in the namespace this CronJob is executed. It needs to contain the following keys:
-        - kopia_password        
+        - kopia_password
+        - b2_key_id
+        - b2_key
 
 spec:
   generateExistingOnPolicyUpdate: true
   mutateExistingOnPolicyUpdate: true
   rules:
-    - name: create-pmb-destination-pvc
-      match:
-        any:
-          - resources:
-              kinds:
-                - PersistentVolumeClaim
-              selector:
-                matchLabels:
-                  snapshot.pmb/enabled: "true"
-                  app.kubernetes.io/name: "*"
-                  app.kubernetes.io/instance: "*"
-      exclude:
-        any:
-          - resources:
-              kinds:
-                - PersistentVolumeClaim
-              selector:
-                matchLabels:
-                  snapshot.pmb/postgres-controller-name: "*"
-                  snapshot.pmb/postgres-controller-type: "*"
-      context:
-        - name: appName
-          variable:
-            jmesPath: 'request.object.metadata.labels."app.kubernetes.io/name"'
-        - name: claimName
-          variable:
-            jmesPath: "request.object.metadata.name"
-        - name: namespace
-          variable:
-            jmesPath: "request.object.metadata.namespace"
-        - name: size
-          variable:
-            jmesPath: "request.object.spec.resources.requests.storage"
-      generate:
-        apiVersion: v1
-        kind: PersistentVolumeClaim
-        name: "{{ claimName }}-backup"
-        namespace: "{{ namespace }}"
-        data:
-          spec:
-            accessModes:
-              - ReadWriteOnce
-            resources:
-              requests:
-                storage: "{{ size }}"
-            storageClassName: pmb-backup
-            volumeMode: Filesystem
     - name: create-pmb-cronjob
       match:
         any:
@@ -77,17 +33,9 @@ spec:
               selector:
                 matchLabels:
                   snapshot.pmb/enabled: "true"
+                  snapshot.pmb/bucket: "*"
                   app.kubernetes.io/name: "*"
                   app.kubernetes.io/instance: "*"
-      exclude:
-        any:
-          - resources:
-              kinds:
-                - PersistentVolumeClaim
-              selector:
-                matchLabels:
-                  snapshot.pmb/postgres-controller-name: "*"
-                  snapshot.pmb/postgres-controller-type: "*"
       context:
         - name: appName
           variable:
@@ -98,11 +46,14 @@ spec:
         - name: namespace
           variable:
             jmesPath: "request.object.metadata.namespace"
+        - name: bucket
+          variable:
+            jmesPath: 'request.object.metadata.labels."snapshot.pmb/bucket"'
       generate:
         synchronize: true
         apiVersion: batch/v1
         kind: CronJob
-        name: "{{ claimName }}-pmb"
+        name: "{{ claimName }}-pmb-sync"
         namespace: "{{ request.object.metadata.namespace }}"
         data:
           metadata:
@@ -137,10 +88,20 @@ spec:
                               secretKeyRef:
                                 key: kopia_password
                                 name: kopia
+                          - name: B2_KEY_ID
+                            valueFrom:
+                              secretKeyRef:
+                                key: kopia_password
+                                name: b2_key_id
+                          - name: B2_KEY
+                            valueFrom:
+                              secretKeyRef:
+                                key: kopia_password
+                                name: b2_key
                         command:
                           - /bin/bash
                           - -c
                           - |-
                             printf "\e[1;32m%-6s\e[m\n" "Pinging pmb-tekton to run backup"
                             curl -X POST \
-                              -d "{\"namespace\": \"{{ namespace }}\", \"kopia_repo_pvc\": \"{{ claimName }}-backup\", \"source_pvc\": \"{{ claimName }}\", \"kopia_password\": \"$KOPIA_PASSWORD\"}" http://el-pmb-listener.pmb-backup.svc.cluster.local:8080
+                              -d "{\"namespace\": \"{{ namespace }}\", \"kopia_repo_pvc\": \"{{ claimName }}-backup\", \"b2_bucket\": \"{{ bucket }}\", \"b2_key_id\": \"$B2_KEY_ID\", \"b2_key\": \"$B2_KEY\", \"kopia_password\": \"$KOPIA_PASSWORD\"}" http://el-pmb-listener.pmb-backup.svc.cluster.local:8080
