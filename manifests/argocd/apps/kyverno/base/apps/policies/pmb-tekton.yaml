@@ -37,6 +37,15 @@ spec:
                   snapshot.pmb/enabled: "true"
                   app.kubernetes.io/name: "*"
                   app.kubernetes.io/instance: "*"
+      exclude:
+        any:
+           - resources:
+              kinds:
+                - PersistentVolumeClaim
+              selector:
+                matchLabels:
+                  snapshot.pmb/postgres-controller-name: "*"
+                  snapshot.pmb/postgres-controller-type: "*"
       context:
         - name: appName
           variable:
@@ -75,6 +84,15 @@ spec:
                   snapshot.pmb/enabled: "true"
                   app.kubernetes.io/name: "*"
                   app.kubernetes.io/instance: "*"
+      exclude:
+        any:
+           - resources:
+              kinds:
+                - PersistentVolumeClaim
+              selector:
+                matchLabels:
+                  snapshot.pmb/postgres-controller-name: "*"
+                  snapshot.pmb/postgres-controller-type: "*"
       context:
         - name: appName
           variable:
