@@ -58,7 +58,7 @@ spec:
       generate:
         apiVersion: v1
         kind: PersistentVolumeClaim
-        name: "{{ claimName }}-psql-backup"
+        name: "{{ claimName }}-backup"
         namespace: "{{ namespace }}"
         data:
           spec:
@@ -98,7 +98,7 @@ spec:
       generate:
         apiVersion: v1
         kind: PersistentVolumeClaim
-        name: "{{ claimName }}-psql-tmp"
+        name: "{{ claimName }}-tmp"
         namespace: "{{ namespace }}"
         data:
           spec:
@@ -185,4 +185,4 @@ spec:
                           - |-
                             printf "\e[1;32m%-6s\e[m\n" "Pinging pmb-tekton to run backup"
                             curl -X POST \
-                              -d "{\"namespace\": \"{{ namespace }}\", \"kopia_repo_pvc\": \"{{ claimName }}-psql-backup\", \"source_pvc\": \"{{ claimName }}-psql-tmp\", \"postgres_controller\": \"{{ postgresControllerType }}/{{ postgresControllerName }}\" ,\"kopia_password\": \"$KOPIA_PASSWORD\"}" http://el-pmb-kopia-sync-listener.pmb-backup.svc.cluster.local:8080
+                              -d "{\"namespace\": \"{{ namespace }}\", \"kopia_repo_pvc\": \"{{ claimName }}-backup\", \"source_pvc\": \"{{ claimName }}-tmp\", \"postgres_controller\": \"{{ postgresControllerType }}/{{ postgresControllerName }}\" ,\"kopia_password\": \"$KOPIA_PASSWORD\"}" http://el-pmb-kopia-sync-listener.pmb-backup.svc.cluster.local:8080

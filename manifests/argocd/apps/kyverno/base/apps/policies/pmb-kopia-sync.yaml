@@ -104,4 +104,4 @@ spec:
                           - |-
                             printf "\e[1;32m%-6s\e[m\n" "Pinging pmb-tekton to run backup"
                             curl -X POST \
-                              -d "{\"namespace\": \"{{ namespace }}\", \"kopia_repo_pvc\": \"{{ claimName }}-psql-backup\", \"b2_bucket\": \"{{ bucket }}\", \"b2_key_id\": \"$B2_KEY_ID\", \"b2_key\": \"$B2_KEY\", \"kopia_password\": \"$KOPIA_PASSWORD\"}" http://el-pmb-kopia-sync-listener.pmb-backup.svc.cluster.local:8080
+                              -d "{\"namespace\": \"{{ namespace }}\", \"kopia_repo_pvc\": \"{{ claimName }}-backup\", \"b2_bucket\": \"{{ bucket }}\", \"b2_key_id\": \"$B2_KEY_ID\", \"b2_key\": \"$B2_KEY\", \"kopia_password\": \"$KOPIA_PASSWORD\"}" http://el-pmb-kopia-sync-listener.pmb-backup.svc.cluster.local:8080
