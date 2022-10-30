@@ -81,7 +81,7 @@ spec:
               params:
                 - name: DRY_RUN
                   value: "true"
-              workspace:
+              workspaces:
                 - name: dir-to-remove
                   workspace: source-dir
                   subPath: postgres-backup
