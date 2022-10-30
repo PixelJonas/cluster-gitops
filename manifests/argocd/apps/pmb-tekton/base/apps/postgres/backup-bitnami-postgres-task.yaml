@@ -11,7 +11,7 @@ spec:
     - name: temp-dir
   steps:
     - name: pg-dump-via-kubectl
-      image: quay.io/openshift/origin-cli:4.12
+      image: quay.io/openshift/origin-cli:4.13
       command: ["/bin/bash", "-c"]
       args:
         - |-
