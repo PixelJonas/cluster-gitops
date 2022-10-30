@@ -12,13 +12,9 @@ spec:
           value: $(body.namespace)
         - name: kopia_password
           value: $(body.kopia_password)
-        - name: destination-pvc
-          value: $(body.destination-pvc)
+        - name: kopia_repo_pvc
+          value: $(body.kopia_repo_pvc)
         - name: source-pvc
-          value: $(body.source-pvc)
-        - name: temp-pvc
-          value: $(body.temp-pvc)
-        - name: postgres-controller
-          value: $(body.postgres-controller)
+          value: $(body.source_pvc)
       template:
         ref: pmb-backup-template
