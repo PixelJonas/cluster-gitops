@@ -28,20 +28,20 @@ spec:
       command: ["/bin/bash", "-c"]
       args:
         - |-
-          printf "[01/08] Create repo ..."              && [[ ! -f "${PMB__DEST_DIR}"/repo/kopia.repository.f ]] && kopia repository create filesystem --path="${PMB__DEST_DIR}"/repo
-          printf "-------------------------------------"
-          printf "[02/08] Connect to repo ..."          && kopia repo connect filesystem --path="${PMB__DEST_DIR}"/repo --override-hostname=cluster --override-username=root
-          printf "-------------------------------------"
-          printf "[03/08] Set policies ..."             && kopia policy set "${PMB__DEST_DIR}"/repo --compression=zstd --keep-latest 14 --keep-hourly 0 --keep-daily 7 --keep-weekly 2 --keep-monthly 0 --keep-annual 0
-          printf "-------------------------------------"
-          printf "[04/08] Snapshot {{ claimName }} ..." && kopia snap create "${PMB__SRC_DIR}"
-          printf "-------------------------------------"
-          printf "[05/08] List snapshots ..."           && kopia snap list "${PMB__SRC_DIR}"
-          printf "-------------------------------------"
-          printf "[06/08] Show stats ..."               && kopia content stats
-          printf "-------------------------------------"
-          printf "[07/08] Show maintenance info ..."    && kopia maintenance info
-          printf "-------------------------------------"
-          printf "[08/08] Disconnect from repo ..."     && kopia repo disconnect
-          printf "-------------------------------------"
-          printf "FINISHED"
+          echo "[01/08] Create repo ..."              && [[ ! -f "${PMB__DEST_DIR}"/repo/kopia.repository.f ]] && kopia repository create filesystem --path="${PMB__DEST_DIR}"/repo
+          echo "-------------------------------------"
+          echo "[02/08] Connect to repo ..."          && kopia repo connect filesystem --path="${PMB__DEST_DIR}"/repo --override-hostname=cluster --override-username=root
+          echo "-------------------------------------"
+          echo "[03/08] Set policies ..."             && kopia policy set "${PMB__DEST_DIR}"/repo --compression=zstd --keep-latest 14 --keep-hourly 0 --keep-daily 7 --keep-weekly 2 --keep-monthly 0 --keep-annual 0
+          echo "-------------------------------------"
+          echo "[04/08] Snapshot {{ claimName }} ..." && kopia snap create "${PMB__SRC_DIR}"
+          echo "-------------------------------------"
+          echo "[05/08] List snapshots ..."           && kopia snap list "${PMB__SRC_DIR}"
+          echo "-------------------------------------"
+          echo "[06/08] Show stats ..."               && kopia content stats
+          echo "-------------------------------------"
+          echo "[07/08] Show maintenance info ..."    && kopia maintenance info
+          echo "-------------------------------------"
+          echo "[08/08] Disconnect from repo ..."     && kopia repo disconnect
+          echo "-------------------------------------"
+          echo "FINISHED"
