@@ -46,7 +46,7 @@ spec:
           echo "-------------------------------------"
           echo "[03/07] Set policies ..."             && kopia policy set "${KOPIA_DIR}"/repo --compression=zstd --keep-latest 14 --keep-hourly 0 --keep-daily 7 --keep-weekly 2 --keep-monthly 0 --keep-annual 0
           echo "-------------------------------------"
-          echo "[04/07] List snapshots ..."           && kopia snap list "${KOPIA_DIR}"
+          echo "[04/07] List snapshots ..."           && kopia snap list --all"
           echo "-------------------------------------"
           echo "[04/07] Sync to B2 ..."               && kopia repository sync-to b2 --bucket=${B2_BUCKET} --key-id=${B2_KEY_ID} --key=${B2_KEY}
           echo "-------------------------------------"
