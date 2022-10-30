@@ -25,7 +25,7 @@ spec:
         params:
           - name: KOPIA_PASSWORD
             value: $(tt.params.kopia_password)
-          - name: postgres-controller
+          - name: postgres_controller
             value: $(tt.params.postgres_controller)
         workspaces:
           - name: kopia-repo-dir
