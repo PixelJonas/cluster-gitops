@@ -41,7 +41,7 @@ spec:
             - name: source-dir
             - name: kopia-repo-dir
           tasks:
-            - name: sync-kopia-repo
+            - name: kopia-snapshot
               taskRef:
                 kind: ClusterTask
                 name: pmb-kopia-backup
