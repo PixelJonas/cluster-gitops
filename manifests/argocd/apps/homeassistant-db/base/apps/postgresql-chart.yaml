@@ -31,6 +31,8 @@ spec:
               existingSecret: homeassistant-db-postgresql
               database: homeassistant
         primary:
+          persistence:
+            size: 20Gi
           service:
             type: NodePort
             nodePorts:
@@ -40,55 +42,6 @@ spec:
           labels:
             kanister.kasten.io/inject-sidecar: "true"
             k10.kasten.io/forcegenericbackup: "true"
-          # extraVolumes:
-          #   - name: backup
-          #     persistentVolumeClaim:
-          #       claimName: pvc-homeassistant-db-backup
-          # sidecars:
-          #   - name: pmb-backup-cron
-          #     image: quay.io/jjanz/pmb:latest
-          #     imagePullPolicy: Always
-          #     securityContext:
-          #       privileged: true
-          #     command:
-          #       - /bin/bash
-          #       - -c
-          #       - |-
-          #         printf "\e[1;32m%-6s\e[m\n" "Starting PMB Loop-Script ..."
-          #         printf "\e[1;32m%-6s\e[m\n" "Waiting 2minutes for everything to be up and running ..."
-          #         sleep 2h
-          #         printf "\e[1;32m%-6s\e[m\n" "Entering while loop ..."
-          #         BACKUP_SUCCESS=1
-          #         while [ $BACKUP_SUCCESS -eq 1 ]; do
-          #           printf "\e[1;32m%-6s\e[m\n" "Starting backup at $(date) ..."
-
-          #           /entrypoint.sh
-          #           BACKUP_EXIT=$?
-          #           printf "\e[1;32m%-6s\e[m\n" "finished backup with $BACKUP_EXIT ..."
-          #           if [ $BACKUP_EXIT -ne 0 ]; then
-          #             printf "\e[1;32m%-6s\e[m\n" "failed backup exiting ..."
-          #             BACKUP_SUCCESS=0
-          #           else
-          #             printf "\e[1;32m%-6s\e[m\n" "backup was successfull waiting 24h for next backup ..."
-          #             sleep 24h
-          #           fi
-          #         done
-              
-          #     env:
-          #       - name: KOPIA_PASSWORD
-          #         valueFrom:
-          #           secretKeyRef:
-          #             name: kopia
-          #             key: kopia_password
-          #       - name: PMB__DEBUG
-          #         value: "true"
-          #       - name: PMB__FSFREEZE
-          #         value: "false"
-          #     volumeMounts:
-          #       - name: data
-          #         mountPath: /data/src
-          #       - name: backup
-          #         mountPath: /data/dest
 
   ignoreDifferences:
     - group: "apps"
