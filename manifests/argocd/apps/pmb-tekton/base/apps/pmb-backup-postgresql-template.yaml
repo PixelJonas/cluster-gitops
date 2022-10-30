@@ -75,16 +75,3 @@ spec:
                   subPath: postgres-backup
                 - name: kopia-repo-dir
                   workspace: kopia-repo-dir
-            - name: remove-files
-              taskRef:
-                kind: ClusterTask
-                name: remove-dir
-              runAfter:
-                - sync-kopia-repo
-              params:
-                - name: DRY_RUN
-                  value: "true"
-              workspaces:
-                - name: dir-to-remove
-                  workspace: source-dir
-                  subPath: postgres-backup
