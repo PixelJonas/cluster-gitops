@@ -130,8 +130,8 @@ spec:
               secretKeyRef:
                 name: paperless-db-postgresql
                 key: password
-        
-        
+
+
         command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
         args: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
 
@@ -193,7 +193,7 @@ spec:
           consume:
             enabled: false
             mountPath: /usr/src/paperless/consume
-            accessMode: ReadWriteOnce       
+            accessMode: ReadWriteOnce
           custom-scripts:
             name: paperless-ng
             enabled: true
