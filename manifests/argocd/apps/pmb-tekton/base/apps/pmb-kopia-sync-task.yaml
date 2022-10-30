@@ -48,7 +48,7 @@ spec:
           echo "-------------------------------------"
           echo "[04/07] List snapshots ..."           && kopia snap list --all
           echo "-------------------------------------"
-          echo "[04/07] Sync to B2 ..."               && kopia repository sync-to b2 --bucket=${B2_BUCKET} --key-id=${B2_KEY_ID} --key=${B2_KEY}
+          echo "[04/07] Sync to B2 ..."               && kopia repository sync-to b2 --delete --times --bucket=${B2_BUCKET} --key-id=${B2_KEY_ID} --key=${B2_KEY}
           echo "-------------------------------------"
           echo "[05/07] Show stats ..."               && kopia content stats
           echo "-------------------------------------"
