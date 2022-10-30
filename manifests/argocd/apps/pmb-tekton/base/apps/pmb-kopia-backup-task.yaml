@@ -10,7 +10,7 @@ spec:
       default: kopia
   workspaces:
     - name: source-dir
-    - name: destination-dir
+    - name: kopia-repo-dir
   steps:
     - name: kopia-backup
       image: ghcr.io/bjw-s/pmb:rolling
@@ -20,7 +20,7 @@ spec:
         - name: PMB__SRC_DIR
           value: $(workspaces.source-dir.path)
         - name: PMB__DEST_DIR
-          value: $(workspaces.destination-dir.path)
+          value: $(workspaces.kopia-repo-dir.path)
         - name: PMB__FSFREEZE
           value: "false"
         - name: PMB__DEBUG

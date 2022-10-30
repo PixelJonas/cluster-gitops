@@ -8,4 +8,7 @@ resources:
   - triggertemplate.yaml
   - postgres
   - sealed-kopia-secret.yaml
+  - pmb-backup-postgres-listener.yaml
+  - pmb-backup-postgresql-template.yaml
+  - remove-dir-task.yaml
 

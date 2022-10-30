@@ -1,7 +1,7 @@
 apiVersion: triggers.tekton.dev/v1beta1
 kind: TriggerTemplate
 metadata:
-  name: pmb-backup-template
+  name: pmb-backup-postgresql-template
   namespace: pmb-backup
 spec:
   params:
@@ -11,11 +11,13 @@ spec:
       description: Name of the PVC to be used for kopia
     - name: source_pvc
       description: Name of a PVC where the files for backup are
+    - name: postgres_controller
+      default: ""
   resourcetemplates:
     - apiVersion: tekton.dev/v1beta1
       kind: PipelineRun
       metadata:
-        generateName: pmb-backup-
+        generateName: pmb-backup-psql-
         namespace: $(tt.params.namespace)
         annotations:
           pipeline.openshift.io/started-by: external
@@ -23,6 +25,8 @@ spec:
         params:
           - name: KOPIA_PASSWORD
             value: $(tt.params.kopia_password)
+          - name: postgres-controller
+            value: $(tt.params.postgres_controller)
         workspaces:
           - name: kopia-repo-dir
             persistentVolumeClaim:
@@ -41,6 +45,22 @@ spec:
             - name: source-dir
             - name: kopia-repo-dir
           tasks:
+            - name: backup-database
+              when:
+                - input: "$(tt.params.postgres_controller)"
+                  operator: notin
+                  values: ["", "/"]
+              taskRef:
+                kind: ClusterTask
+                name: backup-bitnami-postgresql
+              workspaces:
+                - name: source-dir
+                  workspace: source-dir
+                  subPath: postgres-backup
+              params:
+                - name: CONTROLLER_NAME
+                  value: $(params.postgres_controller)
+          finally:
             - name: sync-kopia-repo
               taskRef:
                 kind: ClusterTask
@@ -51,6 +71,17 @@ spec:
               workspaces:
                 - name: source-dir
                   workspace: source-dir
+                  subPath: postgres-backup
                 - name: kopia-repo-dir
                   workspace: kopia-repo-dir
-
+            - name: remove files
+              taskRef:
+                kind: ClusterTask
+                name: remove-dir
+              params:
+                - name: DRY_RUN
+                  value: "true"
+              workspace:
+                - name: dir-to-remove
+                  workspace: source-dir
+                  subPath: postgres-backup
