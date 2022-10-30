@@ -34,7 +34,7 @@ spec:
           echo "-------------------------------------"
           echo "[03/08] Set policies ..."             && kopia policy set "${PMB__DEST_DIR}"/repo --compression=zstd --keep-latest 14 --keep-hourly 0 --keep-daily 7 --keep-weekly 2 --keep-monthly 0 --keep-annual 0
           echo "-------------------------------------"
-          echo "[04/08] Snapshot {{ claimName }} ..." && kopia snap create "${PMB__SRC_DIR}"
+          echo "[04/08] Snapshot ..."                 && kopia snap create "${PMB__SRC_DIR}"
           echo "-------------------------------------"
           echo "[05/08] List snapshots ..."           && kopia snap list "${PMB__SRC_DIR}"
           echo "-------------------------------------"
