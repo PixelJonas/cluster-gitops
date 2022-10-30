@@ -91,13 +91,13 @@ spec:
                           - name: B2_KEY_ID
                             valueFrom:
                               secretKeyRef:
-                                key: kopia_password
-                                name: b2_key_id
+                                key: b2_key_id
+                                name: kopia
                           - name: B2_KEY
                             valueFrom:
                               secretKeyRef:
-                                key: kopia_password
-                                name: b2_key
+                                key: b2_key
+                                name: kopia
                         command:
                           - /bin/bash
                           - -c
