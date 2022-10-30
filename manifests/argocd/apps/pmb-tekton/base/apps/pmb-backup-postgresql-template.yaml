@@ -74,7 +74,7 @@ spec:
                   subPath: postgres-backup
                 - name: kopia-repo-dir
                   workspace: kopia-repo-dir
-            - name: remove files
+            - name: remove-files
               taskRef:
                 kind: ClusterTask
                 name: remove-dir
