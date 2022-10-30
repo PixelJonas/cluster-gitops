@@ -19,6 +19,10 @@ spec:
           value: $(params.KOPIA_PASSWORD)
         - name: PMB__SRC_DIR
           value: $(workspaces.source-dir.path)
+        - name: KOPIA_CACHE_DIRECTORY
+          value: $(workspaces.kopia-repo-dir.path)/cache
+        - name: KOPIA_LOG_DIR
+          value: $(workspaces.kopia-repo-dir.path)/logs
         - name: PMB__DEST_DIR
           value: $(workspaces.kopia-repo-dir.path)
       command: ["/bin/bash", "-c"]
