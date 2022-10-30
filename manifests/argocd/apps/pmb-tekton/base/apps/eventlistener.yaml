@@ -14,7 +14,7 @@ spec:
           value: $(body.kopia_password)
         - name: kopia_repo_pvc
           value: $(body.kopia_repo_pvc)
-        - name: source-pvc
+        - name: source_pvc
           value: $(body.source_pvc)
       template:
         ref: pmb-backup-template
