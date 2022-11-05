@@ -61,7 +61,7 @@ spec:
             - name: ndots
               value: "1"
 
-        configmap: 
+        configMaps: 
           config:
             enabled: true
             data: 
