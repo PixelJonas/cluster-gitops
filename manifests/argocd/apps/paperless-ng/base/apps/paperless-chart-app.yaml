@@ -23,86 +23,85 @@ spec:
 
 
         secrets:
-          docker-entrypoint.sh:
+          paperless-ng-custom-scripts:
             enabled: true
-            stringData: |-
-              #!/usr/bin/env bash
+            stringData:
+              docker-entrypoint.sh: |-
+                #!/usr/bin/env bash
 
-              set -e
+                set -e
 
-              install_packages() {
-                echo "Installing packages..."
+                install_packages() {
+                  echo "Installing packages..."
 
-                local packages="$1"
-                read -ra packages <<<"$packages"
+                  local packages="$1"
+                  read -ra packages <<<"$packages"
 
-                # Check that it is not empty
-                if [ ${#packages[@]} -eq 0 ]; then
-                  return
+                  # Check that it is not empty
+                  if [ ${#packages[@]} -eq 0 ]; then
+                    return
+                  fi
+                  apt-get update
+
+                  for package in "${packages[@]}"; do
+                    pkg="$package"
+
+                    if dpkg -s "$pkg" &>/dev/null; then
+                      echo "Package $pkg already installed!"
+                      continue
+                    fi
+
+                    if ! apt-cache show "$pkg" &>/dev/null; then
+                      echo "Package $pkg not found! :("
+                      continue
+                    fi
+
+                    echo "Installing package $pkg..."
+                    if ! apt-get -y install "$pkg" &>/dev/null; then
+                      echo "Could not install $pkg"
+                      exit 1
+                    fi
+                  done
+                }
+
+                # Install additional packages if specified
+                if [[ -n "$PAPERLESS_CUSTOM_PACKAGES" ]]; then
+                  install_packages "$PAPERLESS_CUSTOM_PACKAGES"
                 fi
-                apt-get update
 
-                for package in "${packages[@]}"; do
-                  pkg="$package"
+                exec "/sbin/docker-entrypoint.sh" "/usr/local/bin/paperless_cmd.sh"
 
-                  if dpkg -s "$pkg" &>/dev/null; then
-                    echo "Package $pkg already installed!"
-                    continue
-                  fi
+              pdf_rm_blank.sh: |-
+                #!/usr/bin/env bash
 
-                  if ! apt-cache show "$pkg" &>/dev/null; then
-                    echo "Package $pkg not found! :("
-                    continue
-                  fi
+                DOCUMENT_FILE_NAME=${1}
 
-                  echo "Installing package $pkg..."
-                  if ! apt-get -y install "$pkg" &>/dev/null; then
-                    echo "Could not install $pkg"
-                    exit 1
-                  fi
-                done
-              }
+                echo "
+                Document ${DOCUMENT_ID} was just consumed.
+                "
 
-              # Install additional packages if specified
-              if [[ -n "$PAPERLESS_CUSTOM_PACKAGES" ]]; then
-                install_packages "$PAPERLESS_CUSTOM_PACKAGES"
-              fi
+                IN="$DOCUMENT_FILE_NAME"
+                OUT="${DOCUMENT_FILE_NAME}_tmp"
+                PAGES=$(pdfinfo "$IN" | grep ^Pages: | tr -dc '0-9')
+                echo "Starting to remove blank pages from $IN"
+                non_blank() {
+                    for i in $(seq 1 $PAGES)
+                    do
+                        if [ $(convert -density 25 "$IN[$((i-1))]" -define histogram:unique-colors=true -format %c histogram:info:- | wc -l) -gt 25 ]
+                        then
+                            echo $i
+                            #echo $i 1>&2
+                        fi
+                        echo -n . 1>&2
+                    done | tee out.tmp
+                    echo 1>&2
+                }
 
-              exec "/sbin/docker-entrypoint.sh" "/usr/local/bin/paperless_cmd.sh"
-
-          pdf_rm_blank.sh:
-            enabled: true
-            stringData: |-
-              #!/usr/bin/env bash
-
-              DOCUMENT_FILE_NAME=${1}
-
-              echo "
-              Document ${DOCUMENT_ID} was just consumed.
-              "
-
-              IN="$DOCUMENT_FILE_NAME"
-              OUT="${DOCUMENT_FILE_NAME}_tmp"
-              PAGES=$(pdfinfo "$IN" | grep ^Pages: | tr -dc '0-9')
-              echo "Starting to remove blank pages from $IN"
-              non_blank() {
-                  for i in $(seq 1 $PAGES)
-                  do
-                      if [ $(convert -density 25 "$IN[$((i-1))]" -define histogram:unique-colors=true -format %c histogram:info:- | wc -l) -gt 25 ]
-                      then
-                          echo $i
-                          #echo $i 1>&2
-                      fi
-                      echo -n . 1>&2
-                  done | tee out.tmp
-                  echo 1>&2
-              }
-
-              set +x
-              pdftk "$IN" cat $(non_blank) output "$OUT"
-              rm out.tmp
-              mv "$OUT" "$IN"
-              echo "finishing removing blank pages from $IN"
+                set +x
+                pdftk "$IN" cat $(non_blank) output "$OUT"
+                rm out.tmp
+                mv "$OUT" "$IN"
+                echo "finishing removing blank pages from $IN"
 
         env:
           # -- Project name
@@ -199,7 +198,7 @@ spec:
             mountPath: /usr/src/paperless/consume
             accessMode: ReadWriteOnce
           custom-scripts:
-            name: paperless-ng
+            name: paperless-ng-custom-scripts
             enabled: true
             type: secret
             defaultMode: 0777
