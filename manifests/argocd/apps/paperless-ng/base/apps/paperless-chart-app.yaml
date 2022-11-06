@@ -22,7 +22,7 @@ spec:
           pullPolicy: IfNotPresent
 
 
-        secret:
+        secrets:
           docker-entrypoint.sh: |-
             #!/usr/bin/env bash
 
