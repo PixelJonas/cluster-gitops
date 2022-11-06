@@ -23,7 +23,7 @@ spec:
 
 
         secrets:
-          paperless-ng-custom-scripts:
+          custom-scripts:
             enabled: true
             stringData:
               docker-entrypoint.sh: |-
