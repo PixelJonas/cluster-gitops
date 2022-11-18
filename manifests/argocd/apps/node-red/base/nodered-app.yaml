@@ -23,15 +23,6 @@ spec:
           pullPolicy: IfNotPresent
 
 
-        controller:
-          labels:
-            kanister.kasten.io/inject-sidecar: "true"
-            k10.kasten.io/forcegenericbackup: "true"
-
-        podLabels:
-          kanister.kasten.io/inject-sidecar: "true"
-          k10.kasten.io/forcegenericbackup: "true"
-
         env:
           TZ: Europe/Berlin
           NODE_RED_ENABLE_PROJECTS: "false"
