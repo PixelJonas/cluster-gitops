@@ -28,6 +28,15 @@ spec:
           enabled: false
 
         common_env:
+          OAUTH_ENABLED: "true"
+          OAUTH_ISSUER_URL: "https://sso.janz.digital/auth/realms/janz"
+          OAUTH_CLIENT_ID: "immich"
+          OAUTH_CLIENT_SECRET:
+            valueFrom:
+              secretKeyRef:
+                name: immich-secret
+                key: oauth_client_secret
+          OAUTH_BUTTON_TEXT: "Janz SSO"
           DB_HOSTNAME: "immich-db-postgresql"
           DB_PASSWORD:
             valueFrom:
