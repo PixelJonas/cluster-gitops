@@ -20,10 +20,6 @@ spec:
         autoscaling:
           enabled: false
 
-        extraLabels:
-          kanister.kasten.io/inject-sidecar: "true"
-          k10.kasten.io/forcegenericbackup: "true"
-
         features:
           emailNotifications: true
           demoUsers: false

@@ -23,11 +23,6 @@ spec:
               username: sharry
               existingSecret: sharry-db-postgresql
               database: sharry
-        primary:
-          annotations: 
-            kanister.kasten.io/blueprint: postgres-bp
-          labels:
-            kanister.kasten.io/inject-sidecar: "true"
 
   syncPolicy:
     syncOptions:

@@ -26,15 +26,6 @@ spec:
           PUID: "1500"
           PGID: "1500"
 
-        controller:
-          labels:
-            kanister.kasten.io/inject-sidecar: "true"
-            k10.kasten.io/forcegenericbackup: "true"
-
-        podLabels:
-          kanister.kasten.io/inject-sidecar: "true" 
-          k10.kasten.io/forcegenericbackup: "true"
-
         securityContext:
           privileged: true
           
@@ -99,7 +90,6 @@ spec:
             mountPath: /config
             size: 5Gi
             labels:
-              kanister.kasten.io/ignore: "true"
               snapshot.pmb/enabled: "true"
           media:
             enabled: true
@@ -107,8 +97,6 @@ spec:
             accessMode: ReadWriteOnce
             size: 10Gi
             mountPath: /media
-            labels:
-              kanister.kasten.io/ignore: "true"
           downloads:
             enabled: true
             storageClass: nfs

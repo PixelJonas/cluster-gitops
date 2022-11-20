@@ -30,12 +30,6 @@ spec:
               username: immich
               existingSecret: immich-postgresql
               database: immich
-        primary:
-          annotations: 
-            kanister.kasten.io/blueprint: postgres-bp
-          labels:
-            kanister.kasten.io/inject-sidecar: "true"
-            k10.kasten.io/forcegenericbackup: "true"
 
   ignoreDifferences:
     - group: "apps"

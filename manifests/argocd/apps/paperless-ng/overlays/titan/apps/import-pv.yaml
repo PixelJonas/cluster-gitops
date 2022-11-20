@@ -4,8 +4,6 @@ metadata:
   name: pvc-paperless-import
   annotations:
     argocd.argoproj.io/sync-wave: "111"
-  labels:
-    kanister.kasten.io/ignore: "true"
 spec:
   accessModes:
     - ReadWriteOnce
@@ -31,7 +29,6 @@ metadata:
   labels:
     app.kubernetes.io/instance: paperless-ng
     app.kubernetes.io/name: paperless
-    kanister.kasten.io/ignore: "true"
   name: paperless-ng-import
   namespace: paperless
 spec:

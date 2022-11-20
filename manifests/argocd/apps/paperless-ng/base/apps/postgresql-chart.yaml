@@ -22,11 +22,6 @@ spec:
               username: paperless
               existingSecret: paperless-db-postgresql
               database: paperless
-        primary:
-          annotations: 
-            kanister.kasten.io/blueprint: postgres-bp
-          labels:
-            kanister.kasten.io/inject-sidecar: "true"
 
   syncPolicy:
     syncOptions:
