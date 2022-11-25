@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://codecentric.github.io/helm-charts
     chart: keycloakx
-    targetRevision: 1.6.2
+    targetRevision: 1.7.0
     helm:
       values: |-
         command:
