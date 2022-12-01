@@ -7,7 +7,7 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: postgresql
-    targetRevision: 12.1.2
+    targetRevision: 12.1.3
     helm:
       parameters:
         - name: "global.storageClass"
