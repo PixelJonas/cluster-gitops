@@ -1,0 +1,60 @@
+{
+  "extends": [
+    "config:base",
+    "docker:enableMajor",
+    ":disableRateLimiting",
+    ":dependencyDashboard",
+    ":semanticCommits",
+    ":enablePreCommit",
+    ":automergeDigest",
+    ":automergeBranch",
+    "github>pixeljonas/cluster-gitops//.github/renovate/autoMerge.json5",
+    "github>pixeljonas/cluster-gitops//.github/renovate/commitMessage.json5",
+    "github>pixeljonas/cluster-gitops//.github/renovate/labels.json5",
+    "github>pixeljonas/cluster-gitops//.github/renovate/semanticCommits.json5",
+    "helpers:pinGitHubActionDigests"
+  ],
+  "dependencyDashboard": true,
+  "dependencyDashboardTitle": "Renovate Dashboard 🤖",
+  "suppressNotifications": [
+    "prIgnoreNotification"
+  ],
+  "rebaseWhen": "conflicted",
+  "schedule": [
+    "every saturday"
+  ],
+  "pre-commit": {
+    "enabled": true
+  },  
+  "argocd": {
+    "fileMatch": [
+      "manifests/.+\\.yaml$"
+    ]
+  },
+  "kubernetes": {
+    "fileMatch": [
+      "manifests/.+\\.ya?ml$"
+    ]
+  },
+  "helm-values": {
+    "fileMatch": [
+      "manifests/.+\\.yaml$"
+    ]
+  },
+  "regexManagers": [
+    {
+      "description": "Process various other dependencies",
+      "fileMatch": [
+        "manifests/.+\\.ya?ml$"
+      ],
+      "matchStrings": [
+        " *repository: '?\"?(?<depName>.*?)'?\"?\n *tag: *'?\"?(?<currentValue>.*)'?\"?\n",
+        " *repository: '?\"?(?<depName>.*?)'?\"?\n *pullPolicy:.*\n *tag: *'?\"?(?<currentValue>.*)'?\"?\n",
+        " *containerRepo='?\"?(?<depName>.*?)'?\"?\n *tag: '?\"?(?<currentValue>.*)'?\"?\n",
+        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
+      ],
+      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
+      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+    }
+  ]
+}
