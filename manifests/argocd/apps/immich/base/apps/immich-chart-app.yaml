@@ -62,28 +62,33 @@ spec:
 
         server:
           image:
+            # renovate: datasource=github-releases depName=immich-app/immich
             repository: docker.io/altran1502/immich-server
-            tag: v1.36.1_55-dev
+            tag: v1.39.0_61-dev
 
         microservice:
           image:
+            # renovate: datasource=github-releases depName=immich-app/immich
             repository: docker.io/altran1502/immich-server
-            tag: v1.36.1_55-dev
+            tag: v1.39.0_61-dev
 
         machine_learning:
           image:
+            # renovate: datasource=github-releases depName=immich-app/immich
             repository: docker.io/altran1502/immich-machine-learning
-            tag: v1.36.1_55-dev
+            tag: v1.39.0_61-dev
           
         web:
           image:
+            # renovate: datasource=github-releases depName=immich-app/immich
             repository: docker.io/altran1502/immich-web
-            tag: v1.36.1_55-dev
+            tag: v1.39.0_61-dev
           
         proxy:
           image:
+            # renovate: datasource=github-releases depName=immich-app/immich
             repository: docker.io/altran1502/immich-proxy
-            tag: v1.36.1_55-dev
+            tag: v1.39.0_61-dev
 
   project: cluster-apps
   syncPolicy:
