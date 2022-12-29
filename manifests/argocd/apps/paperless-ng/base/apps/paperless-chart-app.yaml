@@ -122,7 +122,7 @@ spec:
                 * Tags: ${DOCUMENT_TAGS}
                 It was consumed with the passphrase ${PASSPHRASE}
                 "
-                /usr/src/paperless/custom-scripts/shrinkpdf.sh ${DOCUMENT_ARCHIVE_PATH} ${DOCUMENT_ARCHIVE_PATH}_shrinked 300
+                /usr/src/paperless/custom-scripts/shrinkpdf.sh ${DOCUMENT_ARCHIVE_PATH} ${DOCUMENT_ARCHIVE_PATH}_shrinked 200
                 mv ${DOCUMENT_ARCHIVE_PATH}_shrinked ${DOCUMENT_ARCHIVE_PATH}
 
               shrinkpdfhere.sh: |-
