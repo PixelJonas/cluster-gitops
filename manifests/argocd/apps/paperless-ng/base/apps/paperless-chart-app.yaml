@@ -122,13 +122,13 @@ spec:
                 * Tags: ${DOCUMENT_TAGS}
                 It was consumed with the passphrase ${PASSPHRASE}
                 "
-                /usr/src/paperless/custom-scripts/shrinkpdf.sh.sh ${DOCUMENT_ARCHIVE_PATH} ${DOCUMENT_ARCHIVE_PATH}_shrinked 150
+                /usr/src/paperless/custom-scripts/shrinkpdf.sh ${DOCUMENT_ARCHIVE_PATH} ${DOCUMENT_ARCHIVE_PATH}_shrinked 150
                 mv ${DOCUMENT_ARCHIVE_PATH}_shrinked ${DOCUMENT_ARCHIVE_PATH}
 
               shrinkpdfhere.sh: |-
                 #!/bin/sh              
                 dpi=${1:-150}
-                find . -type f -name '*.pdf' -exec sh -c 'shrinkpdf "$1" "$(dirname "$1")"/"$(basename "$1" .pdf)".compressed.pdf $2' sh {} "$dpi" \;
+                find . -type f -name '*.pdf' -exec sh -c '/usr/src/paperless/custom-scripts/shrinkpdf.sh "$1" "$(dirname "$1")"/"$(basename "$1" .pdf)".compressed.pdf $2' sh {} "$dpi" \;
                 
               shrinkpdf.sh: |-
                 #!/bin/sh
