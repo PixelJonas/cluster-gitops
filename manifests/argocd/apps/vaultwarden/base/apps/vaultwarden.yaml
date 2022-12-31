@@ -18,6 +18,7 @@ spec:
 
         image:
           repository: vaultwarden/server
+          # renovate: datasource=docker depName=docker.io/vaultwarden/server
           tag: 1.27.0
           pullPolicy: IfNotPresent
 

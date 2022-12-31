@@ -18,6 +18,7 @@ spec:
 
         image:
           repository: ghcr.io/paperless-ngx/paperless-ngx
+          # renovate: datasource=docker depName=ghcr.io/paperless-ngx/paperless-ngx
           tag: 1.10.2
           pullPolicy: IfNotPresent
 

@@ -18,7 +18,8 @@ spec:
       values: |-
 
         image:
-          repository: nodered/node-red
+          repository: docker.io/nodered/node-red
+          # renovate: datasource=docker depName=docker.io/nodered/node-red
           tag: 3.0.2
           pullPolicy: IfNotPresent
 

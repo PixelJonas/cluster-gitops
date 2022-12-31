@@ -28,7 +28,7 @@
   },  
   "argocd": {
     "fileMatch": [
-      "manifests/.+\\.yaml$"
+      "manifests/argocd/.+\\.yaml$"
     ]
   },
   "kubernetes": {
@@ -43,6 +43,14 @@
   },
   "regexManagers": [
     {
+      "description": ["Process CRD dependencies - Chart and Github Release are the same version"],
+      "fileMatch": ["manifests/.+\\.ya?ml$"],
+      "matchStrings": [
+        "# renovate: registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n",
+      ],
+      "datasourceTemplate": "helm"
+    }    
+    {
       "description": "Process various other dependencies",
       "fileMatch": [
         "manifests/.+\\.ya?ml$"
@@ -51,7 +59,7 @@
         " *repository: '?\"?(?<depName>.*?)'?\"?\n *tag: *'?\"?(?<currentValue>.*)'?\"?\n",
         " *repository: '?\"?(?<depName>.*?)'?\"?\n *pullPolicy:.*\n *tag: *'?\"?(?<currentValue>.*)'?\"?\n",
         " *containerRepo='?\"?(?<depName>.*?)'?\"?\n *tag: '?\"?(?<currentValue>.*)'?\"?\n",
-        "datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
+        " *datasource=(?<datasource>\\S+) depName=(?<depName>\\S+)( versioning=(?<versioning>\\S+))?\n.*?\"(?<currentValue>.*)\"\n"
       ],
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
