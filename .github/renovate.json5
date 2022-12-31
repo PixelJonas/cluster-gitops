@@ -49,7 +49,7 @@
         "# renovate: registryUrl=(?<registryUrl>\\S+) chart=(?<depName>\\S+)\n.*?(?<currentValue>[^-\\s]*)\n",
       ],
       "datasourceTemplate": "helm"
-    }    
+    },   
     {
       "description": "Process various other dependencies",
       "fileMatch": [
