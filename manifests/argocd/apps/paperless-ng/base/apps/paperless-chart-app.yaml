@@ -296,7 +296,7 @@ spec:
         additionalContainers:
           broker:
             name: broker
-            image: redis:6.0
+            image: redis:7.0
             imagePullPolicy: IfNotPresent
           tika:
             name: tika
