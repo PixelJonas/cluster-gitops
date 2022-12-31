@@ -300,7 +300,7 @@ spec:
             imagePullPolicy: IfNotPresent
           tika:
             name: tika
-            image: docker.io/apache/tika:2.3.0
+            image: docker.io/apache/tika:2.5.0
             imagePullPolicy: IfNotPresent
           gotenberg:
             name: gotenberg
