@@ -35,7 +35,7 @@ patches:
         path: "/spec/source/helm/parameters/-"
         value:
           name: dnsConfig.nameservers[0]
-          value: 192.168.1.207
+          value: 10.20.0.1
           
       - op: "add"
         path: "/spec/source/helm/parameters/-"

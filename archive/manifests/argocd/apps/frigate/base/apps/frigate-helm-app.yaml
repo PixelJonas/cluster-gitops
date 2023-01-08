@@ -109,7 +109,6 @@ spec:
             type: hostPath
             hostPath: /dev/apex_0
 
-
   project: cluster-apps
   syncPolicy:
     syncOptions:
