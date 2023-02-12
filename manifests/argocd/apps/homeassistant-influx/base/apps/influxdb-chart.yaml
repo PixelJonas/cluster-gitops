@@ -33,10 +33,11 @@ spec:
         persistence:
           storageClass: odf-lvm-vg1
           size: 150Gi
-        service:
-          type: NodePort
-          nodePorts:
-            postgresql: 30320
+        influxdb:
+          service:
+            type: NodePort
+            nodePorts:
+              influxdb: 30320
 
         backup:
           enabled: true
