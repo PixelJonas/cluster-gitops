@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: homeassistant-influx
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+spec:
+  destination:
+    namespace: homeassistant-influx
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: influx
+    targetRevision: 5.4.15
+    helm:
+      values: |-
+
+        auth:
+          enabled: true
+          admin:
+            username: homeassistant-influx-admin
+          user:
+            username: homeassistant
+            org: homeassistant
+          readUser:
+            username: homeassistant-read
+          writeUser:
+            username: homeassistant-write
+          existingSecret: homeassistant-influx-credentials
+
+        persistence:
+          storageClass: odf-lvm-vg1
+          size: 150Gi
+        service:
+          type: NodePort
+          nodePorts:
+            postgresql: 30320
+
+        backup:
+          enabled: true
+
+  ignoreDifferences:
+    - group: "apps"
+      kind: "StatefulSet"
+      jsonPointers:
+        - /spec/replicas
+
+  syncPolicy:
+    syncOptions:
+      - RespectIgnoreDifferences=true
+      - CreateNamespace=true
