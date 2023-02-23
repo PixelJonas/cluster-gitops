@@ -22,7 +22,7 @@ spec:
           extraArgs:
             default-ssl-certificate: "operators/wildcard-apps-hive-janz-digital-tls"
     repoURL: https://kubernetes.github.io/ingress-nginx
-    targetRevision: 4.4.2
+    targetRevision: 4.5.2
   syncPolicy:
     syncOptions:
       - CreateNamespace=true
