@@ -82,6 +82,7 @@ spec:
             - "src/main.py"
           env:
             NODE_ENV: "production"
+            TRANSFORMERS_CACHE: /usr/src/app/.transformers_cache
           
         web:
           image:
