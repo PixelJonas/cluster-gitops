@@ -96,6 +96,12 @@ spec:
             # renovate: datasource=docker depName=docker.io/altran1502/immich-proxy
             tag: v1.49.0
 
+        persistence:
+          transformers-cache:
+            enabled: true
+            type: emptyDir
+            mountPath: /usr/src/app/.transformers_cache
+
   project: cluster-apps
   syncPolicy:
     syncOptions:
