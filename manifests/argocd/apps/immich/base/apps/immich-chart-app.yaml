@@ -77,9 +77,6 @@ spec:
             repository: docker.io/altran1502/immich-machine-learning
             # renovate: datasource=docker depName=docker.io/altran1502/immich-machine-learning
             tag: v1.49.0
-          command: "python"
-          args:
-            - "src/main.py"
           env:
             NODE_ENV: "production"
             TRANSFORMERS_CACHE: /usr/src/app/.transformers_cache
