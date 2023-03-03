@@ -64,19 +64,19 @@ spec:
           image:
             repository: docker.io/altran1502/immich-server
             # renovate: datasource=docker depName=docker.io/altran1502/immich-server
-            tag: v1.49.0
+            tag: v1.50.1
 
         microservice:
           image:
             repository: docker.io/altran1502/immich-server
             # renovate: datasource=docker depName=docker.io/altran1502/immich-server
-            tag: v1.49.0
+            tag: v1.50.1
 
         machine_learning:
           image:
             repository: docker.io/altran1502/immich-machine-learning
             # renovate: datasource=docker depName=docker.io/altran1502/immich-machine-learning
-            tag: v1.49.0
+            tag: v1.50.1
           command: null
           args: []           
           env:
@@ -87,13 +87,13 @@ spec:
           image:
             repository: docker.io/altran1502/immich-web
             # renovate: datasource=docker depName=docker.io/altran1502/immich-web
-            tag: v1.49.0
+            tag: v1.50.1
           
         proxy:
           image:
             repository: docker.io/altran1502/immich-proxy
             # renovate: datasource=docker depName=docker.io/altran1502/immich-proxy
-            tag: v1.49.0
+            tag: v1.50.1
 
         persistence:
           transformers-cache:
