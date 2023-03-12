@@ -16,7 +16,7 @@ spec:
     namespace: paperless
   nfs:
     path: /documents
-    server: 10.20.0.21
+    server: 10.42.0.10
   mountOptions:
     - nfsvers=4
   persistentVolumeReclaimPolicy: Retain
