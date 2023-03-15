@@ -1,0 +1,69 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+  annotations:
+    argocd.argoproj.io/sync-wave: "51"
+spec:
+  destination:
+    namespace: nextcloud
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: https://nextcloud.github.io/helm/
+    chart: nextcloud
+    targetRevision: 3.5.3
+    helm:
+      values: |-
+
+        nextcloud:
+          host: cloud.apps.sakaarr.janz.digital
+          existingSecret:
+            enabled: true
+            secretName: nextcloud-credentials
+            usernameKey: admin-user
+            passwordKey: admin-password
+            smtpUsernameKey: smtp-user
+            smtpPasswordKey: smtp-password
+          containerPort: 8080
+          mail:
+            enabled: true
+            fromAddress: home@famjanz.de
+            domain: famajanz.de
+            smtp:
+              host: smtp.strato.de
+              port: 465
+
+        internalDatabase:
+          enabled: false
+        
+        externalDatabase:
+          enabled: true
+          tpye: postgresql
+          host: nextcloud-db-postgresql
+          database: nextcloud
+          existingSecret:
+            enabled: true
+            secretName: nextcloud-db-postgresql
+            usernameKey: username
+            passwordKey: password
+        redis:
+          enabled: true
+        
+        persistence:
+          enabled: true
+          storageClass: odf-lvm-vg1
+          nextcloudData:
+            enabled: true
+            storageClass: odf-lvm-vg1
+        
+        metrics:
+          enabled: true
+          serviceMonitor:
+            enabled: true
+
+
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

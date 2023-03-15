@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nextcloud-db
+  annotations:
+    argocd.argoproj.io/sync-wave: "50"
+spec:
+  destination:
+    namespace: nextcloud
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: postgresql
+    targetRevision: 12.2.2
+    helm:
+      values: |-
+        global:
+          storageClass: odf-lvm-vg1
+          postgresql:
+            auth:
+              username: nextcloud
+              existingSecret: nextcloud-db-postgresql
+              database: nextcloud
+
+  syncPolicy:
+    syncOptions:
+    - CreateNamespace=true
