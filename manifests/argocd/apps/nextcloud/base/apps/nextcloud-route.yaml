@@ -6,7 +6,7 @@ metadata:
   annotations:
     haproxy.router.openshift.io/timeout: 240s  
 spec:
-  host: cloud.apps.sakaarr.janz.digital
+  host: cloud.janz.digital
   to:
     kind: Service
     name: nextcloud
