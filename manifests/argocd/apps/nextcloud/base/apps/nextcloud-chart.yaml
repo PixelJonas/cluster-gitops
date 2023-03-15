@@ -114,7 +114,7 @@ spec:
           nextcloudData:
             enabled: true
             storageClass: nfs
-            size: 200GB
+            size: 200Gi
 
         metrics:
           enabled: true
