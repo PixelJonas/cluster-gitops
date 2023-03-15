@@ -37,6 +37,11 @@ spec:
             - name: NEXTCLOUD_HOSTNAME
               value: cloud.apps.sakaarr.janz.digital
 
+        livenessProbe:
+          enabled: false
+        readinessProbe:
+          enabled: false
+
         internalDatabase:
           enabled: false
 
