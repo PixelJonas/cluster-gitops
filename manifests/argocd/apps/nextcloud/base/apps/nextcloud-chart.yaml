@@ -25,7 +25,7 @@ spec:
             passwordKey: admin-password
             smtpUsernameKey: smtp-user
             smtpPasswordKey: smtp-password
-          containerPort: 8080
+          containerPort: 80
           mail:
             enabled: true
             fromAddress: home@famjanz.de
