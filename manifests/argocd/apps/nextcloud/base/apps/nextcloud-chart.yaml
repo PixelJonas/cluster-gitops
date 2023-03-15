@@ -36,6 +36,11 @@ spec:
           extraEnv:
             - name: NEXTCLOUD_HOSTNAME
               value: nextcloud.nextcloud.svc.cluster.local
+            - name: OIDC_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: nextcloud-credentials
+                  key: oidc-client-secret
           configs:
             proxy.config.php: |-
               <?php
@@ -52,6 +57,38 @@ spec:
                   3 => 'nextcloud.nextcloud.svc.cluster.local'
                 ),
                 'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
+              );
+            oidc.config.php: |-
+              <?php
+              $CONFIG = array (
+                // Some Nextcloud options that might make sense here
+                'allow_user_to_change_display_name' => false,
+                'lost_password_link' => 'disabled',
+                'overwriteprotocol' => 'https',
+
+                // URL of provider. All other URLs are auto-discovered from .well-known
+                'oidc_login_provider_url' => 'https://sso.janz.digital/auth/realms/janz',
+
+                // Client ID and secret registered with the provider
+                'oidc_login_client_id' => 'nextcloud',
+                'oidc_login_client_secret' => getenv('OIDC_CLIENT_SECRET'),
+
+                // Automatically redirect the login page to the provider
+                'oidc_login_auto_redirect' => true,
+
+                // Redirect to this page after logging out the user
+                'oidc_login_logout_url' => 'https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/logout',
+
+                // Login button text
+                'oidc_login_button_text' => 'Log in with Janz SSO',
+                'oidc_login_hide_password_form' => false,
+
+                'oidc_login_attributes' => array (
+                    'id' => 'preferred_username',
+                    'mail' => 'email',
+                ),
+                'oidc_login_redir_fallback' => true,
+
               );
 
         internalDatabase:
