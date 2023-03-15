@@ -39,7 +39,7 @@ spec:
         
         externalDatabase:
           enabled: true
-          tpye: postgresql
+          type: postgresql
           host: nextcloud-db-postgresql
           database: nextcloud
           existingSecret:
