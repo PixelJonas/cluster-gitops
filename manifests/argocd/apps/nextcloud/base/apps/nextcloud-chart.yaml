@@ -38,13 +38,16 @@ spec:
               value: cloud.apps.sakaarr.janz.digital
           configs:
             trusted_domains.php: |-
-              'trusted_domains' =>
-                array (
-                0 => 'localhost',
-                1 => 'cloud.apps.sakaarr.janz.digital',
-                1 => 'cloud.janz.digital',
-                2 => '192.168.1.50'
-              ),
+              $CONFIG = array (
+                'trusted_domains' =>
+                  array (
+                  0 => 'localhost',
+                  1 => 'cloud.apps.sakaarr.janz.digital',
+                  1 => 'cloud.janz.digital',
+                  2 => '192.168.1.50'
+                ),
+                'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
+              );
 
         livenessProbe:
           enabled: false
