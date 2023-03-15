@@ -17,7 +17,7 @@ spec:
       values: |-
 
         nextcloud:
-          host: cloud.apps.sakaarr.janz.digital
+          host: nextcloud.nextcloud.svc.cluster.local
           existingSecret:
             enabled: true
             secretName: nextcloud-credentials
@@ -35,7 +35,7 @@ spec:
               port: 465
           extraEnv:
             - name: NEXTCLOUD_HOSTNAME
-              value: cloud.apps.sakaarr.janz.digital
+              value: nextcloud.nextcloud.svc.cluster.local
           configs:
             proxy.config.php: |-
               <?php
@@ -48,15 +48,11 @@ spec:
                   array (
                   0 => 'localhost',
                   1 => 'cloud.apps.sakaarr.janz.digital',
-                  2 => 'cloud.janz.digital'
+                  2 => 'cloud.janz.digital',
+                  3 => 'nextcloud.nextcloud.svc.cluster.local'
                 ),
                 'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
               );
-
-        livenessProbe:
-          enabled: false
-        readinessProbe:
-          enabled: false
 
         internalDatabase:
           enabled: false
