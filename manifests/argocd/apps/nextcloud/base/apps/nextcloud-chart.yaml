@@ -28,8 +28,8 @@ spec:
           containerPort: 80
           mail:
             enabled: true
-            fromAddress: home@famjanz.de
-            domain: famajanz.de
+            fromAddress: home
+            domain: famjanz.de
             smtp:
               host: smtp.strato.de
               port: 465
@@ -37,14 +37,18 @@ spec:
             - name: NEXTCLOUD_HOSTNAME
               value: cloud.apps.sakaarr.janz.digital
           configs:
-            trusted_domains.php: |-
+            proxy.config.php: |-
+              <?php
               $CONFIG = array (
+                'trusted_proxies' => array(
+                  0 => '127.0.0.1',
+                  1 => '10.0.0.0/8',
+                ),
                 'trusted_domains' =>
                   array (
                   0 => 'localhost',
                   1 => 'cloud.apps.sakaarr.janz.digital',
-                  1 => 'cloud.janz.digital',
-                  2 => '192.168.1.50'
+                  2 => 'cloud.janz.digital'
                 ),
                 'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
               );
