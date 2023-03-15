@@ -3,6 +3,8 @@ apiVersion: route.openshift.io/v1
 metadata:
   name: nextcloud-route
   namespace: nextcloud
+  annotations:
+    haproxy.router.openshift.io/timeout: 240s  
 spec:
   host: cloud.apps.sakaarr.janz.digital
   to:
