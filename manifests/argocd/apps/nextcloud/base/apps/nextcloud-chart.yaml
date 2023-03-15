@@ -113,7 +113,8 @@ spec:
           storageClass: odf-lvm-vg1
           nextcloudData:
             enabled: true
-            storageClass: odf-lvm-vg1
+            storageClass: nfs
+            size: 200GB
 
         metrics:
           enabled: true
