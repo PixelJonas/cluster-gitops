@@ -34,9 +34,12 @@ spec:
               host: smtp.strato.de
               port: 465
 
+        extraEnv:
+          NEXTCLOUD_HOSTNAME: cloud.apps.sakaarr.janz.digital
+
         internalDatabase:
           enabled: false
-        
+
         externalDatabase:
           enabled: true
           type: postgresql
@@ -49,20 +52,18 @@ spec:
             passwordKey: password
         redis:
           enabled: true
-        
+
         persistence:
           enabled: true
           storageClass: odf-lvm-vg1
           nextcloudData:
             enabled: true
             storageClass: odf-lvm-vg1
-        
+
         metrics:
           enabled: true
           serviceMonitor:
             enabled: true
-
-
 
   syncPolicy:
     syncOptions:
