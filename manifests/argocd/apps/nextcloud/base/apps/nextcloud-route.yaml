@@ -1,0 +1,17 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: nextcloud-route
+  namespace: nextcloud
+spec:
+  host: cloud.apps.sakaarr.janz.digital
+  to:
+    kind: Service
+    name: nextcloud
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
