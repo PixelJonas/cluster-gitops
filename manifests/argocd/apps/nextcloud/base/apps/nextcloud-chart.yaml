@@ -34,7 +34,9 @@ spec:
               host: smtp.strato.de
               port: 465
           extraEnv:
-            NEXTCLOUD_HOSTNAME: cloud.apps.sakaarr.janz.digital
+            env:
+              name: NEXTCLOUD_HOSTNAME
+              value: cloud.apps.sakaarr.janz.digital
 
         internalDatabase:
           enabled: false
