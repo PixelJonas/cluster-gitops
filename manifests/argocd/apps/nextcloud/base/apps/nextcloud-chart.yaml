@@ -82,6 +82,7 @@ spec:
                 // Login button text
                 'oidc_login_button_text' => 'Log in with Janz SSO',
                 'oidc_login_hide_password_form' => false,
+                'oidc_login_disable_registration' => true,
 
                 'oidc_login_attributes' => array (
                     'id' => 'preferred_username',
