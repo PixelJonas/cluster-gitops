@@ -2,18 +2,6 @@ schemaVersion: 2.1.0
 metadata:
   name: cluster-gitops
   version: 2.1.0
-
-attributes:
-  .vscode/extensions.json: |
-    {
-      "recommendations": [
-        "arcticicestudio.nord-visual-studio-code",
-        "vscode-icons-team.vscode-icons",
-        "esbenp.prettier-vscode",
-        "eamodio.gitlens",
-        "redhat.vscode-yaml",
-      ]
-    }
 projects:
   - name: "cluster-gitops"
     git:
