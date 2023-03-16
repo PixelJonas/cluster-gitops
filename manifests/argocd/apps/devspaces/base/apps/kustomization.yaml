@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
   - "sealed-github-credentials.yaml"
+  - "sealed-ssh-credentials.yaml"
