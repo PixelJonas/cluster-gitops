@@ -1,13 +1,14 @@
-schemaVersion: 2.1.0
+schemaVersion: 2.2.0
 metadata:
   name: cluster-gitops
-  version: 2.1.0
 projects:
   - name: "cluster-gitops"
+    clonePath: cluster-gitops
     git:
       remotes:
         origin: https://github.com/PixelJonas/cluster-gitops.git
   - name: "private-gitops"
+    clonePath: private-gitops
     git:
       remotes:
         origin: https://github.com/PixelJonas/private-gitops.git  
