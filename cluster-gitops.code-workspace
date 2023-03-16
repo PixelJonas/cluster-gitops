@@ -19,6 +19,7 @@
     "files.eol": "\n",
     "explorer.confirmDragAndDrop": false,
     "terminal.integrated.fontFamily": "SourceCodePro-Light,Source Code Pro for Powerline,Consolas,'Courier New',monospace",
+    "terminal.integrated.defaultProfile.linux": "zsh",
     "gitlens.keymap": "alternate",
     "[html]": {
       "editor.defaultFormatter": "esbenp.prettier-vscode"
