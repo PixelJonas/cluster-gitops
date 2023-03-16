@@ -11,9 +11,9 @@ projects:
     clonePath: private-gitops
     git:
       remotes:
-        origin: https://github.com/PixelJonas/private-gitops.git  
+        origin: https://github.com/PixelJonas/private-gitops.git
 components:
   - container:
-      image: 'registry.redhat.io/devspaces/udi-rhel8@sha256:8de469cc9131a42092bd66e0f27a52bbc9b9a449235abf5b900d172a1bd3c985'
+      image: "quay.io/jjanz/k8s-tooling:latest"
       sourceMapping: /projects
-    name: universal-developer-image
+    name: k8s-tooling
