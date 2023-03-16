@@ -1,0 +1,55 @@
+{
+  "folders": [
+    {
+      "path": "/projects/cluster-gitops"
+    },
+    {
+      "path": "/projects/private-gitops"
+    }
+  ],
+  "settings": {
+    "prettier.enable": true,
+    "editor.formatOnSave": true,
+    "files.autoSave": "afterDelay",
+    "editor.formatOnPaste": true,
+    "editor.tabSize": 2,
+    "editor.suggestSelection": "first",
+    "workbench.colorTheme": "Nord",
+    "workbench.iconTheme": "vscode-icons",
+    "files.eol": "\n",
+    "explorer.confirmDragAndDrop": false,
+    "terminal.integrated.fontFamily": "SourceCodePro-Light,Source Code Pro for Powerline,Consolas,'Courier New',monospace",
+    "gitlens.keymap": "alternate",
+    "[html]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "vscode.json-language-features"
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[python]": {
+      "editor.formatOnType": true
+    },
+    "[yaml]": {
+      "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "git.alwaysSignOff": true,
+    "git.autofetch": true,
+    "git.enableSmartCommit": true,
+    "git.ignoreLegacyWarning": true,
+    "prettier.singleQuote": true,
+    "vsicons.dontShowNewVersionMessage": true,
+    "files.exclude": {
+      "**/.classpath": true,
+      "**/.project": true,
+      "**/.settings": true,
+      "**/.factorypath": true
+    },
+    "diffEditor.ignoreTrimWhitespace": false
+  }
+}
