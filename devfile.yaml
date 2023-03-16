@@ -16,4 +16,6 @@ components:
   - container:
       image: "quay.io/jjanz/k8s-tooling:latest"
       sourceMapping: /projects
+      command:
+        - "/bin/zsh"
     name: k8s-tooling
