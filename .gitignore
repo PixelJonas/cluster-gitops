@@ -7,6 +7,7 @@ config.yaml
 *.csr
 
 /*.yaml
+!devfile.yaml
 /*.json
 /bootstrap/ansible/inventories/.proxmox.yaml
 /bootstrap/ansible/inventories/hosts.yaml
