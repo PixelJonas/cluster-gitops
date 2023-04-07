@@ -34,6 +34,8 @@ spec:
           storageClass: odf-lvm-vg1
           size: 150Gi
         influxdb:
+          updateStrategy:
+            type: Recreate
           service:
             type: NodePort
             nodePorts:
