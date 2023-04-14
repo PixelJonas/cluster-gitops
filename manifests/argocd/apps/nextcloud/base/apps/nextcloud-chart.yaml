@@ -16,6 +16,11 @@ spec:
     helm:
       values: |-
 
+        image:
+          flavor: fpm
+        nginx:
+          enabled: true
+
         nextcloud:
           host: nextcloud.nextcloud.svc.cluster.local
           existingSecret:
