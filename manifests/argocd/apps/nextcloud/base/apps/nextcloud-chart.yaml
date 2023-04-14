@@ -36,6 +36,10 @@ spec:
           extraEnv:
             - name: NEXTCLOUD_HOSTNAME
               value: nextcloud.nextcloud.svc.cluster.local
+            - name: PHP_UPLOAD_LIMIT
+              value: 16G
+            - name: NEXTCLOUD_INIT_HTACCESS
+              value: "true"
             - name: OIDC_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
