@@ -11,7 +11,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     path: charts/apps/immich
-    repoURL: "https://github.com/PixelJonas/immich-charts.git"
+    repoURL: "https://github.com/immich-app/immich-charts.git"
     targetRevision: refactor
     helm:
       values: |-
@@ -30,7 +30,7 @@ spec:
         immich:
           persistence:
             existingClaim: nfs-photos-immich
-        
+
         redis:
           enabled: true
 
@@ -42,7 +42,7 @@ spec:
               accessMode: ReadWriteOnce
               size: 8Gi
               storageClass: odf-lvm-vg1
-  
+
         env:
           DB_HOSTNAME: "immich-db-postgresql"
           DB_PASSWORD:
