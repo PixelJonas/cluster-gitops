@@ -10,7 +10,7 @@ spec:
     namespace: immich
     server: "https://kubernetes.default.svc"
   source:
-    path: charts/apps/immich
+    path: charts/immich
     repoURL: "https://github.com/immich-app/immich-charts.git"
     targetRevision: refactor
     helm:
