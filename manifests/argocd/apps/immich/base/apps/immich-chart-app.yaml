@@ -29,7 +29,8 @@ spec:
 
         immich:
           persistence:
-            existingClaim: nfs-photos-immich
+            library:
+              existingClaim: nfs-photos-immich
 
         redis:
           enabled: true
