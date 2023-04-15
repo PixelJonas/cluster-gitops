@@ -12,7 +12,7 @@ spec:
   source:
     path: charts/apps/immich
     repoURL: "https://github.com/PixelJonas/immich-charts.git"
-    targetRevision: main
+    targetRevision: refactor
     helm:
       values: |-
 
@@ -27,16 +27,23 @@ spec:
         postgresql:
           enabled: false
 
-        common_env:
-          OAUTH_ENABLED: "true"
-          OAUTH_ISSUER_URL: "https://sso.janz.digital/auth/realms/janz"
-          OAUTH_CLIENT_ID: "immich"
-          OAUTH_CLIENT_SECRET:
-            valueFrom:
-              secretKeyRef:
-                name: immich-secret
-                key: oauth_client_secret
-          OAUTH_BUTTON_TEXT: "Janz SSO"
+        immich:
+          persistence:
+            existingClaim: nfs-photos-immich
+        
+        redis:
+          enabled: true
+
+        typesense:
+          enabled: true
+          persistence:
+            tsdata:
+              enabled: true
+              accessMode: ReadWriteOnce
+              size: 8Gi
+              storageClass: odf-lvm-vg1
+  
+        env:
           DB_HOSTNAME: "immich-db-postgresql"
           DB_PASSWORD:
             valueFrom:
@@ -49,57 +56,14 @@ spec:
                 name: immich-secret
                 key: jwt_secret
 
-        persistence:
-          library:
-            enabled: true
-            storageClass: odf-lvm-vg1
-            accessMode: ReadWriteOnce
-            labels:
-              "snapshot.pmb/enabled": "true"
-              "snapshot.pmb/postgres-controller-name": "immich-db-postgresql"
-              "snapshot.pmb/postgres-controller-type": "sts"
-            size: 5Gi
-
-        server:
-          image:
-            repository: docker.io/altran1502/immich-server
-            # renovate: datasource=docker depName=docker.io/altran1502/immich-server
-            tag: v1.50.1
-
-        microservice:
-          image:
-            repository: docker.io/altran1502/immich-server
-            # renovate: datasource=docker depName=docker.io/altran1502/immich-server
-            tag: v1.50.1
-
         machine_learning:
-          image:
-            repository: docker.io/altran1502/immich-machine-learning
-            # renovate: datasource=docker depName=docker.io/altran1502/immich-machine-learning
-            tag: v1.50.1
-          command: null
-          args: []           
-          env:
-            NODE_ENV: "production"
-            TRANSFORMERS_CACHE: /usr/src/app/.transformers_cache
-          
-        web:
-          image:
-            repository: docker.io/altran1502/immich-web
-            # renovate: datasource=docker depName=docker.io/altran1502/immich-web
-            tag: v1.50.1
-          
-        proxy:
-          image:
-            repository: docker.io/altran1502/immich-proxy
-            # renovate: datasource=docker depName=docker.io/altran1502/immich-proxy
-            tag: v1.50.1
-
-        persistence:
-          transformers-cache:
-            enabled: true
-            type: emptyDir
-            mountPath: /usr/src/app/.transformers_cache
+          persistence:
+            cache:
+              enabled: true
+              size: 10Gi
+              type: pvc
+              accessMode: ReadWriteOnce
+              storageClass: odf-lvm-vg1
 
   project: cluster-apps
   syncPolicy:

@@ -1,0 +1,16 @@
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-photos-immich
+  namespace: immich
+  annotations:
+    argocd.argoproj.io/sync-wave: "90"
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: nfs
+  volumeMode: Filesystem
