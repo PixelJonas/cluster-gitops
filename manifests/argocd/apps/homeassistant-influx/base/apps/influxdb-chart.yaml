@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: influxdb
-    targetRevision: 5.4.23
+    targetRevision: 5.5.2
     helm:
       values: |-
 
