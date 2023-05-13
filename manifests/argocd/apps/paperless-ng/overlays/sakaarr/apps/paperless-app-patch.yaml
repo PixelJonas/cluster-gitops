@@ -6,10 +6,6 @@ spec:
   source:
     helm:
       parameters:
-        - name: persistence.consume.existingClaim
-          value: paperless-ng-import
-        - name: persistence.consume.enabled
-          value: "true"
         - name: persistence.data.storageClass
           value: "odf-lvm-vg1"
         - name: persistence.export.storageClass
