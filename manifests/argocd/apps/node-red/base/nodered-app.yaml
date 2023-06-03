@@ -13,7 +13,7 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 1.5.0
+    targetRevision: 1.5.1
     helm:
       values: |-
 
