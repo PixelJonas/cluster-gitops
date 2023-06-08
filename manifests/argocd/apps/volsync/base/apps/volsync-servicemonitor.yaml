@@ -14,6 +14,10 @@ spec:
       tlsConfig:
         # Using self-signed cert for connection
         insecureSkipVerify: true
+  jobLabel: name
+  namespaceSelector:
+    matchNames:
+      - openshift-operators
   selector:
     matchLabels:
       control-plane: controller-manager
