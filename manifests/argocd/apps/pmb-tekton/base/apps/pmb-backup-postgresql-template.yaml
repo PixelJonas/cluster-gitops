@@ -28,8 +28,6 @@ spec:
               claimName: $(tt.params.source_pvc)
         pipelineSpec:
           params:
-            - name: KOPIA_PASSWORD
-              type: string
             - name: postgres_controller
               type: string
               default: ""
