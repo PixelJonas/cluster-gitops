@@ -5,6 +5,7 @@ resources:
   - sealed-immich-postgresql.yaml
   - sealed-immich-secret.yaml
   - postgresql-chart.yaml
+  - immich-backup-app.yaml
   - immich-nfs.yaml
   - immich-chart-app.yaml
   - route.yaml
