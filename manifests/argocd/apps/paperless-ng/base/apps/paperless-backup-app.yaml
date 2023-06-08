@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: paperless-backup-app
+  namespace: argocd-operator-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "101"
+spec:
+  destination:
+    namespace: paperless
+    server: https://kubernetes.default.svc
+  project: cluster-apps
+  source:
+    path: manifests/argocd/apps/paperless/base/apps/backup
+    repoURL: https://github.com/pixeljonas/cluster-gitops.git
+    targetRevision: master
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

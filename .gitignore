@@ -6,6 +6,8 @@ config.yaml
 *.srl
 *.csr
 
+/volsync-seal.sh
+
 /*.yaml
 !devfile.yaml
 /*.json
