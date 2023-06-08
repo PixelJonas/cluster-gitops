@@ -4,7 +4,7 @@ kind: Kustomization
 
 resources:
   - delete-cpu-limits.yaml
-  - pmb-tekton.yaml
-  - pmb-psql-tekton.yaml
-  - pmb-kopia-sync.yaml
+  #- pmb-tekton.yaml
+  #- pmb-psql-tekton.yaml
+  #- pmb-kopia-sync.yaml
   - sync-kopia-secret.yaml

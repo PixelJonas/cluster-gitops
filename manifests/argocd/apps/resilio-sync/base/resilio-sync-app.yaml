@@ -89,8 +89,8 @@ spec:
             accessMode: ReadWriteOnce
             mountPath: /config
             size: 5Gi
-            labels:
-              snapshot.pmb/enabled: "true"
+            # labels:
+            #   snapshot.pmb/enabled: "true"
           media:
             enabled: true
             storageClass: nfs
@@ -109,8 +109,8 @@ spec:
             accessMode: ReadWriteOnce
             mountPath: /sync
             size: 10Gi
-            labels:
-              snapshot.pmb/enabled: "true"
+            # labels:
+            #   snapshot.pmb/enabled: "true"
   syncPolicy:
     automated:
       prune: true
