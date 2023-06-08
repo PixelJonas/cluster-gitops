@@ -3,4 +3,5 @@ kind: Kustomization
 
 resources:
   - influxdb-chart.yaml
+  - homeassistant-influx-backup-app.yaml
   - sealed-homeassistant-influx-credentials.yaml
