@@ -10,10 +10,6 @@ spec:
       bindings:
         - name: namespace
           value: $(body.namespace)
-        - name: kopia_password
-          value: $(body.kopia_password)
-        - name: kopia_repo_pvc
-          value: $(body.kopia_repo_pvc)
         - name: source_pvc
           value: $(body.source_pvc)
         - name: postgres_controller
