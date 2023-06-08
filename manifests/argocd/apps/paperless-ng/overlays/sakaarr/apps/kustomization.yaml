@@ -18,5 +18,4 @@ patches:
       group: argoproj.io
       version: v1alpha1
       kind: Application
-      name: paperless-ng
     path: paperless-app-namespace-patch.yaml
