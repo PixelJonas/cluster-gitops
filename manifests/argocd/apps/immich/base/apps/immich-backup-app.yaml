@@ -7,7 +7,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "101"
 spec:
   destination:
-    namespace: nextcloud
+    namespace: immich
     server: https://kubernetes.default.svc
   project: cluster-apps
   source:
