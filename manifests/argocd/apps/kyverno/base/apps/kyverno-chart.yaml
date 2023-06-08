@@ -16,7 +16,7 @@ spec:
     helm:
       values: |-
 
-        installCRDs: false
+        installCRDs: true
 
         extraArgs:
           - --autogenInternals=false
