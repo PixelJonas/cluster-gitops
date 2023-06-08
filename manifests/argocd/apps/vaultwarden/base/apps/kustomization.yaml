@@ -6,3 +6,4 @@ resources:
   - "postgresql-chart.yaml"
   - "sealed-postgresql-credentials.yaml"
   - "sealed-vaultwarden-credentials.yaml"
+  - "vaultwarden-backup-app.yaml"
