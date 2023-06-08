@@ -4,13 +4,13 @@ kind: ReplicationSource
 metadata:
   name: nextcloud-data-backup
   annotations:
-    argocd.argoproj.io/sync-wave: "200"  
+    argocd.argoproj.io/sync-wave: "200"
 spec:
   # The PVC to be backed up
   sourcePVC: nextcloud-nextcloud-data
   trigger:
     # Take a backup every 30 minutes
-    schedule: "*/30 * * * *"
+    schedule: "0 5 * * *"
   restic:
     # Prune the repository (repack to free space) every 2 weeks
     pruneIntervalDays: 14
