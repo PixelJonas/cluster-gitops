@@ -1,0 +1,19 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: volsync-monitor
+  namespace: openshift-operators
+  labels:
+    control-plane: controller-manager
+spec:
+  endpoints:
+    - interval: 30s
+      path: /metrics
+      port: https
+      scheme: https
+      tlsConfig:
+        # Using self-signed cert for connection
+        insecureSkipVerify: true
+  selector:
+    matchLabels:
+      control-plane: controller-manager

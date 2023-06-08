@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: volsync-app
+  annotations:
+    argocd.argoproj.io/sync-wave: "11"
+  labels:
+    gitops.ownedBy: cluster-config
+spec:
+  destination:
+    namespace: volsync
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    path: manifests/argocd/apps/volsync/base/apps
+    repoURL: https://github.com/pixeljonas/cluster-gitops.git
+    targetRevision: master
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
