@@ -26,46 +26,6 @@ spec:
   generateExistingOnPolicyUpdate: true
   mutateExistingOnPolicyUpdate: true
   rules:
-    - name: create-pmb-destination-pvc
-      match:
-        any:
-          - resources:
-              kinds:
-                - PersistentVolumeClaim
-              selector:
-                matchLabels:
-                  snapshot.pmb/enabled: "true"
-                  snapshot.pmb/postgres-controller-name: "*"
-                  snapshot.pmb/postgres-controller-type: "*"
-                  app.kubernetes.io/name: "*"
-                  app.kubernetes.io/instance: "*"
-      context:
-        - name: appName
-          variable:
-            jmesPath: 'request.object.metadata.labels."app.kubernetes.io/name"'
-        - name: claimName
-          variable:
-            jmesPath: "request.object.metadata.name"
-        - name: namespace
-          variable:
-            jmesPath: "request.object.metadata.namespace"
-        - name: size
-          variable:
-            jmesPath: "request.object.spec.resources.requests.storage"
-      generate:
-        apiVersion: v1
-        kind: PersistentVolumeClaim
-        name: "{{ claimName }}-backup"
-        namespace: "{{ namespace }}"
-        data:
-          spec:
-            accessModes:
-              - ReadWriteOnce
-            resources:
-              requests:
-                storage: "{{ size }}"
-            storageClassName: pmb-backup
-            volumeMode: Filesystem
     - name: create-pmb-tmp-pvc
       match:
         any:
