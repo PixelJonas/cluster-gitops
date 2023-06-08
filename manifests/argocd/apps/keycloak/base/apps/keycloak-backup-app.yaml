@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak-backup-app
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "101"
+spec:
+  destination:
+    namespace: keycloak
+    server: https://kubernetes.default.svc
+  project: cluster-apps
+  source:
+    path: manifests/argocd/apps/keycloak/base/apps/backup
+    repoURL: https://github.com/pixeljonas/cluster-gitops.git
+    targetRevision: master
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
