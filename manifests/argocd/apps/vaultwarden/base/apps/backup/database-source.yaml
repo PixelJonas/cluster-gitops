@@ -9,8 +9,8 @@ spec:
   # The PVC to be backed up
   sourcePVC: data-vaultwarden-db-postgresql-0
   trigger:
-    # Take a backup every 30 minutes
-    schedule: "* * */1 * *"
+    # Take a backup everyday at 5am
+    schedule: "0 5 * * *"
   restic:
     # Prune the repository (repack to free space) every 2 weeks
     pruneIntervalDays: 14
