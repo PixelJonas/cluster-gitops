@@ -5,3 +5,4 @@ resources:
   - "sealed-restic-config.yaml"
   - "sealed-restic-database.yaml"
   - "config-source.yaml"
+  - "database-source.yaml"
