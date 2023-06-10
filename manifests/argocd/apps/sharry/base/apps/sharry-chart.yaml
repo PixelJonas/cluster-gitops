@@ -80,7 +80,7 @@ spec:
                   mail {
                     enabled = true
                     smtp {
-                      host = "smtp.strato.de"
+                      host = "smtp.fastmail.com"
                       port = 465
                       user = ${SHARRY_SMTP_USERNAME}
                       password = ${SHARRY_SMTP_PASSWORD}
