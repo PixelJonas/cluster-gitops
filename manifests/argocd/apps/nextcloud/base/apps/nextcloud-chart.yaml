@@ -50,6 +50,10 @@ spec:
                 secretKeyRef:
                   name: nextcloud-credentials
                   key: oidc-client-secret
+          podSecurityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            privileged: true        
           configs:
             proxy.config.php: |-
               <?php
