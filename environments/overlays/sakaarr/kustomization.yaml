@@ -18,7 +18,6 @@ bases:
   - ../../../manifests/argocd/apps/immich/base
   - ../../../manifests/argocd/apps/resilio-sync/base
   - ../../../manifests/argocd/apps/homeassistant-influx/base
-  - ../../../manifests/argocd/apps/nextcloud/base
 
   - ../../../manifests/argocd/apps/cert-manager/overlays/sakaarr
   - ../../../manifests/argocd/apps/homeassistant-db/overlays/sakaarr
