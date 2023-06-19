@@ -10,7 +10,6 @@ bases:
   - ../../../manifests/argocd/apps/openshift-certs/base
   - ../../../manifests/argocd/apps/cluster-monitoring/base
   - ../../../manifests/argocd/apps/volsync/base
-  - ../../../manifests/argocd/apps/kyverno/base
   - ../../../manifests/argocd/apps/devspaces/base
   #  - ../../../manifests/argocd/apps/cloudnative-pg/base
   - ../../../manifests/argocd/apps/machineconfig/base
