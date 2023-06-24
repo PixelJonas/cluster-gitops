@@ -55,7 +55,7 @@ spec:
             htpasswd: "admin:$2y$10$90kwyftHGGeNUPHiDmueqOW5/TCAWMhLjFjv9Ff111TSs.cvibk.."
 
     repoURL: https://charts.kasten.io/
-    targetRevision: 6.0.0
+    targetRevision: 6.0.1
   ignoreDifferences:
     - kind: SecurityContextConstraints
       jqPathExpressions:
