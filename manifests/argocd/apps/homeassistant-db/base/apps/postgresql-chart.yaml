@@ -17,10 +17,8 @@ spec:
     helm:
       values: |-
 
-        # commonLabels:
-        #   snapshot.pmb/enabled: "true"
-        #   snapshot.pmb/postgres-controller-name: "homeassistant-db-postgresql"
-        #   snapshot.pmb/postgres-controller-type: "sts"
+        volumePermissions:
+          enabled: true
 
         global:
           storageClass: openebs-jiva-csi-default
