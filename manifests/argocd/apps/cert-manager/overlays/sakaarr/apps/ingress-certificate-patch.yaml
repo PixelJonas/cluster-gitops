@@ -4,7 +4,7 @@ metadata:
   name: wildcard-apps-sakaarr-janz-digital
 spec:
   dnsNames:
-    - "*.apps.sakaarr.janz.digital"
+    - "*.apps.sno-cluster.janz.digital"
   secretName: wildcard-apps-sakaarr-janz-digital-tls
   issuerRef:
     name: cloudflare-issuer
