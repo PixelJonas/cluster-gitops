@@ -8,14 +8,14 @@ data:
     prometheus:
       volumeClaimTemplate:
         spec:
-          storageClassName: odf-lvm-vg1
+          storageClassName: lvms-vg1
           resources:
             requests:
               storage: 40Gi
     thanosRuler:
       volumeClaimTemplate:
         spec:
-          storageClassName: odf-lvm-vg1
+          storageClassName: lvms-vg1
           resources:
             requests:
               storage: 40Gi

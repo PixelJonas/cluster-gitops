@@ -7,11 +7,11 @@ spec:
     helm:
       parameters:
         - name: persistence.data.storageClass
-          value: "odf-lvm-vg1"
+          value: "lvms-vg1"
         - name: persistence.export.storageClass
-          value: "odf-lvm-vg1"
+          value: "lvms-vg1"
         - name: persistence.media.storageClass
-          value: "odf-lvm-vg1"
+          value: "lvms-vg1"
         - name: ingress.main.enabled
           value: "false"
         - name: env.PAPERLESS_URL

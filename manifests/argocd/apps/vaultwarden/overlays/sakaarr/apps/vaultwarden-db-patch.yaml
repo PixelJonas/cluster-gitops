@@ -7,4 +7,4 @@ spec:
     helm:
       parameters:
         - name: "global.storageClass"
-          value: "odf-lvm-vg1"
+          value: "lvms-vg1"

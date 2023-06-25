@@ -85,7 +85,7 @@ spec:
         persistence:
           config:
             enabled: true
-            storageClass: odf-lvm-vg1
+            storageClass: lvms-vg1
             accessMode: ReadWriteOnce
             mountPath: /config
             size: 5Gi

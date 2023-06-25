@@ -132,7 +132,7 @@ spec:
 
         persistence:
           enabled: true
-          storageClass: odf-lvm-vg1
+          storageClass: lvms-vg1
           nextcloudData:
             enabled: true
             storageClass: nfs

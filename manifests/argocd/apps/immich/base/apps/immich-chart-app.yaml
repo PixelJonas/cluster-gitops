@@ -10,7 +10,7 @@ spec:
     namespace: immich
     server: "https://kubernetes.default.svc"
   source:
-    repoURL: 'https://immich-app.github.io/immich-charts'
+    repoURL: "https://immich-app.github.io/immich-charts"
     targetRevision: 0.1.1
     chart: immich
     helm:
@@ -42,7 +42,7 @@ spec:
               enabled: true
               accessMode: ReadWriteOnce
               size: 8Gi
-              storageClass: odf-lvm-vg1
+              storageClass: lvms-vg1
 
         env:
           DB_HOSTNAME: "immich-db-postgresql"
@@ -64,7 +64,7 @@ spec:
               size: 10Gi
               type: pvc
               accessMode: ReadWriteOnce
-              storageClass: odf-lvm-vg1
+              storageClass: lvms-vg1
 
   project: cluster-apps
   syncPolicy:

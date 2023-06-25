@@ -10,7 +10,7 @@ spec:
           value: "false"
 
         - name: persistence.config.storageClass
-          value: "odf-lvm-vg1"
+          value: "lvms-vg1"
 
         - name: persistence.data.storageClass
-          value: "odf-lvm-vg1"
+          value: "lvms-vg1"

@@ -7,18 +7,18 @@ data:
   config.yaml: |
 
     enableUserWorkload: true
-    
+
     prometheusK8s:
       volumeClaimTemplate:
         spec:
-          storageClassName: odf-lvm-vg1
+          storageClassName: lvms-vg1
           resources:
             requests:
               storage: 50Gi
     alertmanagerMain:
       volumeClaimTemplate:
         spec:
-          storageClassName: odf-lvm-vg1
+          storageClassName: lvms-vg1
           resources:
             requests:
               storage: 10Gi

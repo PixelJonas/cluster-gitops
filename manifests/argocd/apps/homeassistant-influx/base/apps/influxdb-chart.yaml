@@ -31,7 +31,7 @@ spec:
           existingSecret: homeassistant-influx-credentials
 
         persistence:
-          storageClass: odf-lvm-vg1
+          storageClass: lvms-vg1
           size: 150Gi
         influxdb:
           updateStrategy:
