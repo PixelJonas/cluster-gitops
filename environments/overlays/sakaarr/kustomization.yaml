@@ -7,7 +7,6 @@ resources:
 - ../../../manifests/argocd/apps/certificates/base
 - ../../../manifests/argocd/apps/nfs-provisioner/overlays/backups
 - ../../../manifests/argocd/apps/cloudflared/base
-- ../../../manifests/argocd/apps/openshift-certs/base
 - ../../../manifests/argocd/apps/cluster-monitoring/base
 - ../../../manifests/argocd/apps/volsync/base
 - ../../../manifests/argocd/apps/devspaces/base
