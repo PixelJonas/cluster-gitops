@@ -15,6 +15,11 @@ spec:
     targetRevision: 12.5.8
     helm:
       values: |-
+
+
+        volumePermissions:
+          enabled: true
+
         global:
           storageClass: local-path
           postgresql:
@@ -25,4 +30,4 @@ spec:
 
   syncPolicy:
     syncOptions:
-    - CreateNamespace=true
+      - CreateNamespace=true
