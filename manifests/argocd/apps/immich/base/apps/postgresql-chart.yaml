@@ -17,11 +17,9 @@ spec:
     helm:
       values: |-
 
-        # commonLabels:
-        #   snapshot.pmb/enabled: "true"
-        #   snapshot.pmb/postgres-controller-name: "immich-postgresql"
-        #   snapshot.pmb/postgres-controller-type: "sts"
-
+        volumePermissions:
+          enabled: true
+          
         global:
           storageClass: lvms-vg1
           postgresql:
