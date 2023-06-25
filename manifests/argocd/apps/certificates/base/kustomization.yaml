@@ -14,6 +14,22 @@ patches:
       kind: Certificate
   - patch: |-
       - op: replace
+        path: /metadata/namespace
+        value: openshift-ingress
+    target:
+      group: cert-manager.io
+      kind: Certificate
+      name: openshift-wildcard
+  - patch: |-
+      - op: replace
+        path: /metadata/namespace
+        value: openshift-config
+    target:
+      group: cert-manager.io
+      kind: Certificate
+      name: openshift-api
+  - patch: |-
+      - op: replace
         path: /spec/servingCerts/namedCertificates/0/names/0
         value: api.sno-cluster.janz.digital
     target:
