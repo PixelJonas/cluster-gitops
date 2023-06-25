@@ -1,0 +1,13 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: paperless-data-restore
+  namespace: paperless
+spec:
+  trigger:
+    manual: restore-once
+  restic:
+    repository: restic-config-data
+    destinationPVC: paperless-ng-data
+    copyMethod: Direct
