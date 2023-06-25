@@ -6,4 +6,4 @@
   path: /spec/source/helm/parameters/-
   value:
     name: "global.storageClass"
-    value: "odf-lvm-vg1"
+    value: "lvms-vg1"
