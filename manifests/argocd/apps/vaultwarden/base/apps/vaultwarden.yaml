@@ -35,7 +35,12 @@ spec:
               secretKeyRef:
                 name: vaultwarden-credentials
                 key: admin-password
-         
+        securityContext:
+          privileged: true
+        podSecurityContext:
+          runAsUser: 0
+          runAsGroup: 0
+
         service:
           main:
             ports:
