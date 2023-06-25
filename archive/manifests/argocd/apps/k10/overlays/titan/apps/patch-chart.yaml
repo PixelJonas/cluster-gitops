@@ -1,9 +1,0 @@
-- op: add
-  path: /spec/source/helm/parameters
-  value: []
-
-- op: add
-  path: /spec/source/helm/parameters/-
-  value:
-    name: "ingress.host"
-    value: "kasten.apps.titan.janz.digital"

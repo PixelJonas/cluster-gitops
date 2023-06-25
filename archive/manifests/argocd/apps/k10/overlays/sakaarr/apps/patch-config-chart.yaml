@@ -1,3 +1,0 @@
-- op: replace
-  path: /spec/source/path
-  value: manifests/argocd/apps/k10/overlays/sakaarr/apps/config
