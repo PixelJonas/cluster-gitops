@@ -2,13 +2,13 @@ apiVersion: argoproj.io/v1alpha1
 kind: AppProject
 metadata:
   name: cluster-apps
-  namespace: argocd
+  namespace: openshift-gitops
 spec:
   clusterResourceWhitelist:
-  - group: '*'
-    kind: '*'
+    - group: "*"
+      kind: "*"
   destinations:
-  - namespace: '*'
-    server: '*'
+    - namespace: "*"
+      server: "*"
   sourceRepos:
-  - '*'
+    - "*"
