@@ -2,13 +2,13 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: homeassistant-db-database-restore
-  namespace: homeassistant-db
+  name: homeassistant-influx-database-restore
+  namespace: homeassistant-influx
 spec:
   trigger:
     manual: restore-once
   restic:
     repository: restic-config-database
     # Use an existing PVC, don't provision a new one
-    destinationPVC: data-homeassistant-db-postgresql-0
+    destinationPVC: homeassistant-influx-influxdb
     copyMethod: Direct

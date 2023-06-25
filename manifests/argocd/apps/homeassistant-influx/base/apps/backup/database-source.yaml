@@ -3,11 +3,12 @@ apiVersion: volsync.backube/v1alpha1
 kind: ReplicationSource
 metadata:
   name: homeassistant-influx-database-backup
+  namespace: homeassistant-influx
   annotations:
-    argocd.argoproj.io/sync-wave: "200"  
+    argocd.argoproj.io/sync-wave: "200"
 spec:
   # The PVC to be backed up
-  sourcePVC: homeassistant-influx-influxdb-backups
+  sourcePVC: homeassistant-influx-influxdb
   trigger:
     # Take a backup everyday at 5am
     schedule: "0 5 * * *"
