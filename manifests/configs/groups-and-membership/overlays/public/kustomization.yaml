@@ -1,17 +1,17 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-bases:
-  - ../demo-admin
-patchesJson6902:
-  - target:
-      group: user.openshift.io
-      version: v1
-      kind: Group
-      name: argocdadmins
-    path: argocdadmins-group-users.yaml
-  - target:
-      group: user.openshift.io
-      version: v1
-      kind: Group
-      name: cluster-admins
-    path: cluster-admin-group-users.yaml
+resources:
+- ../demo-admin
+patches:
+- path: argocdadmins-group-users.yaml
+  target:
+    group: user.openshift.io
+    kind: Group
+    name: argocdadmins
+    version: v1
+- path: cluster-admin-group-users.yaml
+  target:
+    group: user.openshift.io
+    kind: Group
+    name: cluster-admins
+    version: v1

@@ -3,17 +3,16 @@ kind: Kustomization
 
 namespace: cert-manager
 
-bases:
-  - "../../../base/apps"
 
 resources:
-  - ingress-certificate-patch.yaml
-  - api-token.yaml
+- ingress-certificate-patch.yaml
+- api-token.yaml
+- ../../../base/apps
 
 patches:
-  - target:
-      group: cert-manager.io
-      version: v1
-      kind: ClusterIssuer
-      name: cloudflare-issuer
-    path: patch-issuer-server.yaml
+- path: patch-issuer-server.yaml
+  target:
+    group: cert-manager.io
+    kind: ClusterIssuer
+    name: cloudflare-issuer
+    version: v1

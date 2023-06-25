@@ -3,13 +3,13 @@ kind: Kustomization
 
 namespace: openshift-gitops
 
-bases:
-  - ../../base
 
 patches:
-  - target:
-      group: argoproj.io
-      version: v1alpha1
-      kind: Application
-      name: cert-manager
-    path: patch-cert-manager-app.yaml
+- path: patch-cert-manager-app.yaml
+  target:
+    group: argoproj.io
+    kind: Application
+    name: cert-manager
+    version: v1alpha1
+resources:
+- ../../base

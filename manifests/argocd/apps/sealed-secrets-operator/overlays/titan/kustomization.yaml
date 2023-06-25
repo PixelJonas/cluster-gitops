@@ -3,13 +3,13 @@ kind: Kustomization
 
 namespace: argocd
 
-bases:
-- ../../base
 
 patches:
-- target:
+- path: patch-destination.yaml
+  target:
     group: argoproj.io
-    version: v1alpha1
     kind: Application
     name: sealed-secrets
-  path: patch-destination.yaml
+    version: v1alpha1
+resources:
+- ../../base

@@ -4,16 +4,16 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 namespace: openshift-ingress
 
 resources:
-  - openshift-wildcard-certificate.yaml
-  - https://raw.githubusercontent.com/gnunn-gitops/cluster-config/main/components/apps/certificates/base/patch-cluster-wildcard-cert-job.yaml
+- openshift-wildcard-certificate.yaml
+- https://raw.githubusercontent.com/gnunn-gitops/cluster-config/main/components/apps/certificates/base/patch-cluster-wildcard-cert-job.yaml
 
 patches:
-  - target:
-      group: batch
-      version: v1
-      kind: Job
-      name: patch-cluster-wildcard-cert
-    patch: |-
-      - op: replace
-        path: /spec/template/spec/containers/0/image
-        value: quay.io/openshift/origin-cli:4.10
+- patch: |-
+    - op: replace
+      path: /spec/template/spec/containers/0/image
+      value: quay.io/openshift/origin-cli:4.10
+  target:
+    group: batch
+    kind: Job
+    name: patch-cluster-wildcard-cert
+    version: v1

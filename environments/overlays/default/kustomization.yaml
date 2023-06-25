@@ -3,19 +3,18 @@ kind: Kustomization
 
 namespace: openshift-gitops
 
-bases:
-  - ../../../manifests/argocd/apps/oauth/base
-  - ../../../manifests/argocd/apps/groups-and-membership/base
-  - ../../../manifests/argocd/apps/vault/base
-  - ../../../manifests/argocd/apps/alertmanager/base
 
 resources:
-  - cluster-config-namespace.yaml
+- cluster-config-namespace.yaml
+- ../../../manifests/argocd/apps/oauth/base
+- ../../../manifests/argocd/apps/groups-and-membership/base
+- ../../../manifests/argocd/apps/vault/base
+- ../../../manifests/argocd/apps/alertmanager/base
 
 patches:
-  - target:
-      group: argoproj.io
-      version: v1alpha1
-      kind: Application
-      labelSelector: gitops.ownedBy=cluster-config
-    path: patch-gitops-repo.yaml
+- path: patch-gitops-repo.yaml
+  target:
+    group: argoproj.io
+    kind: Application
+    labelSelector: gitops.ownedBy=cluster-config
+    version: v1alpha1

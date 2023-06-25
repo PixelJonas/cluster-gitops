@@ -3,8 +3,7 @@ kind: Kustomization
 
 namespace: openshift-gitops
 
-bases:
-- ../../../environments/overlays/bootstrap
 
 resources:
 - cluster-config-manager.yaml
+- ../../../environments/overlays/bootstrap

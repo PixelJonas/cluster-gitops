@@ -3,25 +3,24 @@ kind: Kustomization
 
 namespace: openshift-gitops
 
-bases:
-  - ../../../environments/overlays/bootstrap
 
 resources:
-  - argocd-namespace.yaml
-  - clusterrolebinding.yaml
-  - cluster-config-manager.yaml
+- argocd-namespace.yaml
+- clusterrolebinding.yaml
+- cluster-config-manager.yaml
+- ../../../environments/overlays/bootstrap
+
 
 patches:
-  - target:
-      group: argoproj.io
-      version: v1alpha1
-      kind: ArgoCD
-      name: openshift-gitops
-    path: patch-argocd-server.yaml
-
-  - target:
-      group: argoproj.io
-      version: v1alpha1
-      kind: Application
-      labelSelector: gitops.ownedBy=cluster-config
-    path: patch-target-revision.yaml
+- path: patch-argocd-server.yaml
+  target:
+    group: argoproj.io
+    kind: ArgoCD
+    name: openshift-gitops
+    version: v1alpha1
+- path: patch-target-revision.yaml
+  target:
+    group: argoproj.io
+    kind: Application
+    labelSelector: gitops.ownedBy=cluster-config
+    version: v1alpha1

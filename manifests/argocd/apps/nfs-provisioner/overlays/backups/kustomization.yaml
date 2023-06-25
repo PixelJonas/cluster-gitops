@@ -1,38 +1,50 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-bases:
-  - ../../base
+
+
+
+
+
+
+
+
+
+
+
+
 
 patches:
-  - target:
-      group: argoproj.io
-      version: v1alpha1
-      kind: Application
-      name: nfs-provisioner
-    patch: |-
+- patch: |2-
 
 
-      - op: add
-        path: /metadata/name
-        value: nfs-backup-provisioner
+    - op: add
+      path: /metadata/name
+      value: nfs-backup-provisioner
 
-      - op: add
-        path: /spec/destination/namespace
-        value: nfs-backup-provisioner
+    - op: add
+      path: /spec/destination/namespace
+      value: nfs-backup-provisioner
 
-      - op: add
-        path: /spec/source/helm/parameters
-        value: []
+    - op: add
+      path: /spec/source/helm/parameters
+      value: []
 
-      - op: add
-        path: /spec/source/helm/parameters/-
-        value:
-          name: "nfs.path"
-          value: "/pmb-data"
+    - op: add
+      path: /spec/source/helm/parameters/-
+      value:
+        name: "nfs.path"
+        value: "/pmb-data"
 
-      - op: add
-        path: /spec/source/helm/parameters/-
-        value:
-          name: "storageClass.name"
-          value: "pmb-backup"
+    - op: add
+      path: /spec/source/helm/parameters/-
+      value:
+        name: "storageClass.name"
+        value: "pmb-backup"
+  target:
+    group: argoproj.io
+    kind: Application
+    name: nfs-provisioner
+    version: v1alpha1
+resources:
+- ../../base

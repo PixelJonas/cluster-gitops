@@ -1,12 +1,11 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-bases:
-  - "../../../base/apps"
 
 resources:
-  - "import-pv.yaml"
-  - "ingress-internet.yaml"
+- import-pv.yaml
+- ingress-internet.yaml
+- ../../../base/apps
 
-patchesStrategicMerge:
-  - "paperless-app-patch.yaml"
+patches:
+- path: paperless-app-patch.yaml

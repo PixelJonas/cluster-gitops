@@ -2,7 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - "sealed-restic-photos.yaml"
-  - "sealed-restic-database.yaml"
-  - "photos-source.yaml"
-  - "database-source.yaml"
+- sealed-restic-photos.yaml
+- sealed-restic-database.yaml
+- photos-source.yaml
+- database-source.yaml

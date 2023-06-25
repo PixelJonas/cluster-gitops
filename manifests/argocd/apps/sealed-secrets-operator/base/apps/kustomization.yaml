@@ -3,18 +3,17 @@ kind: Kustomization
 
 namespace: sealed-secrets
 
-bases:
-  - github.com/redhat-canada-gitops/catalog/sealed-secrets-operator/base
 
 resources:
-  - sealed-secrets-namespace.yaml
-  - role-anyuid.yaml
+- sealed-secrets-namespace.yaml
+- role-anyuid.yaml
+- github.com/redhat-canada-gitops/catalog/sealed-secrets-operator/base
 
-patchesJson6902:
-  - target:
-      version: v1
-      group: apps
-      kind: Deployment
-      name: sealed-secrets-controller
-      namespace: sealed-secrets
-    path: patch-update-status.yaml
+patches:
+- path: patch-update-status.yaml
+  target:
+    group: apps
+    kind: Deployment
+    name: sealed-secrets-controller
+    namespace: sealed-secrets
+    version: v1

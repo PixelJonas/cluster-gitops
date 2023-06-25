@@ -4,4 +4,4 @@ kind: Kustomization
 namespace: openshift-gitops
 
 resources:
-  - grafana-operator-app.yaml
+- grafana-operator-app.yaml

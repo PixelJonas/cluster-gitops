@@ -1,16 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-bases:
-  - ../default
 
 resources:
-  - httpasswd-secret.yaml
+- httpasswd-secret.yaml
+- ../default
 
-patchesJson6902:
-  - target:
-      group: config.openshift.io
-      version: v1
-      kind: OAuth
-      name: cluster
-    path: httpasswd-provider.yaml
+patches:
+- path: httpasswd-provider.yaml
+  target:
+    group: config.openshift.io
+    kind: OAuth
+    name: cluster
+    version: v1

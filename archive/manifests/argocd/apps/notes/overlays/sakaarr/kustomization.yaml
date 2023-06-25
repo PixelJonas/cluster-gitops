@@ -1,24 +1,30 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-bases:
-  - "../../base"
+
+
+
+
+
+
 
 patches:
-  - target:
-      group: argoproj.io
-      version: v1alpha1
-      kind: Application
-      name: notes-app
-    patch: |-
-      - op: "replace"
-        path: "/metadata/namespace"
-        value: "openshift-gitops"
+- patch: |-
+    - op: "replace"
+      path: "/metadata/namespace"
+      value: "openshift-gitops"
 
-      - op: "replace"
-        path: "/spec/destination/namespace"
-        value: "openshift-gitops"
+    - op: "replace"
+      path: "/spec/destination/namespace"
+      value: "openshift-gitops"
 
-      - op: "add"
-        path: "/spec/source/path"
-        value: manifests/argocd/apps/notes/overlays/sakaarr/apps
+    - op: "add"
+      path: "/spec/source/path"
+      value: manifests/argocd/apps/notes/overlays/sakaarr/apps
+  target:
+    group: argoproj.io
+    kind: Application
+    name: notes-app
+    version: v1alpha1
+resources:
+- ../../base

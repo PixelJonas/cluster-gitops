@@ -1,21 +1,19 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-bases:
-  - ../../base
 
 resources:
-  - google-secret.yaml
-  - login-template-secret.yaml
-  - provider-selection-template-secret.yaml
+- google-secret.yaml
+- login-template-secret.yaml
+- provider-selection-template-secret.yaml
+- ../../base
 
-patchesStrategicMerge:
-  - oauth-templates.yaml
 
-patchesJson6902:
-  - target:
-      group: config.openshift.io
-      version: v1
-      kind: OAuth
-      name: cluster
-    path: oauth-rh-sso.yaml
+patches:
+- path: oauth-rh-sso.yaml
+  target:
+    group: config.openshift.io
+    kind: OAuth
+    name: cluster
+    version: v1
+- path: oauth-templates.yaml

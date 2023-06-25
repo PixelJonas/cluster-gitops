@@ -2,16 +2,15 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - pmb-kopia-backup-task.yaml
-  - rbac.yaml
-  - eventlistener.yaml
-  - triggertemplate.yaml
-  - postgres
-  - sealed-kopia-secret.yaml
-  - pmb-backup-postgres-listener.yaml
-  - pmb-backup-postgresql-template.yaml
-  - remove-dir-task.yaml
-  - pmb-kopia-sync-listener.yaml
-  - pmb-kopia-sync-task.yaml
-  - pmb-kopia-sync-template.yaml
-
+- pmb-kopia-backup-task.yaml
+- rbac.yaml
+- eventlistener.yaml
+- triggertemplate.yaml
+- postgres
+- sealed-kopia-secret.yaml
+- pmb-backup-postgres-listener.yaml
+- pmb-backup-postgresql-template.yaml
+- remove-dir-task.yaml
+- pmb-kopia-sync-listener.yaml
+- pmb-kopia-sync-task.yaml
+- pmb-kopia-sync-template.yaml
