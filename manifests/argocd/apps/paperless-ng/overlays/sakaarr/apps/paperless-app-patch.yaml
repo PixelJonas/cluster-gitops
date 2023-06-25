@@ -17,10 +17,10 @@ spec:
         - name: env.PAPERLESS_URL
           value: "https://paperless.janz.digital"
         - name: env.PAPERLESS_ALLOWED_HOSTS
-          value: "paperless.apps.sakaarr.janz.digital,paperless.janz.digital,localhost"
+          value: "paperless.apps.sno-cluster.janz.digital,paperless.janz.digital,localhost"
         - name: env.PAPERLESS_CORS_ALLOWED_HOSTS
-          value: "https://paperless.apps.sakaarr.janz.digital,https://paperless.janz.digital"
+          value: "https://paperless.apps.sno-cluster.janz.digital,https://paperless.janz.digital"
         - name: env.PAPERLESS_CSRF_TRUSTED_ORIGINS
-          value: "https://paperless.apps.sakaarr.janz.digital,https://paperless.janz.digital"
+          value: "https://paperless.apps.sno-cluster.janz.digital,https://paperless.janz.digital"
         - name: env.PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME
           value: "HTTP_CF_ACCESS_AUTHENTICATED_USER_EMAIL"

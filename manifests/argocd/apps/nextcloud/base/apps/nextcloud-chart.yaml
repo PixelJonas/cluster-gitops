@@ -69,7 +69,7 @@ spec:
                 'trusted_domains' =>
                   array (
                   0 => 'localhost',
-                  1 => 'cloud.apps.sakaarr.janz.digital',
+                  1 => 'cloud.apps.sno-cluster.janz.digital',
                   2 => 'cloud.janz.digital',
                   3 => 'nextcloud.nextcloud.svc.cluster.local'
                 ),

@@ -4,7 +4,7 @@ metadata:
   name: resilio-route
   namespace: resilio-sync
 spec:
-  host: sync.apps.sakaarr.janz.digital
+  host: sync.apps.sno-cluster.janz.digital
   to:
     kind: Service
     name: resilio-sync

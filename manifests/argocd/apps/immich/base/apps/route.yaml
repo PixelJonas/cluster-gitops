@@ -4,7 +4,7 @@ metadata:
   name: immich-route
   namespace: immich
 spec:
-  host: immich.apps.sakaarr.janz.digital
+  host: immich.apps.sno-cluster.janz.digital
   to:
     kind: Service
     name: immich-proxy
