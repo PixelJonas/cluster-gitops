@@ -11,7 +11,7 @@ patches:
         value:
           htpasswd:
             fileData:
-              name: htpass-secret
+              name: htpasswd-secret
           mappingMethod: claim
           name: htpasswd
           type: HTPasswd
