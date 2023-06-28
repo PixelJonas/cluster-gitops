@@ -4,6 +4,7 @@ kind: Kustomization
 resources:
 - ./cluster-apps-project.yaml
 - ../../../manifests/argocd/apps/nfs-provisioner/base
+- ../../../manifests/argocd/apps/oauth/base
 - ../../../manifests/argocd/apps/certificates/base
 - ../../../manifests/argocd/apps/nfs-provisioner/overlays/backups
 - ../../../manifests/argocd/apps/cloudflared/base
