@@ -24,7 +24,7 @@ resources:
   - ../../../manifests/argocd/apps/sharry/overlays/sakaarr
   - ../../../manifests/argocd/apps/sealed-secrets-operator/overlays/titan
   - ../../../manifests/argocd/apps/oauth/base
-  - ../../../manifests/argocd/apps/groups-and-membership/overlays/default
+  - ../../../manifests/argocd/apps/groups-and-membership/base
 
 patches:
   - path: patch-gitops-repo.yaml
