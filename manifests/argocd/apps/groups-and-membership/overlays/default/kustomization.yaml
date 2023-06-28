@@ -1,0 +1,31 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - https://github.com/gnunn-gitops/cluster-config//components/configs/groups-and-membership/base
+
+patches:
+  - target:
+      group: user.openshift.io
+      version: v1
+      kind: Group
+      name: argocdadmins
+    patch: |-
+      - op: add
+        path: /users/-
+        value: "janz.jonas@gmail.com"
+      - op: add
+        path: /users/-
+        value: "jonas"
+  - target:
+      group: user.openshift.io
+      version: v1
+      kind: Group
+      name: cluster-admins
+    patch: |-
+      - op: add
+        path: /users/-
+        value: "janz.jonas@gmail.com"
+      - op: add
+        path: /users/-
+        value: "jonas"
