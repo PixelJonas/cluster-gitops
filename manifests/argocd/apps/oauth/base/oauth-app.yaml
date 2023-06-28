@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: oauth
+  annotations:
+    argocd.argoproj.io/sync-wave: "11"
+  labels:
+    gitops.ownedBy: cluster-config
+spec:
+  destination:
+    namespace: openshift-gitops
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    path: manifests/argocd/apps/oauth/overlays/sakaarr
+    repoURL: https://github.com/pixeljonas/cluster-gitops.git
+    targetRevision: master
