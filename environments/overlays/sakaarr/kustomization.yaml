@@ -4,7 +4,6 @@ kind: Kustomization
 resources:
 - ./cluster-apps-project.yaml
 - ../../../manifests/argocd/apps/nfs-provisioner/base
-- ../../../manifests/argocd/apps/oauth/base
 - ../../../manifests/argocd/apps/certificates/base
 - ../../../manifests/argocd/apps/nfs-provisioner/overlays/backups
 - ../../../manifests/argocd/apps/cloudflared/base
@@ -24,6 +23,7 @@ resources:
 - ../../../manifests/argocd/apps/node-red/overlays/sakaarr
 - ../../../manifests/argocd/apps/sharry/overlays/sakaarr
 - ../../../manifests/argocd/apps/sealed-secrets-operator/overlays/titan
+- ../../../manifests/argocd/apps/oauth/overlays/sakaarr
 
 
 
