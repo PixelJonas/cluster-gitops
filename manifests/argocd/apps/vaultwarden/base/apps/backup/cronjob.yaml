@@ -1,7 +1,7 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: example
+  name: vaultwarden-backup
   namespace: vaultwarden
   annotations:
     argocd.argoproj.io/sync-wave: "200"
