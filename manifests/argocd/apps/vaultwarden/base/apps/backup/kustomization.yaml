@@ -6,3 +6,5 @@ resources:
 - sealed-restic-database.yaml
 - config-source.yaml
 - database-source.yaml
+- pvc.yaml
+- conrjob.yaml
