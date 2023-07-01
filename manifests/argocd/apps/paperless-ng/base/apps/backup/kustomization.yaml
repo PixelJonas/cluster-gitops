@@ -8,3 +8,5 @@ resources:
 - data-source.yaml
 - media-source.yaml
 - database-source.yaml
+- cronjob.yaml
+- pvc.yaml
