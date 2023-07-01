@@ -9,5 +9,5 @@ spec:
   restic:
     repository: restic-config-database
     # Use an existing PVC, don't provision a new one
-    destinationPVC: data-keycloak-db-postgresql-0
+    destinationPVC: data-keycloak-db-backup
     copyMethod: Direct
