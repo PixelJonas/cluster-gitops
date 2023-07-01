@@ -10,5 +10,5 @@ spec:
   restic:
     repository: restic-config-database
     # Use an existing PVC, don't provision a new one
-    destinationPVC: data-homeassistant-db-postgresql-0
+    destinationPVC: data-homeassistant-db-backup
     copyMethod: Direct
