@@ -1,8 +1,8 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: homeassistant-db-backup
-  namespace: homeassistant-db
+  name: immich-backup
+  namespace: immich
   annotations:
     argocd.argoproj.io/sync-wave: "200"
 spec:
@@ -15,21 +15,21 @@ spec:
           volumes:
             - name: backup
               persistentVolumeClaim:
-                claimName: data-homeassistant-db-backup
+                claimName: data-immich-db-backup
           containers:
             - name: pg-dump-via-kubectl
               env:
                 - name: POSTGRESQL_VOLUME_DIR
                   value: /bitnami/postgresql
                 - name: POSTGRES_USER
-                  value: homeassistant
+                  value: immich
                 - name: POSTGRES_POSTGRES_PASSWORD
                   valueFrom:
                     secretKeyRef:
-                      name: homeassistant-db-postgresql
+                      name: immich-db-postgresql
                       key: postgres-password
                 - name: POSTGRES_DB
-                  value: homeassistant
+                  value: immich
               volumeMounts:
                 - name: backup
                   mountPath: /backup
