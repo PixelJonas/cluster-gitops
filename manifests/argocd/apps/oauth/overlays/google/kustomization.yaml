@@ -10,12 +10,11 @@ patches:
         path: /spec/identityProviders/-
         value:
             google:
-              clientID: 576540902053-q42a05v31h7ugi794gkqc4fhmjml7vb9.apps.googleusercontent.com
+              clientID: 478348800225-pipjo1969ga8rg53sf9he8mb0sjkml01.apps.googleusercontent.com
               clientSecret:
                 name: google-secret
-              hostedDomain: redhat.com
             mappingMethod: claim
-            name: RedHatSSO
+            name: Google
             type: Google
     target:
       group: config.openshift.io
