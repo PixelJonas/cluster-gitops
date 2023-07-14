@@ -316,7 +316,7 @@ spec:
             enabled: true
             spec:
               failureThreshold: 30
-              initialDelaySeconds: 360
+              initialDelaySeconds: 120
               periodSeconds: 5
               tcpSocket:
                 port: 8000
