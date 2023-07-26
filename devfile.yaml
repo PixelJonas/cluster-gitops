@@ -12,6 +12,11 @@ projects:
     git:
       remotes:
         origin: https://github.com/PixelJonas/private-gitops.git
+  - name: "pixeljonas-charts"
+    clonePath: charts
+    git:
+      remotes:
+        origin: https://github.com/PixelJonas/pixeljonas-charts.git
 components:
   - container:
       image: "quay.io/jjanz/k8s-tooling:latest"

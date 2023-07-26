@@ -5,6 +5,9 @@
     },
     {
       "path": "/projects/private-gitops"
+    },
+    {
+      "path": "/projects/charts"
     }
   ],
   "settings": {
