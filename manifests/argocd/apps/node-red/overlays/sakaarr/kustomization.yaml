@@ -6,7 +6,7 @@ patches:
       "- op: \"replace\"\n  path: \"/metadata/namespace\"\n  value: \"openshift-gitops\"\n\n-
       op: \"add\"\n  path: \"/spec/source/helm/parameters\"\n  value: []\n\n- op: \"add\"\n
       \ path: \"/spec/source/helm/parameters/-\"\n  value:\n    name: ingress.main.enabled\n
-      \   value: \"false\"\n\n- op: \"add\"\n  path: \"/spec/source/helm/parameters/-\"\n
+      \   value: \"true\"\n\n- op: \"add\"\n  path: \"/spec/source/helm/parameters/-\"\n
       \ value:\n    name: persistence.data.storageClass\n    value: \"lvms-vg1\"\n\n-
       op: \"add\"\n  path: \"/spec/source/helm/parameters/-\"\n  value:\n    name: dnsConfig.nameservers[0]\n
       \   value: 10.20.0.1\n    \n- op: \"add\"\n  path: \"/spec/source/helm/parameters/-\"\n

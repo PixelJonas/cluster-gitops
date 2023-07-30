@@ -4,6 +4,7 @@
     "vscode-icons-team.vscode-icons",
     "esbenp.prettier-vscode",
     "eamodio.gitlens",
-    "redhat.vscode-yaml"
+    "redhat.vscode-yaml",
+    "ms-kubernetes-tools.vscode-kubernetes-tools"
   ]
 }
