@@ -40,9 +40,7 @@ spec:
           main:
             enabled: true
             annotations:
-              nginx.ingress.kubernetes.io/proxy-body-size: 50m
               route.openshift.io/termination: "edge"
-            ingressClassName: nginx
             pathType: Prefix
             hosts:
               - host: nodered.apps.sno-cluster.janz.digital
