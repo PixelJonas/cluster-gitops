@@ -25,6 +25,7 @@ resources:
   - ../../../manifests/argocd/apps/sealed-secrets-operator/overlays/titan
   - ../../../manifests/argocd/apps/oauth/base
   - ../../../manifests/argocd/apps/groups-and-membership/base
+  - ../../../manifests/argocd/apps/nextcloud/base
 
 patches:
   - path: patch-gitops-repo.yaml
