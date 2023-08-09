@@ -51,7 +51,6 @@ spec:
                   name: nextcloud-credentials
                   key: oidc-client-secret
           securityContext:
-            privileged: true
             runAsUser: 0
             runAsGroup: 0
           podSecurityContext:
