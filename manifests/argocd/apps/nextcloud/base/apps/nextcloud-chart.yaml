@@ -71,7 +71,8 @@ spec:
                   0 => 'localhost',
                   1 => 'cloud.apps.sno-cluster.janz.digital',
                   2 => 'cloud.janz.digital',
-                  3 => 'nextcloud.nextcloud.svc.cluster.local'
+                  3 => 'nextcloud.nextcloud.svc.cluster.local',
+                  4 => 'cloud.app.janz.digital'
                 ),
                 'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
               );
