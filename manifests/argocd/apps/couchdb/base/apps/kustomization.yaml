@@ -5,3 +5,4 @@ resources:
 - couchdb-chart.yaml
 - sealed-kopia-config.yaml
 - sealed-couchdb-credentials.yaml
+- clusterrolebinding.yaml
