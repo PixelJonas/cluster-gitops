@@ -27,6 +27,7 @@ spec:
             require_valid_user: true
             max_http_request_size: 4294967296
             enable_cors: true
+            WWW-Authenticate: Basic realm="couchdb"
           chttpd_auth:
             require_valid_user: true
           cors:
@@ -36,6 +37,7 @@ spec:
             enable_cors: true
             max_http_request_size: 4294967296
             enable_cors: true
+            WWW-Authenticate: Basic realm="couchdb"
 
         service:
           type:  NodePort
