@@ -55,6 +55,7 @@ spec:
             runAsUser: 0
             runAsGroup: 0
           podSecurityContext:
+            privileged: true
             runAsUser: 0
             runAsGroup: 0
           configs:
