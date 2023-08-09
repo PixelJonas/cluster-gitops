@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: couchdb-app
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "101"
+spec:
+  destination:
+    namespace: couchdb
+    server: https://kubernetes.default.svc
+  project: cluster-apps
+  source:
+    path: manifests/argocd/apps/couchdb/base/apps
+    repoURL: https://github.com/pixeljonas/cluster-gitops.git
+    targetRevision: master
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: couchdb
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+spec:
+  destination:
+    namespace: couchdb
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: https://apache.github.io/couchdb-helm/
+    chart: couchdb
+    targetRevision: 4.4.3
+    helm:
+      values: |-
+
+        createAdminSecret: false
+
+        persistentVolume:
+          enabled: true
+          size: 12Gi
+          storageClass: lvms-vg1
+
+  syncPolicy:
+    syncOptions:
+      - RespectIgnoreDifferences=true
+      - CreateNamespace=true

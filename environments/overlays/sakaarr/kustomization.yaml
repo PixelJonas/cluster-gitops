@@ -26,6 +26,7 @@ resources:
   - ../../../manifests/argocd/apps/oauth/base
   - ../../../manifests/argocd/apps/groups-and-membership/base
   - ../../../manifests/argocd/apps/nextcloud/base
+  - ../../../manifests/argocd/apps/couchdb/base
 
 patches:
   - path: patch-gitops-repo.yaml
