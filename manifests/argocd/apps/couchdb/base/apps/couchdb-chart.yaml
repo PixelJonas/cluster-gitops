@@ -23,6 +23,9 @@ spec:
           couchdb:
             uuid: ac53c755-7ef6-497a-8f47-4deaca20769c
 
+        service:
+          type:  NodePort
+
         persistentVolume:
           enabled: true
           size: 12Gi
