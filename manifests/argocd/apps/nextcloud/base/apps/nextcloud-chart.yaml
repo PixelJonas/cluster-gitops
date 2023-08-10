@@ -12,7 +12,7 @@ spec:
   source:
     repoURL: https://nextcloud.github.io/helm/
     chart: nextcloud
-    targetRevision: 3.5.20
+    targetRevision: 3.5.21
     helm:
       values: |-
 
@@ -55,7 +55,7 @@ spec:
             runAsUser: 0
             runAsGroup: 0
           podSecurityContext:
-            privileged: true        
+            privileged: true
             runAsUser: 0
             runAsGroup: 0
           configs:
@@ -71,7 +71,8 @@ spec:
                   0 => 'localhost',
                   1 => 'cloud.apps.sno-cluster.janz.digital',
                   2 => 'cloud.janz.digital',
-                  3 => 'nextcloud.nextcloud.svc.cluster.local'
+                  3 => 'nextcloud.nextcloud.svc.cluster.local',
+                  4 => 'cloud.app.janz.digital'
                 ),
                 'forwarded_for_headers' => array('HTTP_X_FORWARDED_FOR'),
               );

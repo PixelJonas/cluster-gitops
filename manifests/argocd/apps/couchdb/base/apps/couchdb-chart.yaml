@@ -1,0 +1,53 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: couchdb
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+spec:
+  destination:
+    namespace: couchdb
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: https://apache.github.io/couchdb-helm/
+    chart: couchdb
+    targetRevision: 4.4.3
+    helm:
+      values: |-
+
+        createAdminSecret: false
+
+        couchdbConfig:
+          couchdb:
+            uuid: ac53c755-7ef6-497a-8f47-4deaca20769c
+            max_document_size: 4294967296
+          chttpd:
+            require_valid_user: true
+            max_http_request_size: 4294967296
+            enable_cors: true
+            WWW-Authenticate: Basic realm="couchdb"
+          chttpd_auth:
+            require_valid_user: true
+          cors:
+            credentials: true
+            origins: "app://obsidian.md,capacitor://localhost,http://localhost"
+          httpd:
+            enable_cors: true
+            max_http_request_size: 4294967296
+            enable_cors: true
+            WWW-Authenticate: Basic realm="couchdb"
+
+        service:
+          type:  NodePort
+
+        persistentVolume:
+          enabled: true
+          size: 12Gi
+          storageClass: lvms-vg1
+
+  syncPolicy:
+    syncOptions:
+      - RespectIgnoreDifferences=true
+      - CreateNamespace=true
