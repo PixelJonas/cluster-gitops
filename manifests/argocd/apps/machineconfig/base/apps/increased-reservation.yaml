@@ -8,4 +8,4 @@ spec:
       increased-memory: enabled
   kubeletConfig:
     systemReserved:
-      memory: 2Gi
+      memory: 3Gi
