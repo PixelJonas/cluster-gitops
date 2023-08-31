@@ -21,6 +21,8 @@ spec:
               env:
                 - name: POSTGRESQL_VOLUME_DIR
                   value: /bitnami/postgresql
+                - name: POSTGRES_USER
+                  value: immich
                 - name: POSTGRES_POSTGRES_PASSWORD
                   valueFrom:
                     secretKeyRef:
@@ -36,7 +38,7 @@ spec:
                   set -e
 
                   echo -----------------------------------
-                  echo "Backing up database"
+                  echo "Backing up $POSTGRES_USER database"
                     kubectl exec "$POSTGRES_USER"-db-postgresql-0 --container postgresql -- /bin/bash -c 'PGPASSWORD=$POSTGRES_POSTGRES_PASSWORD pg_dump -U postgres -d $POSTGRES_DATABASE' > /backup/backup.sql
                   echo -----------------------------------
                     ls -lah /backup
