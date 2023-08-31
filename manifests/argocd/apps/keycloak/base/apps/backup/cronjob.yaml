@@ -21,15 +21,11 @@ spec:
               env:
                 - name: POSTGRESQL_VOLUME_DIR
                   value: /bitnami/postgresql
-                - name: POSTGRES_USER
-                  value: keycloak
                 - name: POSTGRES_POSTGRES_PASSWORD
                   valueFrom:
                     secretKeyRef:
                       name: keycloak-db-postgresql
                       key: postgres-password
-                - name: POSTGRES_DB
-                  value: keycloak
               volumeMounts:
                 - name: backup
                   mountPath: /backup
@@ -40,8 +36,8 @@ spec:
                   set -e
 
                   echo -----------------------------------
-                  echo "Backing up $POSTGRES_USER database"
-                    kubectl exec "$POSTGRES_USER"-db-postgresql-0 --container postgresql -- /bin/bash -c 'PGPASSWORD=$POSTGRES_POSTGRES_PASSWORD pg_dump -U postgres -d $POSTGRES_DB' > /backup/backup.sql
+                  echo "Backing up database"
+                    kubectl exec "$POSTGRES_USER"-db-postgresql-0 --container postgresql -- /bin/bash -c 'PGPASSWORD=$POSTGRES_POSTGRES_PASSWORD pg_dump -U postgres -d $POSTGRES_DATABASE' > /backup/backup.sql
                   echo -----------------------------------
                     ls -lah /backup
                   echo -----------------------------------
