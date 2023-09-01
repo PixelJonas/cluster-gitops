@@ -30,18 +30,6 @@ resources:
   - ../../../manifests/argocd/apps/couchdb/base
 
 patches:
-  - path: patch-gitops-repo.yaml
-    target:
-      group: argoproj.io
-      kind: Application
-      labelSelector: gitops.ownedBy=cluster-config
-      version: v1alpha1
-  - path: patch-target-revision.yaml
-    target:
-      group: argoproj.io
-      kind: Application
-      labelSelector: gitops.ownedBy=cluster-config
-      version: v1alpha1
   - path: patch-destination.yaml
     target:
       group: argoproj.io
