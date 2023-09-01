@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: defrag-etcd
+  annotations:
+    argocd.argoproj.io/sync-wave: "101"
+  labels:
+    gitops.ownedBy: cluster-config
+spec:
+  destination:
+    namespace: openshift-etcd
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    path: components/defrag-etcd/base
+    repoURL: https://github.com/gnunn-gitops/cluster-config.git
+    targetRevision: master
