@@ -3,3 +3,12 @@ kind: Kustomization
 
 resources:
 - defrag-etcd-app.yaml
+
+patches:
+  - patch: |-
+      - op: replace
+        path: /spec/jobTemplate/spec/template/spec/containers[0]/image
+        value: quay.io/openshift/origin-cli:4.15
+    target:
+      group: batch/v1
+      kind: CronJob
