@@ -5,6 +5,7 @@ resources:
   - ./cluster-apps-project.yaml
   - ../../../manifests/argocd/apps/nfs-provisioner/base
   - ../../../manifests/argocd/apps/certificates/base
+  - ../../../manifests/argocd/apps/alertmanager/base
   - ../../../manifests/argocd/apps/defrag-etcd/base
   - ../../../manifests/argocd/apps/image-registry/base
   - ../../../manifests/argocd/apps/nfs-provisioner/overlays/backups
