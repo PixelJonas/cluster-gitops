@@ -36,7 +36,6 @@ spec:
             fromAddress: home
             domain: famjanz.de
             smtp:
-              host: smtp.fastmail.com
               port: 465
           extraEnv:
             - name: NEXTCLOUD_HOSTNAME
