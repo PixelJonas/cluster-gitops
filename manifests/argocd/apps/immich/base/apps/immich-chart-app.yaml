@@ -39,7 +39,6 @@ spec:
           securityContext:
             runAsUser: 1500
             runAsGroup: 1500
-            fsGroup: 1500
 
         redis:
           enabled: true
