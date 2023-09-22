@@ -35,6 +35,12 @@ spec:
             library:
               existingClaim: nfs-photos-immich
 
+        server:
+          securityContext:
+            runAsUser: 1500
+            runAsGroup: 1500
+            fsGroup: 1500
+
         redis:
           enabled: true
 
