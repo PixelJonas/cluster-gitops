@@ -21,6 +21,9 @@ spec:
             - name: ndots
               value: "1"
 
+        image:
+          tag: release
+
         redis:
           enabled: true
 
