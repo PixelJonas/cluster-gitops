@@ -7,12 +7,11 @@ metadata:
     control-plane: controller-manager
 spec:
   endpoints:
-    - interval: 30s
-      path: /metrics
+    - path: /metrics
       port: https
       scheme: https
+      bearerTokenFile: /var/run/secrets/kubernetes.io/serviceaccount/token
       tlsConfig:
-        # Using self-signed cert for connection
         insecureSkipVerify: true
   jobLabel: name
   namespaceSelector:
