@@ -33,7 +33,7 @@ spec:
           service:
             type: NodePort
             nodePorts:
-              postgresql: 30310
+              postgresql: "30310"
 
   ignoreDifferences:
     - group: "apps"
