@@ -2,7 +2,7 @@ apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   name: external-restic-config-config-b2
-  namespace: paperless
+  namespace: vaultwarden
   annotations:
     argocd.argoproj.io/sync-wave: "30"
 spec:
