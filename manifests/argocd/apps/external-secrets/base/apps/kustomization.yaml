@@ -2,8 +2,9 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 commonAnnotations:
-    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+  argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
 
 resources:
-    - github.com/redhat-cop/gitops-catalog/external-secrets-operator/operator/overlays/stable
-    - github.com/redhat-cop/gitops-catalog/external-secrets-operator/instance/overlays/default
+  - github.com/redhat-cop/gitops-catalog/external-secrets-operator/operator/overlays/stable
+  - github.com/redhat-cop/gitops-catalog/external-secrets-operator/instance/overlays/default
+  - cluster-store.yaml
