@@ -14,7 +14,7 @@ spec:
   data:
     - secretKey: RESTIC_REPOSITORY
       remoteRef:
-        key: VUALTWARDEN_DATABASE_REPO
+        key: VAULTWARDEN_DATABASE_REPO
 
     - secretKey: RESTIC_PASSWORD
       remoteRef:
