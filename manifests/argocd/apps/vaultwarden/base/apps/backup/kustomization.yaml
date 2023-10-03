@@ -4,7 +4,11 @@ kind: Kustomization
 resources:
   - sealed-restic-config.yaml
   - sealed-restic-database.yaml
+  - external-restic-config-config-b2.yaml
+  - external-restic-config-database-b2.yaml
   - config-source.yaml
+  - config-source-b2.yaml
   - database-source.yaml
+  - database-source-b2.yaml
   - pvc.yaml
   - cronjob.yaml
