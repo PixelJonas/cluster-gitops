@@ -5,8 +5,14 @@ resources:
 - sealed-restic-data.yaml
 - sealed-restic-media.yaml
 - sealed-restic-database.yaml
+- external-restic-config-media-b2.yaml
+- external-restic-config-data-b2.yaml
+- external-restic-config-database-b2.yaml
 - data-source.yaml
+- data-source-b2.yaml
 - media-source.yaml
+- media-source-b2.yaml
 - database-source.yaml
+- database-source-b2.yaml
 - cronjob.yaml
 - pvc.yaml
