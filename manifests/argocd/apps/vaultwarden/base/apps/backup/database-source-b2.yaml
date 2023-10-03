@@ -9,7 +9,8 @@ spec:
   # The PVC to be backed up
   sourcePVC: data-vaultwarden-db-backup
   trigger:
-s3://s3.us-west-002.backblazeb2.com/volsync-vaultwarden-database
+    # Take a backup everyday at 5am
+    schedule: "0 5 * * *"
   restic:
     # Prune the repository (repack to free space) every 2 weeks
     pruneIntervalDays: 14
