@@ -3,6 +3,7 @@ kind: Kustomization
 
 resources:
   - sealed-restic-database.yaml
+  - restic-config-database-b2.yaml
   - database-source.yaml
   - cronjob.yaml
   - pvc.yaml
