@@ -3,25 +3,5 @@ kind: Kustomization
 
 
 resources:
-- route.yaml
 - ../../../base/apps
 
-
-patches:
-- path: vaultwarden-app-patch.yaml
-  target:
-    group: argoproj.io
-    kind: Application
-    name: vaultwarden
-    version: v1alpha1
-- path: vaultwarden-db-patch.yaml
-  target:
-    group: argoproj.io
-    kind: Application
-    name: vaultwarden-db
-    version: v1alpha1
-- path: argocd-app-namespace.yaml
-  target:
-    group: argoproj.io
-    kind: Application
-    version: v1alpha1

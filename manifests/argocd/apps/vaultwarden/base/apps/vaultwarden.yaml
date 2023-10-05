@@ -4,42 +4,48 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "111"
   name: vaultwarden
-  namespace: argocd-operator-system
-spec:
+  namespace: openshift-gitops
   destination:
     namespace: vaultwarden
     server: "https://kubernetes.default.svc"
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 1.5.1
+    targetRevision: 2.0.0
     helm:
       values: |-
 
-        image:
-          repository: vaultwarden/server
-          # renovate: datasource=docker depName=docker.io/vaultwarden/server
-          tag: 1.27.0
-          pullPolicy: IfNotPresent
 
-        env:
-          TZ: Europe/Berlin
-          DATA_FOLDER: "config"            
-          DATABASE_URL:
-            valueFrom:
-              secretKeyRef:
-                name: vaultwarden-credentials
-                key: db-url
-          ADMIN_TOKEN:
-            valueFrom:
-              secretKeyRef:
-                name: vaultwarden-credentials
-                key: admin-password
-        securityContext:
-          privileged: true
-        podSecurityContext:
-          runAsUser: 0
-          runAsGroup: 0
+        defaultPodOptions:  
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+
+        controllers:
+          main:
+            containers:
+              main:
+                image:
+                  repository: vaultwarden/server
+                  # renovate: datasource=docker depName=docker.io/vaultwarden/server
+                  tag: 1.29.2
+                  pullPolicy: IfNotPresent
+                env:
+                  TZ: Europe/Berlin
+                  DATA_FOLDER: "config"            
+                  DATABASE_URL:
+                    valueFrom:
+                      secretKeyRef:
+                        name: vaultwarden-credentials
+                        key: db-url
+                  ADMIN_TOKEN:
+                    valueFrom:
+                      secretKeyRef:
+                        name: vaultwarden-credentials
+                        key: admin-password
+                securityContext:
+                  privileged: true
+
 
         service:
           main:
@@ -52,35 +58,26 @@ spec:
 
         ingress:
           main:
-            annotations:
-              nginx.ingress.kubernetes.io/proxy-body-size: 500m
-              nginx.ingress.kubernetes.io/configuration-snippet: |
-                proxy_set_header Accept-Encoding "";
-                sub_filter
-                '</head>'
-                '<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/bitwarden/nord.css">
-                </head>';
-                sub_filter_once on;  
             enabled: true
-            ingressClassName: nginx
+            ingressClassName: openshift-default
+            annotations:
+              route.openshift.io/termination: "edge"
             pathType: Prefix
             hosts:
-              - host: vaultwarden.apps.hive.janz.digital
+              - host: vaultwarden.apps.sno-cluster.janz.digital
                 paths:
                   - path: /
+                    service:
+                      name: main
+                      port: http
                     pathType: Prefix
-            tls:
-              - hosts:
-                  - vaultwarden.apps.hive.janz.digital
 
         persistence:
           config:
             enabled: true
-            storageClass: openebs-jiva-csi-default
+            storageClass: lvms-vg1
             accessMode: ReadWriteOnce
             size: 1Gi
-            # labels:
-            #   "snapshot.pmb/enabled": "true"
 
   project: cluster-apps
   syncPolicy:

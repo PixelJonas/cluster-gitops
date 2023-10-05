@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: vaultwarden-db
-  namespace: argocd-operator-system
+  namespace: openshift-gitops
   annotations:
     argocd.argoproj.io/sync-wave: "101"
 spec:
@@ -18,7 +18,7 @@ spec:
       values: |-
 
         global:
-          storageClass: local-path
+          storageClass: lvms-vg1
           postgresql:
             auth:
               username: vaultwarden
