@@ -13,22 +13,25 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 1.5.1
+    targetRevision: 2.0.0
     helm:
       values: |-
 
-        image:
-          repository: docker.io/nodered/node-red
-          # renovate: datasource=docker depName=docker.io/nodered/node-red
-          tag: 3.0.2
-          pullPolicy: IfNotPresent
+        controllers:
+          main:
+            containers:
+              main:              
+                image:
+                  repository: docker.io/nodered/node-red
+                  # renovate: datasource=docker depName=docker.io/nodered/node-red
+                  tag: 3.1.0
+                  pullPolicy: IfNotPresent
 
-
-        env:
-          TZ: Europe/Berlin
-          NODE_RED_ENABLE_PROJECTS: "false"
-          NODE_RED_ENABLE_SAFE_MODE: "false"
-          FLOWS: "flows.json"
+                env:
+                  TZ: Europe/Berlin
+                  NODE_RED_ENABLE_PROJECTS: "false"
+                  NODE_RED_ENABLE_SAFE_MODE: "false"
+                  FLOWS: "flows.json"
 
         service:
           main:
@@ -47,6 +50,9 @@ spec:
               - host: nodered.apps.sno-cluster.janz.digital
                 paths:
                   - path: /
+                    service:
+                      name: main
+                      port: http
                     pathType: Prefix
 
         persistence:
@@ -54,10 +60,9 @@ spec:
             enabled: true
             storageClass: openebs-jiva-csi-default
             accessMode: ReadWriteOnce
-            mountPath: /data
+            globalMounts:
+              - path: /data
             size: 3Gi
-            # labels:
-            #   "snapshot.pmb/enabled": "true"
 
   syncPolicy:
     syncOptions:
