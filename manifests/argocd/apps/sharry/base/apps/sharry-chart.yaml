@@ -16,10 +16,7 @@ spec:
     helm:
       values: |-
 
-        defaultPodOptions:  
-          securityContext:
-            runAsUser: 1500
-            runAsGroup: 1500          
+        defaultPodOptions:         
           dnsConfig:
             options:
               - name: ndots
@@ -142,7 +139,8 @@ spec:
             name: sharry-config
             enabled: true
             type: configMap
-            mountPath: /opt/config
+            globalMounts:
+              - path: /opt/config
 
         service:
           main:
