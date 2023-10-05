@@ -37,10 +37,10 @@ spec:
                   COMPOSE_PROJECT_NAME: paperless
                   # -- Redis to use
                   PAPERLESS_REDIS: redis://localhost:6379
-                  PAPERLESS_CSRF_TRUSTED_ORIGINS: "https://paperless.apps.titan.janz.digital,https://paperless.janz.digital"
-                  PAPERLESS_ALLOWED_HOSTS: "paperless.apps.titan.janz.digital,paperless.janz.digital,localhost"
-                  PAPERLESS_CORS_ALLOWED_HOSTS: "https://paperless.apps.titan.janz.digital,https://paperless.janz.digital"
-                  
+                  PAPERLESS_CSRF_TRUSTED_ORIGINS: "https://paperless.apps.sno-cluster.janz.digital,https://paperless.janz.digital"
+                  PAPERLESS_ALLOWED_HOSTS: "paperless.apps.sno-cluster.janz.digital,paperless.janz.digital,localhost"
+                  PAPERLESS_CORS_ALLOWED_HOSTS: "https://paperless.apps.sno-cluster.janz.digital,https://paperless.janz.digital"
+                  PAPERLESS_URL: "https://paperless.janz.digital"
                   # -- OCR languages to install
                   PAPERLESS_OCR_LANGUAGE: deu
                   PAPERLESS_OCR_LANGUAGES: deu
@@ -54,7 +54,7 @@ spec:
                   PAPERLESS_PRE_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/pdf_rm_blank.sh
                   PAPERLESS_POST_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/paperless_post_consume.sh
                   PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
-                  PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: "HTTP_X_AUTH_REQUEST_PREFERRED_USERNAME"
+                  PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: "HTTP_CF_ACCESS_AUTHENTICATED_USER_EMAIL"
                   PAPERLESS_DBHOST: "paperless-db-postgresql"
                   PAPERLESS_DBPORT: "5432"
                   PAPERLESS_DBUSER: "paperless"
@@ -63,10 +63,34 @@ spec:
                       secretKeyRef:
                         name: paperless-db-postgresql
                         key: password
+                probes:
+                  startup:
+                    custom: true
+                    enabled: true
+                    spec:
+                      failureThreshold: 30
+                      initialDelaySeconds: 120
+                      periodSeconds: 5
+                      tcpSocket:
+                        port: 8000
+                      timeoutSeconds: 1
+                  liveness:
+                    custom: true
+                    enabled: true
+                    spec:
+                      failureThreshold: 30
+                      initialDelaySeconds: 0
+                      periodSeconds: 5
+                      exec:
+                        command:
+                          - /bin/bash
+                          - "-c"
+                          - echo "Healthy" > /usr/src/paperless/consume/foo && cat /usr/src/paperless/consume/foo && rm /usr/src/paperless/consume/foo
+              timeoutSeconds: 1
               broker:
                 name: broker
                 image: 
-                  repository: redis:7.2.1
+                  repository: redis
                   tag: 7.2.1
                 imagePullPolicy: IfNotPresent
               tika:
@@ -107,7 +131,7 @@ spec:
           media:
             enabled: true
             globalMounts:
-              - path:: /usr/src/paperless/media
+              - path: /usr/src/paperless/media
             accessMode: ReadWriteOnce            
             storageClass: openebs-jiva-csi-default
             size: 10Gi
@@ -130,33 +154,7 @@ spec:
             globalMounts:
               - path: /usr/src/paperless/custom-scripts
 
-        additionalContainers:
-
-
-        probes:
-          startup:
-            custom: true
-            enabled: true
-            spec:
-              failureThreshold: 30
-              initialDelaySeconds: 120
-              periodSeconds: 5
-              tcpSocket:
-                port: 8000
-              timeoutSeconds: 1
-          liveness:
-            custom: true
-            enabled: true
-            spec:
-              failureThreshold: 30
-              initialDelaySeconds: 0
-              periodSeconds: 5
-              exec:
-                command:
-                  - /bin/bash
-                  - "-c"
-                  - echo "Healthy" > /usr/src/paperless/consume/foo && cat /usr/src/paperless/consume/foo && rm /usr/src/paperless/consume/foo
-              timeoutSeconds: 1
+        
 
         secrets:
           custom-scripts:
