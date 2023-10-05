@@ -12,27 +12,33 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 1.5.1
+    targetRevision: 2.0.0
     helm:
       values: |-
 
-        image:
-          repository: ghcr.io/linuxserver/resilio-sync
-          tag: version-2.7.2.1375
-          pullPolicy: IfNotPresent
+        defaultPodOptions:  
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
 
-        env:
-          TZ: Europe/Berlin
-          PUID: "1500"
-          PGID: "1500"
+        controllers:
+          main:
+            containers:
+              main:
+                image:
+                  repository: ghcr.io/linuxserver/resilio-sync
+                  # renovate: datasource=docker depName=ghcr.io/linuxserver/resilio-sync
+                  tag: 2.7.3
+                  pullPolicy: IfNotPresent
 
-        securityContext:
-          privileged: true
-          
-        podSecurityContext:
-          runAsUser: 0
-          runAsGroup: 0
-          
+                env:
+                  TZ: Europe/Berlin
+                  PUID: "1500"
+                  PGID: "1500"
+
+              securityContext:
+                privileged: true
+
         service:
           main:
             ports:
@@ -59,58 +65,50 @@ spec:
 
         ingress:
           main:
-            annotations:
-              nginx.ingress.kubernetes.io/proxy-body-size: 50m
-            enabled: false
-            ingressClassName: nginx
+            enabled: true
+            ingressClassName: openshift-default
             pathType: Prefix
             annotations:
-              nginx.ingress.kubernetes.io/configuration-snippet: |
-                proxy_set_header Accept-Encoding "";
-                sub_filter
-                '</head>'
-                '<link rel="stylesheet" type="text/css" href="https://theme-park.dev/css/base/resilio-sync/nord.css">
-                </head>';
-                sub_filter_once on;  
+              route.openshift.io/termination: "edge"
             hosts:
-              - host: sync.apps.titan.janz.digital
+              - host: sync.apps.sno-cluster.janz.digital
                 paths:
                   - path: /
+                    service:
+                      name: main
+                      port: http
                     pathType: Prefix
-
-            tls:
-              - hosts:
-                  - sync.apps.titan.janz.digital             
+           
 
         persistence:
           config:
             enabled: true
             storageClass: lvms-vg1
             accessMode: ReadWriteOnce
-            mountPath: /config
+            globalMounts:
+              - path: /config
             size: 5Gi
-            # labels:
-            #   snapshot.pmb/enabled: "true"
           media:
             enabled: true
             storageClass: nfs
             accessMode: ReadWriteOnce
             size: 10Gi
-            mountPath: /media
+            globalMounts:
+              - path: /media
           downloads:
             enabled: true
             storageClass: nfs
             accessMode: ReadWriteOnce
-            mountPath: /downloads
+            globalMounts:
+              - path: /downloads
             size: 10Gi  
           sync:
             enabled: true
             storageClass: nfs
             accessMode: ReadWriteOnce
-            mountPath: /sync
+            globalMounts:
+              - path: /sync
             size: 10Gi
-            # labels:
-            #   snapshot.pmb/enabled: "true"
   syncPolicy:
     automated:
       prune: true
