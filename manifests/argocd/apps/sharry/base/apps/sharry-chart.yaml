@@ -120,7 +120,7 @@ spec:
                           user-url = "https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/userinfo"
                           user-id-key = "preferred_username"
                           client-id = "sharry"
-                          scope= "email"
+                          scope= ""
                           client-secret = ${SHARRY_OAUTH_CLIENT_SECRET}
                         }
                       ]
