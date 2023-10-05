@@ -12,16 +12,145 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 1.5.1
+    targetRevision: 2.0.0
     helm:
       values: |-
 
-        image:
-          repository: ghcr.io/paperless-ngx/paperless-ngx
-          # renovate: datasource=docker depName=ghcr.io/paperless-ngx/paperless-ngx
-          tag: 1.10.2
-          pullPolicy: IfNotPresent
+        defaultPodOptions:  
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
 
+        controllers:
+          main:
+            containers:
+              main:
+                image:
+                  repository: ghcr.io/paperless-ngx/paperless-ngx
+                  # renovate: datasource=docker depName=ghcr.io/paperless-ngx/paperless-ngx
+                  tag: 1.10.2
+                  pullPolicy: IfNotPresent
+                command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
+                args: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
+                env:
+                  # -- Project name
+                  COMPOSE_PROJECT_NAME: paperless
+                  # -- Redis to use
+                  PAPERLESS_REDIS: redis://localhost:6379
+                  PAPERLESS_CSRF_TRUSTED_ORIGINS: "https://paperless.apps.titan.janz.digital,https://paperless.janz.digital"
+                  PAPERLESS_ALLOWED_HOSTS: "paperless.apps.titan.janz.digital,paperless.janz.digital,localhost"
+                  PAPERLESS_CORS_ALLOWED_HOSTS: "https://paperless.apps.titan.janz.digital,https://paperless.janz.digital"
+                  
+                  # -- OCR languages to install
+                  PAPERLESS_OCR_LANGUAGE: deu
+                  PAPERLESS_OCR_LANGUAGES: deu
+                  PAPERLESS_CUSTOM_PACKAGES: "pdftk poppler-utils"
+                  PAPERLESS_TIME_ZONE: Europe/Berlin
+                  PAPERLESS_CONSUMER_POLLING: 30
+                  PAPERLESS_OCR_DESKEW: true
+                  PAPERLESS_TIKA_ENABLED: 1
+                  PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://localhost:3000
+                  PAPERLESS_TIKA_ENDPOINT: http://localhost:9998
+                  PAPERLESS_PRE_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/pdf_rm_blank.sh
+                  PAPERLESS_POST_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/paperless_post_consume.sh
+                  PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
+                  PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: "HTTP_X_AUTH_REQUEST_PREFERRED_USERNAME"
+                  PAPERLESS_DBHOST: "paperless-db-postgresql"
+                  PAPERLESS_DBPORT: "5432"
+                  PAPERLESS_DBUSER: "paperless"
+                  PAPERLESS_DBPASS:
+                    valueFrom:
+                      secretKeyRef:
+                        name: paperless-db-postgresql
+                        key: password
+              broker:
+                name: broker
+                image: redis:7.2.1
+                imagePullPolicy: IfNotPresent
+              tika:
+                name: tika
+                # renovate: datasource=docker depName=docker.io/apache/tika
+                image: docker.io/apache/tika:2.9.0.0
+                imagePullPolicy: IfNotPresent
+              gotenberg:
+                name: gotenberg
+                # renovate: datasource=docker depName=docker.io/gotenberg/gotenberg
+                image: docker.io/gotenberg/gotenberg:7.9.2
+                env:
+                  - name: CHROMIUM_DISABLE_ROUTES
+                    value: "1"
+
+        service:
+          main:
+            ports:
+              http:
+                port: 8000
+
+        ingress:
+          main:
+            enabled: false
+
+        persistence:
+          data:
+            enabled: true
+            globalMounts:
+              - path: /usr/src/paperless/data
+            accessMode: ReadWriteOnce
+            storageClass: openebs-jiva-csi-default
+            size: 3Gi
+          media:
+            enabled: true
+            globalMounts:
+              - path:: /usr/src/paperless/media
+            accessMode: ReadWriteOnce            
+            storageClass: openebs-jiva-csi-default
+            size: 10Gi
+          export:
+            enabled: true       
+            globalMounts:
+              - path: /usr/src/paperless/export
+            accessMode: ReadWriteOnce
+            size: 1Gi
+          consume:
+            enabled: false
+            globalMounts:
+              - path: /usr/src/paperless/consume
+            accessMode: ReadWriteOnce
+          custom-scripts:
+            name: paperless-ng-custom-scripts
+            enabled: true
+            type: secret
+            defaultMode: 0777
+            globalMounts:
+              - path: /usr/src/paperless/custom-scripts
+
+        additionalContainers:
+
+
+        probes:
+          startup:
+            custom: true
+            enabled: true
+            spec:
+              failureThreshold: 30
+              initialDelaySeconds: 120
+              periodSeconds: 5
+              tcpSocket:
+                port: 8000
+              timeoutSeconds: 1
+          liveness:
+            custom: true
+            enabled: true
+            spec:
+              failureThreshold: 30
+              initialDelaySeconds: 0
+              periodSeconds: 5
+              exec:
+                command:
+                  - /bin/bash
+                  - "-c"
+                  - echo "Healthy" > /usr/src/paperless/consume/foo && cat /usr/src/paperless/consume/foo && rm /usr/src/paperless/consume/foo
+              timeoutSeconds: 1
 
         secrets:
           custom-scripts:
@@ -201,139 +330,6 @@ spec:
 
                 check_smaller "$IFILE" "$OFILE"       
 
-        env:
-          # -- Project name
-          COMPOSE_PROJECT_NAME: paperless
-          # -- Redis to use
-          PAPERLESS_REDIS: redis://localhost:6379
-          PAPERLESS_CSRF_TRUSTED_ORIGINS: "https://paperless.apps.titan.janz.digital,https://paperless.janz.digital"
-          PAPERLESS_ALLOWED_HOSTS: "paperless.apps.titan.janz.digital,paperless.janz.digital,localhost"
-          PAPERLESS_CORS_ALLOWED_HOSTS: "https://paperless.apps.titan.janz.digital,https://paperless.janz.digital"
-          
-          # -- OCR languages to install
-          PAPERLESS_OCR_LANGUAGE: deu
-          PAPERLESS_OCR_LANGUAGES: deu
-          PAPERLESS_CUSTOM_PACKAGES: "pdftk poppler-utils"
-          PAPERLESS_TIME_ZONE: Europe/Berlin
-          PAPERLESS_CONSUMER_POLLING: 30
-          PAPERLESS_OCR_DESKEW: true
-          PAPERLESS_TIKA_ENABLED: 1
-          PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://localhost:3000
-          PAPERLESS_TIKA_ENDPOINT: http://localhost:9998
-          PAPERLESS_PRE_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/pdf_rm_blank.sh
-          PAPERLESS_POST_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/paperless_post_consume.sh
-          PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
-          PAPERLESS_HTTP_REMOTE_USER_HEADER_NAME: "HTTP_X_AUTH_REQUEST_PREFERRED_USERNAME"
-          PAPERLESS_DBHOST: "paperless-db-postgresql"
-          PAPERLESS_DBPORT: "5432"
-          PAPERLESS_DBUSER: "paperless"
-          PAPERLESS_DBPASS:
-            valueFrom:
-              secretKeyRef:
-                name: paperless-db-postgresql
-                key: password
-
-
-        command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
-        args: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
-
-        podSecurityContext:
-          runAsUser: 0
-          runAsGroup: 0
-
-        service:
-          main:
-            ports:
-              http:
-                port: 8000
-
-        ingress:
-          main:
-            annotations:
-              nginx.ingress.kubernetes.io/proxy-body-size: 50m
-            enabled: true
-            ingressClassName: nginx
-            pathType: Prefix
-            hosts:
-              - host: paperless.apps.hive.janz.digital
-                paths:
-                  - path: /
-                    pathType: Prefix
-            tls:
-              - hosts:
-                  - paperless.apps.hive.janz.digital
-
-        persistence:
-          data:
-            enabled: true
-            mountPath: /usr/src/paperless/data
-            accessMode: ReadWriteOnce
-            storageClass: openebs-jiva-csi-default
-            size: 3Gi
-          media:
-            enabled: true
-            mountPath: /usr/src/paperless/media
-            accessMode: ReadWriteOnce            
-            storageClass: openebs-jiva-csi-default
-            size: 10Gi
-            # labels:
-            #   "snapshot.pmb/enabled": "true"
-          export:
-            enabled: true       
-            mountPath: /usr/src/paperless/export
-            accessMode: ReadWriteOnce
-            size: 1Gi
-          consume:
-            enabled: false
-            mountPath: /usr/src/paperless/consume
-            accessMode: ReadWriteOnce
-          custom-scripts:
-            name: paperless-ng-custom-scripts
-            enabled: true
-            type: secret
-            defaultMode: 0777
-            mountPath: /usr/src/paperless/custom-scripts
-
-        additionalContainers:
-          broker:
-            name: broker
-            image: redis:7.2
-            imagePullPolicy: IfNotPresent
-          tika:
-            name: tika
-            image: docker.io/apache/tika:2.5.0
-            imagePullPolicy: IfNotPresent
-          gotenberg:
-            name: gotenberg
-            image: docker.io/gotenberg/gotenberg:7
-            env:
-              - name: CHROMIUM_DISABLE_ROUTES
-                value: "1"
-
-        probes:
-          startup:
-            custom: true
-            enabled: true
-            spec:
-              failureThreshold: 30
-              initialDelaySeconds: 120
-              periodSeconds: 5
-              tcpSocket:
-                port: 8000
-              timeoutSeconds: 1
-          liveness:
-            custom: true
-            enabled: true
-            spec:
-              failureThreshold: 30
-              initialDelaySeconds: 0
-              periodSeconds: 5
-              exec:
-                command:
-                  - /bin/bash
-                  - "-c"
-                  - echo "Healthy" > /usr/src/paperless/consume/foo && cat /usr/src/paperless/consume/foo && rm /usr/src/paperless/consume/foo
-              timeoutSeconds: 1
 
   project: cluster-apps
   syncPolicy:
