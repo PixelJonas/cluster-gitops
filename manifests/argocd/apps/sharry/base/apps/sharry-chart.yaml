@@ -147,6 +147,22 @@ spec:
               http:
                 port: 9090
 
+        ingress:
+          main:
+            enabled: true
+            className: openshift-default
+            annotations:
+              route.openshift.io/termination: "edge"
+            pathType: Prefix
+            hosts:
+              - host: sharry.apps.sno-cluster.janz.digital
+                paths:
+                  - path: /
+                    service:
+                      name: main
+                      port: http
+                    pathType: Prefix    
+
   project: cluster-apps
   syncPolicy:
     syncOptions:
