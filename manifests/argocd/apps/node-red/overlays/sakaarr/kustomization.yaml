@@ -1,22 +1,5 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-patches:
-  - patch:
-      "- op: \"replace\"\n  path: \"/metadata/namespace\"\n  value: \"openshift-gitops\"\n\n-
-      op: \"add\"\n  path: \"/spec/source/helm/parameters\"\n  value: []\n\n- op: \"add\"\n
-      \ path: \"/spec/source/helm/parameters/-\"\n  value:\n    name: ingress.main.enabled\n
-      \   value: \"true\"\n\n- op: \"add\"\n  path: \"/spec/source/helm/parameters/-\"\n
-      \ value:\n    name: persistence.data.storageClass\n    value: \"lvms-vg1\"\n\n-
-      op: \"add\"\n  path: \"/spec/source/helm/parameters/-\"\n  value:\n    name: dnsConfig.nameservers[0]\n
-      \   value: 10.20.0.1\n    \n- op: \"add\"\n  path: \"/spec/source/helm/parameters/-\"\n
-      \ value:\n    name: dnsConfig.searches[0]\n    value: janz.lan\n\n- op: \"add\"\n
-      \ path: \"/spec/source/helm/parameters/-\"\n  value:\n    name: dnsPolicy\n    value:
-      None"
-    target:
-      group: argoproj.io
-      kind: Application
-      name: node-red
-      version: v1alpha1
 resources:
   - ../../base

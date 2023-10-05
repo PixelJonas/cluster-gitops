@@ -2,7 +2,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: node-red
-  namespace: argocd-operator-system
+  namespace: openshift-gitops
   annotations:
     argocd.argoproj.io/sync-wave: "101"
 spec:
@@ -16,6 +16,21 @@ spec:
     targetRevision: 2.0.0
     helm:
       values: |-
+
+        defaultPodOptions:  
+          dnsPolicy: None
+          dnsConfig:
+            nameservers:
+              - 10.42.0.1
+              - 172.30.0.10
+              - 192.168.1.1
+            searches:
+              - media.svc.cluster.local
+              - svc.cluster.local
+              - cluster.local
+              - sno-cluster.janz.digital
+              - janz.lan
+              - janz.digital
 
         controllers:
           main:
@@ -58,7 +73,7 @@ spec:
         persistence:
           data:
             enabled: true
-            storageClass: openebs-jiva-csi-default
+            storageClass: lvms-vg1
             accessMode: ReadWriteOnce
             globalMounts:
               - path: /data
