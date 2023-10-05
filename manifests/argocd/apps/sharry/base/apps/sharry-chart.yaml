@@ -16,7 +16,10 @@ spec:
     helm:
       values: |-
 
-        defaultPodOptions:         
+        defaultPodOptions: 
+          securityContext:
+              runAsUser: 0
+              runAsGroup: 0        
           dnsConfig:
             options:
               - name: ndots
@@ -161,7 +164,7 @@ spec:
                     service:
                       name: main
                       port: http
-                    pathType: Prefix    
+                    pathType: Prefix
 
   project: cluster-apps
   syncPolicy:
