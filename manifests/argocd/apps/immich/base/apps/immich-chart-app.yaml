@@ -22,7 +22,7 @@ spec:
               value: "1"
 
         image:
-          tag: release
+          tag: v1.81.0
 
         redis:
           enabled: true
