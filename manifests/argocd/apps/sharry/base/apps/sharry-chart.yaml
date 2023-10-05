@@ -109,21 +109,6 @@ spec:
                       invite-time = "7 days"
                     }
                     auth {
-                      oauth = [
-                        {
-                          enabled = true
-                          id = "janz"
-                          name = "Janz SSO"
-                          icon = "fab fa-key"
-                          authorize-url = "https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/auth"
-                          token-url = "https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/token"
-                          user-url = "https://sso.janz.digital/auth/realms/janz/protocol/openid-connect/userinfo"
-                          user-id-key = "preferred_username"
-                          client-id = "sharry"
-                          scope= ""
-                          client-secret = ${SHARRY_OAUTH_CLIENT_SECRET}
-                        }
-                      ]
                       fixed {
                         enabled = true
                         user = "admin"
