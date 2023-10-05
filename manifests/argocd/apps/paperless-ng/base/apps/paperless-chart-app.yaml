@@ -65,17 +65,23 @@ spec:
                         key: password
               broker:
                 name: broker
-                image: redis:7.2.1
+                image: 
+                  repository: redis:7.2.1
+                  tag: 7.2.1
                 imagePullPolicy: IfNotPresent
               tika:
                 name: tika
-                # renovate: datasource=docker depName=docker.io/apache/tika
-                image: docker.io/apache/tika:2.9.0.0
+                image: 
+                  # renovate: datasource=docker depName=docker.io/apache/tika
+                  repository: docker.io/apache/tika
+                  tag: 2.9.0.0
                 imagePullPolicy: IfNotPresent
               gotenberg:
                 name: gotenberg
-                # renovate: datasource=docker depName=docker.io/gotenberg/gotenberg
-                image: docker.io/gotenberg/gotenberg:7.9.2
+                image:
+                  # renovate: datasource=docker depName=docker.io/gotenberg/gotenberg
+                  repository: docker.io/gotenberg/gotenberg
+                  tag: 7.9.2
                 env:
                   - name: CHROMIUM_DISABLE_ROUTES
                     value: "1"
@@ -328,8 +334,7 @@ spec:
 
                 shrink "$IFILE" "$OFILE" "$res" || exit $?
 
-                check_smaller "$IFILE" "$OFILE"       
-
+                check_smaller "$IFILE" "$OFILE"
 
   project: cluster-apps
   syncPolicy:
