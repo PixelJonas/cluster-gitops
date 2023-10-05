@@ -31,6 +31,8 @@ spec:
                   # renovate: datasource=docker depName=docker.io/eikek0/sharry
                   tag: v1.12.1
                   pullPolicy: IfNotPresent
+                args:
+                  - "/opt/config/sharry.conf"
                 env:
                   - name: TZ
                     value: Europe/Berlin
@@ -130,9 +132,6 @@ spec:
                     }
                   }
                 }
-
-        args:
-        - "/opt/config/sharry.conf"
 
         persistence:
           config:
