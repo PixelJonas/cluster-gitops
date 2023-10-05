@@ -30,14 +30,12 @@ spec:
                   # renovate: datasource=docker depName=ghcr.io/linuxserver/resilio-sync
                   tag: 2.7.3
                   pullPolicy: IfNotPresent
-
                 env:
                   TZ: Europe/Berlin
                   PUID: "1500"
                   PGID: "1500"
-
-              securityContext:
-                privileged: true
+                securityContext:
+                  privileged: true
 
         service:
           main:
