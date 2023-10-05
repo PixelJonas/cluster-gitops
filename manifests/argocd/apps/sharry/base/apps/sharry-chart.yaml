@@ -12,55 +12,61 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 1.5.1
+    targetRevision: 2.0.0
     helm:
       values: |-
 
+        defaultPodOptions:  
+          securityContext:
+            runAsUser: 1500
+            runAsGroup: 1500          
+          dnsConfig:
+            options:
+              - name: ndots
+                value: "1"
 
-        image:
-          repository: eikek0/sharry
-          # renovate: datasource=docker depName=docker.io/eikek0/sharry
-          tag: v1.11.0
-          pullPolicy: IfNotPresent
-
-        env:
-          - name: TZ
-            value: Europe/Berlin
-          - name: POSTGRESQL_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: sharry-db-postgresql
-                key: postgres-password
-          - name: SHARRY_OAUTH_CLIENT_SECRET
-            valueFrom:
-              secretKeyRef:
-                name: sharry-credentials
-                key: client-secret
-          - name: SHARRY_ADMIN_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: sharry-credentials
-                key: admin-password
-          - name: SHARRY_INVITE_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: sharry-credentials
-                key: invite-password
-          - name: SHARRY_SMTP_USERNAME
-            valueFrom:
-              secretKeyRef:
-                name: sharry-credentials
-                key: smtp-username
-          - name: SHARRY_SMTP_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: sharry-credentials
-                key: smtp-password
-
-        dnsConfig:
-          options:
-            - name: ndots
-              value: "1"
+        controllers:
+          main:
+            containers:
+              main:
+                image:
+                  repository: eikek0/sharry
+                  # renovate: datasource=docker depName=docker.io/eikek0/sharry
+                  tag: v1.12.1
+                  pullPolicy: IfNotPresent
+                env:
+                  - name: TZ
+                    value: Europe/Berlin
+                  - name: POSTGRESQL_PASSWORD
+                    valueFrom:
+                      secretKeyRef:
+                        name: sharry-db-postgresql
+                        key: postgres-password
+                  - name: SHARRY_OAUTH_CLIENT_SECRET
+                    valueFrom:
+                      secretKeyRef:
+                        name: sharry-credentials
+                        key: client-secret
+                  - name: SHARRY_ADMIN_PASSWORD
+                    valueFrom:
+                      secretKeyRef:
+                        name: sharry-credentials
+                        key: admin-password
+                  - name: SHARRY_INVITE_PASSWORD
+                    valueFrom:
+                      secretKeyRef:
+                        name: sharry-credentials
+                        key: invite-password
+                  - name: SHARRY_SMTP_USERNAME
+                    valueFrom:
+                      secretKeyRef:
+                        name: sharry-credentials
+                        key: smtp-username
+                  - name: SHARRY_SMTP_PASSWORD
+                    valueFrom:
+                      secretKeyRef:
+                        name: sharry-credentials
+                        key: smtp-password
 
         configMaps: 
           config:
