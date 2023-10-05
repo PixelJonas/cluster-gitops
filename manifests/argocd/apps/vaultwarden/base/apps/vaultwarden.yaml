@@ -5,6 +5,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "111"
   name: vaultwarden
   namespace: openshift-gitops
+spec:
   destination:
     namespace: vaultwarden
     server: "https://kubernetes.default.svc"
