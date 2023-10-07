@@ -64,7 +64,7 @@ spec:
         ingress:
           main:
             enabled: true
-            ingressClassName: openshift-default
+            className: openshift-default
             pathType: Prefix
             annotations:
               route.openshift.io/termination: "edge"
