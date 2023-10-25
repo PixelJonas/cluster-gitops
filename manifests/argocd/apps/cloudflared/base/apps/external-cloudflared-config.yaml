@@ -1,0 +1,17 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: external-cloudflared-config
+  namespace: cloudflared
+  annotations:
+    argocd.argoproj.io/sync-wave: "30"
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: doppler-cluster
+  target:
+    name: cloudflared-config
+  data:
+    - secretKey: config.yaml
+      remoteRef:
+        key: CLOUDFLARED_CONFIG
