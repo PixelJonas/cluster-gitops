@@ -1,0 +1,34 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationSource
+metadata:
+  name: immich-photos-backup-b2
+  annotations:
+    argocd.argoproj.io/sync-wave: "200"  
+spec:
+  # The PVC to be backed up
+  sourcePVC: nfs-photos-immich
+  trigger:
+    # at 2am every 7th day
+    schedule: "0 2 */7 * *"
+  restic:
+    # Prune the repository (repack to free space) every 2 weeks
+    pruneIntervalDays: 14
+    # Name of the Secret with the connection information
+    repository: restic-config-photos-b2
+    # Retention policy for backups
+    retain:
+      hourly: 0
+      daily: 0
+      weekly: 7
+      monthly: 3
+      yearly: 1
+    # Clone the source volume prior to taking a backup to ensure a
+    # point-in-time image.
+    copyMethod: Direct
+    cacheAccessModes:
+      - ReadWriteOnce
+    # The StorageClass to use when creating the PiT copy (same as source PVC if omitted)
+    #storageClassName: my-sc-name
+    # The VSC to use if the copy method is Snapshot (default if omitted)
+    #volumeSnapshotClassName: my-vsc-name

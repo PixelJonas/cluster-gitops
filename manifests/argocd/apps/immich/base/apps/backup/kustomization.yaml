@@ -4,5 +4,9 @@ kind: Kustomization
 resources:
 - sealed-restic-photos.yaml
 - sealed-restic-database.yaml
+- external-restic-config-photos-b2.yaml
+- external-restic-config-database-b2.yaml
 - photos-source.yaml
 - database-source.yaml
+- photos-source-b2.yaml
+- database-source-b2.yaml
