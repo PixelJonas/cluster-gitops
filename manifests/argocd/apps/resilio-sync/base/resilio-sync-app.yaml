@@ -107,6 +107,12 @@ spec:
             globalMounts:
               - path: /sync
             size: 10Gi
+          media:
+            enabled: true
+            existingClaim: nfs-resilio-audiobooks
+            globalMounts:
+              - path: /audiobooks
+
   syncPolicy:
     automated:
       prune: true
