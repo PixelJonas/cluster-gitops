@@ -2,7 +2,7 @@ apiVersion: external-secrets.io/v1beta1
 kind: ExternalSecret
 metadata:
   name: external-cloudflare-api-token
-  namespace: cloudflared
+  namespace: cert-manager
   annotations:
     argocd.argoproj.io/sync-wave: "30"
 spec:
