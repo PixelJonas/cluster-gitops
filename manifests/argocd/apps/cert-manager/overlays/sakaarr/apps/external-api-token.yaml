@@ -1,0 +1,17 @@
+apiVersion: external-secrets.io/v1beta1
+kind: ExternalSecret
+metadata:
+  name: external-cloudflare-api-token
+  namespace: cloudflared
+  annotations:
+    argocd.argoproj.io/sync-wave: "30"
+spec:
+  secretStoreRef:
+    kind: ClusterSecretStore
+    name: doppler-cluster
+  target:
+    name: cloudflare-api-token
+  data:
+    - secretKey: api-token
+      remoteRef:
+        key: CLOUDFLARE_API_KEY

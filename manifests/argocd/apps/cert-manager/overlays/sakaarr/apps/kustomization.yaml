@@ -3,15 +3,14 @@ kind: Kustomization
 
 namespace: openshift-operators
 
-
 resources:
-- api-token.yaml
-- ../../../base/apps
+  - external-api-token.yaml
+  - ../../../base/apps
 
 patches:
-- path: patch-issuer-server.yaml
-  target:
-    group: cert-manager.io
-    kind: ClusterIssuer
-    name: cloudflare-issuer
-    version: v1
+  - path: patch-issuer-server.yaml
+    target:
+      group: cert-manager.io
+      kind: ClusterIssuer
+      name: cloudflare-issuer
+      version: v1
