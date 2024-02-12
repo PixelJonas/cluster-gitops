@@ -6,3 +6,4 @@ resources:
 - homeassistant-db-backup-app.yaml
 - sealed-homeassistant-db-postgresql.yaml
 - sealed-kopia-config.yaml
+- anyuid-rolebinding.yaml

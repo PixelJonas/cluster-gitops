@@ -7,3 +7,4 @@ resources:
 - keycloak-backup-app.yaml
 - sealed-postgresql-credentials.yaml
 - sealed-keycloak-credentials.yaml
+- anyuid-rolebinding.yaml

@@ -8,3 +8,4 @@ resources:
 - sealed-nextcloud-credentials.yaml
 - nextcloud-backup-app.yaml
 - nextcloud-route.yaml
+- anyuid-rolebinding.yaml

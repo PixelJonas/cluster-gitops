@@ -6,3 +6,4 @@ resources:
 - sealed-postgresql-credentials.yaml
 - sharry-chart.yaml
 - postgresql-chart.yaml
+- anyuid-rolebinding.yaml

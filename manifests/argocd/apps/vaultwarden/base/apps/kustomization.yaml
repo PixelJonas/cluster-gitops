@@ -7,3 +7,4 @@ resources:
 - sealed-postgresql-credentials.yaml
 - external-vaultwarden-credentials.yaml
 - vaultwarden-backup-app.yaml
+- anyuid-rolebinding.yaml
