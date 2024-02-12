@@ -1,7 +1,7 @@
 kind: ClusterRoleBinding
 apiVersion: rbac.authorization.k8s.io/v1
 metadata:
-  name: vaultwarden-db-anyuid
+  name: vaultwarden-db-privileged
 subjects:
   - kind: ServiceAccount
     name: vaultwarden-db-postgresql
