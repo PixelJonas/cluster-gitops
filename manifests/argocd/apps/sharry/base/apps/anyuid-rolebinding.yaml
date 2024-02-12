@@ -4,7 +4,7 @@ metadata:
   name: sharry-db-anyuid
 subjects:
   - kind: ServiceAccount
-    name: sharry-db-postgresql-0
+    name: sharry-db-postgresql
     namespace: sharry
 roleRef:
   apiGroup: rbac.authorization.k8s.io

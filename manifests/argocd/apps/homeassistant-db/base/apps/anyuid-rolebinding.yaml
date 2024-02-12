@@ -4,7 +4,7 @@ metadata:
   name: homeassistant-db-anyuid
 subjects:
   - kind: ServiceAccount
-    name: homeassistant-db-postgresql-0
+    name: homeassistant-db-postgresql
     namespace: homeassistant-db
 roleRef:
   apiGroup: rbac.authorization.k8s.io

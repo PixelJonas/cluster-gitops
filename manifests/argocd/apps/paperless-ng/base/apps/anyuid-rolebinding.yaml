@@ -4,7 +4,7 @@ metadata:
   name: paperless-ng-anyuid
 subjects:
   - kind: ServiceAccount
-    name: paperless-db-postgresql-0
+    name: paperless-db-postgresql
     namespace: paperless
 roleRef:
   apiGroup: rbac.authorization.k8s.io

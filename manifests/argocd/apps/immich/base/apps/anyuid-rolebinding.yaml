@@ -4,7 +4,7 @@ metadata:
   name: immich-db-anyuid
 subjects:
   - kind: ServiceAccount
-    name: immich-db-postgresql-0
+    name: immich-db-postgresql
     namespace: immich
 roleRef:
   apiGroup: rbac.authorization.k8s.io

@@ -4,7 +4,7 @@ metadata:
   name: vaultwarden-db-anyuid
 subjects:
   - kind: ServiceAccount
-    name: vaultwarden-db-postgresql-0
+    name: vaultwarden-db-postgresql
     namespace: vaultwarden
 roleRef:
   apiGroup: rbac.authorization.k8s.io
