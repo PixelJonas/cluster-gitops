@@ -19,7 +19,7 @@ spec:
 
         image:
           repository: tensorchord/pgvecto-rs
-          tag: pg16-v0.2.0
+          tag: pg16-v0.1.11
 
         volumePermissions:
           enabled: true
