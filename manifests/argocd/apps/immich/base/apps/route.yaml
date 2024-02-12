@@ -7,7 +7,7 @@ spec:
   host: immich.apps.sno-cluster.janz.digital
   to:
     kind: Service
-    name: immich-proxy
+    name: immich-server
     weight: 100
   port:
     targetPort: http
