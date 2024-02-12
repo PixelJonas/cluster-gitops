@@ -7,7 +7,7 @@ namespace: sealed-secrets
 resources:
 - sealed-secrets-namespace.yaml
 - role-anyuid.yaml
-- github.com/redhat-canada-gitops/catalog/sealed-secrets-operator/base
+- github.com/redhat-cop/gitops-catalog/sealed-secrets-operator/operator/base
 
 patches:
 - path: patch-update-status.yaml
