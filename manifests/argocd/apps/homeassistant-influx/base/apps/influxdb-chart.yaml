@@ -43,6 +43,9 @@ spec:
 
         backup:
           enabled: true
+          cronjob:
+            securityContext:
+              enabled: true
 
   ignoreDifferences:
     - group: "apps"
