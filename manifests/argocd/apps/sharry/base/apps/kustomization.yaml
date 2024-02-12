@@ -7,3 +7,4 @@ resources:
 - sharry-chart.yaml
 - postgresql-chart.yaml
 - anyuid-rolebinding.yaml
+- privileged-rolebinding.yaml

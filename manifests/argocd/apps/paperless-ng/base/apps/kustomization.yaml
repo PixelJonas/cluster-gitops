@@ -7,3 +7,4 @@ resources:
   - postgresql-chart.yaml
   - paperless-backup-app.yaml
   - anyuid-rolebinding.yaml
+  - privileged-rolebinding.yaml

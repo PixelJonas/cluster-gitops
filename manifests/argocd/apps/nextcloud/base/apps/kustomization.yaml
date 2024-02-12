@@ -9,3 +9,4 @@ resources:
 - nextcloud-backup-app.yaml
 - nextcloud-route.yaml
 - anyuid-rolebinding.yaml
+- privileged-rolebinding.yaml

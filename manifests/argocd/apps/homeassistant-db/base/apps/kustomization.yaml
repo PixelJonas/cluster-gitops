@@ -7,3 +7,4 @@ resources:
 - sealed-homeassistant-db-postgresql.yaml
 - sealed-kopia-config.yaml
 - anyuid-rolebinding.yaml
+- privileged-rolebinding.yaml

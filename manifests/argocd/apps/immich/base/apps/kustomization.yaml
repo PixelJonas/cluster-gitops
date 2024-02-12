@@ -10,3 +10,4 @@ resources:
   - immich-chart-app.yaml
   - route.yaml
   - anyuid-rolebinding.yaml
+  - privileged-rolebinding.yaml
