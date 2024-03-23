@@ -6,6 +6,9 @@ subjects:
   - kind: ServiceAccount
     name: wikijs-db-postgresql
     namespace: wikijs
+  - kind: ServiceAccount
+    name: default
+    namespace: wikijs
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
