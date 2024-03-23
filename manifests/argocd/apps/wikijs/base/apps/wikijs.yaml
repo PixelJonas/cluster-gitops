@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+  name: wikijs
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: wikijs
+    server: "https://kubernetes.default.svc"
+  source:
+    chart: wiki
+    repoURL: https://charts.js.wiki
+    targetRevision: 2.2.0
+    helm:
+      values: |-
+
+        ingress:
+          main:
+            enabled: true
+            className: openshift-default
+            annotations:
+              route.openshift.io/termination: "edge"
+            pathType: Prefix
+            hosts:
+              - host: wikijs.apps.sno-cluster.janz.digital
+                paths:
+                  - path: /
+                    pathType: Prefix
+
+        postgresql:
+          enabled: false
+          postgresqlHost: wikijs-db-postgresql
+          postgresqlDatabase: wikijs
+          postgresqlUser: wikijs
+          existingSecret: wikijs-db-postgresql
+          existingSecretKey: password
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

@@ -1,0 +1,13 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: wikijs-database-restore
+  namespace: wikijs
+spec:
+  trigger:
+    manual: restore-once
+  restic:
+    repository: restic-config-database
+    destinationPVC: data-wikijs-db-backup
+    copyMethod: Direct

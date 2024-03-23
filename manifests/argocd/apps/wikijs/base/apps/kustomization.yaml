@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+resources:
+  - password.yaml
+  - postgresql-chart.yaml
+  - external-password-postgresql.yaml
+  - password-backup-app.yaml
+  - anyuid-rolebinding.yaml
+  - privileged-rolebinding.yaml

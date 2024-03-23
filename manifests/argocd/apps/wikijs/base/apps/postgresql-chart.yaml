@@ -1,0 +1,30 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: wikijs-db
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "101"
+spec:
+  destination:
+    namespace: wikijs
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: postgresql
+    targetRevision: 13.4.4
+    helm:
+      values: |-
+
+        global:
+          storageClass: lvms-vg1
+          postgresql:
+            auth:
+              username: wikijs
+              existingSecret: wikijs-db-postgresql
+              database: wikijs
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
