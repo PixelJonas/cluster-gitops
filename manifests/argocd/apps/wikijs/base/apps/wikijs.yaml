@@ -10,45 +10,79 @@ spec:
     namespace: wikijs
     server: "https://kubernetes.default.svc"
   source:
-    chart: wiki
-    repoURL: https://charts.js.wiki
-    targetRevision: 2.2.0
+    chart: app-template
+    repoURL: https://bjw-s.github.io/helm-charts
+    targetRevision: 2.6.0
     helm:
       values: |-
 
+
+        defaultPodOptions:  
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
+
+        controllers:
+          main:
+            containers:
+              main:
+                image:
+                  repository: linuxserver/wikijs
+                  # renovate: datasource=docker depName=linuxserver/wikijs
+                  tag: 2.5.301
+                  pullPolicy: IfNotPresent
+                env:
+                  TZ: Europe/Berlin
+                  PUID: 1500
+                  PGID: 1500
+                  DB_HOST: wikijs-db-postgresql
+                  DB_NAME: wikijs
+                  DB_USER: wikijs
+                  DB_PASS:
+                    valueFrom:
+                      secretKeyRef:
+                        name: wikijs-db-postgresql
+                        key: password
+                securityContext:
+                  privileged: true
+
+
+        service:
+          main:
+            ports:
+              http:
+                port: 80
+              websocket:
+                enabled: true
+                port: 3000
+
         ingress:
-          enabled: true
-          className: openshift-default
-          annotations:
-            route.openshift.io/termination: "edge"
-          pathType: Prefix
-          hosts:
-            - host: wikijs.apps.sno-cluster.janz.digital
-              paths:
-                - path: /
-                  pathType: Prefix
+          main:
+            enabled: true
+            className: openshift-default
+            annotations:
+              route.openshift.io/termination: "edge"
+            pathType: Prefix
+            hosts:
+              - host: wikijs.apps.sno-cluster.janz.digital
+                paths:
+                  - path: /
+                    service:
+                      name: main
+                      port: http
+                    pathType: Prefix
 
-        postgresql:
-          enabled: false
-          postgresqlHost: wikijs-db-postgresql
-          postgresqlDatabase: wikijs
-          postgresqlUser: wikijs
-          existingSecret: wikijs-db-postgresql
-          existingSecretKey: password
-
-        volumes:
-          - name: logs-cache
-            emptyDir:
-              sizeLimit: 500Mi
-          - name: wiki-cache
-            emptyDir:
-              sizeLimit: 500Mi
-
-        volumeMounts:
-          - mountPath: /wiki/data/cache
-            name: wiki-cache
-          - mountPath: /logs
-            name: logs-cache
+        persistence:
+          config:
+            enabled: true
+            storageClass: lvms-vg1
+            accessMode: ReadWriteOnce
+            size: 5Gi
+          data:
+            enabled: true
+            storageClass: lvms-vg1
+            accessMode: ReadWriteOnce
+            size: 5Gi
 
   project: cluster-apps
   syncPolicy:
