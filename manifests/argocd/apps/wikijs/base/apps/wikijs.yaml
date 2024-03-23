@@ -17,17 +17,16 @@ spec:
       values: |-
 
         ingress:
-          main:
-            enabled: true
-            className: openshift-default
-            annotations:
-              route.openshift.io/termination: "edge"
-            pathType: Prefix
-            hosts:
-              - host: wikijs.apps.sno-cluster.janz.digital
-                paths:
-                  - path: /
-                    pathType: Prefix
+          enabled: true
+          className: openshift-default
+          annotations:
+            route.openshift.io/termination: "edge"
+          pathType: Prefix
+          hosts:
+            - host: wikijs.apps.sno-cluster.janz.digital
+              paths:
+                - path: /
+                  pathType: Prefix
 
         postgresql:
           enabled: false
