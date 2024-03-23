@@ -46,9 +46,9 @@ spec:
 
         volumeMounts:
           - mountPath: /wiki/data/cache
-            - name: wiki-cache
+            name: wiki-cache
           - mountPath: /logs
-            - name: logs-cache
+            name: logs-cache
 
   project: cluster-apps
   syncPolicy:
