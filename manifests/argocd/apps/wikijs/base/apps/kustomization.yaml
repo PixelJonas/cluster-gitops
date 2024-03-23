@@ -3,8 +3,6 @@ kind: Kustomization
 
 resources:
   - wikijs.yaml
-  - postgresql-chart.yaml
-  - external-wikijs-postgresql.yaml
   - wikijs-backup-app.yaml
   - anyuid-rolebinding.yaml
   - privileged-rolebinding.yaml

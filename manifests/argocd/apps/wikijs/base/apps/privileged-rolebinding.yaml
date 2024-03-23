@@ -4,9 +4,6 @@ metadata:
   name: wikijs-db-privileged
 subjects:
   - kind: ServiceAccount
-    name: wikijs-db-postgresql
-    namespace: wikijs
-  - kind: ServiceAccount
     name: default
     namespace: wikijs
 roleRef:

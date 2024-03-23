@@ -35,15 +35,6 @@ spec:
                   TZ: Europe/Berlin
                   PUID: 1500
                   PGID: 1500
-                  DB_TYPE: postgres
-                  DB_HOST: wikijs-db-postgresql
-                  DB_NAME: wikijs
-                  DB_USER: wikijs
-                  DB_PASS:
-                    valueFrom:
-                      secretKeyRef:
-                        name: wikijs-db-postgresql
-                        key: password
                 securityContext:
                   privileged: true
 
@@ -75,7 +66,7 @@ spec:
             enabled: true
             storageClass: lvms-vg1
             accessMode: ReadWriteOnce
-            size: 5Gi
+            size: 20Gi
           data:
             enabled: true
             storageClass: lvms-vg1
