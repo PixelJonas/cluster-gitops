@@ -12,7 +12,7 @@ spec:
   source:
     chart: wiki
     repoURL: https://charts.js.wiki
-    targetRevision: 2.2.0
+    targetRevision: 2.2.20
     helm:
       values: |-
 
