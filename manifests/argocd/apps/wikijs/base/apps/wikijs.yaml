@@ -81,6 +81,21 @@ spec:
             accessMode: ReadWriteOnce
             size: 5Gi
 
+        defaultPodOptions:  
+          dnsPolicy: None
+          dnsConfig:
+            nameservers:
+              - 10.42.0.1
+              - 172.30.0.10
+              - 192.168.1.1
+            searches:
+              - media.svc.cluster.local
+              - svc.cluster.local
+              - cluster.local
+              - sno-cluster.janz.digital
+              - janz.lan
+              - janz.digital
+
   project: cluster-apps
   syncPolicy:
     syncOptions:
