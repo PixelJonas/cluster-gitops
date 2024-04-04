@@ -19,7 +19,7 @@ resources:
   - ../../../manifests/argocd/apps/resilio-sync/base
   - ../../../manifests/argocd/apps/homeassistant-influx/base
   - ../../../manifests/argocd/apps/external-secrets/base
-  - ../../../manifests/argocd/apps/wikijs/base
+  - ../../../manifests/argocd/apps/spoolman/base
 
   
   - ../../../manifests/argocd/apps/cert-manager/overlays/sakaarr

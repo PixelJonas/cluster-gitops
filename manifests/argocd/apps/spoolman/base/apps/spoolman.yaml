@@ -1,0 +1,69 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+  name: spoolman
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: spoolman
+    server: "https://kubernetes.default.svc"
+  source:
+    chart: app-template
+    repoURL: https://bjw-s.github.io/helm-charts
+    targetRevision: 2.6.0
+    helm:
+      values: |-
+
+        controllers:
+          main:
+            containers:
+              main:
+                image:
+                  repository: ghcr.io/donkie/spoolman
+                  # renovate: datasource=docker depName=linuxserver/wikijs
+                  tag: 0.16.0
+                  pullPolicy: IfNotPresent
+                env:
+                  TZ: Europe/Berlin
+
+
+        service:
+          main:
+            ports:
+              http:
+                port: 8000
+
+        ingress:
+          main:
+            enabled: true
+            className: openshift-default
+            annotations:
+              route.openshift.io/termination: "edge"
+            pathType: Prefix
+            hosts:
+              - host: spoolman.apps.sno-cluster.janz.digital
+                paths:
+                  - path: /
+                    service:
+                      name: main
+                      port: http
+                    pathType: Prefix
+
+        persistence:
+          data:
+            enabled: true
+            storageClass: lvms-vg1
+            accessMode: ReadWriteOnce
+            globalMounts:
+              - path: /home/app/.local/share/spoolman
+            size: 20Gi
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true
