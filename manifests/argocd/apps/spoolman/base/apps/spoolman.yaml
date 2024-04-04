@@ -15,7 +15,8 @@ spec:
     targetRevision: 2.6.0
     helm:
       values: |-
-      
+
+
         defaultPodOptions:  
           securityContext:
             runAsUser: 0
@@ -32,6 +33,8 @@ spec:
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin
+                  SPOOLMAN_PORT: "8000"
+                  SPOOLMAN_HOST: "0.0.0.0"
                 securityContext:
                   privileged: true
 
