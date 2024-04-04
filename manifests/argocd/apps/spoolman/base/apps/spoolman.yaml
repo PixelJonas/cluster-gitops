@@ -15,6 +15,11 @@ spec:
     targetRevision: 2.6.0
     helm:
       values: |-
+      
+        defaultPodOptions:  
+          securityContext:
+            runAsUser: 0
+            runAsGroup: 0
 
         controllers:
           main:
@@ -27,7 +32,8 @@ spec:
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin
-
+                securityContext:
+                  privileged: true
 
         service:
           main:
