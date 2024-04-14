@@ -22,7 +22,7 @@ spec:
               value: "1"
 
         image:
-          tag: v1.99.0
+          tag: v1.101.0
 
         postgresql:
           enabled: false
