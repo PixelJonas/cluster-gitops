@@ -1,0 +1,9 @@
+kind: ServiceAccount
+apiVersion: v1
+metadata:
+  name: completed-pod-cleanup
+  namespace: maintenance
+  annotations:
+    argocd.argoproj.io/sync-wave: "10"
+  labels:
+    app: completed-pod-cleanup
