@@ -1,0 +1,22 @@
+apiVersion: operator.external-secrets.io/v1alpha1
+kind: OperatorConfig
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-options: SkipDryRunOnMissingResource=true
+    argocd.argoproj.io/sync-wave: "111"
+  labels:
+    argocd.argoproj.io/instance: external-secrets
+  name: cluster
+  namespace: external-secrets
+spec:
+  prometheus:
+    enabled: true
+    service:
+      port: 8080
+  resources:
+    limits:
+      cpu: 100m
+      memory: 256Mi
+    requests:
+      cpu: 10m
+      memory: 96Mi
