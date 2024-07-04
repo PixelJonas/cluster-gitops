@@ -21,7 +21,6 @@ spec:
           - "/opt/keycloak/bin/kc.sh"
           - "--verbose"
           - "start"
-          - "--auto-build"
           - "--http-enabled=true"
           - "--proxy=edge"
           - "--http-port=8080"
