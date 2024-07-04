@@ -23,6 +23,8 @@ spec:
           - "--http-port=8080"
           - "--hostname-strict=false"
           - "--spi.hostname.default.frontend-url=https://sso.janz.digital/auth"
+          - "--spi.hostname.default.admin-url=https://sso.janz.digital/auth"
+          - "--spi.hostname.default.frontend-admin-url=https://sso.janz.digital/auth"
           - "--spi-events-listener-jboss-logging-success-level=info"
           - "--spi-events-listener-jboss-logging-error-level=warn"
 
