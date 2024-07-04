@@ -23,7 +23,7 @@ spec:
           - "start"
           - "--http-enabled=true"
           - "--http-port=8080"
-          - "--hostname-strict-https=false"
+          - "--hostname=sso.app.janz.digital"
           - "--spi-events-listener-jboss-logging-success-level=info"
           - "--spi-events-listener-jboss-logging-error-level=warn"
 
