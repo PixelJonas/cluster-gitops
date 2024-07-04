@@ -17,6 +17,18 @@ spec:
     helm:
       values: |-
 
+
+        global:
+          compatibility:
+            openshift:
+              adaptSecurityContext: disabled
+
+        influxdb:
+          containerSecurityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
+
         auth:
           enabled: true
           admin:
