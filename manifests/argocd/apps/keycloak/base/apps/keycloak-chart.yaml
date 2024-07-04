@@ -44,6 +44,8 @@ spec:
                 key: password
           - name: KC_PROXY
             value: "passthrough"
+          - name: KEYCLOAK_FRONTEND_URL
+            value: https://sso.janz.digital/auth
           - name: JAVA_OPTS_APPEND
             value: >-
               -XX:+UseContainerSupport
