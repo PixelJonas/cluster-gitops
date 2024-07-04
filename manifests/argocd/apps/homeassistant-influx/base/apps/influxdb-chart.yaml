@@ -24,6 +24,10 @@ spec:
               adaptSecurityContext: disabled
 
         influxdb:
+          podSecurityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
           containerSecurityContext:
             runAsUser: 0
             runAsGroup: 0
