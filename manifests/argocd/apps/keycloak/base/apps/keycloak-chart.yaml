@@ -44,7 +44,7 @@ spec:
                 name: keycloak-db-postgresql
                 key: password
           - name: KC_PROXY
-            value: "passthrough"
+            value: "edge"
           - name: KC_FRONTEND_URL
             value: https://sso.janz.digital/auth
           - name: JAVA_OPTS_APPEND
