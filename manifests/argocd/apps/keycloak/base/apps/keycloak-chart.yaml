@@ -12,21 +12,17 @@ spec:
   source:
     repoURL: https://codecentric.github.io/helm-charts
     chart: keycloakx
-    targetRevision: 2.3.0
+    targetRevision: 2.4.2
     helm:
       values: |-
 
 
         command:
           - "/opt/keycloak/bin/kc.sh"
-          - "--verbose"
           - "start"
-          - "--auto-build"
-          - "--http-enabled=true"
-          - "--proxy=edge"
           - "--http-port=8080"
           - "--hostname-strict=false"
-          - "--hostname-strict-https=false"
+          - "--hostname=https://sso.janz.digital/auth"
           - "--spi-events-listener-jboss-logging-success-level=info"
           - "--spi-events-listener-jboss-logging-error-level=warn"
 
@@ -47,6 +43,10 @@ spec:
               secretKeyRef:
                 name: keycloak-db-postgresql
                 key: password
+          - name: KC_PROXY
+            value: "edge"
+          - name: KC_FRONTEND_URL
+            value: https://sso.janz.digital/auth
           - name: JAVA_OPTS_APPEND
             value: >-
               -XX:+UseContainerSupport
