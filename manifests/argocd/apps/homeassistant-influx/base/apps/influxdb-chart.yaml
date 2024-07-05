@@ -23,6 +23,10 @@ spec:
           enabled: false
 
         influxdb:
+          resources:
+            limits:
+              cpu: 1
+              memory: 512Mi
           livenessProbe:
             enabled: false
           readinessProbe:
