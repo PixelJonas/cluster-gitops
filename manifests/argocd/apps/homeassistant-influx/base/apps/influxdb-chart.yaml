@@ -17,19 +17,6 @@ spec:
     helm:
       values: |-
 
-        influxdb:
-          resources:
-            requests:
-              cpu: 1
-              memory: 512Mi
-            limits:
-              cpu: 1
-              memory: 512Mi
-          livenessProbe:
-            enabled: false
-          readinessProbe:
-            enabled: false
-      
         auth:
           enabled: true
           admin:
@@ -46,7 +33,16 @@ spec:
         persistence:
           storageClass: lvms-vg1
           size: 150Gi
+
+
         influxdb:
+          resources:
+            requests:
+              cpu: 1
+              memory: 512Mi
+            limits:
+              cpu: 1
+              memory: 512Mi
           updateStrategy:
             type: Recreate
           service:
