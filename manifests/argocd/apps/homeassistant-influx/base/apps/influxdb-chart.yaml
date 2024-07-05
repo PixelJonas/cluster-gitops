@@ -19,7 +19,7 @@ spec:
 
 
         influxdb:
-          startupProbe:
+          livenessProbe:
             initialDelaySeconds: 180
       
         auth:
