@@ -17,6 +17,11 @@ spec:
     helm:
       values: |-
 
+
+        influxdb:
+          startupProbe:
+            initialDelaySeconds: 180
+      
         auth:
           enabled: true
           admin:
