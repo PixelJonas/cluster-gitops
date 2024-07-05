@@ -17,12 +17,16 @@ spec:
     helm:
       values: |-
 
+        livenessProbe:
+          enabled: false
+        readinessProbe:
+          enabled: false
 
         influxdb:
           livenessProbe:
-            initialDelaySeconds: 180
+            enabled: false
           readinessProbe:
-            initialDelaySeconds: 180
+            enabled: false
       
         auth:
           enabled: true
