@@ -17,11 +17,6 @@ spec:
     helm:
       values: |-
 
-        livenessProbe:
-          enabled: false
-        readinessProbe:
-          enabled: false
-
         influxdb:
           resources:
             requests:
