@@ -21,6 +21,8 @@ spec:
         influxdb:
           livenessProbe:
             initialDelaySeconds: 180
+          readinessProbe:
+            initialDelaySeconds: 180
       
         auth:
           enabled: true
