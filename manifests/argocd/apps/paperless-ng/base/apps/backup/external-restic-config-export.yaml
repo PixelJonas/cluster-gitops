@@ -10,7 +10,7 @@ spec:
     kind: ClusterSecretStore
     name: doppler-cluster
   target:
-    name: restic-config-export-b2
+    name: restic-config-export
   data:
     - secretKey: RESTIC_REPOSITORY
       remoteRef:
