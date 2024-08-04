@@ -13,7 +13,7 @@ spec:
         spec:
           serviceAccountName: pipeline
           containers:
-            - name: document_eporter_via_kubectl
+            - name: document-eporter-via-kubectl
               image: quay.io/openshift/origin-cli:4.16
               command: ["/bin/bash", "-c"]
               args:
