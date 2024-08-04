@@ -1,0 +1,31 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: paperless-document-exporter
+  namespace: paperless
+  annotations:
+    argocd.argoproj.io/sync-wave: "200"
+spec:
+  schedule: "0 1 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: pipeline
+          containers:
+            - name: document_eporter_via_kubectl
+              image: quay.io/openshift/origin-cli:4.16
+              command: ["/bin/bash", "-c"]
+              args:
+                - |-
+                  set -e
+
+                  echo -----------------------------------
+                  echo "Running document_exporter in paperless container"
+                    kubectl exec deploy/paperless-ng --container main -- document_exporter /usr/src/paperless/export/
+                  echo -----------------------------------
+                    kubectl exec deploy/paperless-ng --container main -- ls -lah /usr/src/paperless/export/
+                    kubectl exec deploy/paperless-ng --container main -- du -hs /usr/src/paperless/export
+                  echo -----------------------------------
+                  echo "Finished running document_exporter"
+          restartPolicy: OnFailure
