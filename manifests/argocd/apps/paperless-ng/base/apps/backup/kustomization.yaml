@@ -7,7 +7,6 @@ resources:
   - sealed-restic-database.yaml
   - external-restic-config-media-b2.yaml
   - external-restic-config-data-b2.yaml
-  - external-restic-config-database-b2.yaml
   - external-restic-config-export-b2.yaml
   - external-restic-config-export.yaml
   - export-source-b2.yaml
@@ -17,7 +16,6 @@ resources:
   - media-source.yaml
   - media-source-b2.yaml
   - database-source.yaml
-  - database-source-b2.yaml
   - cronjob.yaml
   - cronjob-document-exporter.yaml
   - pvc.yaml
