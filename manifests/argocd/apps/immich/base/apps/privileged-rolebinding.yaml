@@ -6,6 +6,9 @@ subjects:
   - kind: ServiceAccount
     name: immich-db-postgresql
     namespace: immich
+  - kind: ServiceAccount
+    name: immich-redis-master
+    namespace: immich
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
