@@ -10,7 +10,7 @@ spec:
     - name: source-dir
   steps:
     - name: pg-dump-via-kubectl
-      image: quay.io/openshift/origin-cli:4.16
+      image: quay.io/openshift/origin-cli:4.17
       command: ["/bin/bash", "-c"]
       args:
         - |-
