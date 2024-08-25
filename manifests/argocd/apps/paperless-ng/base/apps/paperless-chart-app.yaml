@@ -126,8 +126,7 @@ spec:
                   - path: /
                     service:
                       name: paperless
-                      port: http
-                    pathType: Prefix
+                      port: 8000
 
         persistence:
           data:
