@@ -12,7 +12,7 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 2.6.0
+    targetRevision: 3.3.2
     helm:
       values: |-
 
@@ -22,9 +22,9 @@ spec:
             runAsGroup: 0
 
         controllers:
-          main:
+          paperless:
             containers:
-              main:
+              paperless:
                 image:
                   repository: ghcr.io/paperless-ngx/paperless-ngx
                   # renovate: datasource=docker depName=ghcr.io/paperless-ngx/paperless-ngx
@@ -86,22 +86,18 @@ spec:
                           - /bin/bash
                           - "-c"
                           - echo "Healthy" > /usr/src/paperless/consume/foo && cat /usr/src/paperless/consume/foo && rm /usr/src/paperless/consume/foo
-              timeoutSeconds: 1
               broker:
-                name: broker
                 image: 
                   repository: redis
                   tag: 7.2.1
-                imagePullPolicy: IfNotPresent
+                  pullPolicy: IfNotPresent
               tika:
-                name: tika
                 image: 
                   # renovate: datasource=docker depName=docker.io/apache/tika
                   repository: docker.io/apache/tika
                   tag: 2.9.0.0
-                imagePullPolicy: IfNotPresent
+                  pullPolicy: IfNotPresent
               gotenberg:
-                name: gotenberg
                 image:
                   # renovate: datasource=docker depName=docker.io/gotenberg/gotenberg
                   repository: docker.io/gotenberg/gotenberg
@@ -112,13 +108,10 @@ spec:
 
         service:
           main:
+            controller: paperless
             ports:
               http:
                 port: 8000
-
-        ingress:
-          main:
-            enabled: false
 
         persistence:
           data:
@@ -136,16 +129,9 @@ spec:
             storageClass: openebs-jiva-csi-default
             size: 10Gi
           export:
-            enabled: true       
             globalMounts:
               - path: /usr/src/paperless/export
-            accessMode: ReadWriteOnce
             existingClaim: nfs-export-paperless
-          consume:
-            enabled: false
-            globalMounts:
-              - path: /usr/src/paperless/consume
-            accessMode: ReadWriteOnce
           custom-scripts:
             name: paperless-ng-custom-scripts
             enabled: true
@@ -333,7 +319,6 @@ spec:
                 shrink "$IFILE" "$OFILE" "$res" || exit $?
 
                 check_smaller "$IFILE" "$OFILE"
-
   project: cluster-apps
   syncPolicy:
     syncOptions:

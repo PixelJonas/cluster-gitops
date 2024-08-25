@@ -8,12 +8,8 @@ spec:
       parameters:
         - name: persistence.data.storageClass
           value: "lvms-vg1"
-        - name: persistence.export.storageClass
-          value: "lvms-vg1"
         - name: persistence.media.storageClass
           value: "lvms-vg1"
-        - name: ingress.main.enabled
-          value: "false"
         - name: env.PAPERLESS_URL
           value: "https://paperless.janz.digital"
         - name: env.PAPERLESS_ALLOWED_HOSTS
