@@ -113,20 +113,6 @@ spec:
               http:
                 port: 8000
 
-        ingress:
-          paperless:
-            enabled: true
-            className: openshift-default
-            annotations:
-              route.openshift.io/termination: "edge"
-            hosts:
-              - host: paperless.apps.sno-cluster.janz.digital
-                paths:
-                  - path: /
-                    service:
-                      name: paperless
-                      port: 8000
-
         persistence:
           data:
             enabled: true
