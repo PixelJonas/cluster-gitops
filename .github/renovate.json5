@@ -17,15 +17,15 @@
   schedule: ['every saturday'],
   packageRules: [
     {
-      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
-      "automerge": true
+      matchUpdateTypes: ['minor', 'patch'],
+      automerge: true
     },
     {
-      "matchDepTypes": ["devDependencies"],
-      "automerge": true
+      matchDepTypes: ['devDependencies'],
+      automerge: true
     }
   ],
-  "platformAutomerge": true
+  platformAutomerge: true
   'pre-commit': {
     enabled: true,
   },
