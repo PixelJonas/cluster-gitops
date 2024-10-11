@@ -1,7 +1,0 @@
-hostname_microshift: microshift-master-01.janz.lan
-
-update_utility: dnf-automatic
-update_service: dnf-automatic-install.timer
-update_conf_path: /etc/dnf/automatic.conf
-security_fail2ban_enabled: false
-security_autoupdate_enabled: false

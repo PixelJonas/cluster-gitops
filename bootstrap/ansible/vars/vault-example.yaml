@@ -1,4 +1,0 @@
-vault_samba_jonas_password: secret
-vault_samba_andrew_password: secret
-vault_samba_printer_password: secret
-vault_password_salt: secret

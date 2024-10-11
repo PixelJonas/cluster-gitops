@@ -1,9 +1,0 @@
----
-- name: download and install CRI-O
-  include_tasks: crio.yaml
-
-- name: configure firewalld
-  include_tasks: firewalld.yaml
-
-- name: install microshift
-  include_tasks: microshift.yaml

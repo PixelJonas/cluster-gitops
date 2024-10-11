@@ -1,5 +1,0 @@
----
-- name: download file
-  get_url:
-    url: "{{ item.url }}"
-    dest: "/etc/yum.repos.d/{{ item.name }}"

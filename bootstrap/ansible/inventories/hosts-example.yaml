@@ -1,8 +1,0 @@
----
-all:
-  hosts:
-
-  children:
-    lab:
-      hosts:
-        pve:

@@ -1,7 +1,0 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: oauth2-proxy-app
-spec:
-  source:
-    path: manifests/argocd/apps/oauth2-proxy/overlays/titan/apps
