@@ -30,6 +30,7 @@ spec:
             runAsGroup: 0
             privileged: true
             allowPrivilegeEscalation: true
+            readOnlyRootFilesystem: false
             runAsNonRoot: false
 
         global:
