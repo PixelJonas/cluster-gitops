@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: cluster-apps
   source:
-    chart: app-template
+    chart: cloudnative-pg
     repoURL: https://cloudnative-pg.io/charts
     targetRevision: 0.22.0
     helm:
