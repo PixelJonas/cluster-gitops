@@ -29,6 +29,7 @@ spec:
             runAsUser: 0
             runAsGroup: 0
             privileged: true
+            allowPrivilegeEscalation: true
             runAsNonRoot: false
 
         global:
