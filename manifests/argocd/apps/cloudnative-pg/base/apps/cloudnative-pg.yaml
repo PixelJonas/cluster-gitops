@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: node-red
+  name: cloudnative-pg
   namespace: openshift-gitops
   annotations:
     argocd.argoproj.io/sync-wave: "11"
 spec:
   destination:
-    namespace: node-red
+    namespace: cloudnative-pg
     server: https://kubernetes.default.svc
   project: cluster-apps
   source:
@@ -19,7 +19,7 @@ spec:
 
         config:
           create: true
-        
+
         crds:
           create: true
 
