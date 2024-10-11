@@ -34,6 +34,11 @@ spec:
               existingClaim: nfs-photos-immich
 
         server:
+          service:
+            main:
+              ports:
+                http:
+                  port: 2283
           securityContext:
             runAsUser: 1500
             runAsGroup: 1500
