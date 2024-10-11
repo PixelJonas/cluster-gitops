@@ -39,18 +39,6 @@
       "depNameTemplate": "{{{replace 'ghcr.io/' '' depName}}}",
       "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
       "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
-    },
-    {
-      description: 'Process various other dependencies',
-      fileMatch: ['manifests/.+\\.ya?ml$'],
-      matchStrings: [
-        " *repository: *'?\"?(?<depName>.*?)'?\"?\n *tag: *'?\"?(?<currentValue>.*)'?\"?\n",
-        " *repository: *'?\"?(?<depName>.*?)'?\"?\n *pullPolicy:.*\n *tag: *'?\"?(?<currentValue>.*)'?\"?\n",
-        " *containerRepo=*'?\"?(?<depName>.*?)'?\"?\n *tag: '?\"?(?<currentValue>.*)'?\"?\n"
-      ],
-      "depNameTemplate": "{{{replace 'docker.io/' '' depName}}}",
-      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
-    },
+    }
   ],
 }
