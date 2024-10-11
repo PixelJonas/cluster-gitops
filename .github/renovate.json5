@@ -18,11 +18,13 @@
   packageRules: [
     {
       matchUpdateTypes: ['minor', 'patch'],
-      automerge: true
+      automerge: true,
+      automergeType: 'branch'
     },
     {
       matchDepTypes: ['devDependencies'],
-      automerge: true
+      automerge: true,
+      automergeType: 'branch'
     }
   ],
   platformAutomerge: true,
