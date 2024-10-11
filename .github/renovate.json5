@@ -15,17 +15,32 @@
   suppressNotifications: ['prIgnoreNotification'],
   rebaseWhen: 'conflicted',
   schedule: ['every saturday'],
-  ignoreTests: true,
   packageRules: [
     {
       matchUpdateTypes: ['minor', 'patch'],
       automerge: true,
-      automergeType: 'branch'
+      automergeType: 'branch',
+      ignoreTests: true,
     },
     {
       matchDepTypes: ['devDependencies'],
       automerge: true,
-      automergeType: 'branch'
+      automergeType: 'branch',
+      ignoreTests: true,
+    },
+    {
+      description: 'Auto merge container digests',
+      matchDatasources: ['docker'],
+      automerge: true,
+      automergeType: 'branch',
+      matchUpdateTypes: ['digest'],
+      versioning: 'loose',
+      matchPackagePrefixes: [
+        'ghcr.io/onedr0p',
+        'ghcr.io/bjw-s',
+        'ghcr.io/bjw-s-labs',
+      ],
+      ignoreTests: true,
     }
   ],
   platformAutomerge: true,
@@ -46,25 +61,15 @@
       description: 'Process various other dependencies',
       fileMatch: ['manifests/.+\\.ya?ml$'],
       matchStrings: [
+        // prettier-ignore
         " *repository: *'?\"?(?<depName>.*?)'?\"?\n *tag: *'?\"?(?<currentValue>.*)'?\"?\n",
+        // prettier-ignore
         " *repository: *'?\"?(?<depName>.*?)'?\"?\n *pullPolicy:.*\n *tag: *'?\"?(?<currentValue>.*)'?\"?\n",
-        " *containerRepo=*'?\"?(?<depName>.*?)'?\"?\n *tag: '?\"?(?<currentValue>.*)'?\"?\n"
+        // prettier-ignore
+        " *containerRepo=*'?\"?(?<depName>.*?)'?\"?\n *tag: '?\"?(?<currentValue>.*)'?\"?\n",
       ],
-      "depNameTemplate": "{{{replace 'ghcr.io/' '' depName}}}",
-      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
+      datasourceTemplate: 'docker',
+      versioningTemplate: 'semver-coerced',
     },
-    {
-      description: 'Process various other dependencies',
-      fileMatch: ['manifests/.+\\.ya?ml$'],
-      matchStrings: [
-        " *repository: *'?\"?(?<depName>.*?)'?\"?\n *tag: *'?\"?(?<currentValue>.*)'?\"?\n",
-        " *repository: *'?\"?(?<depName>.*?)'?\"?\n *pullPolicy:.*\n *tag: *'?\"?(?<currentValue>.*)'?\"?\n",
-        " *containerRepo=*'?\"?(?<depName>.*?)'?\"?\n *tag: '?\"?(?<currentValue>.*)'?\"?\n"
-      ],
-      "depNameTemplate": "{{{replace 'docker.io/' '' depName}}}",
-      "datasourceTemplate": "{{#if datasource}}{{{datasource}}}{{else}}github-releases{{/if}}",
-      "versioningTemplate": "{{#if versioning}}{{{versioning}}}{{else}}semver{{/if}}"
-    }
   ],
 }
