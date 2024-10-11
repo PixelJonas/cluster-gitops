@@ -15,6 +15,7 @@
   suppressNotifications: ['prIgnoreNotification'],
   rebaseWhen: 'conflicted',
   schedule: ['every saturday'],
+  ignoreTests: true,
   packageRules: [
     {
       matchUpdateTypes: ['minor', 'patch'],
