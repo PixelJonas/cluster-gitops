@@ -15,7 +15,7 @@
   suppressNotifications: ['prIgnoreNotification'],
   rebaseWhen: 'conflicted',
   schedule: ['every saturday'],
-  "packageRules": [
+  packageRules: [
     {
       "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "automerge": true
