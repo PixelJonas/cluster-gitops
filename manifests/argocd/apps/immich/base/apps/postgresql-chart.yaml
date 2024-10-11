@@ -23,7 +23,11 @@ spec:
 
         volumePermissions:
           enabled: true
-          
+        
+        primary:
+          containerSecurityContext:
+            runAsNonRoot: false
+
         global:
           storageClass: lvms-vg1
           postgresql:
