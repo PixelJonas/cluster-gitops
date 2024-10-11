@@ -14,8 +14,6 @@ resources:
   - ../../../manifests/argocd/apps/volsync/base
   - ../../../manifests/argocd/apps/devspaces/base
   - ../../../manifests/argocd/apps/machineconfig/base
-  - ../../../manifests/argocd/apps/cloudnative-pg/base
-
 
   - ../../../manifests/argocd/apps/immich/base
   - ../../../manifests/argocd/apps/resilio-sync/base
