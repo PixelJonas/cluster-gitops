@@ -1,0 +1,28 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: node-red
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "11"
+spec:
+  destination:
+    namespace: node-red
+    server: https://kubernetes.default.svc
+  project: cluster-apps
+  source:
+    chart: app-template
+    repoURL: https://cloudnative-pg.io/charts
+    targetRevision: 0.22.0
+    helm:
+      values: |-
+
+        config:
+          create: true
+        
+        crds:
+          create: true
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
