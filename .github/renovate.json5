@@ -27,20 +27,6 @@
       automerge: true,
       automergeType: 'branch',
       ignoreTests: true,
-    },
-    {
-      description: 'Auto merge container digests',
-      matchDatasources: ['docker'],
-      automerge: true,
-      automergeType: 'branch',
-      matchUpdateTypes: ['digest'],
-      versioning: 'loose',
-      matchPackagePrefixes: [
-        'ghcr.io/onedr0p',
-        'ghcr.io/bjw-s',
-        'ghcr.io/bjw-s-labs',
-      ],
-      ignoreTests: true,
     }
   ],
   platformAutomerge: true,
