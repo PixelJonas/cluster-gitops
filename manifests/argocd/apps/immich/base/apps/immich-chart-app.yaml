@@ -22,6 +22,7 @@ spec:
               value: "1"
 
         image:
+          repository: ghcr.io/immich-app/immich-server
           tag: v1.111.0
 
         postgresql:
