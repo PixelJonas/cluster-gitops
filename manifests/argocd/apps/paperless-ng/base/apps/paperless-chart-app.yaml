@@ -27,7 +27,6 @@ spec:
               paperless:
                 image:
                   repository: ghcr.io/paperless-ngx/paperless-ngx
-                  # renovate: datasource=docker depName=ghcr.io/paperless-ngx/paperless-ngx
                   tag: 1.10.2
                   pullPolicy: IfNotPresent
                 command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
@@ -93,13 +92,11 @@ spec:
                   pullPolicy: IfNotPresent
               tika:
                 image: 
-                  # renovate: datasource=docker depName=docker.io/apache/tika
                   repository: docker.io/apache/tika
                   tag: 2.9.0.0
                   pullPolicy: IfNotPresent
               gotenberg:
                 image:
-                  # renovate: datasource=docker depName=docker.io/gotenberg/gotenberg
                   repository: docker.io/gotenberg/gotenberg
                   tag: 7.9.2
                 env:
