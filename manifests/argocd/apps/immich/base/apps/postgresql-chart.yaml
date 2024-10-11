@@ -28,7 +28,7 @@ spec:
           containerSecurityContext:
             runAsUser: 0
             runAsGroup: 0
-            privileged: false
+            privileged: true
             runAsNonRoot: false
 
         global:
