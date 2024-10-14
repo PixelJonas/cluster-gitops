@@ -28,7 +28,6 @@ spec:
               main:
                 image:
                   repository: eikek0/sharry
-                  # renovate: datasource=docker depName=docker.io/eikek0/sharry
                   tag: v1.12.1
                   pullPolicy: IfNotPresent
                 args:

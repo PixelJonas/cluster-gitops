@@ -28,7 +28,6 @@ spec:
               main:
                 image:
                   repository: ghcr.io/donkie/spoolman
-                  # renovate: datasource=docker depName=linuxserver/wikijs
                   tag: 0.16.0
                   pullPolicy: IfNotPresent
                 env:
