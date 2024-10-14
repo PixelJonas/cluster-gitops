@@ -27,7 +27,6 @@ spec:
               main:
                 image:
                   repository: ghcr.io/linuxserver/resilio-sync
-                  # renovate: datasource=docker depName=ghcr.io/linuxserver/resilio-sync
                   tag: 2.7.3
                   pullPolicy: IfNotPresent
                 env:
