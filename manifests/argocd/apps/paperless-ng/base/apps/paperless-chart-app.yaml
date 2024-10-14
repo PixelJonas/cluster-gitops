@@ -27,7 +27,7 @@ spec:
               paperless:
                 image:
                   repository: ghcr.io/paperless-ngx/paperless-ngx
-                  tag: 1.10.2
+                  tag: 2.12.1
                   pullPolicy: IfNotPresent
                 command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
                 args: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
@@ -88,7 +88,7 @@ spec:
               broker:
                 image: 
                   repository: redis
-                  tag: 7.2.1
+                  tag: 7.4.1
                   pullPolicy: IfNotPresent
               tika:
                 image: 
@@ -98,7 +98,7 @@ spec:
               gotenberg:
                 image:
                   repository: docker.io/gotenberg/gotenberg
-                  tag: 7.9.2
+                  tag: 8.12.0
                 env:
                   - name: CHROMIUM_DISABLE_ROUTES
                     value: "1"
