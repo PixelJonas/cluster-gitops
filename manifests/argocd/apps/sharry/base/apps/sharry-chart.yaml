@@ -28,7 +28,7 @@ spec:
               main:
                 image:
                   repository: eikek0/sharry
-                  tag: v1.12.1
+                  tag: v1.14.0
                   pullPolicy: IfNotPresent
                 args:
                   - "/opt/config/sharry.conf"
