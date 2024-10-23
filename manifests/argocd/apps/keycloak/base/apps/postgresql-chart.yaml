@@ -16,6 +16,14 @@ spec:
     helm:
       values: |-
 
+        primary:
+          containerSecurityContext:
+            runAsUser: 0
+            runAsGroup: 0
+            runAsNonRoot: false
+            privileged: true
+            allowPrivilegeEscalation: true
+
         global:
           storageClass: local-path
           postgresql:
