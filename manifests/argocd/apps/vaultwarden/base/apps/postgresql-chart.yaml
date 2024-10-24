@@ -17,6 +17,24 @@ spec:
     helm:
       values: |-
 
+
+
+        volumePermissions:
+          enabled: false
+          securityContext:
+            runAsUser: "auto"
+
+        securityContext:
+          enabled: false
+
+        shmVolume:
+          chmod:
+            enabled: false
+
+        containerSecurityContext:
+          enabled: false
+
+          
         global:
           storageClass: lvms-vg1
           postgresql:
