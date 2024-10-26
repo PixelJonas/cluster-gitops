@@ -13,10 +13,28 @@ spec:
   source:
     repoURL: https://charts.bitnami.com/bitnami
     chart: postgresql
-    targetRevision: 16.0.3
+    targetRevision: 16.0.6
     helm:
       values: |-
 
+
+
+        volumePermissions:
+          enabled: false
+          securityContext:
+            runAsUser: "auto"
+
+        securityContext:
+          enabled: false
+
+        shmVolume:
+          chmod:
+            enabled: false
+
+        containerSecurityContext:
+          enabled: false
+
+          
         global:
           storageClass: lvms-vg1
           postgresql:
