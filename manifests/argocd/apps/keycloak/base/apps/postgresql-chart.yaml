@@ -17,21 +17,23 @@ spec:
       values: |-
 
         volumePermissions:
-          enabled: false
-          securityContext:
-            runAsUser: "auto"
+          enabled: true
 
         securityContext:
-          enabled: false
+          enabled: true
 
         shmVolume:
           chmod:
-            enabled: false
+            enabled: true
 
         containerSecurityContext:
-          enabled: false
+          enabled: true
 
+          
         global:
+          compatibility:
+            openshift:
+              adaptSecurityContext: disabled
           storageClass: local-path
           postgresql:
             auth:
