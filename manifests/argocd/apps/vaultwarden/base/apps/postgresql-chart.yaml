@@ -20,19 +20,19 @@ spec:
 
 
         volumePermissions:
-          enabled: false
+          enabled: true
           securityContext:
-            runAsUser: "auto"
+            runAsUser: 0
 
         securityContext:
-          enabled: false
+          enabled: true
 
         shmVolume:
           chmod:
-            enabled: false
+            enabled: true
 
         containerSecurityContext:
-          enabled: false
+          enabled: true
 
           
         global:
