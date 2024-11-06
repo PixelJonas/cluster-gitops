@@ -21,8 +21,6 @@ spec:
 
         volumePermissions:
           enabled: true
-          securityContext:
-            runAsUser: 0
 
         securityContext:
           enabled: true
@@ -36,6 +34,9 @@ spec:
 
           
         global:
+          compatibility:
+            openshift:
+              adaptSecurityContext: disabled
           storageClass: lvms-vg1
           postgresql:
             auth:
