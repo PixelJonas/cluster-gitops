@@ -1,9 +1,0 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
-metadata:
-  name: sharry-app
-spec:
-  destination:
-    namespace: openshift-gitops
-  source:
-    path: manifests/argocd/apps/sharry/overlays/sakaarr/apps
