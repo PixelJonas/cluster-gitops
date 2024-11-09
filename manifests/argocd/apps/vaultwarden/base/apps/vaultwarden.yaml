@@ -12,7 +12,7 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 2.6.0
+    targetRevision: 3.5.1
     helm:
       values: |-
 
@@ -23,9 +23,9 @@ spec:
             runAsGroup: 0
 
         controllers:
-          main:
+          vaultwarden:
             containers:
-              main:
+              vaultwarden:
                 image:
                   repository: vaultwarden/server
                   tag: 1.32.3
@@ -48,7 +48,8 @@ spec:
 
 
         service:
-          main:
+          vaultwarden:
+            controller: vaultwarden
             ports:
               http:
                 port: 80
@@ -57,24 +58,23 @@ spec:
                 port: 3012
 
         ingress:
-          main:
+          vaultwarden:
             enabled: true
             className: openshift-default
             annotations:
               route.openshift.io/termination: "edge"
-            pathType: Prefix
             hosts:
               - host: vaultwarden.apps.sno-cluster.janz.digital
                 paths:
                   - path: /
                     service:
-                      name: main
+                      identifier: vaultwarden
                       port: http
-                    pathType: Prefix
 
         persistence:
           config:
-            enabled: true
+            globalMounts:
+              - path: /config
             storageClass: lvms-vg1
             accessMode: ReadWriteOnce
             size: 1Gi
