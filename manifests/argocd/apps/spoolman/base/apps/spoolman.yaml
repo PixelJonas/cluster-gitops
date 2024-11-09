@@ -12,7 +12,7 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 2.6.0
+    targetRevision: 3.5.1
     helm:
       values: |-
 
@@ -23,9 +23,9 @@ spec:
             runAsGroup: 0
 
         controllers:
-          main:
+          spoolman:
             containers:
-              main:
+              spoolman:
                 image:
                   repository: ghcr.io/donkie/spoolman
                   tag: 0.20.0
@@ -38,30 +38,28 @@ spec:
                   privileged: true
 
         service:
-          main:
+          spoolman:
+            controller: spoolman
             ports:
               http:
                 port: 8000
 
         ingress:
-          main:
+          spoolman:
             enabled: true
             className: openshift-default
             annotations:
               route.openshift.io/termination: "edge"
-            pathType: Prefix
             hosts:
               - host: spoolman.apps.sno-cluster.janz.digital
                 paths:
                   - path: /
                     service:
-                      name: main
+                      identifier: spoolman
                       port: http
-                    pathType: Prefix
 
         persistence:
           data:
-            enabled: true
             storageClass: lvms-vg1
             accessMode: ReadWriteOnce
             globalMounts:
