@@ -13,7 +13,7 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 2.6.0
+    targetRevision: 3.5.1
     helm:
       values: |-
 
@@ -33,9 +33,9 @@ spec:
               - janz.digital
 
         controllers:
-          main:
+          node:
             containers:
-              main:              
+              node:              
                 image:
                   repository: docker.io/nodered/node-red
                   tag: 4.0.5
@@ -48,30 +48,27 @@ spec:
                   FLOWS: "flows.json"
 
         service:
-          main:
+          node:
+            controller: node
             ports:
               http:
                 port: 1880
       
         ingress:
-          main:
-            enabled: true
+          node:
             className: openshift-default
             annotations:
               route.openshift.io/termination: "edge"
-            pathType: Prefix
             hosts:
               - host: nodered.apps.sno-cluster.janz.digital
                 paths:
                   - path: /
                     service:
-                      name: main
+                      identifier: node
                       port: http
-                    pathType: Prefix
 
         persistence:
           data:
-            enabled: true
             storageClass: lvms-vg1
             accessMode: ReadWriteOnce
             globalMounts:
