@@ -27,7 +27,7 @@ spec:
               paperless:
                 image:
                   repository: ghcr.io/paperless-ngx/paperless-ngx
-                  tag: 2.13.4
+                  tag: 2.13.5
                   pullPolicy: IfNotPresent
                 command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
                 args: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
