@@ -1,0 +1,46 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: spliit-backup
+  namespace: spliit
+  annotations:
+    argocd.argoproj.io/sync-wave: "200"
+spec:
+  schedule: "0 3 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: pipeline
+          volumes:
+            - name: backup
+              persistentVolumeClaim:
+                claimName: data-spliit-db-backup
+          containers:
+            - name: pg-dump-via-kubectl
+              env:
+                - name: POSTGRESQL_VOLUME_DIR
+                  value: /bitnami/postgresql
+                - name: POSTGRES_USER
+                  value: spliit
+                - name: POSTGRES_POSTGRES_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: spliit-db-postgresql
+                      key: postgres-password
+              volumeMounts:
+                - name: backup
+                  mountPath: /backup
+              image: quay.io/openshift/origin-cli:4.18
+              command: ["/bin/bash", "-c"]
+              args:
+                - |-
+                  set -e
+
+                  echo -----------------------------------
+                  echo "Backing up $POSTGRES_USER database"
+                    kubectl exec "$POSTGRES_USER"-db-postgresql-0 --container postgresql -- /bin/bash -c 'PGPASSWORD=$POSTGRES_POSTGRES_PASSWORD pg_dump -U postgres -d $POSTGRES_DATABASE' > /backup/backup.sql
+                  echo -----------------------------------
+                    ls -lah /backup
+                  echo -----------------------------------
+          restartPolicy: OnFailure

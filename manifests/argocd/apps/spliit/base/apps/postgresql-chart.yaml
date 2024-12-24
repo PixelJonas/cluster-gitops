@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: spliit-db
+  annotations:
+    argocd.argoproj.io/sync-wave: "100"
+spec:
+  destination:
+    namespace: spliit
+    server: https://kubernetes.default.svc
+  project: cluster-apps
+  source:
+    repoURL: https://charts.bitnami.com/bitnami
+    chart: postgresql
+    targetRevision: 16.1.2
+    helm:
+      values: |-
+
+
+        volumePermissions:
+          enabled: true
+        global:
+          storageClass: lvms-vg1
+          postgresql:
+            auth:
+              username: spliit
+              existingSecret: spliit-db-postgresql
+              database: spliit
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

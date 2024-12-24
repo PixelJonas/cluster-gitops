@@ -1,0 +1,13 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: data-spliit-db-backup
+  namespace: spliit
+spec:
+  trigger:
+    manual: restore-once
+  restic:
+    repository: restic-config-database
+    destinationPVC: data-spliit-db-postgresql-0
+    copyMethod: Direct
