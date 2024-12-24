@@ -11,7 +11,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: "https://immich-app.github.io/immich-charts"
-    targetRevision: 0.8.4
+    targetRevision: 0.9.0
     chart: immich
     helm:
       values: |-
@@ -23,7 +23,7 @@ spec:
 
         image:
           repository: ghcr.io/immich-app/immich-server
-          tag: v1.120.1
+          tag: v1.123.0
 
         postgresql:
           enabled: false
