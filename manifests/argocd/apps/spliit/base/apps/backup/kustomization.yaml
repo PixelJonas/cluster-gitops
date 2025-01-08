@@ -5,6 +5,5 @@ resources:
   - cronjob.yaml
   - database-destination.yaml
   - database-source-b2.yaml
-  - database-source.yaml
   - external-restic-config-database-b2.yaml
   - pvc.yaml

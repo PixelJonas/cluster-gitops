@@ -8,6 +8,6 @@ spec:
   trigger:
     manual: restore-once
   restic:
-    repository: restic-config-database
+    repository: restic-config-database-b2
     destinationPVC: data-spliit-db-postgresql-0
     copyMethod: Direct
