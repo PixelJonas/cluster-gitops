@@ -16,9 +16,15 @@ spec:
       tls:
         insecureEdgeTerminationPolicy: Redirect
         termination: edge
-  resourceCustomizations: |
-    argoproj.io/Application:
-      health.lua: |
+  resourceExclusions: |
+    - apiGroups:
+      - project.openshift.io
+      clusters:
+      - '*'
+      kinds:
+      - Project
+  resourceHealthChecks:
+    - check: |
         hs = {}
         hs.status = "Progressing"
         hs.message = ""
@@ -29,56 +35,153 @@ spec:
           end
         end
         return hs
-    operators.coreos.com/Subscription:
-      health.lua: |
+      group: argoproj.io
+      kind: Application
+    - check: |
         hs = {}
         if obj.status ~= nil then
-          if obj.status.currentCSV ~= nil and (obj.status.state == "AtLatestKnown" or obj.status.state == "UpgradeAvailable" or obj.status.state == "UpgradePending") then
-            hs.status = "Healthy"
-            hs.message = "Subcription installed"
-            return hs
+          if obj.status.conditions ~= nil then
+            for _, condition in ipairs(obj.status.conditions) do
+              hs.message = condition.message
+              break
+            end
+          end
+          if obj.status.phase ~= nil then
+            if obj.status.phase == "Failure" then
+              hs.status = "Degraded"
+              return hs
+            elseif obj.status.phase == "Available" then
+              hs.status = "Healthy"
+              return hs
+            elseif obj.status.phase == "Pending" then
+              hs.status = "Progressing"
+              return hs
+            end
+          end
+          hs.status = "Progressing"
+          hs.message = "Waiting for operator to update status"
+          return hs
+        end
+      group: argoproj.io
+      kind: RolloutManager
+    - check: |
+        health_status = {}
+        if obj.status ~= nil then
+          if obj.status.conditions ~= nil then
+            numDegraded = 0
+            numPending = 0
+            numSuspended = 0
+            msg = ""
+            for i, condition in pairs(obj.status.conditions) do
+              msg = msg .. i .. ": " .. condition.type .. " | " .. condition.status .. " | " .. condition.reason .. "\n"
+              if condition.type == "InstallPlanPending" and condition.status == "True" then
+                if condition.reason == "RequiresApproval" then
+                  numSuspended = numSuspended + 1
+                else
+                  numPending = numPending + 1
+                end
+              elseif (condition.type == "InstallPlanMissing" and condition.reason ~= "ReferencedInstallPlanNotFound") then
+                numDegraded = numDegraded + 1
+              elseif (condition.type == "CatalogSourcesUnhealthy" or condition.type == "InstallPlanFailed") and condition.status == "True" then
+                numDegraded = numDegraded + 1
+              elseif (condition.type == "ResolutionFailed" and condition.reason ~= "ConstraintsNotSatisfiable") then
+                numDegraded = numDegraded + 1
+              end
+            end
+            if numDegraded > 0 then
+              health_status.status = "Degraded"
+              health_status.message = msg
+              return health_status
+            elseif numSuspended > 0 then
+              health_status.status = "Suspended"
+              health_status.message = "Requires Approval"
+              return health_status
+            elseif numPending > 0 then
+              health_status.status = "Progressing"
+              health_status.message = "An install plan for a subscription is pending installation"
+              return health_status
+            else
+              health_status.status = "Healthy"
+              health_status.message = msg
+              return health_status
+            end
+          end
+        end
+        health_status.status = "Progressing"
+        health_status.message = "An install plan for a subscription is pending installation"
+        return health_status
+      group: operators.coreos.com
+      kind: Subscription
+    - check: |
+        hs = {}
+        if obj.status ~= nil then
+          if obj.status.phase ~= nil then
+            if obj.status.phase == "Complete" then
+              hs.status = "Healthy"
+              hs.message = obj.status.phase
+              return hs
+            elseif obj.status.phase == "RequiresApproval" then
+              hs.status = "Suspended"
+              hs.message = obj.status.phase
+              return hs
+            else
+              hs.status = "Progressing"
+              hs.message = obj.status.phase
+              return hs
+            end
           end
         end
         hs.status = "Progressing"
-        hs.message = "Waiting for Subscription to complete."
+        hs.message = "Waiting for InstallPlan to complete"
         return hs
-    platform.stackrox.io/Central:
-      health.lua: |
+      group: operators.coreos.com
+      kind: InstallPlan
+    - check: |
         hs = {}
-        if obj.status ~= nil and obj.status.conditions ~= nil then
-            for i, condition in ipairs(obj.status.conditions) do
-              if condition.status == "True" and condition.reason == "InstallSuccessful" then
-                  hs.status = "Healthy"
-                  hs.message = "Install Successful"
+        hs.status = "Progressing"
+        hs.message = ""
+        if obj.status ~= nil then
+          if obj.status.tags ~= nil then
+            numTags = 0
+            for _ , item in pairs(obj.status.tags) do
+              numTags = numTags + 1
+              numItems = 0
+              if item.tags ~= nil then
+                for _ , item in pairs(item.tags) do
+                  numItems = numItems + 1
+                end
+                if numItems == 0 then
                   return hs
+                end
               end
             end
+            if numTags > 0 then
+              hs.status = "Healthy"
+              hs.message = "ImageStream has tags resolved"
+              return hs
+            end
+          end
+        end
+        return hs
+      group: image.openshift.io
+      kind: ImageStream
+    - check: |
+        hs = {}
+        if obj.status ~= nil then
+          if obj.status.phase ~= nil then
+            if obj.status.phase == "Complete" then
+              hs.status = "Healthy"
+              hs.message = obj.status.phase
+              return hs
+            end
+          end
         end
         hs.status = "Progressing"
-        hs.message = "Waiting for Central to deploy."
+        hs.message = "Waiting for Build to complete"
         return hs
-    route.openshift.io/Route:
-      ignoreDifferences: |
-        jsonPointers:
-        - /webhooks/ingress
-    Deployment:
-      ignoreDifferences: |
-        jsonPointers:
-        - /spec/template/spec/hostUsers
-    CustomResourceDefinition:
-      ignoreDifferences: |
-        jsonPointers:
-        - /spec/conversion/webhook/clientConfig/caBundle
-    admissionregistration.k8s.io/MutatingWebhookConfiguration:
-      ignoreDifferences: |
-        jsonPointers:
-        - /webhooks/0/clientConfig/caBundle
-    integreatly.org/GrafanaDataSource:
-      ignoreDifferences: |
-        jsonPointers:
-        - /spec/datasources/0/secureJsonData/httpHeaderValue1
-    PersistentVolumeClaim:
-      health.lua: |
+      group: build.openshift.io
+      kind: Build
+    - check: |
         hs = {}
         if obj.status ~= nil then
           if obj.status.phase ~= nil then
@@ -95,46 +198,23 @@ spec:
           end
         end
         hs.status = "Progressing"
-        hs.message = "Waiting for certificate"
+        hs.message = "Waiting for PVC"
         return hs
-    Job:
-      health.lua: |
-        hs = {}
-        if obj.status ~= nil then
-          if obj.status.active ~= nil then
-            if obj.status.active == "1" then
-              hs.status = "Progressing"
-              hs.message = obj.status.active .. " active job(s)."
-              return hs
-            end
-          end
-          if obj.status.succeeded ~= nil then
-            if obj.status.succeeded == 1 then
-              hs.status = "Healthy"
-              hs.message = "Job completed successfully."
-              return hs
-            end
-          end
-        end
-        hs.status = "Progressing"
-        hs.message = "Waiting for Job to complete."
-        return hs
-  resourceExclusions: |
-    - apiGroups:
-        - '*'
-      clusters:
-        - '*'
-      kinds:
-        - SecurityContextConstraints
-    - apiGroups:
-      - tekton.dev
-      clusters:
-      - '*'
-      kinds:
-      - TaskRun
-      - PipelineRun
-    - apiGroups:
-      - compliance.openshift.io
-      kinds:
-      - ComplianceCheckResult
-      - ComplianceRemediation
+      kind: PersistentVolumeClaim
+  resourceIgnoreDifferences:
+    resourceIdentifiers:
+      - customization:
+          jsonPointers:
+            - /status/ingress
+        group: route.openshift.io
+        kind: Route
+      - customization:
+          jsonPointers:
+            - /status/ingress
+        group: quay.redhat.com
+        kind: QuayRegistry
+      - customization:
+          jsonPointers:
+            - /spec/template/spec/hostUsers
+        group: apps
+        kind: Deployment
