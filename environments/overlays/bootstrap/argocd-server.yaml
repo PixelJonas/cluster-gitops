@@ -61,6 +61,10 @@ spec:
       ignoreDifferences: |
         jsonPointers:
         - /webhooks/ingress
+    Deployment:
+      ignoreDifferences: |
+        jsonPointers:
+        - /spec/template/spec/hostUsers
     CustomResourceDefinition:
       ignoreDifferences: |
         jsonPointers:
