@@ -12,7 +12,7 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 3.6.0
+    targetRevision: 3.6.1
     helm:
       values: |-
 
@@ -27,7 +27,7 @@ spec:
               paperless:
                 image:
                   repository: ghcr.io/paperless-ngx/paperless-ngx
-                  tag: 2.13.5
+                  tag: 2.14.3
                   pullPolicy: IfNotPresent
                 command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
                 args: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
