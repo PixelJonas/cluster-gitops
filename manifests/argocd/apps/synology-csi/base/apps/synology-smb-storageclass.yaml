@@ -7,7 +7,7 @@ metadata:
 provisioner: csi.san.synology.com
 parameters:
   protocol: smb
-  location: /volume1
+  location: /volume1/openshift
   dsm: 10.42.2.92
   csi.storage.k8s.io/node-stage-secret-name: synology-csi-smb-credentials
   csi.storage.k8s.io/node-stage-secret-namespace: synology-csi
