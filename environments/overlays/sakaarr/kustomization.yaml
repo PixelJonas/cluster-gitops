@@ -14,6 +14,7 @@ resources:
   - ../../../manifests/argocd/apps/volsync/base
   - ../../../manifests/argocd/apps/devspaces/base
   - ../../../manifests/argocd/apps/machineconfig/base
+  - ../../../manifests/argocd/apps/synology-csi/base
 
   - ../../../manifests/argocd/apps/resilio-sync/base
   - ../../../manifests/argocd/apps/external-secrets/base
