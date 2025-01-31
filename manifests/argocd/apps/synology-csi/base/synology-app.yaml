@@ -4,7 +4,7 @@ metadata:
   name: synology-app
   namespace: openshift-gitops
   annotations:
-    argocd.argoproj.io/sync-wave: "101"
+    argocd.argoproj.io/sync-wave: "11"
 spec:
   destination:
     namespace: synology-csi
