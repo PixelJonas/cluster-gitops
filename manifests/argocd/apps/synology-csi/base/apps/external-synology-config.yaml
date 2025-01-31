@@ -7,8 +7,6 @@ spec:
   secretStoreRef:
     kind: ClusterSecretStore
     name: doppler-cluster
-  target:
-    name: client-info-secret
   data:
     - secretKey: synoip
       remoteRef:
@@ -16,14 +14,15 @@ spec:
     - secretKey: synopass
       remoteRef:
         key: SYNOLOGY_PASSWORD
-  template:
-    type: Opaque
-    data:
-      client-info.yml: |
-        clients:
-          - host: {{ .synoip | toString }}
-            port: 5001
-            https: true
-            username: csi
-            password: {{ .synopass | toString }}
-
+  target:
+    name: client-info-secret
+    template:
+      type: Opaque
+      data:
+        client-info.yml: |
+          clients:
+            - host: {{ .synoip | toString }}
+              port: 5001
+              https: true
+              username: csi
+              password: {{ .synopass | toString }}
