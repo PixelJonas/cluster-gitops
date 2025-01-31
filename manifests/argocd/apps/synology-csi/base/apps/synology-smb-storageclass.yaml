@@ -16,5 +16,5 @@ mountOptions:
  - file_mode=0770
  - uid=0
  - gid=0
-reclaimPolicy: Recycle
+reclaimPolicy: Retain
 allowVolumeExpansion: true
