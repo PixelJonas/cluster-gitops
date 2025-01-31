@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: cluster-apps
   source:
-    path: manifests/argocd/apps/synology/base/apps
+    path: manifests/argocd/apps/synology-csi/base/apps
     repoURL: https://github.com/pixeljonas/cluster-gitops.git
     targetRevision: master
   syncPolicy:
