@@ -3,8 +3,6 @@ kind: ExternalSecret
 metadata:
   name: external-synology-smb-credentials
   namespace: synology-csi
-  annotations:
-    argocd.argoproj.io/sync-wave: "30"
 spec:
   secretStoreRef:
     kind: ClusterSecretStore
