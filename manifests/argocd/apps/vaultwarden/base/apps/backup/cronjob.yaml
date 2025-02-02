@@ -15,7 +15,7 @@ spec:
           volumes:
             - name: backup
               persistentVolumeClaim:
-                claimName: data-vaultwarden-db-backup
+                claimName: syno-vaultwarden-db-backup
           containers:
             - name: pg-dump-via-kubectl
               env:
