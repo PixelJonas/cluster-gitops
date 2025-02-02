@@ -124,7 +124,7 @@ spec:
               - path: /usr/src/paperless/media
             accessMode: ReadWriteOnce            
             storageClass: openebs-jiva-csi-default
-            size: 10Gi
+            size: 15Gi
           export:
             globalMounts:
               - path: /usr/src/paperless/export
