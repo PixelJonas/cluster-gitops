@@ -15,7 +15,7 @@ spec:
           volumes:
             - name: backup
               persistentVolumeClaim:
-                claimName: data-keycloak-db-backup
+                claimName: syno-keycloak-db-backup
           containers:
             - name: pg-dump-via-kubectl
               env:
