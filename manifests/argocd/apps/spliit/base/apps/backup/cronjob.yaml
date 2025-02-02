@@ -15,7 +15,7 @@ spec:
           volumes:
             - name: backup
               persistentVolumeClaim:
-                claimName: data-spliit-db-backup
+                claimName: syno-spliit-db-backup
           containers:
             - name: pg-dump-via-kubectl
               env:

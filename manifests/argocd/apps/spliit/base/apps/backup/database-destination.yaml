@@ -2,7 +2,7 @@
 apiVersion: volsync.backube/v1alpha1
 kind: ReplicationDestination
 metadata:
-  name: data-spliit-db-backup
+  name: syno-spliit-db-backup
   namespace: spliit
 spec:
   trigger:
