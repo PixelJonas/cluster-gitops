@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: data-paperless-db-backup
+  name: syno-paperless-db-backup
   namespace: paperless
   annotations:
     argocd.argoproj.io/sync-wave: "200"
@@ -9,7 +9,7 @@ spec:
   accessModes:
     - ReadWriteOnce
   volumeMode: Filesystem
-  storageClassName: pmb-backup
+  storageClassName: synology-smb-storage
   resources:
     requests:
-      storage: 200Gi
+      storage: 5Gi

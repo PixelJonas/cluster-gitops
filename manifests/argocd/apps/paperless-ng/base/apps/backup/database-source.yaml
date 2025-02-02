@@ -7,7 +7,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "200"  
 spec:
   # The PVC to be backed up
-  sourcePVC: data-paperless-db-backup
+  sourcePVC: syno-paperless-db-backup
   trigger:
     # Take a backup everyday at 5am
     schedule: "0 5 * * *"
