@@ -2,7 +2,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: nfs-export-paperless
+  name: syno-export-paperless
   namespace: paperless
   annotations:
     argocd.argoproj.io/sync-wave: "90"
@@ -12,5 +12,5 @@ spec:
   resources:
     requests:
       storage: 20Gi
-  storageClassName: pmb-backup
+  storageClassName: synology-smb-storage
   volumeMode: Filesystem

@@ -7,7 +7,7 @@ metadata:
     argocd.argoproj.io/sync-wave: "200"
 spec:
   # The PVC to be backed up
-  sourcePVC: nfs-export-paperless
+  sourcePVC: syno-export-paperless
   trigger:
     # Take a backup every 1AM every 3 days
     schedule: "0 3 */1 * *"

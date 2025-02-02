@@ -128,7 +128,7 @@ spec:
           export:
             globalMounts:
               - path: /usr/src/paperless/export
-            existingClaim: nfs-export-paperless
+            existingClaim: syno-export-paperless
           custom-scripts:
             name: paperless-ng-custom-scripts
             enabled: true
