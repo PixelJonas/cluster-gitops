@@ -28,7 +28,7 @@ spec:
               vaultwarden:
                 image:
                   repository: vaultwarden/server
-                  tag: 1.33.1
+                  tag: 1.33.2
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin
