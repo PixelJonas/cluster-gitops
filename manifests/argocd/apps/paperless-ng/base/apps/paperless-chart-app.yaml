@@ -12,7 +12,7 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 3.7.0
+    targetRevision: 3.7.1
     helm:
       values: |-
 
@@ -98,7 +98,7 @@ spec:
               gotenberg:
                 image:
                   repository: docker.io/gotenberg/gotenberg
-                  tag: 8.17
+                  tag: 8.17.1
                 env:
                   - name: CHROMIUM_DISABLE_ROUTES
                     value: "1"

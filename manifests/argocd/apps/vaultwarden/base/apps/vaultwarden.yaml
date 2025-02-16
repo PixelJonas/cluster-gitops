@@ -12,7 +12,7 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 3.7.0
+    targetRevision: 3.7.1
     helm:
       values: |-
 
@@ -28,7 +28,7 @@ spec:
               vaultwarden:
                 image:
                   repository: vaultwarden/server
-                  tag: 1.33.1
+                  tag: 1.33.2
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin
