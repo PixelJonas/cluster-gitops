@@ -2,8 +2,8 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-  - sealed-restic-config.yaml
-  - sealed-restic-database.yaml
+  - external-restic-config-config.yaml
+  - external-restic-config-database.yaml
   - external-restic-config-config-b2.yaml
   - external-restic-config-database-b2.yaml
   - config-source.yaml

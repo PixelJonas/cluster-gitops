@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - vaultwarden.yaml
   - postgresql-chart.yaml
-  - sealed-postgresql-credentials.yaml
+  - external-postgresql-credentials.yaml
   - external-vaultwarden-credentials.yaml
   - vaultwarden-backup-app.yaml
   - anyuid-rolebinding.yaml

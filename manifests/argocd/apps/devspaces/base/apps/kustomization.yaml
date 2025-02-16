@@ -2,5 +2,5 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
 resources:
-- sealed-github-credentials.yaml
-- sealed-ssh-credentials.yaml
+- external-github-credentials.yaml
+- external-ssh-credentials.yaml

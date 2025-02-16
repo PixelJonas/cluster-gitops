@@ -5,7 +5,7 @@ resources:
 - keycloak-chart.yaml
 - postgresql-chart.yaml
 - keycloak-backup-app.yaml
-- sealed-postgresql-credentials.yaml
-- sealed-keycloak-credentials.yaml
+- external-postgresql-credentials.yaml
+- external-keycloak-credentials.yaml
 - anyuid-rolebinding.yaml
 - privileged-rolebinding.yaml

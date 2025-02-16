@@ -3,6 +3,6 @@ kind: Kustomization
 
 resources:
 - couchdb-chart.yaml
-- sealed-kopia-config.yaml
-- sealed-couchdb-credentials.yaml
+- external-kopia-config.yaml
+- external-couchdb-credentials.yaml
 - clusterrolebinding.yaml

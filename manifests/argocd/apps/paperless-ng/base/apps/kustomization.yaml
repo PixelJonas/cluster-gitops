@@ -4,7 +4,7 @@ kind: Kustomization
 resources:
   - paperless-chart-app.yaml
   - paperless-export-pvc.yaml
-  - sealed-postgresql-credentials.yaml
+  - external-postgresql-credentials.yaml
   - postgresql-chart.yaml
   - paperless-backup-app.yaml
   - anyuid-rolebinding.yaml
