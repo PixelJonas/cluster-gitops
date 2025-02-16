@@ -27,7 +27,7 @@ spec:
               resilio:
                 image:
                   repository: ghcr.io/linuxserver/resilio-sync
-                  tag: 2.8.1
+                  tag: 3.0.0
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin
