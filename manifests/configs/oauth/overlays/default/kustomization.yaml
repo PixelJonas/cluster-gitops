@@ -3,7 +3,7 @@ kind: Kustomization
 
 
 resources:
-- google-secret.yaml
+- external-google-secret.yaml
 - login-template-secret.yaml
 - provider-selection-template-secret.yaml
 - ../../base
