@@ -1,19 +1,6 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 patches:
 - patch: |2-
 
@@ -34,7 +21,7 @@ patches:
       path: /spec/source/helm/parameters/-
       value:
         name: "nfs.path"
-        value: "/pmb-data"
+        value: "/volume1/pmb-backup"
 
     - op: add
       path: /spec/source/helm/parameters/-
