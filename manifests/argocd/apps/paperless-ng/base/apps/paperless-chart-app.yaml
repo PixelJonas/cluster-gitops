@@ -186,7 +186,7 @@ spec:
                   install_packages "$PAPERLESS_CUSTOM_PACKAGES"
                 fi
 
-                exec "/sbin/docker-entrypoint.sh" "/usr/local/bin/paperless_cmd.sh"
+                exec "/init"
 
               pdf_rm_blank.sh: |-
                 #!/usr/bin/env bash
