@@ -12,7 +12,7 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 3.7.1
+    targetRevision: 3.7.3
     helm:
       values: |-
 
@@ -27,7 +27,7 @@ spec:
               resilio:
                 image:
                   repository: ghcr.io/linuxserver/resilio-sync
-                  tag: 2.8.1
+                  tag: 3.0.3
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin

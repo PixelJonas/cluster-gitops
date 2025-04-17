@@ -12,7 +12,7 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s.github.io/helm-charts
-    targetRevision: 3.7.1
+    targetRevision: 3.7.3
     helm:
       values: |-
 
@@ -28,7 +28,7 @@ spec:
               spoolman:
                 image:
                   repository: ghcr.io/donkie/spoolman
-                  tag: 0.21
+                  tag: 0.22.1
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin
