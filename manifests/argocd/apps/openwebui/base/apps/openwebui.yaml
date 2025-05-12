@@ -31,6 +31,14 @@ spec:
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin
+                  WEBUI_URL: https://gpt.apps.sno-cluster.janz.digital
+                  ENABLE_ADMIN_EXPORT: "true"
+                  ENV: "prod"
+                  ENABLE_PERSISTENT_CONFIG: "true"
+                  PORT: 8080
+                  ENABLE_REALTIME_CHAT_SAVE: true
+
+
                 securityContext:
                   privileged: true
         persistence:
@@ -46,7 +54,7 @@ spec:
             controller: openwebui
             ports:
               http:
-                port: 3000
+                port: 8080
 
         ingress:
           openwebui:
