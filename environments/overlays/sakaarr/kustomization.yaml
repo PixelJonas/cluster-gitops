@@ -21,6 +21,7 @@ resources:
   - ../../../manifests/argocd/apps/spoolman/base
   - ../../../manifests/argocd/apps/maintenance/base
   - ../../../manifests/argocd/apps/spliit/base
+  - ../../../manifests/argocd/apps/openwebui/base
 
   - ../../../manifests/argocd/apps/cert-manager/overlays/sakaarr
   - ../../../manifests/argocd/apps/paperless-ng/overlays/sakaarr
