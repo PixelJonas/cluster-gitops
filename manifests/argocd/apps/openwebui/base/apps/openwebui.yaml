@@ -33,6 +33,13 @@ spec:
                   TZ: Europe/Berlin
                 securityContext:
                   privileged: true
+        persistence:
+          config:
+            globalMounts:
+              - path: /app/backend/data
+            storageClass: lvms-vg1
+            accessMode: ReadWriteOnce
+            size: 5Gi
 
         service:
           openwebui:
