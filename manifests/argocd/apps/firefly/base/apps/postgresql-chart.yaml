@@ -16,26 +16,10 @@ spec:
     targetRevision: 16.7.10
     helm:
       values: |-
-
         volumePermissions:
           enabled: true
-
-        securityContext:
-          enabled: true
-
-        shmVolume:
-          chmod:
-            enabled: true
-
-        containerSecurityContext:
-          enabled: true
-
-          
         global:
-          compatibility:
-            openshift:
-              adaptSecurityContext: disabled
-          storageClass: local-path
+          storageClass: lvms-vg1
           postgresql:
             auth:
               username: firefly
