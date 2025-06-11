@@ -1,0 +1,46 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: firefly-db
+  annotations:
+    argocd.argoproj.io/sync-wave: "50"
+spec:
+  destination:
+    namespace: firefly
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: registry-1.docker.io/bitnamicharts
+    chart: postgresql
+    targetRevision: 16.7.10
+    helm:
+      values: |-
+
+        volumePermissions:
+          enabled: true
+
+        securityContext:
+          enabled: true
+
+        shmVolume:
+          chmod:
+            enabled: true
+
+        containerSecurityContext:
+          enabled: true
+
+          
+        global:
+          compatibility:
+            openshift:
+              adaptSecurityContext: disabled
+          storageClass: local-path
+          postgresql:
+            auth:
+              username: firefly
+              existingSecret: firefly-db-postgresql
+              database: firefly
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
