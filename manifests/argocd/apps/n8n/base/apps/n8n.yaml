@@ -21,7 +21,7 @@ spec:
             containers:
               n8n:
                 image:
-                  repository: docker.n8n.io/n8nio/n8n
+                  repository: docker.io/n8nio/n8n
                   tag: 1.98.0
                   pullPolicy: IfNotPresent
                 env:
