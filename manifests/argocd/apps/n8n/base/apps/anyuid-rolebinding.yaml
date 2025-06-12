@@ -1,0 +1,14 @@
+kind: ClusterRoleBinding
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: n8n-anyuid
+  annotations:
+    argocd.argoproj.io/sync-wave: "30"
+subjects:
+  - kind: ServiceAccount
+    name: n8n-db-postgresql
+    namespace: n8n
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: 'system:openshift:scc:anyuid'
