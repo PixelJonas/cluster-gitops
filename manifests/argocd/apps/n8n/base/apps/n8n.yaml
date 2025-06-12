@@ -58,7 +58,6 @@ spec:
                         name: n8n-credentials
                         key: host
                   N8N_PORT: 8080
-                  N8N_PROTOCOL: https
                   NODE_ENV: production
                   WEBHOOK_URL:
                     valueFrom:
