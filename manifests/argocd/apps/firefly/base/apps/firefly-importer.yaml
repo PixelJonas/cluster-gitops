@@ -22,31 +22,11 @@ spec:
             containers:
               firefly-importer:
                 image:
-                  repository: docker.io/fireflyiii/core
-                  tag: version-6.2.17
+                  repository: docker.io/fireflyiii/data-importer
+                  tag: version-1.6.3
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin
-                  DB_CONNECTION: pgsql
-                  DB_HOST: firefly-db-postgresql
-                  DB_PORT: 5432
-                  DB_DATABASE: firefly
-                  DB_USERNAME: firefly
-                  DB_PASSWORD:
-                    valueFrom:
-                      secretKeyRef:
-                        name: firefly-db-postgresql
-                        key: password
-                  APP_KEY:
-                    valueFrom:
-                      secretKeyRef:
-                        name: firefly-credentials
-                        key: appkey
-                  SITE_OWNER:
-                    valueFrom:
-                      secretKeyRef:
-                        name: firefly-credentials
-                        key: siteowner
                   MAIL_MAILER: smtp
                   MAIL_ENCRYPTION: ssl
                   MAIL_PORT: 465
