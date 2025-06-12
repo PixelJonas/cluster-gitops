@@ -78,12 +78,18 @@ spec:
                         key: mailpassword
 
         persistence:
-          config:
+          home:
             globalMounts:
               - path: /home/node/
             storageClass: lvms-vg1
             accessMode: ReadWriteOnce
             size: 5Gi
+          config:
+            globalMounts:
+              - path: /.n8n
+            storageClass: lvms-vg1
+            accessMode: ReadWriteOnce
+            size: 1Gi
 
         service:
           n8n:
