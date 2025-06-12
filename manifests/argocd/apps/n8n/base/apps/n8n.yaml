@@ -68,6 +68,7 @@ spec:
                   N8N_HIRING_BANNER_ENABLED: false
                   N8N_RUNNERS_ENABLED: true
                   N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: false
+                  N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE: true
                   N8N_SMTP_SSL: true
                   N8N_SMTP_PORT: 465
                   N8N_SMTP_HOST:
