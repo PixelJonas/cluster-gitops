@@ -80,7 +80,7 @@ spec:
         persistence:
           config:
             globalMounts:
-              - path: /home/node/.n8n
+              - path: /home/node/
             storageClass: lvms-vg1
             accessMode: ReadWriteOnce
             size: 5Gi
