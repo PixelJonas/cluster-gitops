@@ -20,10 +20,7 @@ spec:
                         name: firefly-credentials
                         key: staticcrontoken
                 - name: FIREFLY_III_URL
-                  valueFrom:
-                      secretKeyRef:
-                        name: firefly-credentials
-                        key: appurl
+                  value: http://firefly.firefly.svc.cluster.local:8080
               image: docker.io/curlimages/curl:8.12.0
               command: 
                 - /usr/bin/curl
@@ -31,5 +28,5 @@ spec:
                 - --silent
                 - --show-error
                 - --fail
-                - "http:$(FIREFLY_III_URL)//api/v1/cron/$(FIREFLY_III_TOKEN)"
+                - "$(FIREFLY_III_URL)/api/v1/cron/$(FIREFLY_III_TOKEN)"
           restartPolicy: OnFailure
