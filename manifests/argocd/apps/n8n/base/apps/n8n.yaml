@@ -90,6 +90,12 @@ spec:
             storageClass: lvms-vg1
             accessMode: ReadWriteOnce
             size: 1Gi
+          cache:
+            globalMounts:
+              - path: /.cache
+            storageClass: lvms-vg1
+            accessMode: ReadWriteOnce
+            size: 1Gi
 
         service:
           n8n:
