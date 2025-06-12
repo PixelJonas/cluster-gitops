@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: syno-n8n-db-backup
+  namespace: n8n
+  annotations:
+    argocd.argoproj.io/sync-wave: "200"
+spec:
+  accessModes:
+    - ReadWriteOnce
+  volumeMode: Filesystem
+  storageClassName: synology-smb-storage
+  resources:
+    requests:
+      storage: 2Gi

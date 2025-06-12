@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n8n-db
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "50"
+spec:
+  destination:
+    namespace: n8n
+    server: https://kubernetes.default.svc
+  project: cluster-config
+  source:
+    repoURL: registry-1.docker.io/bitnamicharts
+    chart: postgresql
+    targetRevision: 16.7.10
+    helm:
+      values: |-
+        volumePermissions:
+          enabled: true
+        global:
+          storageClass: lvms-vg1
+          postgresql:
+            auth:
+              username: n8n
+              existingSecret: n8n-db-postgresql
+              database: n8n
+
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
