@@ -104,7 +104,7 @@ spec:
                 paths:
                   - path: /
                     service:
-                      identifier: firefly
+                      identifier: firefly-importer
                       port: http
 
   project: cluster-apps
