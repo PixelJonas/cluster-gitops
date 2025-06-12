@@ -110,6 +110,12 @@ spec:
             storageClass: lvms-vg1
             accessMode: ReadWriteOnce
             size: 1Gi
+          npm:
+            globalMounts:
+              - path: /.npm
+            storageClass: lvms-vg1
+            accessMode: ReadWriteOnce
+            size: 5Gi
 
         service:
           n8n:
