@@ -82,9 +82,17 @@ spec:
                         name: firefly-credentials
                         key: autoimportsecret
                   CAN_POST_AUTOIMPORT: true
+                  IMPORT_DIR_ALLOWLIST: /import
                   CAN_POST_FILES: true
                   ENABLE_MAIL_REPORT: true
                   EXPECT_SECURE_URL: true
+        persistence:
+          import:
+            globalMounts:
+              - path: /import
+            storageClass: lvms-vg1
+            accessMode: ReadWriteOnce
+            size: 500Mi
 
         service:
           firefly-importer:

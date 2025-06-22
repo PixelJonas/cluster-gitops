@@ -17,8 +17,6 @@ spec:
     helm:
       values: |-
 
-
-
         volumePermissions:
           enabled: true
 
