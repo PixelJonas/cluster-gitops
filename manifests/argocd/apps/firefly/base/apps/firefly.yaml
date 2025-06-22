@@ -27,6 +27,7 @@ spec:
                 env:
                   TZ: Europe/Berlin
                   APP_ENV: prod
+                  ALLOW_WEBHOOKS: true
                   DB_CONNECTION: pgsql
                   DB_HOST: firefly-db-postgresql
                   DB_PORT: 5432
