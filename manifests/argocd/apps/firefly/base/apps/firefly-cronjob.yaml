@@ -21,7 +21,7 @@ spec:
                         key: staticcrontoken
                 - name: FIREFLY_III_URL
                   value: http://firefly.firefly.svc.cluster.local:8080
-              image: docker.io/curlimages/curl:8.14.1
+              image: 'quay.io/openshift/origin-cli:4.20'
               command: 
                 - /usr/bin/curl
               args:
