@@ -12,7 +12,7 @@ spec:
   source:
     chart: app-template
     repoURL: https://bjw-s-labs.github.io/helm-charts
-    targetRevision: 4.0.1
+    targetRevision: 4.1.1
     helm:
       values: |-
 
@@ -27,7 +27,7 @@ spec:
               paperless:
                 image:
                   repository: ghcr.io/paperless-ngx/paperless-ngx
-                  tag: 2.16.3
+                  tag: 2.17.1
                   pullPolicy: IfNotPresent
                 command: "/usr/src/paperless/custom-scripts/docker-entrypoint.sh"
                 args: ["/usr/local/bin/supervisord", "-c", "/etc/supervisord.conf"]
@@ -98,7 +98,7 @@ spec:
               gotenberg:
                 image:
                   repository: docker.io/gotenberg/gotenberg
-                  tag: 8.21
+                  tag: 8.21.1
                 env:
                   - name: CHROMIUM_DISABLE_ROUTES
                     value: "1"

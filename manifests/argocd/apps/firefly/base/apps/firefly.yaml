@@ -1,0 +1,138 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+  name: firefly
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: firefly
+    server: "https://kubernetes.default.svc"
+  source:
+    chart: app-template
+    repoURL: https://bjw-s-labs.github.io/helm-charts
+    targetRevision: 4.1.1
+    helm:
+      values: |-
+
+        controllers:
+          firefly:
+            containers:
+              firefly:
+                image:
+                  repository: docker.io/fireflyiii/core
+                  tag: version-6.2.17
+                  pullPolicy: IfNotPresent
+                env:
+                  TZ: Europe/Berlin
+                  APP_ENV: prod
+                  DB_CONNECTION: pgsql
+                  DB_HOST: firefly-db-postgresql
+                  DB_PORT: 5432
+                  DB_DATABASE: firefly
+                  DB_USERNAME: firefly
+
+                  MAIL_MAILER: smtp
+                  MAIL_ENCRYPTION: ssl
+                  MAIL_PORT: 465
+                  MAIL_HOST:
+                    valueFrom:
+                      secretKeyRef:
+                        name: firefly-credentials
+                        key: mailhost
+                  MAIL_FROM:
+                    valueFrom:
+                      secretKeyRef:
+                        name: firefly-credentials
+                        key: mailfrom
+                  MAIL_USERNAME:
+                    valueFrom:
+                      secretKeyRef:
+                        name: firefly-credentials
+                        key: mailusername
+                  MAIL_PASSWORD:
+                    valueFrom:
+                      secretKeyRef:
+                        name: firefly-credentials
+                        key: mailpassword
+                  MAP_DEFAULT_LAT:
+                    valueFrom:
+                      secretKeyRef:
+                        name: firefly-credentials
+                        key: mapdefaultlat
+                  MAP_DEFAULT_LONG:
+                    valueFrom:
+                      secretKeyRef:
+                        name: firefly-credentials
+                        key: mapdefaultlong
+                  STATIC_CRON_TOKEN:
+                    valueFrom:
+                      secretKeyRef:
+                        name: firefly-credentials
+                        key: staticcrontoken
+                  DB_PASSWORD:
+                    valueFrom:
+                      secretKeyRef:
+                        name: firefly-db-postgresql
+                        key: password
+                  TRUSTED_PROXIES: 
+                    valueFrom:
+                      secretKeyRef:
+                        name: firefly-credentials
+                        key: trustedproxies
+                  SITE_OWNER:
+                    valueFrom:
+                      secretKeyRef:
+                        name: firefly-credentials
+                        key: siteowner
+                  APP_KEY:
+                    valueFrom:
+                      secretKeyRef:
+                        name: firefly-credentials
+                        key: appkey
+                  APP_URL:
+                    valueFrom:
+                      secretKeyRef:
+                        name: firefly-credentials
+                        key: appurl
+
+
+                securityContext:
+                  privileged: true
+        persistence:
+          upload:
+            globalMounts:
+              - path: /var/www/html/storage/upload
+            storageClass: lvms-vg1
+            accessMode: ReadWriteOnce
+            size: 5Gi
+
+        service:
+          firefly:
+            controller: firefly
+            ports:
+              http:
+                port: 8080
+
+        ingress:
+          firefly:
+            enabled: true
+            className: openshift-default
+            annotations:
+              route.openshift.io/termination: "edge"
+            hosts:
+              - host: firefly.apps.sno-cluster.janz.digital
+                paths:
+                  - path: /
+                    service:
+                      identifier: firefly
+                      port: http
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

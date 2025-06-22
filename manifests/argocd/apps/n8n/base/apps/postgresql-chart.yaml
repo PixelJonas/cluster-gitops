@@ -1,13 +1,13 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: vaultwarden-db
+  name: n8n-db
   namespace: openshift-gitops
   annotations:
-    argocd.argoproj.io/sync-wave: "101"
+    argocd.argoproj.io/sync-wave: "50"
 spec:
   destination:
-    namespace: vaultwarden
+    namespace: n8n
     server: https://kubernetes.default.svc
   project: cluster-config
   source:
@@ -16,31 +16,15 @@ spec:
     targetRevision: 16.7.10
     helm:
       values: |-
-
         volumePermissions:
           enabled: true
-
-        securityContext:
-          enabled: true
-
-        shmVolume:
-          chmod:
-            enabled: true
-
-        containerSecurityContext:
-          enabled: true
-
-          
         global:
-          compatibility:
-            openshift:
-              adaptSecurityContext: disabled
           storageClass: lvms-vg1
           postgresql:
             auth:
-              username: vaultwarden
-              existingSecret: vaultwarden-db-postgresql
-              database: vaultwarden
+              username: n8n
+              existingSecret: n8n-db-postgresql
+              database: n8n
 
   syncPolicy:
     syncOptions:

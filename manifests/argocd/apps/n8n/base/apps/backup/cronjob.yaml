@@ -1,8 +1,8 @@
 apiVersion: batch/v1
 kind: CronJob
 metadata:
-  name: spliit-backup
-  namespace: spliit
+  name: n8n-backup
+  namespace: n8n
   annotations:
     argocd.argoproj.io/sync-wave: "200"
 spec:
@@ -15,18 +15,18 @@ spec:
           volumes:
             - name: backup
               persistentVolumeClaim:
-                claimName: syno-spliit-db-backup
+                claimName: syno-n8n-db-backup
           containers:
             - name: pg-dump-via-kubectl
               env:
                 - name: POSTGRESQL_VOLUME_DIR
                   value: /bitnami/postgresql
                 - name: POSTGRES_USER
-                  value: spliit
+                  value: n8n
                 - name: POSTGRES_POSTGRES_PASSWORD
                   valueFrom:
                     secretKeyRef:
-                      name: spliit-db-postgresql
+                      name: n8n-db-postgresql
                       key: postgres-password
               volumeMounts:
                 - name: backup

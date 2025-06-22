@@ -1,0 +1,32 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: firefly-cron
+  namespace: firefly
+  annotations:
+    argocd.argoproj.io/sync-wave: "200"
+spec:
+  schedule: "0 3 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: firefly-cron
+              env:
+                - name: FIREFLY_III_TOKEN
+                  valueFrom:
+                      secretKeyRef:
+                        name: firefly-credentials
+                        key: staticcrontoken
+                - name: FIREFLY_III_URL
+                  value: http://firefly.firefly.svc.cluster.local:8080
+              image: 'quay.io/openshift/origin-cli:4.20'
+              command: 
+                - /usr/bin/curl
+              args:
+                - --silent
+                - --show-error
+                - --fail
+                - "$(FIREFLY_III_URL)/api/v1/cron/$(FIREFLY_III_TOKEN)"
+          restartPolicy: OnFailure

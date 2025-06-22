@@ -1,0 +1,13 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: firefly-database-restore
+spec:
+  trigger:
+    manual: restore-once
+  restic:
+    repository: restic-config-database
+    # Use an existing PVC, don't provision a new one
+    destinationPVC: syno-firefly-db-backup
+    copyMethod: Direct

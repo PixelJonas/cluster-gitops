@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: n8n-backup-app
+  namespace: openshift-gitops
+  annotations:
+    argocd.argoproj.io/sync-wave: "211"
+spec:
+  destination:
+    namespace: n8n
+    server: https://kubernetes.default.svc
+  project: cluster-apps
+  source:
+    path: manifests/argocd/apps/n8n/base/apps/backup
+    repoURL: https://github.com/pixeljonas/cluster-gitops.git
+    targetRevision: master
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true

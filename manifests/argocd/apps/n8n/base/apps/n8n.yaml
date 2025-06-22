@@ -1,0 +1,147 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+  name: n8n
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: n8n
+    server: "https://kubernetes.default.svc"
+  source:
+    chart: app-template
+    repoURL: https://bjw-s-labs.github.io/helm-charts
+    targetRevision: 4.1.1
+    helm:
+      values: |-
+
+        defaultPodOptions:  
+          dnsPolicy: None
+          dnsConfig:
+            nameservers:
+              - 10.42.0.1
+              - 172.30.0.10
+              - 192.168.1.1
+            searches:
+              - svc.cluster.local
+              - cluster.local
+              - sno-cluster.janz.digital
+              - janz.lan
+              - janz.digital
+
+        controllers:
+          n8n:
+            containers:
+              n8n:
+                image:
+                  repository: docker.io/n8nio/n8n
+                  tag: 1.99.1
+                  pullPolicy: IfNotPresent
+                env:
+                  TZ: Europe/Berlin
+                  GENERIC_TIMEZONE: Europe/Berlin
+                  APP_ENV: prod
+                  DB_TYPE: postgresdb
+                  DB_POSTGRESDB_HOST: n8n-db-postgresql.n8n.svc.cluster.local
+                  DB_POSTGRESDB_PORT: 5432
+                  DB_POSTGRESDB_DATABASE: n8n
+                  DB_POSTGRESDB_USER: n8n
+                  DB_POSTGRESDB_PASSWORD:
+                    valueFrom:
+                      secretKeyRef:
+                        name: n8n-db-postgresql
+                        key: password
+                  N8N_HOST:
+                    valueFrom:
+                      secretKeyRef:
+                        name: n8n-credentials
+                        key: host
+                  N8N_PORT: 8080
+                  NODE_ENV: production
+                  WEBHOOK_URL:
+                    valueFrom:
+                      secretKeyRef:
+                        name: n8n-credentials
+                        key: webhookurl
+                  N8N_HIRING_BANNER_ENABLED: false
+                  N8N_RUNNERS_ENABLED: true
+                  N8N_ENFORCE_SETTINGS_FILE_PERMISSIONS: false
+                  N8N_COMMUNITY_PACKAGES_ALLOW_TOOL_USAGE: true
+                  N8N_SMTP_SSL: true
+                  N8N_SMTP_PORT: 465
+                  N8N_SMTP_HOST:
+                    valueFrom:
+                      secretKeyRef:
+                        name: n8n-credentials
+                        key: mailhost
+                  N8N_SMTP_SENDER:
+                    valueFrom:
+                      secretKeyRef:
+                        name: n8n-credentials
+                        key: mailfrom
+                  N8N_SMTP_USER:
+                    valueFrom:
+                      secretKeyRef:
+                        name: n8n-credentials
+                        key: mailusername
+                  N8N_SMTP_PASS:
+                    valueFrom:
+                      secretKeyRef:
+                        name: n8n-credentials
+                        key: mailpassword
+
+        persistence:
+          home:
+            globalMounts:
+              - path: /home/node/
+            storageClass: lvms-vg1
+            accessMode: ReadWriteOnce
+            size: 5Gi
+          config:
+            globalMounts:
+              - path: /.n8n
+            storageClass: lvms-vg1
+            accessMode: ReadWriteOnce
+            size: 1Gi
+          cache:
+            globalMounts:
+              - path: /.cache
+            storageClass: lvms-vg1
+            accessMode: ReadWriteOnce
+            size: 1Gi
+          npm:
+            globalMounts:
+              - path: /.npm
+            storageClass: lvms-vg1
+            accessMode: ReadWriteOnce
+            size: 5Gi
+
+        service:
+          n8n:
+            controller: n8n
+            ports:
+              http:
+                port: 8080
+
+        ingress:
+          n8n:
+            enabled: true
+            className: openshift-default
+            annotations:
+              route.openshift.io/termination: "edge"
+            hosts:
+              - host: n8n.apps.sno-cluster.janz.digital
+                paths:
+                  - path: /
+                    service:
+                      identifier: n8n
+                      port: http
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

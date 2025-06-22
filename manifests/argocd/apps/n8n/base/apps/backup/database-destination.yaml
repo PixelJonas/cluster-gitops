@@ -1,0 +1,13 @@
+---
+apiVersion: volsync.backube/v1alpha1
+kind: ReplicationDestination
+metadata:
+  name: n8n-database-restore
+spec:
+  trigger:
+    manual: restore-once
+  restic:
+    repository: restic-config-database
+    # Use an existing PVC, don't provision a new one
+    destinationPVC: syno-n8n-db-backup
+    copyMethod: Direct

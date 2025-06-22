@@ -1,0 +1,30 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: firefly-importer-cron
+  namespace: firefly
+  annotations:
+    argocd.argoproj.io/sync-wave: "200"
+spec:
+  schedule: "0 3 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: firefly-import-cron
+              image: 'quay.io/openshift/origin-cli:4.20'
+              command:
+                - /usr/bin/curl
+              args:
+                - '-X POST'
+                - 'http://$(FIREFLY_III_IMPORTER_URL)/autoimport?directory=/import&secret=$(AUTO_IMPORT_SECRET)'
+              env:
+                - name: AUTO_IMPORT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: firefly-credentials
+                      key: autoimportsecret
+                - name: FIREFLY_III_IMPORTER_URL
+                  value: 'firefly-importer.firefly.svc.cluster.local:8080'
+          restartPolicy: OnFailure
