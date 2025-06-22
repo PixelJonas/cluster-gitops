@@ -22,7 +22,7 @@ spec:
               firefly:
                 image:
                   repository: docker.io/fireflyiii/core
-                  tag: version-6.2.17
+                  tag: version-6.2.18
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin
