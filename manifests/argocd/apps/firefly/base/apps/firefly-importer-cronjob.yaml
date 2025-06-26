@@ -13,18 +13,14 @@ spec:
         spec:
           containers:
             - name: firefly-import-cron
-              image: 'quay.io/openshift/origin-cli:4.20'
-              command:
-                - /usr/bin/curl
+              image: quay.io/openshift/origin-cli:4.20
+              command: ["/bin/bash", "-c"]
               args:
-                - '-X POST'
-                - 'http://$(FIREFLY_III_IMPORTER_URL)/autoimport?directory=/import&secret=$(AUTO_IMPORT_SECRET)'
-              env:
-                - name: AUTO_IMPORT_SECRET
-                  valueFrom:
-                    secretKeyRef:
-                      name: firefly-credentials
-                      key: autoimportsecret
-                - name: FIREFLY_III_IMPORTER_URL
-                  value: 'firefly-importer.firefly.svc.cluster.local:8080'
+                - |-
+                  set -e
+
+                  echo -----------------------------------
+                  echo "Starting auto-import of bank statements"
+                  kubectl exec -n firefly deploy/firefly-importer --container firefly-importer -- /bin/bash -c 'php artisan importer:import /import/config.json'
+                  echo -----------------------------------
           restartPolicy: OnFailure
