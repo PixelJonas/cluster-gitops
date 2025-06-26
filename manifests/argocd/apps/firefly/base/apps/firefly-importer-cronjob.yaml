@@ -11,6 +11,7 @@ spec:
     spec:
       template:
         spec:
+          serviceAccountName: pipeline
           containers:
             - name: firefly-import-cron
               image: quay.io/openshift/origin-cli:4.20
