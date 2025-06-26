@@ -22,6 +22,6 @@ spec:
 
                   echo -----------------------------------
                   echo "Starting auto-import of bank statements"
-                  kubectl exec -n firefly deploy/firefly-importer --container firefly-importer -- /bin/bash -c 'php artisan importer:import /import/config.json'
+                  kubectl exec -n firefly deploy/firefly-importer --container firefly-importer -- /bin/bash -c 'php artisan importer:import /import/config.json' || true
                   echo -----------------------------------
           restartPolicy: OnFailure
