@@ -50,6 +50,7 @@ spec:
                   PAPERLESS_TIKA_ENABLED: 1
                   PAPERLESS_TIKA_GOTENBERG_ENDPOINT: http://localhost:3000
                   PAPERLESS_TIKA_ENDPOINT: http://localhost:9998
+                  PAPERLESS_CONSUMPTION_DIR: /consume
                   PAPERLESS_PRE_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/pdf_rm_blank.sh
                   PAPERLESS_POST_CONSUME_SCRIPT: /usr/src/paperless/custom-scripts/paperless_post_consume.sh
                   PAPERLESS_ENABLE_HTTP_REMOTE_USER: "true"
@@ -125,6 +126,10 @@ spec:
             accessMode: ReadWriteOnce            
             storageClass: openebs-jiva-csi-default
             size: 15Gi
+          consume:
+            globalMounts:
+              - path: /consume
+            existingClaim: nfs-paperless-consume
           export:
             globalMounts:
               - path: /usr/src/paperless/export

@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv-paperless-consume
+spec:
+  accessModes:
+    - ReadWriteMany
+  capacity:
+    storage: 1Gi
+  claimRef:
+    apiVersion: v1
+    kind: PersistentVolumeClaim
+    name: nfs-paperless-consume
+    namespace: paperless
+  nfs:
+    path: /volume1/configs/paperless/consume
+    server: 10.42.2.92
+  mountOptions:
+    - nfsvers=4
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs-custom
+  volumeMode: Filesystem
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: nfs-paperless-consume
+  namespace: paperless
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 1Gi
+  storageClassName: nfs-custom
+  volumeMode: Filesystem
+  volumeName: pv-paperless-consume
