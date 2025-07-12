@@ -21,8 +21,6 @@ spec:
           dnsConfig:
             nameservers:
               - 172.30.0.10
-              - 10.42.0.1
-              - 192.168.1.1
             searches:
               - svc.cluster.local
               - cluster.local
