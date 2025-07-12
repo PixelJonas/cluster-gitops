@@ -36,7 +36,7 @@ spec:
               n8n:
                 image:
                   repository: docker.io/n8nio/n8n
-                  tag: 1.101.1
+                  tag: 1.102.1
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin
