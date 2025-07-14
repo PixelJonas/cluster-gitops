@@ -30,6 +30,12 @@ spec:
                   APP_DEBUG: true
                   LOG_LEVEL: debug
                   LOG_CHANNEL: stack
+                  ENABLE_MAIL_REPORT: true
+                  MAIL_DESTINATION:
+                    valueFrom:
+                      secretKeyRef:
+                        name: firefly-credentials
+                        key: maildestination
                   MAIL_MAILER: smtp
                   MAIL_ENCRYPTION: ssl
                   MAIL_PORT: 465
