@@ -44,7 +44,7 @@ spec:
                       secretKeyRef:
                         name: firefly-credentials
                         key: mailhost
-                  MAIL_FROM:
+                  MAIL_FROM_ADDRESS:
                     valueFrom:
                       secretKeyRef:
                         name: firefly-credentials
