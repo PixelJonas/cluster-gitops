@@ -27,6 +27,9 @@ spec:
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin
+                  APP_DEBUG: true
+                  LOG_LEVEL: debug
+                  LOG_CHANNEL: stack
                   MAIL_MAILER: smtp
                   MAIL_ENCRYPTION: ssl
                   MAIL_PORT: 465
