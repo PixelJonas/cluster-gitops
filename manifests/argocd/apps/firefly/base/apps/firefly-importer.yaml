@@ -64,11 +64,6 @@ spec:
                       secretKeyRef:
                         name: firefly-credentials
                         key: trustedproxies
-                  FIREFLY_III_ACCESS_TOKEN:
-                    valueFrom:
-                      secretKeyRef:
-                        name: firefly-credentials
-                        key: fireflyaccesstoken
                   FIREFLY_III_URL: http://firefly.firefly.svc.cluster.local:8080
                   VANITY_URL:
                     valueFrom:
@@ -90,6 +85,11 @@ spec:
                       secretKeyRef:
                         name: firefly-credentials
                         key: autoimportsecret
+                  FIREFLY_III_CLIENT_ID:
+                    valueFrom:
+                      secretKeyRef:
+                        name: firefly-credentials
+                        key: autoimportclientid
                   CAN_POST_AUTOIMPORT: true
                   IMPORT_DIR_ALLOWLIST: /import
                   CAN_POST_FILES: true
