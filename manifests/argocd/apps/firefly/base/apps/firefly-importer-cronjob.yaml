@@ -62,7 +62,8 @@ spec:
                     secretKeyRef:
                       name: firefly-credentials
                       key: trustedproxies
-                  FIREFLY_III_URL: http://firefly.firefly.svc.cluster.local:8080
+                - name: FIREFLY_III_URL
+                  value: http://firefly.firefly.svc.cluster.local:8080
                 - name: VANITY_URL
                   valueFrom:
                     secretKeyRef:
