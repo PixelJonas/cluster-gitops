@@ -14,14 +14,88 @@ spec:
           serviceAccountName: pipeline
           containers:
             - name: firefly-import-cron
-              image: quay.io/openshift/origin-cli:4.20
-              command: ["/bin/bash", "-c"]
-              args:
-                - |-
-                  set -e
-
-                  echo -----------------------------------
-                  echo "Starting auto-import of bank statements"
-                  kubectl exec -n firefly deploy/firefly-importer --container firefly-importer -- /bin/bash -c 'php artisan importer:import /import/config.json' || true
-                  echo -----------------------------------
+              image: docker.io/fireflyiii/data-importer:latest-cli
+              env:
+                - name: TZ
+                  value: Europe/Berlin
+                - name: APP_DEBUG
+                  value: "true"
+                - name: LOG_LEVEL
+                  value: debug
+                - name: LOG_CHANNEL
+                  value: stack
+                - name: ENABLE_MAIL_REPORT
+                  value: "true"
+                - name: MAIL_DESTINATION
+                  valueFrom:
+                    secretKeyRef:
+                      name: firefly-credentials
+                      key: maildestination
+                - name: MAIL_MAILER
+                  value: smtp
+                - name: MAIL_ENCRYPTION
+                  value: ssl
+                - name: MAIL_PORT
+                  value: 465
+                - name: MAIL_HOST
+                  valueFrom:
+                    secretKeyRef:
+                      name: firefly-credentials
+                      key: mailhost
+                - name: MAIL_FROM_ADDRESS
+                  valueFrom:
+                    secretKeyRef:
+                      name: firefly-credentials
+                      key: mailfrom
+                - name: MAIL_USERNAME
+                  valueFrom:
+                    secretKeyRef:
+                      name: firefly-credentials
+                      key: mailusername
+                - name: MAIL_PASSWORD
+                  valueFrom:
+                    secretKeyRef:
+                      name: firefly-credentials
+                      key: mailpassword
+                - name: TRUSTED_PROXIES 
+                  valueFrom:
+                    secretKeyRef:
+                      name: firefly-credentials
+                      key: trustedproxies
+                  FIREFLY_III_URL: http://firefly.firefly.svc.cluster.local:8080
+                - name: VANITY_URL
+                  valueFrom:
+                    secretKeyRef:
+                      name: firefly-credentials
+                      key: appurl
+                - name: NORDIGEN_ID
+                  valueFrom:
+                    secretKeyRef:
+                      name: firefly-credentials
+                      key: fireflynordigenid
+                - name: NORDIGEN_KEY
+                  valueFrom:
+                    secretKeyRef:
+                      name: firefly-credentials
+                      key: fireflynordigenkey
+                - name: AUTO_IMPORT_SECRET
+                  valueFrom:
+                    secretKeyRef:
+                      name: firefly-credentials
+                      key: autoimportsecret
+                - name: FIREFLY_III_ACCESS_TOKEN
+                  valueFrom:
+                    secretKeyRef:
+                      name: firefly-credentials
+                      key: fireflyaccesstoken
+                - name: CAN_POST_AUTOIMPORT
+                  value: "true"
+                - name: IMPORT_DIR_ALLOWLIST
+                  value: /import
+                - name: CAN_POST_FILES
+                  value: "true"
+                - name: ENABLE_MAIL_REPORT
+                  value: "true"
+                - name: EXPECT_SECURE_URL
+                  value: "true"
           restartPolicy: OnFailure
