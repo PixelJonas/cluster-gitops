@@ -27,6 +27,8 @@ spec:
                   value: Europe/Berlin
                 - name: APP_DEBUG
                   value: "true"
+                - name: IGNORE_DUPLICATE_ERRORS
+                  value: "true"
                 - name: LOG_LEVEL
                   value: debug
                 - name: LOG_CHANNEL
