@@ -12,9 +12,16 @@ spec:
       template:
         spec:
           serviceAccountName: pipeline
+          volumes:
+            - name: import
+              persistentVolumeClaim:
+                claimName: firefly-importer
           containers:
             - name: firefly-import-cron
               image: docker.io/fireflyiii/data-importer:latest-cli
+              volumeMounts:
+              - name: import
+                mountPath: /import
               env:
                 - name: TZ
                   value: Europe/Berlin
