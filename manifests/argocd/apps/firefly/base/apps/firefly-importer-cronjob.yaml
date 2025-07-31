@@ -12,6 +12,13 @@ spec:
       template:
         spec:
           serviceAccountName: pipeline
+          podFailurePolicy:
+            rules:
+              - action: Ignore
+                onExitCodes:
+                  containerName: firefly-import-cron
+                  operator: NotIn
+                  values: [0]
           volumes:
             - name: import
               persistentVolumeClaim:
