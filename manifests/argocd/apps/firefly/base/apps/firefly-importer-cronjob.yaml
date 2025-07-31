@@ -115,4 +115,4 @@ spec:
                   value: "true"
                 - name: EXPECT_SECURE_URL
                   value: "true"
-          restartPolicy: OnFailure
+          restartPolicy: Never
