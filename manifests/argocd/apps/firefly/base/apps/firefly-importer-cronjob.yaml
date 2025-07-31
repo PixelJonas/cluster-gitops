@@ -36,7 +36,7 @@ spec:
                 - name: MAIL_ENCRYPTION
                   value: ssl
                 - name: MAIL_PORT
-                  value: 465
+                  value: "465"
                 - name: MAIL_HOST
                   valueFrom:
                     secretKeyRef:
