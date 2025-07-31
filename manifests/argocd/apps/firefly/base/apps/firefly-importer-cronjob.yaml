@@ -8,14 +8,14 @@ metadata:
 spec:
   schedule: "0 3 * * *"
   jobTemplate:
-    podFailurePolicy:
-      rules:
-        - action: Ignore
-          onExitCodes:
-            containerName: firefly-import-cron
-            operator: NotIn
-            values: [0]
     spec:
+      podFailurePolicy:
+        rules:
+          - action: Ignore
+            onExitCodes:
+              containerName: firefly-import-cron
+              operator: NotIn
+              values: [0]
       template:
         spec:
           serviceAccountName: pipeline
