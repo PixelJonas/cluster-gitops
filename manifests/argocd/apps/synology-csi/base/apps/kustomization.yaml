@@ -12,3 +12,15 @@ resources:
   - https://raw.githubusercontent.com/SynologyOpenSource/synology-csi/refs/heads/main/deploy/kubernetes/v1.20/csi-driver.yml
   - https://raw.githubusercontent.com/SynologyOpenSource/synology-csi/refs/heads/main/deploy/kubernetes/v1.20/node.yml
   - https://raw.githubusercontent.com/SynologyOpenSource/synology-csi/refs/heads/main/deploy/kubernetes/v1.20/snapshotter/snapshotter.yaml
+
+
+patches:
+  - target:
+      group: apps
+      version: v1
+      kind: DaemonSet
+      name: synology-csi-node
+    patch: |-
+      - op: replace
+        path: /spec/template/spec/containers/1/image
+        value: synology/synology-csi@sha256:dae77abe791ded7e26a4b1756b8504711972ebfd3515b64b2691a45337260e77
