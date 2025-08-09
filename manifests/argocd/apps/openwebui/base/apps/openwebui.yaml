@@ -27,7 +27,7 @@ spec:
               openwebui:
                 image:
                   repository: ghcr.io/open-webui/open-webui
-                  tag: git-4ce1e88
+                  tag: git-9a145c5
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin
