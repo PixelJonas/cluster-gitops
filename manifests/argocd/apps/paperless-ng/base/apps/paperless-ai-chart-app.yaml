@@ -85,6 +85,13 @@ spec:
             accessMode: ReadWriteOnce
             storageClass: lvms-vg1
             size: 1Gi
+          cache:
+            enabled: true
+            globalMounts:
+              - path: /app/.cache
+            accessMode: ReadWriteOnce
+            storageClass: lvms-vg1
+            size: 1Gi
           pm2:
             enabled: true
             globalMounts:
