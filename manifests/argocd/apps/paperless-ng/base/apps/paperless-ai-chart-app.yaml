@@ -87,6 +87,13 @@ spec:
             accessMode: ReadWriteOnce
             storageClass: lvms-vg1
             size: 1Gi
+          openapi:
+            enabled: true
+            globalMounts:
+              - path: /app/OPENAPI
+            accessMode: ReadWriteOnce
+            storageClass: lvms-vg1
+            size: 1Gi
           nltk-data:
             enabled: true
             globalMounts:
