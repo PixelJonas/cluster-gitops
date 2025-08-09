@@ -88,7 +88,7 @@ spec:
           cache:
             enabled: true
             globalMounts:
-              - path: /app/.cache
+              - path: /.cache
             accessMode: ReadWriteOnce
             storageClass: lvms-vg1
             size: 1Gi
