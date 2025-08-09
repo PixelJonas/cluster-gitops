@@ -28,6 +28,11 @@ spec:
                   RAG_SERVICE_ENABLED: "true"
                   RAG_SERVICE_URL: http://localhost:8000
                   PAPERLESS_AI_PORT: 3000
+                  PAPERLESS_URL:
+                    valueFrom:
+                      secretKeyRef:
+                        name: paperless-ai-credentials
+                        key: paperless-ai-paperless-api-url
                   PAPERLESS_API_URL:
                     valueFrom:
                       secretKeyRef:
