@@ -58,7 +58,21 @@ spec:
             accessMode: ReadWriteOnce
             storageClass: lvms-vg1
             size: 3Gi
-  
+          pm2:
+            enabled: true
+            globalMounts:
+              - path: /.pm2
+            accessMode: ReadWriteOnce
+            storageClass: lvms-vg1
+            size: 1Gi
+          nltk_data:
+            enabled: true
+            globalMounts:
+              - path: /nltk_data
+            accessMode: ReadWriteOnce
+            storageClass: lvms-vg1
+            size: 5Gi
+
   project: cluster-apps
   syncPolicy:
     syncOptions:
