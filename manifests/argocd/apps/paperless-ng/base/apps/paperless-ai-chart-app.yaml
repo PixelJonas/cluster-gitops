@@ -1,0 +1,68 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: paperless-ai
+  namespace: argocd-operator-system
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+spec:
+  destination:
+    namespace: paperless
+    server: "https://kubernetes.default.svc"
+  source:
+    chart: app-template
+    repoURL: https://bjw-s-labs.github.io/helm-charts
+    targetRevision: 4.2.0
+    helm:
+      values: |-
+
+        controllers:
+          paperlessai:
+            containers:
+              paperlessai:
+                image:
+                  repository: docker.io/clusterzx/paperless-ai
+                  tag: 3.0.7
+                  pullPolicy: IfNotPresent
+                env:
+                  RAG_SERVICE_ENABLED: "true"
+                  RAG_SERVICE_URL: http://localhost:8000
+                  PAPERLESS_AI_PORT: 3000
+
+        service:
+          paperlessai:
+            controller: paperlessai
+            ports:
+              http:
+                port: 3000
+
+        ingress:
+          paperlessai:
+            enabled: true
+            className: openshift-default
+            annotations:
+              route.openshift.io/termination: "edge"
+            hosts:
+              - host: paperlessai.apps.sno-cluster.janz.digital
+                paths:
+                  - path: /
+                    service:
+                      identifier: paperlessai
+                      port: http
+
+        persistence:
+          data:
+            enabled: true
+            globalMounts:
+              - path: /app/data
+            accessMode: ReadWriteOnce
+            storageClass: lvms-vg1
+            size: 3Gi
+  
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

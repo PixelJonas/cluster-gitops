@@ -7,6 +7,7 @@ resources:
   - paperless-consume-pvc.yaml
   - external-postgresql-credentials.yaml
   - postgresql-chart.yaml
+  - paperless-ai-chart-app.yaml
   - paperless-backup-app.yaml
   - anyuid-rolebinding.yaml
   - privileged-rolebinding.yaml
