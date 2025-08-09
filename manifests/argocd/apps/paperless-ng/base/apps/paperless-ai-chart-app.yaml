@@ -36,12 +36,12 @@ spec:
                   PAPERLESS_API_TOKEN:
                     valueFrom:
                       secretKeyRef:
-                        name: paperless-ai-api-token
+                        name: paperless-ai-credentials
                         key: paperless-ai-paperless-api-token
                   OPENAI_API_KEY:
                     valueFrom:
                       secretKeyRef:
-                        name: paperless-ai-api-token
+                        name: paperless-ai-credentials
                         key: paperless-ai-openai-key
 
         service:

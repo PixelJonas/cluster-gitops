@@ -6,6 +6,7 @@ resources:
   - paperless-export-pvc.yaml
   - paperless-consume-pvc.yaml
   - external-postgresql-credentials.yaml
+  - external-paperless-ai-credentials.yaml
   - postgresql-chart.yaml
   - paperless-ai-chart-app.yaml
   - paperless-backup-app.yaml
