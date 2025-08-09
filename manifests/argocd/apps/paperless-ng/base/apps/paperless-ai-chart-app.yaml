@@ -65,7 +65,7 @@ spec:
             accessMode: ReadWriteOnce
             storageClass: lvms-vg1
             size: 1Gi
-          nltk_data:
+          nltk-data:
             enabled: true
             globalMounts:
               - path: /nltk_data
