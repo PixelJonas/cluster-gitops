@@ -90,7 +90,7 @@ spec:
           public:
             enabled: true
             globalMounts:
-              - path: /app/public
+              - path: /app/public/images
             accessMode: ReadWriteOnce
             storageClass: lvms-vg1
             size: 10Gi
