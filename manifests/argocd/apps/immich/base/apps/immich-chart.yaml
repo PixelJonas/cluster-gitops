@@ -92,6 +92,11 @@ spec:
             ports:
               http:
                 port: 6379
+          machine-learning:
+            controller: machine-learning
+            ports:
+              http:
+                port: 3003
 
         ingress:
           immich:
