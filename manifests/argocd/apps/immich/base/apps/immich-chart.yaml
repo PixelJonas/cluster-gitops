@@ -27,7 +27,7 @@ spec:
                 env:
                   UPLOAD_LOCATION: "/library"
                   THUMB_LOCATION: "/storage/thumbs"
-                  ENCODED_VIDEO_LOCATION: "/storage/thumbs"
+                  ENCODED_VIDEO_LOCATION: "/storage/encoded-video"
                   PROFILE_LOCATION: "/storage/profile"
                   BACKUP_LOCATION: "/backup"
                   DB_DATABASE_NAME: immich
