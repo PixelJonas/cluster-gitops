@@ -108,7 +108,7 @@ spec:
             size: 2000Gi
           cache:
             enabled: true
-             globalMounts:
+            globalMounts:
               - path: /cache
             accessMode: ReadWriteOnce
             storageClass: nfs
