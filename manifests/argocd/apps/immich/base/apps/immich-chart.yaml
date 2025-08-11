@@ -110,8 +110,10 @@ spec:
         persistence:
           library:
             enabled: true
-            globalMounts:
-              - path: /data
+            advancedMounts:
+              server:
+                server:
+                  - path: /data
             accessMode: ReadWriteOnce
             storageClass: nfs
             size: 2000Gi
