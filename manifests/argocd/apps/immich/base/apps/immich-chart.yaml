@@ -72,8 +72,6 @@ spec:
                       secretKeyRef:
                         name: immich-credentials
                         key: password
-          machine-learning:
-
 
         service:
           database:
