@@ -70,3 +70,53 @@ spec:
                       secretKeyRef:
                         name: immich-credentials
                         key: password
+
+        service:
+          database:
+            controller: server
+            ports:
+              http:
+                port: 5432
+          server:
+            controller: server
+            ports:
+              http:
+                port: 2283
+
+        ingress:
+          immich:
+            enabled: true
+            className: openshift-default
+            annotations:
+              route.openshift.io/termination: "edge"
+            hosts:
+              - host: immich.apps.sno-cluster.janz.digital
+                paths:
+                  - path: /
+                    service:
+                      identifier: server
+                      port: http
+  
+
+        persistence:
+          library:
+            enabled: true
+            globalMounts:
+              - path: /library
+            accessMode: ReadWriteOnce
+            storageClass: nfs
+            size: 2000Gi
+          cache:
+            enabled: true
+             globalMounts:
+              - path: /cache
+            accessMode: ReadWriteOnce
+            storageClass: nfs
+            size: 20Gi
+          database:
+            enabled: true
+            globalMounts:
+              - path: /var/lib/postgresql/data
+            accessMode: ReadWriteOnce
+            storageClass: lvms-vg1
+            size: 20Gi
