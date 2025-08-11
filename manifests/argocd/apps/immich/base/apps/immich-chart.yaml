@@ -26,9 +26,9 @@ spec:
                   pullPolicy: IfNotPresent
                 env:
                   UPLOAD_LOCATION: "/library"
-                  THUMB_LOCATION: "/storage/thumbs"
-                  ENCODED_VIDEO_LOCATION: "/storage/encoded-video"
-                  PROFILE_LOCATION: "/storage/profile"
+                  THUMB_LOCATION: "/data/thumbs"
+                  ENCODED_VIDEO_LOCATION: "/data/encoded-video"
+                  PROFILE_LOCATION: "/data/profile"
                   BACKUP_LOCATION: "/backup"
                   DB_DATABASE_NAME: immich
                   REDIS_HOSTNAME: immich-redis.immich.svc.cluster.local
@@ -130,7 +130,7 @@ spec:
           data:
             enabled: true
             globalMounts:
-              - path: /storage
+              - path: /data
             accessMode: ReadWriteOnce
             storageClass: lvms-vg1
             size: 20Gi
