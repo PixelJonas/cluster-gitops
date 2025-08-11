@@ -42,11 +42,15 @@ spec:
                       secretKeyRef:
                         name: immich-credentials
                         key: password
+          machine-learning:
+            containers:
               machine-learning:
                 image:
                   repository: ghcr.io/immich-app/immich-machine-learning
                   tag: v1.137.3
                   pullPolicy: IfNotPresent
+          redis:
+            containers:
               redis:
                 image:
                   repository: docker.io/valkey/valkey
