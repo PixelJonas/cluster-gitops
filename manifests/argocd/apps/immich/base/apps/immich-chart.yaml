@@ -46,8 +46,8 @@ spec:
                   repository: ghcr.io/immich-app/immich-machine-learning
                   tag: v1.137.3
                   pullPolicy: IfNotPresent
-              env:
-                REDIS_HOSTNAME: immich-redis.immich.svc.cluster.local
+                env:
+                  REDIS_HOSTNAME: immich-redis.immich.svc.cluster.local
           redis:
             containers:
               redis:
