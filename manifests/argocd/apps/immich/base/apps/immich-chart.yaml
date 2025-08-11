@@ -42,7 +42,34 @@ spec:
                       secretKeyRef:
                         name: immich-credentials
                         key: password
-
+              machine-learning:
+                image:
+                  repository: ghcr.io/immich-app/immich-machine-learning
+                  tag: v1.137.3
+                  pullPolicy: IfNotPresent
+              redis:
+                image:
+                  repository: docker.io/valkey/valkey
+                  tag: 8-bookworm@sha256:facc1d2c3462975c34e10fccb167bfa92b0e0dbd992fc282c29a61c3243afb11
+                  pullPolicy: IfNotPresent
+              database:
+                image:
+                  repository: ghcr.io/immich-app/postgres
+                  tag: 15-vectorchord0.4.2-pgvectors0.3.0@sha256:32324a2f41df5de9efe1af166b7008c3f55646f8d0e00d9550c16c9822366b4a
+                  pullPolicy: IfNotPresent
+                env:
+                  POSTGRES_DB: immich
+                  POSTGRES_INITDB_ARGS: '--data-checksums'
+                  POSTGRES_USER:
+                    valueFrom: 
+                      secretKeyRef:
+                        name: immich-credentials
+                        key: user                    
+                  POSTGRES_PASSWORD:
+                    valueFrom: 
+                      secretKeyRef:
+                        name: immich-credentials
+                        key: password
 
         service:
           database:
@@ -93,7 +120,3 @@ spec:
             accessMode: ReadWriteOnce
             storageClass: lvms-vg1
             size: 20Gi
-
-  syncPolicy:
-    syncOptions:
-      - CreateNamespace=true
