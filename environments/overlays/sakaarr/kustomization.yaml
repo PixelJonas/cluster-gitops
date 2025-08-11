@@ -24,6 +24,7 @@ resources:
   - ../../../manifests/argocd/apps/openwebui/base
   - ../../../manifests/argocd/apps/firefly/base
   - ../../../manifests/argocd/apps/n8n/base
+  - ../../../manifests/argocd/apps/immich/base
 
   - ../../../manifests/argocd/apps/cert-manager/overlays/sakaarr
   - ../../../manifests/argocd/apps/paperless-ng/overlays/sakaarr
