@@ -24,54 +24,49 @@ spec:
                   repository: ghcr.io/immich-app/immich-server
                   tag: v1.137.3
                   pullPolicy: IfNotPresent
-
-
-        service:
-          database:
-            controller: server
-            ports:
-              http:
-                port: 5432
-          server:
-            controller: server
-            ports:
-              http:
-                port: 2283
-
-        ingress:
-          immich:
-            enabled: true
-            className: openshift-default
-            annotations:
-              route.openshift.io/termination: "edge"
-            hosts:
-              - host: immich.apps.sno-cluster.janz.digital
-                paths:
-                  - path: /
-                    service:
-                      identifier: server
-                      port: http
-  
-
-        persistence:
-          library:
-            enabled: true
-            globalMounts:
-              - path: /library
-            accessMode: ReadWriteOnce
-            storageClass: nfs
-            size: 2000Gi
-          cache:
-            enabled: true
-             globalMounts:
-              - path: /cache
-            accessMode: ReadWriteOnce
-            storageClass: nfs
-            size: 20Gi
-          database:
-            enabled: true
-             globalMounts:
-              - path: /var/lib/postgresql/data
-            accessMode: ReadWriteOnce
-            storageClass: lvms-vg1
-            size: 20Gi
+                env:
+                  UPLOAD_LOCATION: "/library"
+                  DB_DATABASE_NAME: immich
+                  DB_URL:
+                    valueFrom:
+                      secretKeyRef:
+                        name: immich-credentials
+                        key: url
+                  DB_USERNAME:
+                    valueFrom: 
+                      secretKeyRef:
+                        name: immich-credentials
+                        key: user
+                  DB_PASSWORD:
+                    valueFrom: 
+                      secretKeyRef:
+                        name: immich-credentials
+                        key: password
+              machine-learning:
+                image:
+                  repository: ghcr.io/immich-app/immich-machine-learning
+                  tag: v1.137.3
+                  pullPolicy: IfNotPresent
+              redis:
+                image:
+                  repository: docker.io/valkey/valkey
+                  tag: 8-bookworm@sha256:facc1d2c3462975c34e10fccb167bfa92b0e0dbd992fc282c29a61c3243afb11
+                  pullPolicy: IfNotPresent
+              database:
+                image:
+                  repository: ghcr.io/immich-app/postgres
+                  tag: 15-vectorchord0.4.2-pgvectors0.3.0@sha256:32324a2f41df5de9efe1af166b7008c3f55646f8d0e00d9550c16c9822366b4a
+                  pullPolicy: IfNotPresent
+                env:
+                  POSTGRES_DB: immich
+                  POSTGRES_INITDB_ARGS: '--data-checksums'
+                  POSTGRES_USER:
+                    valueFrom: 
+                      secretKeyRef:
+                        name: immich-credentials
+                        key: user                    
+                  POSTGRES_PASSWORD:
+                    valueFrom: 
+                      secretKeyRef:
+                        name: immich-credentials
+                        key: password
