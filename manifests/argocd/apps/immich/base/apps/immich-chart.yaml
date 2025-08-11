@@ -95,7 +95,7 @@ spec:
             controller: redis
             ports:
               http:
-                port: 2283
+                port: 6379
 
         ingress:
           immich:
