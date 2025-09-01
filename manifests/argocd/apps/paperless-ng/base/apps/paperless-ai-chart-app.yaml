@@ -25,7 +25,7 @@ spec:
                   tag: unreleased
                   pullPolicy: IfNotPresent
                 env:
-                  PAPERLESS_BASE_URL: "http://paperless-ng.paperless.svc.cluster.local:8000/"
+                  PAPERLESS_BASE_URL: "https://paperless.apps.sno-cluster.janz.digital/"
                   PAPERLESS_API_TOKEN:
                     valueFrom:
                       secretKeyRef:
