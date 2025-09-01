@@ -100,7 +100,7 @@ spec:
             accessMode: ReadWriteOnce
             storageClass: lvms-vg1
             size: 5Gi
-          local_files:
+          local-files:
             enabled: true
             globalMounts:
               - path: /app/local_files
