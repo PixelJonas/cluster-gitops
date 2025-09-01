@@ -31,6 +31,11 @@ spec:
                       secretKeyRef:
                         name: paperless-ai-credentials
                         key: paperless-api-key
+                  PAPERLESS_TOKEN:
+                    valueFrom:
+                      secretKeyRef:
+                        name: paperless-ai-credentials
+                        key: paperless-api-key
                   PAPERLESS_PUBLIC_URL:
                     valueFrom:
                       secretKeyRef:
