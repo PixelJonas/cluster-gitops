@@ -57,7 +57,7 @@ spec:
                   LOCAL_HOCR_PATH: "/app/local_files/hocr"
                   CREATE_LOCAL_PDF: "true"
                   LOCAL_PDF_PATH: "/app/local_files/pdf"
-                  OCR_LIMIT_PAGES: "0"
+                  OCR_LIMIT_PAGES: "5"
                   PDF_SKIP_EXISTING_OCR: "false"
                   PDF_UPLOAD: "true"
                   PDF_REPLACE: "true"
