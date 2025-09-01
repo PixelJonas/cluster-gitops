@@ -22,7 +22,7 @@ spec:
               paperlessai:
                 image:
                   repository: ghcr.io/icereed/paperless-gpt
-                  tag: v0.22.0
+                  tag: unreleased
                   pullPolicy: IfNotPresent
                 env:
                   PAPERLESS_BASE_URL: "http://paperless-ng.paperless.svc.cluster.local:8000"
