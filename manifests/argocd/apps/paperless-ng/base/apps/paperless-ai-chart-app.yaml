@@ -43,6 +43,7 @@ spec:
                         key: paperless-public-url
                   LLM_PROVIDER: "openai"
                   LLM_MODEL: "gpt-4o"
+                  LLM_LANGUAGE: "German"
                   OPENAI_API_KEY:
                     valueFrom:
                       secretKeyRef:
