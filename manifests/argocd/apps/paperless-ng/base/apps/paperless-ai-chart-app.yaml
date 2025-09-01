@@ -28,14 +28,14 @@ spec:
                   PAPERLESS_BASE_URL: "http://paperless-ng.paperless.svc.cluster.local:8000"
                   PAPERLESS_API_TOKEN:
                     valueFrom:
-                    secretKeyRef:
-                      name: paperless-ai-credentials
-                      key: paperless-api-key
+                      secretKeyRef:
+                        name: paperless-ai-credentials
+                        key: paperless-api-key
                   PAPERLESS_PUBLIC_URL:
                     valueFrom:
-                    secretKeyRef:
-                      name: paperless-ai-credentials
-                      key: paperless-public-url
+                      secretKeyRef:
+                        name: paperless-ai-credentials
+                        key: paperless-public-url
                   LLM_PROVIDER: "openai"
                   LLM_MODEL: "gpt-5"
                   OPENAI_API_KEY:
