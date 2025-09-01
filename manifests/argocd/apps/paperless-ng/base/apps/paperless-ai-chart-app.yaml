@@ -53,6 +53,11 @@ spec:
                   VISION_LLM_PROVIDER: "openai"
                   VISION_LLM_MODEL: "gpt-4o"
                   OCR_PROCESS_MODE: "image"
+                  CREATE_LOCAL_HOCR: "true"
+                  LOCAL_HOCR_PATH: "/app/local_files/hocr"
+                  CREATE_LOCAL_PDF: "true"
+                  LOCAL_PDF_PATH: "/app/local_files/pdf"
+                  OCR_LIMIT_PAGES: "0"
                   PDF_SKIP_EXISTING_OCR: "false"
                   PDF_UPLOAD: "true"
                   PDF_REPLACE: "true"
@@ -95,6 +100,13 @@ spec:
             accessMode: ReadWriteOnce
             storageClass: lvms-vg1
             size: 5Gi
+          local_files:
+            enabled: true
+            globalMounts:
+              - path: /app/local_files
+            accessMode: ReadWriteOnce
+            storageClass: lvms-vg1
+            size: 20Gi
 
   project: cluster-apps
   syncPolicy:
