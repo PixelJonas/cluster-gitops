@@ -51,7 +51,7 @@ spec:
                         key: paperless-ai-openai-key
                   OCR_PROVIDER: "llm"
                   VISION_LLM_PROVIDER: "openai"
-                  VISION_LLM_MODEL: "gpt-5"
+                  VISION_LLM_MODEL: "gpt-4.1"
                   OCR_PROCESS_MODE: "image"
                   PDF_SKIP_EXISTING_OCR: "false"
                   PDF_UPLOAD: "true"
