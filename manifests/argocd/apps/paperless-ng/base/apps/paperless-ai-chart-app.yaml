@@ -1,7 +1,7 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: paperless-ai
+  name: paperless-gpt
   namespace: argocd-operator-system
   annotations:
     argocd.argoproj.io/sync-wave: "111"
@@ -21,30 +21,43 @@ spec:
             containers:
               paperlessai:
                 image:
-                  repository: docker.io/clusterzx/paperless-ai
-                  tag: 3.0.7
+                  repository: ghcr.io/icereed/paperless-gpt
+                  tag: v0.22.0
                   pullPolicy: IfNotPresent
                 env:
-                  RAG_SERVICE_ENABLED: "true"
-                  RAG_SERVICE_URL: http://localhost:8000
-                  PAPERLESS_AI_PORT: 3000
+                  PAPERLESS_BASE_URL: "http://paperless-ng.paperless.svc.cluster.local:8000"
+                  PAPERLESS_API_TOKEN:
+                    valueFrom:
+                    secretKeyRef:
+                      name: paperless-ai-credentials
+                      key: paperless-api-key
+                  PAPERLESS_PUBLIC_URL:
+                    valueFrom:
+                    secretKeyRef:
+                      name: paperless-ai-credentials
+                      key: paperless-public-url
+                  LLM_PROVIDER: "openai"
+                  LLM_MODEL: "gpt-5"
                   OPENAI_API_KEY:
                     valueFrom:
                       secretKeyRef:
                         name: paperless-ai-credentials
                         key: paperless-ai-openai-key
+                  OCR_PROVIDER: "llm"
+                  VISION_LLM_PROVIDER: "openai"
+                  VISION_LLM_MODEL: "gpt-5"
+                  OCR_PROCESS_MODE: "image"
+                  PDF_SKIP_EXISTING_OCR: "false"
+                  PDF_UPLOAD: "true"
+                  PDF_OCR_TAGGING: "true"
+                  PDF_OCR_COMPLETE_TAG: "paperless-gpt-ocr-complete"
 
         service:
           paperlessai:
             controller: paperlessai
             ports:
               http:
-                port: 3000
-          paperlessai-ragz:
-            controller: paperlessai
-            ports:
-              http:
-                port: 8000
+                port: 8080
 
         ingress:
           paperlessai:
@@ -59,69 +72,15 @@ spec:
                     service:
                       identifier: paperlessai
                       port: http
-          paperlessai-ragz:
-            enabled: true
-            className: openshift-default
-            annotations:
-              route.openshift.io/termination: "edge"
-            hosts:
-              - host: ragz.apps.sno-cluster.janz.digital
-                paths:
-                  - path: /
-                    service:
-                      identifier: paperlessai-ragz
-                      port: http
 
         persistence:
-          data:
+          prompts:
             enabled: true
             globalMounts:
-              - path: /app/data
+              - path: /app/prompts
             accessMode: ReadWriteOnce
             storageClass: lvms-vg1
             size: 3Gi
-          logs:
-            enabled: true
-            globalMounts:
-              - path: /app/logs
-            accessMode: ReadWriteOnce
-            storageClass: lvms-vg1
-            size: 1Gi
-          public:
-            enabled: true
-            globalMounts:
-              - path: /app/public/images
-            accessMode: ReadWriteOnce
-            storageClass: lvms-vg1
-            size: 10Gi
-          cache:
-            enabled: true
-            globalMounts:
-              - path: /.cache
-            accessMode: ReadWriteOnce
-            storageClass: lvms-vg1
-            size: 10Gi
-          pm2:
-            enabled: true
-            globalMounts:
-              - path: /.pm2
-            accessMode: ReadWriteOnce
-            storageClass: lvms-vg1
-            size: 1Gi
-          openapi:
-            enabled: true
-            globalMounts:
-              - path: /app/OPENAPI
-            accessMode: ReadWriteOnce
-            storageClass: lvms-vg1
-            size: 1Gi
-          nltk-data:
-            enabled: true
-            globalMounts:
-              - path: /nltk_data
-            accessMode: ReadWriteOnce
-            storageClass: lvms-vg1
-            size: 5Gi
 
   project: cluster-apps
   syncPolicy:
