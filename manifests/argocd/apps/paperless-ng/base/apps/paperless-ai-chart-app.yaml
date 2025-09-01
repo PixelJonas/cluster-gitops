@@ -42,7 +42,7 @@ spec:
                         name: paperless-ai-credentials
                         key: paperless-public-url
                   LLM_PROVIDER: "openai"
-                  LLM_MODEL: "gpt-5"
+                  LLM_MODEL: "gpt-4o"
                   OPENAI_API_KEY:
                     valueFrom:
                       secretKeyRef:
