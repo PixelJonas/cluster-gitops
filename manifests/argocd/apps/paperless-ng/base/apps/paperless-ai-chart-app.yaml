@@ -16,18 +16,6 @@ spec:
     helm:
       values: |-
 
-        defaultPodOptions:  
-          dnsPolicy: None
-          dnsConfig:
-            nameservers:
-              - 172.30.0.10
-            searches:
-              - svc.cluster.local
-              - cluster.local
-              - sno-cluster.janz.digital
-              - janz.lan
-              - janz.digital
-
         controllers:
           paperlessai:
             containers:
@@ -37,7 +25,7 @@ spec:
                   tag: unreleased
                   pullPolicy: IfNotPresent
                 env:
-                  PAPERLESS_BASE_URL: "http://paperless-ng.paperless.svc.cluster.local:8000"
+                  PAPERLESS_BASE_URL: "http://paperless-ng.paperless.svc.cluster.local:8000/"
                   PAPERLESS_API_TOKEN:
                     valueFrom:
                       secretKeyRef:
