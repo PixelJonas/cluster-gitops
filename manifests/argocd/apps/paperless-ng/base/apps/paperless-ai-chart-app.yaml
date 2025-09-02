@@ -42,7 +42,7 @@ spec:
                         name: paperless-ai-credentials
                         key: paperless-public-url
                   LLM_PROVIDER: "openai"
-                  LLM_MODEL: "gpt-4o"
+                  LLM_MODEL: "gpt-4.1"
                   LLM_LANGUAGE: "German"
                   OPENAI_API_KEY:
                     valueFrom:
@@ -51,7 +51,7 @@ spec:
                         key: paperless-ai-openai-key
                   OCR_PROVIDER: "llm"
                   VISION_LLM_PROVIDER: "openai"
-                  VISION_LLM_MODEL: "gpt-4o"
+                  VISION_LLM_MODEL: "gpt-4.1"
                   OCR_PROCESS_MODE: "image"
                   CREATE_LOCAL_HOCR: "true"
                   LOCAL_HOCR_PATH: "/app/local_files/hocr"
