@@ -204,39 +204,26 @@ spec:
                 "
 
                 IN="$DOCUMENT_FILE_NAME"
-                # Check for PDF format
-                TYPE=$(file -b "$IN")
-
-                if [ "${TYPE%%,*}" != "PDF document" ]; then
-                  >&2 echo "Skipping $IN - non PDF [$TYPE]."
-                  exit 0
-                fi
-
-
                 OUT="${DOCUMENT_FILE_NAME}_tmp"
-                PAGES=$(pdfinfo "$IN" | awk '/Pages:/ {print $2}'
-                >&2 echo Total pages $PAGES
+                PAGES=$(pdfinfo "$IN" | grep ^Pages: | tr -dc '0-9')
                 echo "Starting to remove blank pages from $IN"
-
-                THRESHOLD=1 
-
                 non_blank() {
-                  for i in $(seq 1 $PAGES) ; do
-                    PERCENT=$(gs -o -  -dFirstPage=${i} -dLastPage=${i} -sDEVICE=ink_cov "${IN}" | grep CMYK | nawk 'BEGIN { sum=0; } {sum += $1 + $2 + $3 + $4;} END {  printf "%.5f\n", sum } ')
-                    >&2 echo -n "Color-sum in page $i is $PERCENT: "
-                    if awk "BEGIN { exit !($PERCENT > $THRESHOLD) }"; then
-                      echo $i
-                      >&2 echo "Page added to document"
-                    else
-                      >&2 echo "Page removed from document"
-                    fi
-                  done
+                    for i in $(seq 1 $PAGES)
+                    do
+                        if [ $(convert -density 25 "$IN[$((i-1))]" -define histogram:unique-colors=true -format %c histogram:info:- | wc -l) -gt 100 ]
+                        then
+                            echo $i
+                            #echo $i 1>&2
+                        fi
+                        echo -n . 1>&2
+                    done | tee out.tmp
+                    echo 1>&2
                 }
-                NON_BLANK=$(non_blank)
-                if [ -n "$NON_BLANK" ]; then
-                  NON_BLANK=$(echo $NON_BLANK  | tr ' ' ",")
-                  qpdf "$IN" --replace-input --pages . $NON_BLANK --
-                fi
+
+                set +x
+                pdftk "$IN" cat $(non_blank) output "$OUT"
+                rm out.tmp
+                mv "$OUT" "$IN"
                 echo "finishing removing blank pages from $IN"
 
               paperless_post_consume.sh: |-
