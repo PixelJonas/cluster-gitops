@@ -6,7 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "200"
 spec:
-  schedule: "0 3 * * *"
+  schedule: "0 7 * * 3"
   jobTemplate:
     spec:
       podFailurePolicy:
