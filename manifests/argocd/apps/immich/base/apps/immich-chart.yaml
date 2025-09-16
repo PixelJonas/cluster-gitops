@@ -22,7 +22,7 @@ spec:
               server:
                 image:
                   repository: ghcr.io/immich-app/immich-server
-                  tag: v1.137.3
+                  tag: v1.142.0
                   pullPolicy: IfNotPresent
                 env:
                   DB_DATABASE_NAME: immich
@@ -44,7 +44,7 @@ spec:
               machine-learning:
                 image:
                   repository: ghcr.io/immich-app/immich-machine-learning
-                  tag: v1.137.3
+                  tag: v1.142.0
                   pullPolicy: IfNotPresent
                 env:
                   REDIS_HOSTNAME: immich-redis.immich.svc.cluster.local
