@@ -11,10 +11,5 @@ parameters:
   dsm: 10.42.2.92
   csi.storage.k8s.io/node-stage-secret-name: synology-csi-smb-credentials
   csi.storage.k8s.io/node-stage-secret-namespace: synology-csi
-mountOptions:
-  - dir_mode=0770
-  - file_mode=0770
-  - uid=0
-  - gid=0
 reclaimPolicy: Retain
 allowVolumeExpansion: true
