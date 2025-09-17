@@ -22,10 +22,10 @@ spec:
 
                   echo -----------------------------------
                   echo "Running document_exporter in paperless container"
-                    kubectl exec deploy/paperless-ng --container main -- document_exporter /usr/src/paperless/export/
+                    kubectl exec deploy/paperless-ng --container paperless -- document_exporter /usr/src/paperless/export/
                   echo -----------------------------------
-                    kubectl exec deploy/paperless-ng --container main -- ls -lah /usr/src/paperless/export/
-                    kubectl exec deploy/paperless-ng --container main -- du -hs /usr/src/paperless/export
+                    kubectl exec deploy/paperless-ng --container paperless -- ls -lah /usr/src/paperless/export/
+                    kubectl exec deploy/paperless-ng --container paperless -- du -hs /usr/src/paperless/export
                   echo -----------------------------------
                   echo "Finished running document_exporter"
           restartPolicy: OnFailure
