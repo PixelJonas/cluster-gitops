@@ -129,8 +129,10 @@ spec:
           consume:
             globalMounts:
               - path: /consume
+            accessMode: ReadWriteOnce
             existingClaim: nfs-paperless-consume
           export:
+            accessMode: ReadWriteOnce
             globalMounts:
               - path: /usr/src/paperless/export
             existingClaim: syno-export-paperless
