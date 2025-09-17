@@ -126,16 +126,17 @@ spec:
             accessMode: ReadWriteOnce            
             storageClass: openebs-jiva-csi-default
             size: 15Gi
+          export:
+            enabled: true
+            globalMounts:
+              - path: /usr/src/paperless/export
+            accessMode: ReadWriteOnce            
+            storageClass: synology-smb-storage
+            size: 20Gi
           consume:
             globalMounts:
               - path: /consume
-            accessMode: ReadWriteOnce
             existingClaim: nfs-paperless-consume
-          export:
-            accessMode: ReadWriteOnce
-            globalMounts:
-              - path: /usr/src/paperless/export
-            existingClaim: syno-export-paperless
           custom-scripts:
             name: paperless-ng-custom-scripts
             enabled: true
