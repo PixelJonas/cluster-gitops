@@ -131,7 +131,7 @@ spec:
             globalMounts:
               - path: /usr/src/paperless/export
             accessMode: ReadWriteOnce            
-            storageClass: synology-smb-storage
+            storageClass: nfs
             size: 20Gi
           consume:
             globalMounts:
