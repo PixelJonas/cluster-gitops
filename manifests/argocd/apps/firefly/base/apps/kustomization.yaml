@@ -8,6 +8,7 @@ resources:
   - firefly-backup-app.yaml
   - firefly-cronjob.yaml
   - firefly-importer-cronjob.yaml
+  - pvc-firefly-importer-pvc.yaml
   - firefly.yaml
   - postgresql-chart.yaml
   - privileged-rolebinding.yaml
