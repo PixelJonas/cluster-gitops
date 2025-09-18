@@ -21,8 +21,8 @@ spec:
           serviceAccountName: pipeline
           volumes:
             - name: import
-              emptyDir:
-                sizeLimit: 50Mi
+              persistentVolumeClaim:
+                claimName: firefly-importer-pvc
           containers:
             - name: firefly-import-cron
               image: docker.io/fireflyiii/data-importer:latest-cli
