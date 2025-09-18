@@ -12,7 +12,6 @@ spec:
       scheme: https
       tlsConfig:
         insecureSkipVerify: true
-  jobLabel: name
   namespaceSelector:
     matchNames:
       - openshift-operators
