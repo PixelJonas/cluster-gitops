@@ -22,8 +22,8 @@ spec:
               firefly:
                 image:
                   repository: docker.io/fireflyiii/core
-                  tag: version-6.2.21
-                  pullPolicy: IfNotPresent
+                  tag: version-6.4.0
+                  pullPolicy: Always
                 env:
                   TZ: Europe/Berlin
                   APP_ENV: prod
