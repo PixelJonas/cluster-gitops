@@ -3,5 +3,4 @@ kind: Kustomization
 
 resources:
   - volsync-operator.yaml
-  - volsync-servicemonitor.yaml
   - clusterrolebdining.yaml
