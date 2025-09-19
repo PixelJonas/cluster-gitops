@@ -1,0 +1,29 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd.argoproj.io/sync-wave: "111"
+  name: volsync-operator
+  namespace: openshift-gitops
+spec:
+  destination:
+    namespace: volsync-system
+    server: "https://kubernetes.default.svc"
+  source:
+    repoURL: https://backube.github.io/helm-charts/
+    targetRevision: 0.13.0
+    chart: volsync
+    helm:
+      values: |-
+
+        manageCRDs: true
+        metrics:
+          disableAuth: true
+
+  project: cluster-apps
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+    automated:
+      prune: true
+      selfHeal: true

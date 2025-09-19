@@ -2,7 +2,7 @@ apiVersion: monitoring.coreos.com/v1
 kind: ServiceMonitor
 metadata:
   name: volsync-monitor
-  namespace: openshift-operators
+  namespace: volsync-system
   labels:
     control-plane: controller-manager
 spec:
@@ -14,7 +14,7 @@ spec:
         insecureSkipVerify: true
   namespaceSelector:
     matchNames:
-      - openshift-operators
+      - volsync-system
   selector:
     matchLabels:
       control-plane: controller-manager
