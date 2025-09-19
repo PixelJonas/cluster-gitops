@@ -4,7 +4,7 @@ metadata:
   name: volsync-monitor
   namespace: volsync-system
   labels:
-    control-plane: controller-manager
+    control-plane: volsync-operator-controller
 spec:
   endpoints:
     - path: /metrics
@@ -17,4 +17,5 @@ spec:
       - volsync-system
   selector:
     matchLabels:
-      control-plane: controller-manager
+      control-plane: volsync-operator-controller
+
