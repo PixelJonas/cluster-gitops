@@ -11,7 +11,7 @@ spec:
     server: "https://kubernetes.default.svc"
   source:
     repoURL: https://backube.github.io/helm-charts/
-    targetRevision: 0.13.0
+    targetRevision: 0.13.1
     chart: volsync
     helm:
       values: |-
