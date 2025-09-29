@@ -14,7 +14,7 @@ spec:
       values: |-
 
         nfs:
-          server: 10.42.2.92
+          server: 10.10.10.40
           path: /volume1/configs
           reclaimPolicy: Retain
           mountOptions: 
