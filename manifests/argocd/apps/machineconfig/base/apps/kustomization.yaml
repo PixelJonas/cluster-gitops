@@ -3,3 +3,4 @@ kind: Kustomization
 
 resources:
 - increased-reservation.yaml
+- nad-syno-network.yaml
