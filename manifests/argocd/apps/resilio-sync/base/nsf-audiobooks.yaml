@@ -14,7 +14,7 @@ spec:
     namespace: resilio-sync
   nfs:
     path: /volume1/media/audiobooks
-    server: 10.42.2.92
+    server: 10.10.10.40
   mountOptions:
     - nfsvers=4
   persistentVolumeReclaimPolicy: Retain

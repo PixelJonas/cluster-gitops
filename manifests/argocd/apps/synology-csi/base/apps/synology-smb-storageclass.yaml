@@ -8,7 +8,7 @@ provisioner: csi.san.synology.com
 parameters:
   protocol: smb
   location: /volume1
-  dsm: 10.42.2.92
+  dsm: 10.10.10.40
   csi.storage.k8s.io/node-stage-secret-name: synology-csi-smb-credentials
   csi.storage.k8s.io/node-stage-secret-namespace: synology-csi
 reclaimPolicy: Retain
