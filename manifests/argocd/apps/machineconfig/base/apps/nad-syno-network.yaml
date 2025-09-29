@@ -1,20 +1,23 @@
-apiVersion: k8s.cni.cncf.io/v1
-kind: NetworkAttachmentDefinition
+apiVersion: nmstate.io/v1
+kind: NodeNetworkConfigurationPolicy
 metadata:
-  name: synology-net
+  name: syno-interface
 spec:
-  config: |-
-    {
-      "cniVersion": "0.3.1",
-      "name": "syno-network",
-      "type": "host-device",
-      "device": "ens19",
-      "ipam": {
-          "type": "static",
-          "addresses": [
-            {
-              "address": "10.10.10.50/24"
-            }
-          ]
-        }
-    }
+  desiredState:
+    interfaces:
+      - bridge:
+          options:
+            stp:
+              enabled: false
+          port:
+            - name: ens19
+        ipv4:
+          address:
+            - ip: 10.10.10.50
+              prefix-length: 24
+          enabled: true
+        name: br0
+        state: up
+        type: linux-bridge
+  nodeSelector:
+    kubernetes.io/hostname: master-0
