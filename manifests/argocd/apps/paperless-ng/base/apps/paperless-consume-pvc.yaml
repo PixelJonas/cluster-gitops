@@ -14,7 +14,7 @@ spec:
     namespace: paperless
   nfs:
     path: /volume1/configs/paperless/consume
-    server: 10.42.2.92
+    server: 10.10.10.50
   mountOptions:
     - nfsvers=4
   persistentVolumeReclaimPolicy: Retain
