@@ -89,7 +89,7 @@ spec:
               broker:
                 image: 
                   repository: redis
-                  tag: 8.2.1
+                  tag: 8.2.2
                   pullPolicy: IfNotPresent
               tika:
                 image: 
