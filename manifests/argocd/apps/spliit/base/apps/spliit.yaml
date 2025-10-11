@@ -28,7 +28,7 @@ spec:
               spliit:
                 image:
                   repository: ghcr.io/crazy-max/spliit
-                  tag: 1.17.0
+                  tag: 1.18.0
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin
