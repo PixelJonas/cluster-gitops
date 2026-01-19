@@ -13,7 +13,7 @@ spec:
   source:
     repoURL: registry-1.docker.io/bitnamicharts
     chart: postgresql
-    targetRevision: 16.7.10
+    targetRevision: 18.2.3
     helm:
       values: |-
 
