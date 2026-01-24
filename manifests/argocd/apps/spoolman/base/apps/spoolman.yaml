@@ -28,7 +28,7 @@ spec:
               spoolman:
                 image:
                   repository: ghcr.io/donkie/spoolman
-                  tag: 0.22.1
+                  tag: 0.23
                   pullPolicy: IfNotPresent
                 env:
                   TZ: Europe/Berlin
