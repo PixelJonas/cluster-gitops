@@ -38,7 +38,7 @@ spec:
               node:              
                 image:
                   repository: docker.io/nodered/node-red
-                  tag: 4.1.3
+                  tag: 4.1.4
                   pullPolicy: IfNotPresent
 
                 env:
